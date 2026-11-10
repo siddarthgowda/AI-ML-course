@@ -32,8 +32,19 @@ PART 1: BASIC FILE HANDLING
 
 Q1. What is file handling in Python?
 
-Ans: File handling is the process of creating, opening,
-reading, writing, updating and deleting files using Python.
+Ans:
+File handling means using Python to work with files on disk:
+open them, read or write data, append, and close (or release)
+them safely.
+
+In interviews, mention the usual flow: `open()` → read/write →
+`close()`, or `with open(...)` so the file closes automatically.
+
+| Step | What happens |
+|------|----------------|
+| Create / open | `open(path, mode)` or `Path.write_text()` |
+| Read / write | `read()`, `write()`, etc. |
+| Close | `close()` or exit `with` block |
 
 Example program:
 
@@ -53,11 +64,17 @@ print("deleted:", not notes.exists())
 Q2. Why do we use file handling?
 
 Ans:
-- To store data permanently.
-- To retrieve stored information.
-- To read and write files.
-- To manage external data.
-- To process large datasets.
+Variables and lists live only in RAM. When the program or
+notebook kernel stops, that data is gone.
+
+Files solve that:
+- **Permanent storage** — sales, student names, model output, logs.
+- **Share data** — CSV/JSON between Python, Excel, web apps.
+- **Big data** — read line-by-line instead of loading everything
+  into memory.
+
+**Interview line:** “We use file handling when data must survive
+after the program ends or must be exchanged with other systems.”
 
 Example program:
 
@@ -161,10 +178,16 @@ print(type(binary_file.read_bytes()), binary_file.read_bytes())
 
 Q7. What is open()?
 
-Ans: open() is a built-in Python function used to open files.
+Ans:
+**`open()`** is the built-in function that connects your program
+to a file on disk and returns a **file object**.
 
-Syntax:
-file = open("data.txt", "r")
+Syntax: `file = open("data.txt", "r")`  
+Better style: `with open("data.txt", "r") as file:` — closes
+automatically even if an error occurs.
+
+Always match **mode** to the job: `r` read, `w` overwrite,
+`a` append (Tekbind trio).
 
 Example program:
 
@@ -234,7 +257,12 @@ file.close()
 
 Q10. What is the default file opening mode?
 
-Ans: r (Read mode).
+Ans:
+**`r` (read).** So `open("data.txt")` is the same as
+`open("data.txt", "r")`.
+
+Implication: the file must **exist** and you **cannot write**
+with default mode — common mistake in beginners’ code.
 
 Example program:
 
@@ -252,7 +280,14 @@ file.close()
 
 Q11. What happens if a file does not exist in read mode?
 
-Ans: FileNotFoundError occurs.
+Ans:
+Python raises **`FileNotFoundError`** — a subclass of `OSError`.
+
+Fix options:
+- Create first with `w` / `a` / `x`, or check with
+  `Path(path).exists()`.
+- Use **`try` / `except FileNotFoundError`** for user-friendly
+  messages (see Part 6 in these notes).
 
 Example program:
 
@@ -266,7 +301,19 @@ except FileNotFoundError as error:
 
 Q12. Can Python create files automatically?
 
-Ans: Yes. Using w, a or x mode.
+Ans:
+Yes — you do **not** need a separate “create file” command.
+
+| Mode | Creates if missing? |
+|------|---------------------|
+| `w` | Yes (then writes; truncates if existed) |
+| `a` | Yes (append) |
+| `x` | Yes only when path is free |
+| `r` | **No** — error if missing |
+
+Parent folders are **not** always created; use
+`Path("folder").mkdir(parents=True, exist_ok=True)` or
+`os.makedirs` when needed.
 
 Example program:
 
@@ -288,22 +335,26 @@ PART 2: FILE OPENING MODES
 Q13. What are the different file opening modes?
 
 Ans:
+The **mode** string tells Python what you are allowed to do and
+what happens if the file is missing.
 
-r   = Read
-w   = Write
-a   = Append
-x   = Exclusive creation
-r+  = Read and Write
-w+  = Write and Read
-a+  = Append and Read
+**Text modes (class + interviews):**
 
-rb  = Read Binary
-wb  = Write Binary
-ab  = Append Binary
+| Mode | Read | Write | File missing | Existing file |
+|------|------|-------|--------------|---------------|
+| `r` | Yes | No | Error | Unchanged |
+| `w` | No | Yes | Created | **Emptied** |
+| `a` | No | Yes (end) | Created | Kept; append |
+| `x` | No | Yes | Created | **Error** if exists |
+| `r+` | Yes | Yes | Error | Unchanged |
+| `w+` | Yes | Yes | Created | **Emptied** |
+| `a+` | Yes | Yes (end) | Created | Kept; append |
 
-rb+ = Read and Write Binary
-wb+ = Write and Read Binary
-ab+ = Append and Read Binary
+**Binary modes** — same idea with `b` (e.g. `rb`, `wb`, `ab`,
+`rb+`, …). Use for images, pickle, non-text bytes.
+
+**Memory trick:** `r` = read only, `w` = wipe and write,
+`a` = add at end, `x` = exclusive create.
 
 Example program:
 
@@ -328,9 +379,13 @@ print("after w:", path.read_text().strip())
 Q14. What is r mode?
 
 Ans:
-- Opens an existing file for reading.
-- File must exist.
-- Does not modify existing content.
+**`r` = read-only.** Default mode when you write `open("f.txt")`.
+
+- File **must exist** or you get **FileNotFoundError**.
+- You cannot write; doing so raises **UnsupportedOperation** (or
+  similar on the file object).
+- Content on disk is **not** changed.
+- Pointer starts at the **beginning** of the file.
 
 Example program:
 
@@ -347,9 +402,15 @@ with path.open("r") as file:
 Q15. What is w mode?
 
 Ans:
-- Opens file for writing.
-- Creates file if it does not exist.
-- Deletes existing content if file already exists.
+**`w` = write (truncate).** This is what Tekbind used for “save
+new list to file”.
+
+- Creates the file if it does not exist.
+- If the file **already exists**, opening with `w` **deletes all
+  old content** first — then you write fresh data.
+- **Danger:** `open("students.txt", "w")` wipes previous names.
+  Use **`a`** to add without deleting, or **`x`** if the file must
+  not exist yet.
 
 Example program:
 
@@ -367,10 +428,13 @@ print(path.read_text())
 Q16. What is a mode?
 
 Ans:
-- Opens file for appending.
-- Adds new content at the end.
-- Creates file if it does not exist.
-- Preserves existing content.
+**`a` = append.** Class used this for “Good morning” at the end
+without erasing earlier lines.
+
+- New `write()` data goes **only at the end** of the file.
+- Existing content **stays**.
+- Creates the file if missing.
+- Pointer is positioned at **end** when opened (good for logs).
 
 Example program:
 
@@ -388,8 +452,21 @@ print(path.read_text())
 Q17. What is x mode?
 
 Ans:
-- Creates a new file.
-- Raises FileExistsError if file already exists.
+**`x` = exclusive creation** (“create only if the file does not
+exist yet”).
+
+| Point | Meaning |
+|-------|---------|
+| Creates | New empty file, like `w` |
+| If file already exists | Raises **FileExistsError** (does not overwrite) |
+| Pointer | Starts at the beginning (position 0) |
+| Use when | You must not accidentally destroy existing data (config, lock file, one-time export) |
+
+**`w` vs `x` (common interview):** `w` overwrites or creates;
+`x` creates only when the path is free — safer when overwriting
+would be a bug.
+
+**Tekbind class:** Not taught; class used `r`, `w`, `a` only.
 
 Example program:
 
@@ -411,9 +488,23 @@ except FileExistsError as error:
 Q18. What is r+ mode?
 
 Ans:
-- Allows reading and writing.
-- File must exist.
-- Does not immediately delete existing content.
+**`r+` = read and write on an existing file** (both allowed on the
+same open file).
+
+| Point | Meaning |
+|-------|---------|
+| File must exist | Otherwise **FileNotFoundError** (unlike `w+` / `a+`) |
+| On open | **Does not** erase old content (unlike `w+`) |
+| Default position | Start of file (0) — good for read-then-patch |
+| Writing | Overwrites from current pointer unless you `seek()` |
+
+**Compare modes (interview):**
+- **`r+`** — update existing file; keep content.
+- **`w+`** — create or **truncate** (empty file), then read/write.
+- **`a+`** — read anywhere, but **new writes** go to the **end**.
+
+After `read()`, call `file.seek(0)` (or the right offset) before
+`write()` — otherwise you append after the bytes you just read.
 
 Example program:
 
@@ -433,9 +524,14 @@ print("after :", path.read_text())
 Q19. What is w+ mode?
 
 Ans:
-- Allows reading and writing.
-- Creates file if necessary.
-- Deletes existing content when opened.
+**`w+` = read and write, but open behaves like `w`.**
+
+- Creates file if missing.
+- If file **exists**, content is **cleared on open** (truncate).
+- After writing, `seek(0)` then `read()` to see what you wrote.
+- Use when you want a **brand-new or reset** file and may read
+  back in the same session — not for “edit existing without
+  deleting”.
 
 Example program:
 
@@ -454,10 +550,16 @@ with path.open("w+") as file:
 Q20. What is a+ mode?
 
 Ans:
-- Allows reading and appending.
-- Creates file if necessary.
-- Preserves existing content.
-- Writing happens at the end.
+**`a+` = read anywhere, append on write.**
+
+- Creates file if missing; **keeps** old data.
+- `read()` / `seek(0)` can read from the start.
+- **`write()` still appends at the end** (not at current pointer
+  like `r+`).
+- Typical use: log file — read history, add a new line at bottom.
+
+**Quick pick:** update middle of file → `r+` with `seek()`; log
+→ `a` or `a+`; replace whole file → `w` or `w+`.
 
 Example program:
 

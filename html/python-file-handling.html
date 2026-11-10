@@ -192,8 +192,16 @@ W…</a><p class="toc-stage">Part 21: Rapid-Fire Questions</p><a href="#part-21"
 <p>Basics through modules (os, shutil, pathlib, csv, json, pickle), encoding, compression, coding, scenarios and rapid-fire.</p>
 </div>
 <p class="qmeta">227 questions across 25 parts.</p>
-<h1 class="stage">Core File Handling</h1><h1 class="stage" id="part-01">Part 1: Basic File Handling</h1><article class="topic" id="q1"><h2><span class="num">Q1</span> What is file handling in Python?</h2><div class="body"><p>File handling is the process of creating, opening,</p>
-<p>reading, writing, updating and deleting files using Python.</p>
+<h1 class="stage">Core File Handling</h1><h1 class="stage" id="part-01">Part 1: Basic File Handling</h1><article class="topic" id="q1"><h2><span class="num">Q1</span> What is file handling in Python?</h2><div class="body"><p>File handling means using Python to work with files on disk:</p>
+<p>open them, read or write data, append, and close (or release)</p>
+<p>them safely.</p>
+<p>In interviews, mention the usual flow: <code><code>open()</code></code> → read/write →</p>
+<p><code><code>close()</code></code>, or <code>with open(...)</code> so the file closes automatically.</p>
+<p>| Step | What happens |</p>
+<p>|------|----------------|</p>
+<p>| Create / open | <code>open(path, mode)</code> or <code>Path.<code>write_text()</code></code> |</p>
+<p>| Read / write | <code><code>read()</code></code>, <code><code>write()</code></code>, etc. |</p>
+<p>| Close | <code><code>close()</code></code> or exit <code>with</code> block |</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -204,7 +212,12 @@ notes = folder / &quot;students.txt&quot;
 notes.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
 print(notes.read_text())
 notes.unlink()
-print(&quot;deleted:&quot;, not notes.exists())</code></pre></div></article><article class="topic" id="q2"><h2><span class="num">Q2</span> Why do we use file handling?</h2><div class="body"><ul><li>To store data permanently.</li><li>To retrieve stored information.</li><li>To read and write files.</li><li>To manage external data.</li><li>To process large datasets.</li></ul>
+print(&quot;deleted:&quot;, not notes.exists())</code></pre></div></article><article class="topic" id="q2"><h2><span class="num">Q2</span> Why do we use file handling?</h2><div class="body"><p>Variables and lists live only in RAM. When the program or</p>
+<p>notebook kernel stops, that data is gone.</p>
+<p class="label">Files solve that:</p>
+<ul><li>**Permanent storage** — sales, student names, model output, logs.</li><li>**Share data** — CSV/JSON between Python, Excel, web apps.</li><li>**Big data** — read line-by-line instead of loading everything</li><li>into memory.</li></ul>
+<p>**Interview line:** “We use file handling when data must survive</p>
+<p>after the program ends or must be exchanged with other systems.”</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -256,9 +269,13 @@ binary_file = folder / &quot;hello.bin&quot;
 text_file.write_text(&quot;Hello&quot;)
 binary_file.write_bytes(b&quot;Hello&quot;)
 print(type(text_file.read_text()), text_file.read_text())
-print(type(binary_file.read_bytes()), binary_file.read_bytes())</code></pre></div></article><article class="topic" id="q7"><h2><span class="num">Q7</span> What is open()?</h2><div class="body"><p><code>open()</code> is a built-in Python function used to open files.</p>
-<pre><code>Syntax:
-file = open(&quot;data.txt&quot;, &quot;r&quot;)</code></pre>
+print(type(binary_file.read_bytes()), binary_file.read_bytes())</code></pre></div></article><article class="topic" id="q7"><h2><span class="num">Q7</span> What is open()?</h2><div class="body"><p>**<code><code>open()</code></code>** is the built-in function that connects your program</p>
+<p>to a file on disk and returns a **file object**.</p>
+<p>Syntax: <code>file = open(&quot;data.txt&quot;, &quot;r&quot;)</code></p>
+<p>Better style: <code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:</code> — closes</p>
+<p>automatically even if an error occurs.</p>
+<p>Always match **mode** to the job: <code>r</code> read, <code>w</code> overwrite,</p>
+<p><code>a</code> append (Tekbind trio).</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -297,7 +314,10 @@ file.seek(0)
 print(file.read())
 print(&quot;name:&quot;, file.name)
 print(&quot;mode:&quot;, file.mode)
-file.close()</code></pre></div></article><article class="topic" id="q10"><h2><span class="num">Q10</span> What is the default file opening mode?</h2><div class="body"><p>r (Read mode).</p>
+file.close()</code></pre></div></article><article class="topic" id="q10"><h2><span class="num">Q10</span> What is the default file opening mode?</h2><div class="body"><p>**<code>r</code> (read).** So <code>open(&quot;data.txt&quot;)</code> is the same as</p>
+<p><code>open(&quot;data.txt&quot;, &quot;r&quot;)</code>.</p>
+<p>Implication: the file must **exist** and you **cannot write**</p>
+<p>with default mode — common mistake in beginners’ code.</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -307,13 +327,26 @@ path.write_text(&quot;already here\n&quot;)
 file = open(path)  # mode defaults to &quot;r&quot;
 print(&quot;mode:&quot;, file.mode)
 print(file.read())
-file.close()</code></pre></div></article><article class="topic" id="q11"><h2><span class="num">Q11</span> What happens if a file does not exist in read mode?</h2><div class="body"><p>FileNotFoundError occurs.</p>
+file.close()</code></pre></div></article><article class="topic" id="q11"><h2><span class="num">Q11</span> What happens if a file does not exist in read mode?</h2><div class="body"><p>Python raises **<code>FileNotFoundError</code>** — a subclass of <code>OSError</code>.</p>
+<p class="label">Fix options:</p>
+<ul><li>Create first with <code>w</code> / <code>a</code> / <code>x</code>, or check with</li></ul>
+<p><code>Path(path).<code>exists()</code></code>.</p>
+<ul><li>Use **<code>try</code> / <code>except FileNotFoundError</code>** for user-friendly</li><li>messages (see Part 6 in these notes).</li></ul>
 <p class="label">Example program:</p>
 <pre><code>try:
     open(&quot;file_demo/missing_student.txt&quot;, &quot;r&quot;)
 except FileNotFoundError as error:
     print(type(error).__name__)
-    print(error)</code></pre></div></article><article class="topic" id="q12"><h2><span class="num">Q12</span> Can Python create files automatically?</h2><div class="body"><p>Yes. Using w, a or x mode.</p>
+    print(error)</code></pre></div></article><article class="topic" id="q12"><h2><span class="num">Q12</span> Can Python create files automatically?</h2><div class="body"><p>Yes — you do **not** need a separate “create file” command.</p>
+<p>| Mode | Creates if missing? |</p>
+<p>|------|---------------------|</p>
+<p>| <code>w</code> | Yes (then writes; truncates if existed) |</p>
+<p>| <code>a</code> | Yes (append) |</p>
+<p>| <code>x</code> | Yes only when path is free |</p>
+<p>| <code>r</code> | **No** — error if missing |</p>
+<p>Parent folders are **not** always created; use</p>
+<p><code>Path(&quot;folder&quot;).mkdir(parents=True, exist_ok=True)</code> or</p>
+<p><code>os.makedirs</code> when needed.</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -323,19 +356,22 @@ file = open(&quot;file_demo/auto_new.txt&quot;, &quot;w&quot;)
 file.write(&quot;created because mode is w\n&quot;)
 file.close()
 print(Path(&quot;file_demo/auto_new.txt&quot;).read_text())</code></pre>
-<p>============================================================</p></div></article><h1 class="stage" id="part-02">Part 2: File Opening Modes</h1><article class="topic" id="q13"><h2><span class="num">Q13</span> What are the different file opening modes?</h2><div class="body"><pre><code>r   = Read
-w   = Write
-a   = Append
-x   = Exclusive creation
-r+  = Read and Write
-w+  = Write and Read
-a+  = Append and Read</code></pre>
-<pre><code>rb  = Read Binary
-wb  = Write Binary
-ab  = Append Binary</code></pre>
-<p>rb+ = Read and Write Binary</p>
-<p>wb+ = Write and Read Binary</p>
-<p>ab+ = Append and Read Binary</p>
+<p>============================================================</p></div></article><h1 class="stage" id="part-02">Part 2: File Opening Modes</h1><article class="topic" id="q13"><h2><span class="num">Q13</span> What are the different file opening modes?</h2><div class="body"><p>The **mode** string tells Python what you are allowed to do and</p>
+<p>what happens if the file is missing.</p>
+<p>**Text modes (class + interviews):**</p>
+<p>| Mode | Read | Write | File missing | Existing file |</p>
+<p>|------|------|-------|--------------|---------------|</p>
+<p>| <code>r</code> | Yes | No | Error | Unchanged |</p>
+<p>| <code>w</code> | No | Yes | Created | **Emptied** |</p>
+<p>| <code>a</code> | No | Yes (end) | Created | Kept; append |</p>
+<p>| <code>x</code> | No | Yes | Created | **Error** if exists |</p>
+<p>| <code>r+</code> | Yes | Yes | Error | Unchanged |</p>
+<p>| <code>w+</code> | Yes | Yes | Created | **Emptied** |</p>
+<p>| <code>a+</code> | Yes | Yes (end) | Created | Kept; append |</p>
+<p>**Binary modes** — same idea with <code>b</code> (e.g. <code>rb</code>, <code>wb</code>, <code>ab</code>,</p>
+<p><code>rb+</code>, …). Use for images, pickle, non-text bytes.</p>
+<p>**Memory trick:** <code>r</code> = read only, <code>w</code> = wipe and write,</p>
+<p><code>a</code> = add at end, <code>x</code> = exclusive create.</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -351,7 +387,8 @@ with path.open(&quot;a&quot;) as file:
 print(&quot;after a:&quot;, path.read_text().replace(&quot;\n&quot;, &quot; | &quot;))
 with path.open(&quot;w&quot;) as file:
     file.write(&quot;replaced\n&quot;)
-print(&quot;after w:&quot;, path.read_text().strip())</code></pre></div></article><article class="topic" id="q14"><h2><span class="num">Q14</span> What is r mode?</h2><div class="body"><ul><li>Opens an existing file for reading.</li><li>File must exist.</li><li>Does not modify existing content.</li></ul>
+print(&quot;after w:&quot;, path.read_text().strip())</code></pre></div></article><article class="topic" id="q14"><h2><span class="num">Q14</span> What is r mode?</h2><div class="body"><p>**<code>r</code> = read-only.** Default mode when you write <code>open(&quot;f.txt&quot;)</code>.</p>
+<ul><li>File **must exist** or you get **FileNotFoundError**.</li><li>You cannot write; doing so raises **UnsupportedOperation** (or</li><li>similar on the file object).</li><li>Content on disk is **not** changed.</li><li>Pointer starts at the **beginning** of the file.</li></ul>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -359,7 +396,11 @@ path = Path(&quot;file_demo/read_only.txt&quot;)
 path.parent.mkdir(exist_ok=True)
 path.write_text(&quot;Rahul\nPriya\n&quot;)
 with path.open(&quot;r&quot;) as file:
-    print(file.read())</code></pre></div></article><article class="topic" id="q15"><h2><span class="num">Q15</span> What is w mode?</h2><div class="body"><ul><li>Opens file for writing.</li><li>Creates file if it does not exist.</li><li>Deletes existing content if file already exists.</li></ul>
+    print(file.read())</code></pre></div></article><article class="topic" id="q15"><h2><span class="num">Q15</span> What is w mode?</h2><div class="body"><p>**<code>w</code> = write (truncate).** This is what Tekbind used for “save</p>
+<p>new list to file”.</p>
+<ul><li>Creates the file if it does not exist.</li><li>If the file **already exists**, opening with <code>w</code> **deletes all</li><li>old content** first — then you write fresh data.</li><li>**Danger:** <code>open(&quot;students.txt&quot;, &quot;w&quot;)</code> wipes previous names.</li></ul>
+<p>Use **<code>a</code>** to add without deleting, or **<code>x</code>** if the file must</p>
+<ul><li>not exist yet.</li></ul>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -368,7 +409,9 @@ path.parent.mkdir(exist_ok=True)
 path.write_text(&quot;Rahul\nPriya\n&quot;)
 with path.open(&quot;w&quot;) as file:
     file.write(&quot;Mary\nTom\n&quot;)
-print(path.read_text())</code></pre></div></article><article class="topic" id="q16"><h2><span class="num">Q16</span> What is a mode?</h2><div class="body"><ul><li>Opens file for appending.</li><li>Adds new content at the end.</li><li>Creates file if it does not exist.</li><li>Preserves existing content.</li></ul>
+print(path.read_text())</code></pre></div></article><article class="topic" id="q16"><h2><span class="num">Q16</span> What is a mode?</h2><div class="body"><p>**<code>a</code> = append.** Class used this for “Good morning” at the end</p>
+<p>without erasing earlier lines.</p>
+<ul><li>New <code><code>write()</code></code> data goes **only at the end** of the file.</li><li>Existing content **stays**.</li><li>Creates the file if missing.</li><li>Pointer is positioned at **end** when opened (good for logs).</li></ul>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -377,7 +420,18 @@ path.parent.mkdir(exist_ok=True)
 path.write_text(&quot;Hello Python\n&quot;)
 with path.open(&quot;a&quot;) as file:
     file.write(&quot;Good morning\n&quot;)
-print(path.read_text())</code></pre></div></article><article class="topic" id="q17"><h2><span class="num">Q17</span> What is x mode?</h2><div class="body"><ul><li>Creates a new file.</li><li>Raises FileExistsError if file already exists.</li></ul>
+print(path.read_text())</code></pre></div></article><article class="topic" id="q17"><h2><span class="num">Q17</span> What is x mode?</h2><div class="body"><p>**<code>x</code> = exclusive creation** (“create only if the file does not</p>
+<p>exist yet”).</p>
+<p>| Point | Meaning |</p>
+<p>|-------|---------|</p>
+<p>| Creates | New empty file, like <code>w</code> |</p>
+<p>| If file already exists | Raises **FileExistsError** (does not overwrite) |</p>
+<p>| Pointer | Starts at the beginning (position 0) |</p>
+<p>| Use when | You must not accidentally destroy existing data (config, lock file, one-time export) |</p>
+<p>**<code>w</code> vs <code>x</code> (common interview):** <code>w</code> overwrites or creates;</p>
+<p><code>x</code> creates only when the path is free — safer when overwriting</p>
+<p>would be a bug.</p>
+<p>**Tekbind class:** Not taught; class used <code>r</code>, <code>w</code>, <code>a</code> only.</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -390,7 +444,18 @@ print(&quot;first:&quot;, path.read_text().strip())
 try:
     path.open(&quot;x&quot;).close()
 except FileExistsError as error:
-    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q18"><h2><span class="num">Q18</span> What is r+ mode?</h2><div class="body"><ul><li>Allows reading and writing.</li><li>File must exist.</li><li>Does not immediately delete existing content.</li></ul>
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q18"><h2><span class="num">Q18</span> What is r+ mode?</h2><div class="body"><p>**<code>r+</code> = read and write on an existing file** (both allowed on the</p>
+<p>same open file).</p>
+<p>| Point | Meaning |</p>
+<p>|-------|---------|</p>
+<p>| File must exist | Otherwise **FileNotFoundError** (unlike <code>w+</code> / <code>a+</code>) |</p>
+<p>| On open | **Does not** erase old content (unlike <code>w+</code>) |</p>
+<p>| Default position | Start of file (0) — good for read-then-patch |</p>
+<p>| Writing | Overwrites from current pointer unless you <code><code>seek()</code></code> |</p>
+<p>**Compare modes (interview):**</p>
+<ul><li>**<code>r+</code>** — update existing file; keep content.</li><li>**<code>w+</code>** — create or **truncate** (empty file), then read/write.</li><li>**<code>a+</code>** — read anywhere, but **new writes** go to the **end**.</li></ul>
+<p>After <code><code>read()</code></code>, call <code>file.seek(0)</code> (or the right offset) before</p>
+<p><code><code>write()</code></code> — otherwise you append after the bytes you just read.</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -401,7 +466,8 @@ with path.open(&quot;r+&quot;) as file:
     print(&quot;before:&quot;, file.read())
     file.seek(0)
     file.write(&quot;Hi!!!&quot;)
-print(&quot;after :&quot;, path.read_text())</code></pre></div></article><article class="topic" id="q19"><h2><span class="num">Q19</span> What is w+ mode?</h2><div class="body"><ul><li>Allows reading and writing.</li><li>Creates file if necessary.</li><li>Deletes existing content when opened.</li></ul>
+print(&quot;after :&quot;, path.read_text())</code></pre></div></article><article class="topic" id="q19"><h2><span class="num">Q19</span> What is w+ mode?</h2><div class="body"><p>**<code>w+</code> = read and write, but open behaves like <code>w</code>.**</p>
+<ul><li>Creates file if missing.</li><li>If file **exists**, content is **cleared on open** (truncate).</li><li>After writing, <code>seek(0)</code> then <code><code>read()</code></code> to see what you wrote.</li><li>Use when you want a **brand-new or reset** file and may read</li><li>back in the same session — not for “edit existing without</li><li>deleting”.</li></ul>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 
@@ -411,7 +477,10 @@ path.write_text(&quot;old content&quot;)
 with path.open(&quot;w+&quot;) as file:
     file.write(&quot;new content&quot;)
     file.seek(0)
-    print(file.read())</code></pre></div></article><article class="topic" id="q20"><h2><span class="num">Q20</span> What is a+ mode?</h2><div class="body"><ul><li>Allows reading and appending.</li><li>Creates file if necessary.</li><li>Preserves existing content.</li><li>Writing happens at the end.</li></ul>
+    print(file.read())</code></pre></div></article><article class="topic" id="q20"><h2><span class="num">Q20</span> What is a+ mode?</h2><div class="body"><p>**<code>a+</code> = read anywhere, append on write.**</p>
+<ul><li>Creates file if missing; **keeps** old data.</li><li><code><code>read()</code></code> / <code>seek(0)</code> can read from the start.</li><li>**<code><code>write()</code></code> still appends at the end** (not at current pointer</li><li>like <code>r+</code>).</li><li>Typical use: log file — read history, add a new line at bottom.</li></ul>
+<p>**Quick pick:** update middle of file → <code>r+</code> with <code><code>seek()</code></code>; log</p>
+<p>→ <code>a</code> or <code>a+</code>; replace whole file → <code>w</code> or <code>w+</code>.</p>
 <p class="label">Example program:</p>
 <pre><code>from pathlib import Path
 

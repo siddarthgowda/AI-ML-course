@@ -143,6 +143,21 @@
       border-radius: 8px;
       background: var(--done);
     }
+    .group.wide { width: 248px; }
+    .chip-section { padding: 2px 4px 6px; }
+    .chip-section + .chip-section {
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px solid #3d6b4a55;
+    }
+    .chip-label {
+      margin: 0 0 4px 2px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
     .ahead .group { background: var(--ahead); border-color: var(--ahead-line); }
     .ahead .group.next-group { background: #1a3326; border-color: var(--next); }
     button.topic, button.child {
@@ -155,6 +170,7 @@
     }
     button.topic { width: 100%; padding: 4px 6px; font-weight: 590; }
     .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 4px 4px; }
+    .info-chips { margin: 0 0 8px; max-width: 100%; }
     button.child {
       padding: 4px 8px;
       border: 1px solid #3d6b4a;
@@ -173,7 +189,7 @@
     <div class="top">
       <div>
         <h1>Topics from the start</h1>
-        <p class="lead">Day 7 Files + NumPy are in this map. Click a topic. Matches <strong>test.ipynb</strong>.</p>
+        <p class="lead">Scroll to Day 6–7. OOP and files use labeled chip rows (class vs full pack). Matches <strong>test.ipynb</strong>.</p>
       </div>
       <div class="legend">
         <span><i class="swatch"></i>Done in class</span>
@@ -184,6 +200,7 @@
     <section class="info" id="info" aria-live="polite">
       <p class="kicker" id="info-path"></p>
       <h2 id="info-title"></h2>
+      <div id="info-chips" class="chips info-chips" hidden></div>
       <div id="info-body" class="info-body"></div>
       <pre id="info-code"></pre>
     </section>
@@ -199,7 +216,7 @@
       { title: "4 Functions", state: "done", topics: ["functions"] },
       { title: "5 Day 5", state: "done", topics: ["args kwargs", "list comprehension", "map filter"] },
       { title: "6 Important", state: "done", topics: ["important"] },
-      { title: "7 Day 6 OOP", state: "done", topics: ["classes", "try except", "modules"] },
+      { title: "7 Day 6 OOP", state: "done", topics: ["classes"] },
       { title: "8 Day 7 Files", state: "done", topics: ["files"] },
       { title: "9 Day 7 NumPy", state: "done", topics: ["numpy"] },
       { title: "10 Intermediate", state: "ahead", topics: ["JSON"] }
@@ -636,17 +653,22 @@
   },
   "files": {
     "question": "File handling",
-    "body": "**Definition:** File handling is the process of creating, opening, reading, writing, appending/updating, and managing files using Python.\n\n**Why:** Variables live only in memory. When the kernel/notebook closes, they disappear. Files keep data permanently (names, sales, logs, reports).\n\n| Mode | Meaning |\n|---|---|\n| `r` | Read only |\n| `w` | Write — creates file if missing; **overwrites** existing content |\n| `a` | Append — add at the end without deleting old content |\n\nAlways `close()` after you finish. Class also mentioned `with open` and looping files for later.",
+    "body": "**Definition:** File handling is the process of creating, opening, reading, writing, appending/updating, and managing files using Python.\n\n**Why:** Variables live only in memory. When the kernel/notebook closes, they disappear. Files keep data permanently (names, sales, logs, reports).\n\n| Mode | Meaning |\n|---|---|\n| `r` | Read only |\n| `w` | Write — creates file if missing; **overwrites** existing content |\n| `a` | Append — add at the end without deleting old content |\n\nAlways `close()` after you finish. Class also mentioned `with open` and looping files for later.\n\n**Two rows on the card:** **In class (Tekbind)** = what was taught in class. **Your notes (25 parts)** = full interview pack (`python-file-handling.html` + practice notebook), not the short class demo.",
     "code": "file = open(\"students.txt\", \"r\")\ndata = file.read()\nprint(data)\nfile.close()\n\nfile = open(\"students.txt\", \"w\")\nfile.write(\"Mary\\n\")\nfile.write(\"Tom\\n\")\nfile.close()\n\nfile = open(\"students.txt\", \"a\")\nfile.write(\"\\nGood morning\")\nfile.close()\n\nfile = open(\"new_file.txt\", \"w\")\nfile.write(\"This is the new file\")\nfile.close()",
     "children": [
       "file modes",
       "file read",
-      "file write"
+      "file write",
+      "files map"
+    ],
+    "childGroups": [
+      { "label": "In class (Tekbind)", "items": ["file modes", "file read", "file write"] },
+      { "label": "Your notes (25 parts)", "items": ["files map"] }
     ]
   },
   "classes": {
     "question": "Class",
-    "body": "**Definition:** A class is a blueprint or template used to create objects. It defines the attributes and methods that its objects can have.\n\nSyntax: `class ClassName:`\n\n- `class` — keyword used to create a class\n- `Student` — name of the class\n- `pass` — placeholder when the class has no code yet\n\n**Remember:** Class = blueprint. Object = instance created from the class.",
+    "body": "**Definition:** A class is a blueprint or template used to create objects. It defines the attributes and methods that its objects can have.\n\nSyntax: `class ClassName:`\n\n- `class` — keyword used to create a class\n- `Student` — name of the class\n- `pass` — placeholder when the class has no code yet\n\n**Remember:** Class = blueprint. Object = instance created from the class.\n\n**4 pillars row:** inheritance (class) · polymorphism · encapsulation · abstraction — click each chip. Pillars 2–4 are in `python-oops.html` Part 7; only inheritance was in Tekbind Day 6.",
     "code": "class Student:\n    pass\n\nclass Car:\n    pass\n\nprint(Student)\nprint(Car)",
     "children": [
       "oop",
@@ -656,10 +678,22 @@
       "self",
       "methods",
       "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
       "multiple inheritance",
       "day6 compare",
       "day6 interview",
-      "day6 revision"
+      "day6 revision",
+      "try except",
+      "modules"
+    ],
+    "childGroups": [
+      { "label": "Core OOP", "items": ["oop", "object", "attributes", "init", "self", "methods"] },
+      { "label": "4 pillars", "items": ["inheritance", "polymorphism", "encapsulation", "abstraction"] },
+      { "label": "In class (extra)", "items": ["multiple inheritance"] },
+      { "label": "Day 6 review", "items": ["day6 compare", "day6 interview", "day6 revision"] },
+      { "label": "Same day", "items": ["try except", "modules"] }
     ]
   },
   "init": {
@@ -668,14 +702,24 @@
     "code": "class Student:\n    def __init__(self, name, age, course):\n        self.name = name\n        self.age = age\n        self.course = course\n\ns1 = Student(\"Rahul\", 15, \"Python\")\ns2 = Student(\"Priya\", 17, \"Python\")\nprint(s1.name)\nprint(s2.name)"
   },
   "inheritance": {
-    "question": "Inheritance",
-    "body": "**Definition:** Inheritance is an OOP concept in which a child class acquires attributes and methods from another class called the parent class. It allows us to reuse existing code instead of writing the same code again.\n\n| Term | Meaning |\n|---|---|\n| Parent class | Class whose attributes and methods are inherited (base class) |\n| Child class | Class that inherits (derived class) |\n\nSyntax: `class Child(Parent):`\n\n**Types of inheritance:** single, multiple, multilevel, hierarchical, hybrid.\n\n**Why:** Employee, Data Scientist, Data Analyst may share name and salary — put common parts in a parent `Employee` class.",
+    "question": "Inheritance (pillar 1)",
+    "body": "**Pillar 1 of 4:** Inheritance — child class gets parent attributes and methods.\n\n| Term | Meaning |\n|---|---|\n| Parent class | Base class being inherited from |\n| Child class | Derived class that inherits |\n\nSyntax: `class Child(Parent):`\n\n| Where | Status |\n|---|---|\n| Tekbind class | **Covered** (`#inheritance` in notebook) |\n| Full OOP notes | [Part 7 + inheritance parts](python-oops.html#part-07) |\n\n**Four pillars:** Inheritance · Polymorphism · Encapsulation · Abstraction",
     "code": "class Employee:\n    def __init__(self, name, salary):\n        self.name = name\n        self.salary = salary\n\n    def display(self):\n        print(\"Name:\", self.name)\n        print(\"Salary:\", self.salary)\n\nclass DataScientist(Employee):\n    pass\n\nd1 = DataScientist(\"Amit\", 10000)\nd1.display()"
   },
   "polymorphism": {
-    "question": "polymorphism",
-    "body": "**Definition:** Polymorphism is the ability to use a common interface with different object types that provide their own behavior.",
-    "code": ""
+    "question": "Polymorphism (pillar 2)",
+    "body": "**Pillar 2 of 4:** Polymorphism — one interface, different behaviors (method overriding, operator overloading, duck typing).\n\n| Where | Status |\n|---|---|\n| Tekbind class | Not covered in Day 6 notebook |\n| Full OOP notes | [Part 7: Four pillars](python-oops.html#part-07) · Q78–Q87 |\n\n**Four pillars:** Inheritance · Polymorphism · Encapsulation · Abstraction",
+    "code": "class Animal:\n    def speak(self):\n        print(\"Some sound\")\n\nclass Dog(Animal):\n    def speak(self):\n        print(\"Bark\")\n\nfor pet in [Animal(), Dog()]:\n    pet.speak()"
+  },
+  "encapsulation": {
+    "question": "Encapsulation (pillar 3)",
+    "body": "**Pillar 3 of 4:** Encapsulation — data + methods inside a class; control access with public / `_protected` / `__private`.\n\n| Where | Status |\n|---|---|\n| Tekbind class | Not covered in Day 6 notebook |\n| Full OOP notes | [Part 7: Four pillars](python-oops.html#part-07) · Q88–Q99 |\n\n**Four pillars:** Inheritance · Polymorphism · Encapsulation · Abstraction",
+    "code": "class BankAccount:\n    def __init__(self, balance):\n        self.__balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.__balance += amount\n\n    def get_balance(self):\n        return self.__balance\n\nacc = BankAccount(1000)\nacc.deposit(500)\nprint(acc.get_balance())"
+  },
+  "abstraction": {
+    "question": "Abstraction (pillar 4)",
+    "body": "**Pillar 4 of 4:** Abstraction — hide implementation; show only what the user needs (`abc`, `@abstractmethod`).\n\n| Where | Status |\n|---|---|\n| Tekbind class | Not covered in Day 6 notebook |\n| Full OOP notes | [Part 7: Four pillars](python-oops.html#part-07) · Q100–Q107 |\n\n**Four pillars:** Inheritance · Polymorphism · Encapsulation · Abstraction",
+    "code": "from abc import ABC, abstractmethod\n\nclass Payment(ABC):\n    @abstractmethod\n    def pay(self, amount):\n        pass\n\nclass CardPayment(Payment):\n    def pay(self, amount):\n        print(\"Paid\", amount, \"by card\")\n\nCardPayment().pay(250)"
   },
   "list comprehension": {
     "question": "List comprehension",
@@ -1045,7 +1089,138 @@
     "body": "Aggregation helpers (no manual loop):\n\n| Function | Meaning |\n|---|---|\n| `np.sum` | Total |\n| `np.mean` | Average |\n| `np.max` / `np.min` | Highest / lowest |\n\nClass sales drill: total, average, highest, filter `> 3000`, add 10% with `sales * 1.1`.",
     "code": "import numpy as np\n\nsales = np.array([1000, 1200, 1400, 1515, 1800, 2000, 7500, 5500])\nprint(np.sum(sales))\nprint(np.mean(sales))\nprint(np.max(sales))\nprint(np.min(sales))\nprint(sales[sales > 3000])\nprint(sales * 1.1)"
   },
-  "day7 revision": {
+  "files map": {
+    "question": "File handling — all 25 parts",
+    "body": "**What “Your notes (25 parts)” means:** Not the Tekbind class slice — this is your **interview pack**: `python-file-handling.html` (227 Q&A + examples) and `file-handling-pratice.ipynb`. Parts 1–3 overlap class; parts 4–25 are extra (CSV, JSON, `pathlib`, `with`, etc.).\n\nGreen chips below = click each part.\n\n| Part | Topic | Tekbind notebook | Your full notes |\n|---|---|---|---|\n| 1 | Basic file handling | Yes (basics) | [Part 1](python-file-handling.html#part-01) |\n| 2 | File opening modes | Yes (basics) | [Part 2](python-file-handling.html#part-02) |\n| 3 | Read & write methods | Yes (basics) | [Part 3](python-file-handling.html#part-03) |\n| 4 | File pointer | No | [Part 4](python-file-handling.html#part-04) |\n| 5 | Context manager | No | [Part 5](python-file-handling.html#part-05) |\n| 6 | Exceptions | No | [Part 6](python-file-handling.html#part-06) |\n| 7 | File attributes | No | [Part 7](python-file-handling.html#part-07) |\n| 8 | os module | No | [Part 8](python-file-handling.html#part-08) |\n| 9 | shutil | No | [Part 9](python-file-handling.html#part-09) |\n| 10 | pathlib | No | [Part 10](python-file-handling.html#part-10) |\n| 11 | tempfile & io | No | [Part 11](python-file-handling.html#part-11) |\n| 12 | CSV | No | [Part 12](python-file-handling.html#part-12) |\n| 13 | JSON | No | [Part 13](python-file-handling.html#part-13) |\n| 14 | Pickle | No | [Part 14](python-file-handling.html#part-14) |\n| 15 | Encoding & buffering | No | [Part 15](python-file-handling.html#part-15) |\n| 16 | Compression | No | [Part 16](python-file-handling.html#part-16) |\n| 17 | Output questions | No | [Part 17](python-file-handling.html#part-17) |\n| 18 | Practical programs | No | [Part 18](python-file-handling.html#part-18) |\n| 19 | Advanced / tricky | No | [Part 19](python-file-handling.html#part-19) |\n| 20 | Scenario-based | No | [Part 20](python-file-handling.html#part-20) |\n| 21 | Rapid-fire | No | [Part 21](python-file-handling.html#part-21) |\n| 22 | Interview checklist | No | [Part 22](python-file-handling.html#part-22) |\n| 23 | JSON study notes | No | [Part 23](python-file-handling.html#part-23) |\n| 24 | Pickle study notes | No | [Part 24](python-file-handling.html#part-24) |\n| 25 | Pathlib study notes | No | [Part 25](python-file-handling.html#part-25) |\n\n**Class notebook:** `assigment/Tekbind_python.ipynb` cells 568–580.",
+    "code": "",
+    "children": ["fh-p01", "fh-p02", "fh-p03", "fh-p04", "fh-p05", "fh-p06", "fh-p07", "fh-p08", "fh-p09", "fh-p10", "fh-p11", "fh-p12", "fh-p13", "fh-p14", "fh-p15", "fh-p16", "fh-p17", "fh-p18", "fh-p19", "fh-p20", "fh-p21", "fh-p22", "fh-p23", "fh-p24", "fh-p25"]
+  },
+  "fh-p01": {
+    "question": "Part 1: Basic file handling",
+    "body": "**Covers:** open(), r/w/a, close.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Tekbind + class (partial) |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 1 in browser](python-file-handling.html#part-01)",
+    "code": ""
+  },
+  "fh-p02": {
+    "question": "Part 2: File opening modes",
+    "body": "**Covers:** r, w, a only in class.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Tekbind + class (partial) |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 2 in browser](python-file-handling.html#part-02)",
+    "code": ""
+  },
+  "fh-p03": {
+    "question": "Part 3: Read & write methods",
+    "body": "**Covers:** read, readline, readlines, write.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Tekbind + class (partial) |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 3 in browser](python-file-handling.html#part-03)",
+    "code": ""
+  },
+  "fh-p04": {
+    "question": "Part 4: File pointer",
+    "body": "**Covers:** tell(), seek(), truncate().\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 4 in browser](python-file-handling.html#part-04)",
+    "code": ""
+  },
+  "fh-p05": {
+    "question": "Part 5: Context manager",
+    "body": "**Covers:** with open(), __enter__, __exit__.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 5 in browser](python-file-handling.html#part-05)",
+    "code": ""
+  },
+  "fh-p06": {
+    "question": "Part 6: Exceptions",
+    "body": "**Covers:** FileNotFoundError, try/except.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 6 in browser](python-file-handling.html#part-06)",
+    "code": ""
+  },
+  "fh-p07": {
+    "question": "Part 7: File attributes",
+    "body": "**Covers:** name, mode, readable, writable.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 7 in browser](python-file-handling.html#part-07)",
+    "code": ""
+  },
+  "fh-p08": {
+    "question": "Part 8: os module",
+    "body": "**Covers:** mkdir, remove, listdir, path.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 8 in browser](python-file-handling.html#part-08)",
+    "code": ""
+  },
+  "fh-p09": {
+    "question": "Part 9: shutil",
+    "body": "**Covers:** copy, move, copytree.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 9 in browser](python-file-handling.html#part-09)",
+    "code": ""
+  },
+  "fh-p10": {
+    "question": "Part 10: pathlib",
+    "body": "**Covers:** Path(), read_text, write_text.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 10 in browser](python-file-handling.html#part-10)",
+    "code": ""
+  },
+  "fh-p11": {
+    "question": "Part 11: tempfile & io",
+    "body": "**Covers:** StringIO, BytesIO.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 11 in browser](python-file-handling.html#part-11)",
+    "code": ""
+  },
+  "fh-p12": {
+    "question": "Part 12: CSV",
+    "body": "**Covers:** reader, writer, DictReader.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 12 in browser](python-file-handling.html#part-12)",
+    "code": ""
+  },
+  "fh-p13": {
+    "question": "Part 13: JSON",
+    "body": "**Covers:** load, dump, loads, dumps.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 13 in browser](python-file-handling.html#part-13)",
+    "code": ""
+  },
+  "fh-p14": {
+    "question": "Part 14: Pickle",
+    "body": "**Covers:** serialize Python objects.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 14 in browser](python-file-handling.html#part-14)",
+    "code": ""
+  },
+  "fh-p15": {
+    "question": "Part 15: Encoding & buffering",
+    "body": "**Covers:** UTF-8, text vs binary.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 15 in browser](python-file-handling.html#part-15)",
+    "code": ""
+  },
+  "fh-p16": {
+    "question": "Part 16: Compression",
+    "body": "**Covers:** zipfile, gzip.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 16 in browser](python-file-handling.html#part-16)",
+    "code": ""
+  },
+  "fh-p17": {
+    "question": "Part 17: Output questions",
+    "body": "**Covers:** predict output.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 17 in browser](python-file-handling.html#part-17)",
+    "code": ""
+  },
+  "fh-p18": {
+    "question": "Part 18: Practical programs",
+    "body": "**Covers:** copy, count, rename files.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 18 in browser](python-file-handling.html#part-18)",
+    "code": ""
+  },
+  "fh-p19": {
+    "question": "Part 19: Advanced / tricky",
+    "body": "**Covers:** large files, paths.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 19 in browser](python-file-handling.html#part-19)",
+    "code": ""
+  },
+  "fh-p20": {
+    "question": "Part 20: Scenario-based",
+    "body": "**Covers:** which mode/module to use.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 20 in browser](python-file-handling.html#part-20)",
+    "code": ""
+  },
+  "fh-p21": {
+    "question": "Part 21: Rapid-fire",
+    "body": "**Covers:** one-line revision.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 21 in browser](python-file-handling.html#part-21)",
+    "code": ""
+  },
+  "fh-p22": {
+    "question": "Part 22: Interview checklist",
+    "body": "**Covers:** must-prepare list.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 22 in browser](python-file-handling.html#part-22)",
+    "code": ""
+  },
+  "fh-p23": {
+    "question": "Part 23: JSON study notes",
+    "body": "**Covers:** deep JSON Q&A.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 23 in browser](python-file-handling.html#part-23)",
+    "code": ""
+  },
+  "fh-p24": {
+    "question": "Part 24: Pickle study notes",
+    "body": "**Covers:** security, protocol.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 24 in browser](python-file-handling.html#part-24)",
+    "code": ""
+  },
+  "fh-p25": {
+    "question": "Part 25: Pathlib study notes",
+    "body": "**Covers:** glob, rglob, parts.\n\n| Source | Status |\n|---|---|\n| Tekbind_python.ipynb (cells 568–580) | Interview pack only |\n| python-file-handling.html | 227 Q&A + examples |\n| file-handling-pratice.ipynb | Runnable solutions |\n\n**Open full notes:** [Part 25 in browser](python-file-handling.html#part-25)",
+    "code": ""
+  },
+    "day7 revision": {
     "question": "Day 7 revision",
     "body": "| Topic | Meaning |\n|---|---|\n| File handling | Create/open/read/write/append files |\n| `r` / `w` / `a` | Read / overwrite write / append |\n| `read` / `readline` / `readlines` | All text / one line / list of lines |\n| NumPy | Numerical Python library |\n| Array | Fast numeric data structure |\n| `ndim` / `shape` / `size` | Dimensions / rows-cols / element count |\n| Indexing 2D | `array[row, column]` |\n| `reshape` | Change shape, same element count |\n| `zeros` / `ones` / `arange` | Special arrays |\n| Element math | `+ - *` without a for loop |\n| Next | More array functions + Pandas |",
     "code": ""
@@ -1059,13 +1234,63 @@
       });
     });
 
+    const chipLabels = { "dict remove": "remove", "star args": "*args", "kwargs": "**kwargs", "combine args": "*args + **kwargs", "min max": "min max", "day5 compare": "compare", "day5 revision": "revision", "args kwargs": "*args **kwargs", "shallow copy": "shallow copy", "deep copy": "deep copy", "dict iterate": "dict iterate", "pop discard": "pop discard", "string format": "string format", "type casting": "type casting", "dynamic typing": "dynamic typing", "important revision": "revision", "oop": "OOP", "object": "object", "attributes": "attributes", "self": "self", "methods": "methods", "inheritance": "inheritance", "polymorphism": "polymorphism", "encapsulation": "encapsulation", "abstraction": "abstraction", "multiple inheritance": "multiple inh.", "day6 compare": "compare", "day6 revision": "revision", "day6 interview": "interview", "try except": "exceptions", "modules": "modules", "file modes": "modes r w a", "file read": "read", "files map": "open 25 parts", "file write": "write append", "numpy array": "array", "numpy shape": "ndim shape size", "numpy index": "indexing slicing", "numpy reshape": "reshape", "numpy special": "zeros ones arange", "numpy math": "math ops", "numpy agg": "sum mean max", "day7 revision": "revision", "fh-p01": "P1", "fh-p02": "P2", "fh-p03": "P3", "fh-p04": "P4", "fh-p05": "P5", "fh-p06": "P6", "fh-p07": "P7", "fh-p08": "P8", "fh-p09": "P9", "fh-p10": "P10", "fh-p11": "P11", "fh-p12": "P12", "fh-p13": "P13", "fh-p14": "P14", "fh-p15": "P15", "fh-p16": "P16", "fh-p17": "P17", "fh-p18": "P18", "fh-p19": "P19", "fh-p20": "P20", "fh-p21": "P21", "fh-p22": "P22", "fh-p23": "P23", "fh-p24": "P24", "fh-p25": "P25" };
+
+    function makeChip(childId) {
+      const child = document.createElement("button");
+      child.type = "button";
+      child.className = "child";
+      child.textContent = chipLabels[childId] || childId;
+      child.dataset.topic = childId;
+      child.setAttribute("aria-pressed", "false");
+      child.addEventListener("click", () => show(childId));
+      return child;
+    }
+
+    function appendTopicChips(group, topic) {
+      if (!topic.children || !topic.children.length) return;
+      if (topic.childGroups && topic.childGroups.length) {
+        group.classList.add("wide");
+        topic.childGroups.forEach((section) => {
+          const wrap = document.createElement("div");
+          wrap.className = "chip-section";
+          const label = document.createElement("p");
+          label.className = "chip-label";
+          label.textContent = section.label;
+          wrap.appendChild(label);
+          const chips = document.createElement("div");
+          chips.className = "chips";
+          section.items.forEach((childId) => chips.appendChild(makeChip(childId)));
+          wrap.appendChild(chips);
+          group.appendChild(wrap);
+        });
+        return;
+      }
+      const chips = document.createElement("div");
+      chips.className = "chips";
+      topic.children.forEach((childId) => chips.appendChild(makeChip(childId)));
+      group.appendChild(chips);
+    }
+
     function stageTitleFor(id) {
-      for (const stage of stages) {
-        if (stage.topics.includes(id) || stage.topics.includes(parentOf[id])) {
-          return stage.title;
+      let cur = id;
+      while (cur) {
+        for (const stage of stages) {
+          if (stage.topics.includes(cur)) return stage.title;
         }
+        cur = parentOf[cur];
       }
       return "";
+    }
+
+    function topicTrail(id) {
+      const parts = [];
+      let cur = id;
+      while (cur) {
+        parts.unshift(chipLabels[cur] || cur);
+        cur = parentOf[cur];
+      }
+      return parts.join("  →  ");
     }
 
     stages.forEach((stage, index) => {
@@ -1095,22 +1320,7 @@
         button.setAttribute("aria-pressed", "false");
         button.addEventListener("click", () => show(id));
         group.appendChild(button);
-        if (topic.children) {
-          const chips = document.createElement("div");
-          chips.className = "chips";
-          topic.children.forEach((childId) => {
-            const child = document.createElement("button");
-            child.type = "button";
-            child.className = "child";
-            const labels = { "dict remove": "remove", "star args": "*args", "kwargs": "**kwargs", "combine args": "*args + **kwargs", "min max": "min max", "day5 compare": "compare", "day5 revision": "revision", "args kwargs": "*args **kwargs", "shallow copy": "shallow copy", "deep copy": "deep copy", "dict iterate": "dict iterate", "pop discard": "pop discard", "string format": "string format", "type casting": "type casting", "dynamic typing": "dynamic typing", "important revision": "revision", "oop": "OOP", "object": "object", "attributes": "attributes", "self": "self", "methods": "methods", "multiple inheritance": "multiple inheritance", "day6 compare": "compare", "day6 revision": "revision", "day6 interview": "interview", "file modes": "modes r w a", "file read": "read", "file write": "write append", "numpy array": "array", "numpy shape": "ndim shape size", "numpy index": "indexing slicing", "numpy reshape": "reshape", "numpy special": "zeros ones arange", "numpy math": "math ops", "numpy agg": "sum mean max", "day7 revision": "revision" };
-            child.textContent = labels[childId] || childId;
-            child.dataset.topic = childId;
-            child.setAttribute("aria-pressed", "false");
-            child.addEventListener("click", () => show(childId));
-            chips.appendChild(child);
-          });
-          group.appendChild(chips);
-        }
+        appendTopicChips(group, topic);
         stack.appendChild(group);
       });
       column.appendChild(stack);
@@ -1129,6 +1339,7 @@
       let safe = escapeHtml(text);
       safe = safe.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
       safe = safe.replace(/`([^`]+)`/g, "<code>$1</code>");
+      safe = safe.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#7ec89a">$1</a>');
       return safe;
     }
 
@@ -1244,10 +1455,41 @@
 
     function show(id) {
       const item = info[id];
-      const parent = parentOf[id];
-      const trail = parent ? parent + "  →  " + id : id;
-      document.getElementById("info-path").textContent = stageTitleFor(id) + "  ·  " + trail;
+      document.getElementById("info-path").textContent = stageTitleFor(id) + "  ·  " + topicTrail(id);
       document.getElementById("info-title").textContent = item.question.replace(/^\d+\.\s*/, "").replace(/`/g, "");
+      const chipsEl = document.getElementById("info-chips");
+      chipsEl.replaceChildren();
+      if (item.children && item.children.length) {
+        chipsEl.hidden = false;
+        const groups = item.childGroups;
+        if (groups && groups.length) {
+          groups.forEach((section) => {
+            const wrap = document.createElement("div");
+            wrap.className = "chip-section";
+            const label = document.createElement("p");
+            label.className = "chip-label";
+            label.textContent = section.label;
+            wrap.appendChild(label);
+            const row = document.createElement("div");
+            row.className = "chips";
+            section.items.forEach((childId) => {
+              const child = makeChip(childId);
+              child.setAttribute("aria-pressed", childId === id ? "true" : "false");
+              row.appendChild(child);
+            });
+            wrap.appendChild(row);
+            chipsEl.appendChild(wrap);
+          });
+        } else {
+          item.children.forEach((childId) => {
+            const child = makeChip(childId);
+            child.setAttribute("aria-pressed", childId === id ? "true" : "false");
+            chipsEl.appendChild(child);
+          });
+        }
+      } else {
+        chipsEl.hidden = true;
+      }
       document.getElementById("info-body").innerHTML = renderNotebookBody(item.body, item.question);
       const codeNode = document.getElementById("info-code");
       if (item.code && item.code.trim()) {
