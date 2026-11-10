@@ -1,0 +1,339 @@
+[5:00] Speaker 1: And movies. Hello everyone, good morning. Good morning.
+
+[11:16] Speaker 2: Good morning. Yeah, let's wait. I'm your trainer from TechMan Technology. Let's wait for five more minutes, let others join and we'll start. I'll be good to go. Okay, I think we can start now. So, everyone with me, guys? Hello?
+
+[14:46] Speaker 1: Hello, yeah. Okay.
+
+[14:51] Speaker 2: Thank you for responding. So, basically, I'm a trainer, and I'll be continuing with your classes from now onwards. So, basically, before starting, what sets some expectations from the class? So if you have any queries, you can raise your hand, and once I'm finished with the topic, you can ask later on. Please don't hesitate to ask any doubt or queries. If you have, ask wherever you are itself. And the next thing, let's make the class interactive. Okay, where I teach, I'll speak, I want the audience also to respond, you are also to speak up.
+
+[15:25] Speaker 1: Is it clear? Okay. Okay.
+
+[15:32] Speaker 2: Yeah, so if anyone has any query, want to ask something, you want to, to give a suggestion, you want to, you know, add something to it, you can raise hand or please speak up, don't hesitate to ask. Are we good to go, guys? And like, I'll keep it interactive where we both will talk. Okay, let's not just keep it one side. Are we good to go, guys? Yes. Yes. Okay. Okay, so let's start. So for, so for before starting with anything, will, I'll just start with a question. You know, when we just click button on a website or when we just open Instagram, Google Map or ask GPP something, what happens behind all those applications? Yes, it gets load. Right. And what, what is there behind all those applications?
+
+[16:44] Speaker 3: Development part.
+
+[16:46] Speaker 2: Right, development part, perfect. Or I would say coding or programming, right? So it's the way of giving instructions to computer to do something. One of the most popular programming language that we have is Python.
+
+[17:05] Speaker 1: Python.
+
+[17:06] Speaker 2: Yes. I'll set my notepad. Okay, can you tell me what is Python? High-level language. Yeah, high-level language. What do you mean by high-level language? Yeah, it's easy for human to understand. Easy for humans to understand. And what? Yeah, and, you know, we can be very... Right. Simple and readable syntax. And, anything Python related to Python?
+
+[18:07] Speaker 3: Python has a lot of built-in libraries.
+
+[18:11] Speaker 2: Right. Lot of built-in libraries which help us to do the work. Now, what is library? What is the built-in library? Yeah. Right, that's a library which will help you to do the work, to perform some tasks, right? We will see it as we proceed. And what we can say about Python, it's widely used. Hmm? Yes, widely used, also dynamic programming language. Programming language. Okay, so I think that is all about Python. And yeah, so it's popular because simple program, like, has a simple syntax, and there's also, you know, it has a huge ecosystem, what you say, lot of libraries. Right? So libraries are something which will allow the user to use some ready-made functions which are there. Agree? Now, ready-made function, like, ready-made function, as in, I can give you one simple example. Suppose you want to, make a table, okay? So, obviously, you will source the plywood or the screws and everything, and you will assemble over there. I'm not going to go in woods and cut the plywood and make a, and make a square table or make a, you know, plywood out of that. So we are using some of ... of the functions. This is what we call IBM. And in particularly, what is the most important thing in Python? I mean, what we do? Build AI systems. I can say that, right? So Python helps me to build AI system, whether it's machine learning, deep learning, agentic AI, core AI, LLMs, all those things, all the AI systems I can build using Python. So what do we do? Basically, we send requests. How does Python help? So we send request to model, and then we provide a prompt, and then we receive the response, receive the response, process, and execute. Okay, so all those things, all these AI related things we can do using Python. Yeah, we can write prompt also inside using some keys, we can send requests, we can integrate. Okay. Now remember one thing in the course, your goal is not to memorize the syntax and everything. There are hundreds of libraries in Python available, there are so many functions, so many syntax, so your goal is not to memorize the syntax. M E M R I, memorize the syntax. Remember, okay? What you want to do, you want to understand what the code is doing, you want to verify is it right or wrong, you want to make sure that you're able to solve the errors, you're able to troubleshoot your program. Okay. What matters is understanding, not memorization. Nowadays, we have, we are all, already an AI-driven world, you know. Many companies, they are using AI for their coding for their integration purpose. But you need to understand what the code is about, how to verify it, how to modify it, and how to troubleshoot it. Okay, so learning Python is not about becoming a human syntax dictionary. So if you say you know Python, that doesn't mean you know where the semicolon, where the comma is, and where the semicolon, where to open bracket. But you should be able to develop the programming logic and the problem-solving ability through Python. Okay? Okay. There's a thing called is learn, like the same thing, you know, it's Python is not about memorizing, it's about learning how to code, how, like how to think logically. Sorry. And because we are already in AI driven world, you should learn to work with AI, not compete with AI. So learn to work with AI and not compete with AI. Okay. Okay. So let AI help you write the code, explain the code, and understand the code, and make sure that whatever code you're writing, you are understanding what are you using, what are you writing. Is it clear, guys? Yes, ma'am.
+
+[23:29] Speaker 4: Yes.
+
+[23:30] Speaker 2: Does anyone know this, history of Python? Little bit? Like how the name Python came and everything. I mean, anyone know that? Yes, ma'am. Yeah, tell me. Yeah, it's,
+
+[23:57] Speaker 4: Python means American USA. USA Cotton,
+
+[24:09] Speaker 2: Cotton Shop is a
+
+[24:09] Speaker 1: hunting
+
+[24:11] Speaker 2: Python Cotton Shop. Right. So, yeah, so, you know, whenever we think of the name, people think that, the name came maybe because it's so complicated or, you know, it's like this snake Python is difficult to learn and something like that. But it is nothing that, it is nothing like that, right? So the name came just from a, as you said, from a comedy script, from a script of a circus. So the person who was inventing Python, he was reading a script of the circus named, Guido Van Rossum Flying Circus something, Python Flying Cir-Circus something. So simple, he just liked the name, so he kept the name. That's it. But nothing hard and fast thing or nothing, things like it's very difficult or you, it's complicated or something like that. Okay? Everyone with me, guys?
+
+[25:05] Speaker 4: Yes, yes, ma'am.
+
+[25:08] Speaker 2: Okay, thank you. Now, let us start doing a little bit of Python. Now, you know, if I want to draw something, okay, like even if I'm drawing a simple drawing, I need to have some interface for that. Like, I want to have a canvas for that, I want to have a page for that. Similarly, when I want to do Python also, I need to have an interface for that. Like, I want to have in what we say there are so many interfaces, so many, ways over there, right, on which I can write my Python script or Python code. Can you tell me some of them? So, first of all, guys, are you familiar with, technology or you're from totally non-tech background? Can I know that so that we will be customizing the curriculum accordingly? So if you're familiar with the technology and you know a little bit of coding, like at least little video I've came across, can you raise your hand so that I know how many are from the tech background and how many are from non-tech, or you can just put it in the chat, tech, non-tech. Familiar. Yeah, man, I
+
+[26:19] Speaker 1: am from
+
+[26:34] Speaker 2: computer science background. Okay, so I assume majority are from tech background. Yeah, there are some though, completely new tech. It's absolutely okay. And I don't worry. Yeah, there are some non-tech also, car tech, health tech, go on. Okay, no worries. So for those who are already tech, you can take this as a add-on thing, like adding new skills. I'm sure you might have forgotten some of the things. And for those who are non-tech, don't worry, we'll be doing everything from the basics only. And right now, you know, we have the AI tools over there. All the AI tools that we have, we can take the help of, those tools to execute the task and everything. Okay. Okay, so let me share the screen. So as I told you, there are many IDEs, there are many development environments on which we can do our Python on. The one of them is our Jupyter Notebook or Jupyter Notebook, whatever we call it. Are you familiar with this notebook at least? Yes. Okay, cool. So this is how I'll open the notebook. So if, if you, you know, you can just, if you have not downloaded it, you can just see, you can go to Anaconda Net Distribution and download the Python notebook from there. Or else you can also follow my YouTube tutorials, which will be there how to install and download this notebook. So you can do this as the assignment for today, you know, download the notebook, get the Python thing ready, if, if, if you have not there, if you're not familiar. Okay. So let's start with the first thing in Python, that is, how shall I print something? Okay, now print means displaying something on the screen. So if I want to print, or if I want to display something, I will use the keyword call. Yes, thanks.
+
+[28:48] Speaker 1: Print.
+
+[28:50] Speaker 2: Yeah. Now remember, Python is case sensitive, now. Case sensitive, I mean, that I cannot write the print as uppercase P. I cannot make some spelling mistakes in print, okay? I cannot write it anyhow as I want. There's a particular syntax, particular way I should follow while writing. Okay? So if I want to print something, I'll write print, bracket, in the bracket, I'll put the quotation mark, and whatever I want to print, I'll type over here, for example, good morning. Okay? And I can click on run from here, or I can simply execute by a keyboard shortcut, shift enter. So, what will happen, whatever I am printing inside my double quotation, good morning, that is printed as it is. Okay, guys? Now, remember, whatever I am putting inside my quotation, that will be printed as it is. So, suppose if I print, hello AI engineers, and I'm executing this, so whatever I'm putting inside the quotation, it will get printed. If there are so many spaces inside the quotation, so many spaces will also get printed. Okay, guys? Similarly, if I want to print some numbers in there, I will put, I print them without giving quotation. Now why? That will come to the next part very soon, which is like the data types in Python. Before doing this, I want to introduce you something called as comments. You know what are comments in Python?
+
+[30:56] Speaker 4: Documenting the code.
+
+[31:08] Speaker 2: Any more guys, what are comments?
+
+[31:11] Speaker 1: A line of description or the code which we are trying to write so that, anyone can Understand it. Present effects execution. Just for our reference. Perfect.
+
+[31:24] Speaker 2: I'll combine both, all, all three of your answers. Line of code or something that we're writing for our reference or for any other reference, but it is not affecting the execution. Means this line will not be read by my Python compiler. It is just for my understanding. Okay, so this is what we call as a comments in Python. So from now onwards, to make you understand the stuff, so something like that, I'll be using comments and you should also use some comments. Because maybe not now, tomorrow, day after, two months later, three months later, when you open Python, you should understand what you have done for at a particular place or else you will forget. That's why comments are necessary. Okay? Okay. Now, you know, We'll introduce the concept called variables. What are variables?
+
+[32:33] Speaker 3: Defining the object.
+
+[32:36] Speaker 2: Sorry, defining the object used to store data. Perfect. And whose values can change. Values can change, right? Something you can assume variable is something that can store something in it. Right? That can store data. You can consider it as a bag, okay? You're storing something in bag or taking it anywhere, and the value or the something that you stored in your bag will be the same. You can change it, you can remove that particular item, you can replace it with item. Okay, so we can obviously change the value, change the items in the bag, but once I store it, it will be stored in that particular thing. So as your answer, so that is what we call the variable. Now, in Python, there are basically four or more types of data, data types. Okay, before going to variable, let me talk about data types. Basically, the famous four data types. Number one is integer. Now, integer means whenever I'm declaring the numbers, two, three, four, five, one, three, minus three. Okay, so whenever I'm declaring the numbers, all the whole numbers, as well as the negative integer or mathematical integer, so they are my integer data type. Okay? Next thing I have is float. Now, float means when I'm declaring something in decimal. So when there's anything in decimal there, it becomes my float data. Next thing that we have is string. Now, string means whenever I'm writing anything that I'm enclosing in quotation mark. So anything enclosed in quotation mark will become your string. Or I can also say characters, because I mostly write characters enclosed in quotation mark. And then after string we have boolean. Boolean is like true or false. I think so. Sometimes there are situation like, suppose you are making some AI model, a self-driving car. So if the light is red, you have to stop. So, so to check whether light, right is red, true. Okay. So if that condition is true. So that's where we have to use the required, the Boolean data, Boolean data type of true or false. Okay. Now let us see, how can I declare a variable? There is one more thing, what we can do is, you know, you can take a note of, the things. Like, for example, whatever the topics are going on, I started with the print statement and then comments and then variable and data type and then how to declare a variable. So whenever the live classes are ending, you can, you know, read about all these things. So keep taking notes of the, all the topics, rather than in the class, because I'm not waiting for you all to, finish, to, to type the things or to finish up the things. You have to manage that maybe later after the class somewhere. Okay, so just keep making a note of all the topics so that it will be easy for you to read later or also for you to do the assignment later. Now, how to declare a variable? I can, I can use some variable name to declare it. So let's say I'm declaring the variable A as twelve. So the value that A is storing is twelve. So if I check what is the type of A, it's showing me integer, because I have stored an integer value in A. Similarly, I can declare another variable B C D as let's say type A. So what is B? What do you think what will be the data type of B? String. Okay, because I've enclosed it in quotation mark. If I want to print, I can simply say print B or simple B also. Print B or print R. If I say type of B, type of B means I want to find what is the data type of. That is your string. Now again, remember I told you something, anything that's to enclose in quotation will become string. So suppose if I'm writing C equal to one, two, three, four, what will be the data type of C? String. String. String, right. Even though I am giving the it integer value, but I'm declaring it inside the quotation, so that will become string. Remember that. Okay. Similarly, I can declare float using some float value. So, again, type of variable float. I can also declare boolean, like let's say is equal to false. True. So my is boolean. Okay, now again. You know in Python, while I'm declaring variable, I can simply say, for example, age is equal to twelve. I don't need to declare the data type before, like in many other programming language, and I'm declaring a variable, I have to declare the type before. But Python is dynamic, which is something called as dynamic typing. Okay, Python variable don't require type declaration. Python variables. Don't require, I will say, explicit type declaration. Okay? I don't need to declare anything. I can just say variable age and so the value of variable age will be reversed. Okay, guys? Okay. Okay. Now, suppose, there are some rules of naming available. Rules of naming available. Now, rules of naming variable means what on how can I name a variable. Can I name a variable as 1A? Can I name a variable as dollar dollar? Can I name a variable as star star? Or can I name it as 999? Any numbers? No. No. Okay. So there are four to five rules of naming a variable. Number one is, it should not start with, it should not start with a number. It should not start with number. For example, I'm writing them Excel. I can name my variable as X one X one etcetera, but I cannot declare it as one X. So if I say one X is equal to gold, it's showing me invalid decimal equivalent. I cannot do this. Okay. My variable should not start with a number. Any more overrides? It contains, like, that's numbers and underscores. Oh, yeah, it should not contain space in between, right? You mean that? Yeah. Yeah, so the name should not contain any space in between. For example, if I want to write the variable number name as first number, so I should not write it, write it as first number. Okay, this is not the correct. If I want, I could write it as first underscore number. So there should not be a space in between. I can write underscore, but not space in. Also, many special characters are not allowed, right? Many special characters not allowed. Like I cannot have dollar or something like that. I cannot have variable as x hash one p. I cannot do this. It should not contain, it should not start with a special character, right? And it should not contain any wild character and keyword as the name, right? Now keyword means as you know print is a keyword in Python. Like that keyword, there are so many keyword that you have in Python. So I cannot name my variable as print. Print is equal to, you know, let's say, this is a good way. Because print is a keyword in Python, I cannot have my variable name start with them. Okay? So, this is some of the rules that I can, I should consider while naming available. Is it okay, guys? Okay. Any queries over here?
+
+[43:02] Speaker 1: No, it's clear.
+
+[43:05] Speaker 2: Thank you. Next, moving to operators. Now, operators, you know, means something that can, that you can do some operations on. So, number one, we have arithmetic operator. Now, arithmetic operators, sorry. I trainer like I want, I just want to know your name. Sorry, Afia. My name is Afia. Hello? Yes, yes, hello. Hello. Okay, so myself, Afiya. What was I speaking? I was speaking about operators and arithmetic operators. Now, arithmetic operator, as the name suggests, all the operators of addition, subtraction, multiplication, division, and there's also modular operator, there's also flow division operator. And all these things comes under arithmetic operators. So, for example, if you have two variables, like let's say I'm declaring A as 12 and declaring B as 67, and basically I want to add them. So I'll just say A plus B. So if you give me 12 plus 6, yeah, so if you just give me 12 plus 67, which is 79. Okay? Similarly, I can do subtraction, multiplication, division, modulo, flow division, all the things with it. Like A star B, if you give me 804, like it's multiplied. Okay? Now what if I have string? Let's see whether our arithmetic operators works with string or not. So, let's consider exams. Hello? And let's consider wires. Okay. And let's simply do X plus Y. What will, what will happen if I do X plus Y? Right. I think it computes something. Like I got hello, how are you? But you can see over here, after hello, I want space. So what can I do to get the space after
+
+[46:07] Speaker 3: hello?
+
+[46:12] Speaker 2: Okay, let's see. Right. Like, so no matter how many space I add here, it will not matter. So I have to add a space after. Remember, everything is a character. Even a space is a character. So I have to add a space after row, execute this again, and then execute X plus one.
+
+[46:43] Speaker 4: Okay. Yes, even space is considered as a character, right, madam?
+
+[46:51] Speaker 2: Yes, even space is considered as.
+
+[46:52] Speaker 4: Instead of, instead of, writing a space,
+
+[46:59] Speaker 2: can we type the slash T? Yes, right, I'm coming to that. So slash T stands for tab space. So all these, let's say backslash T. So if I write, sorry, why it's not working? It will work in later. I'll come to that one later, later. Okay. So right now, we can focus on putting the space, you can put the space after hello or before how or anything like that. Remember, space is also a character in Python. I can do this, or I can simply say print also. Okay? Have a habit of writing, right? Now you can, you can take this as a, take a home thing, whether or not writing print, why does it matter and why does it not matter? Like I can write print x plus y also, and I can simply write x plus y also. So what is the difference between these two things?
+
+[48:01] Speaker 3: I'll, even in the chat that if we write in that well, so I think we can get the space.
+
+[48:08] Speaker 2: Harsha, right? Yes, right. So you can write like this also x plus, and then you can just say empty space plus y. This also works. Okay. And if you want to push this, you can add much space. Right. So this is the most ideal thing actually that we do whenever we come to string concatenation, you know, whenever we'll come to NLP. That part, we will do like this only. We will avoid doing this way because there are some limitations, you know. We will be doing this way most of the time. Okay, so you can do this. So what I have done, between X and Y, add a space. That's it. Okay, now what if I do X minus Y? Like I cannot do that, you know. Subtraction, addition is concatenation. What will be subtraction? Yeah, but if you want, like, let's say there is a sentence you want to separate, you want to delete a particular word, particular character, that we can do using string function. But right now there's nothing subtraction. So express Y will become hello, how are you? Now similarly, there are so many examples that we can do. So for example, the total numbers, the total grades are, let's say the total marks are, 345, and the number of subjects, number of subjects are seven. You want to find average, okay? So what is, what will be average? Average will be marks divided by number of subjects. This is how I can say average. So all these are the use cases where we use these arithmetic operations and all. Okay? If you want, you can just decorate it a little bit with print the average of Marks R, and then comma average. Okay? So basically what I'm doing over here, I'm just, adding like comma average over here means in the print statement, I'm printing the statement as it is and then adding the value of average, whatever the value of average will be saved over there. So it's simply, it can be simply like let's say name is equals to John, and then I'm printing good morning, then I'll say comma name, good morning John. Okay? So, and what is name is just a variable. I'm storing a value John in my variable name, name, that's it. So whenever I am printing it over here, it is coming as is. Okay. After that, it's not the operators. We have comparison operator. Now, comparison operator as in greater than, less than, equal to, all these things. So if, what was my average over here? Forty-nine something. So I want to check if my average is greater than fifty. Is it greater than fifty? No. No.
+
+[51:47] Speaker 4: So it was
+
+[51:50] Speaker 2: your false. Okay. So this is my comparison operator. So like, we have so many comparisons operator, greater than, less than, greater than, equal to, less than, equal to, not equal to also. So we will use this comparison operator when you want to check something, whether a particular value is greater than this, less than this or not. Like, like, what was my marks? So is marks greater than 200? Okay. Is my, you remember I have declared A and B in the start? So is my A greater than equal to B? False. Okay. Now, in comparison operator, if I want to check whether my A is equal to B or not, we use something called double equal. A equal equal B. Now, why I'm using double equal? Remember, double equal is a comparison operator, whereas single equal is a assignment operator. That means if I want to assign some value, I will use single equal, but if I want to check, so here I want to check whether my A is equal to B or not, or basically I want to check whether my value of A is equal to value of B or not. So for that, I'll use double equal. Okay? Remember, double equal is a comparison operator, where single equal is just an assignment operator. Okay, guys, clear, clear? Now we have something called as logical operators. What are the two common logical operators that we have?
+
+[53:50] Speaker 4: And and or.
+
+[53:52] Speaker 2: Yes, and or. So these are my two most famous logical operators. Okay, now there's a difference between and and or. If I wa- if I say I would like to have tea and coffee, you know, so that means I want tea also, I want coffee also, I want both. So whenever I'm using AND, remember all the conditions should be true, T AND coffee. Whereas, if I'm using OR, I want T OR coffee, it's okay if, if only one of the condition is true. Agree with me? Right. So, you know, I can, do this something called, let's say A, is my A greater than twelve, first of all? Is my A greater than twenty? False, okay? Now, if I say A greater than, I'll just write it in a print statement, you will understand better. So, if I say print A greater than twenty, or B Greater than 20. What will be the outcome? True. Okay, because I am checking first of all, is my A greater than 20? Is A greater than 20? No, but is my B greater than 20? Yes. So it's coming true because I'm using a logical operator OR, and one of the condition is true, it will work. So I can say that B is greater than B, yes, so this is true. Okay. And what if I put AND over there? So print A greater than 20 and B greater than 20. What will happen over here? False. False, because both of the conditions should be true. It's not true. First condition itself is false. So that's what it will be written false. Is it okay, guys? Okay. Now, what can we do while we're using all these comparison operators, arithmetic operators, while we are learning this? You know, this is very much useful in our model evaluation, model building, whenever we go ahead and do machine learning. There will come situations where we have to check some conditions, where we could check whether our accuracy is that much or not. Okay? And, and along with accuracy, there are so many features, so many other things that we have to consider. So at that time, all these, operators and everything we will be using, even without knowing that we have used these things. Okay, let's do some question over here. One minute. Okay. Now suppose, simple thing, I think I have not introduced the concept of taking user input. That is left. Okay, now user input means what? Suppose you want a user to enter the value themselves. Like I have taken name is equal to John over here, and I'm doing print hello, or I'll say good morning, comma name. Okay, so good morning John will be printed over here. Now suppose instead of John, I want another name. What shall I do? Sorry to delete it. Let me write marry again and again. But instead of doing this, I can automate it. Means I can tell the user to input a name they like and then work with their name. I can do that using a function of Python called input. So I can say name is equal to input. Enter your name. Okay, so this is a user input. You are asking user to enter the name. Suppose I'm entering my name Afia, and then it will say good morning Afia. So whatever you're entering over here, it's getting stored in the variable name, and whenever I'm printing it good morning Afia, it's getting printed as it is. So this is what we call as user input. Apart from name. I can also have user input of any variable also. For example, A is equal to, now, suppose I'm asking age, let's say age. Okay, so age is equal to, now, if I'm using age, I have to use something called as int input, enter your age. Now, why int? Because my age will be variable. So I have to declare int before using input. So let's say enter your age. So age will be entered at, say, twelve. So twelve will be saved in my variable name age. Sorry. I can, I can also print, I can print something like print your Age is, and then comma, age. So your age is twelve. So here you can enter name, here is the input for entering name. I can also print them together. So let's say enter your name, Mary, and, enter the age, or let's say fifteen, and then print. I can also print, you know, a, a whole greeting message, like, good morning, comma, name. Or there's, you can also say plus instead of comma, there are different ways. Comma, and I can say your age is, comma, age. Now again, there are different syntax that you can do for print. There's also F syntax, there's also something, plus and everything. Okay, you just, you can have a look at this syntax. Good morning, Mary, your age is. Fifteen. So where this, this concept used, we use this concept so many times, we can see. Where? Can you give me one example? Where your name is saved and then it's greeting you with your names? Yes, guys?
+
+[1:01:29] Speaker 3: When we log in to the mail ID and all, we need to enter the password and mail ID.
+
+[1:01:34] Speaker 2: Yeah, yes, yes, right. And the thing is, whenever we open ChatGPT, it says, Hello, Afia. Simple like that. Right. So our name is saved somewhere in the variable, and then when we're doing that, it's getting displayed. Someone has asked me whether we are doing from the beginning. I think, yes, I was instructed to start from the start since I'll be taking your classes. So it's okay, I can consider this as a small revision. Okay, your basics will be strong. Okay, Jason. Can you tell me how much you have done so that I can have a good speed till there? Yes, guys.
+
+[1:02:30] Speaker 1: Okay, through,
+
+[1:02:33] Speaker 2: you mean loops also. Okay, don't worry, you can take this as a kind of revision or something because I was instructed to do from the start only. Okay, no worries. But I hope you're understanding my teaching. Okay.
+
+[1:03:00] Speaker 4: But you need to speak loudly, you know.
+
+[1:03:03] Speaker 2: Oh, I need to speak loudly? Okay. I'll, I'll take the earphone more closer to my mouth. I think that's because of earphone, but I'll change the microphone. Is it better now or is it the same? Hello?
+
+[1:03:34] Speaker 1: Previous was better, I believe.
+
+[1:03:41] Speaker 2: Okay, this is fine? Yeah. Thank you. Okay. And, then we'll start with, let's have a ten minutes break over here, then after coming from break, we'll start with the lift conditions and loops. That's okay? So, a little bit about myself, I am a corporate trainer with around ten years of experience in training, where I have trained fresher batches, corporate batches, and, basically all kind of audiences in big giants companies also. So, yeah, nice to meet you all. Okay, let's have a break here till it's 8:35, ten minutes break. We'll come back and continue with the other conditions.
+
+[1:04:37] Speaker 1: Okay, thank you. Okay, let us continue.
+
+[1:14:54] Speaker 2: Everybody's back? Yes. Okay. Before we start, any queries, whatever we have done before the break? You know, you can make the note of the topics, at one day so that it is clear. And I guess you have your doubt-solving session also in the evening, right? Okay. Let us continue with conditional statements. Now, what are conditional statements? Now, suppose I have a condition where I, I'm a situ, I'm in a situation where I want the condition to be executed based on a particular cut situation. Or I want a sentence to be executed based on a particular situation. Now, for example, again, I give the example of red light, green light, red signal. So, suppose if the light is red, you should say go. That's what we call as conditional statement. And in Python, for IT conditional statement, we have to use a keyword called as if. Okay. So suppose I wanna say you have a age, so age, you know, we have a variable age, the age is fifteen. So I want to check a condition that if the age is greater than eighteen, then you are eligible for vote, okay, or you are eligible for voting. So I can write this statement as if age greater than eighteen, then after this, you have to put colon. This is a part of Python syntax, okay? And after colon, as you press enter, you would see you are little bit indented. Okay, this is also called as a indentation. Means there's a space, there should be a space before your print statement. So that Python will get to know that whatever writing below it, it will be considered as a part of your if statement. So if it's greater than eighteen, I will say print you are eligible to vote. Okay? As simple as that. Here I'm not getting any result. Can you tell me why?
+
+[1:17:54] Speaker 4: Conditional response.
+
+[1:17:56] Speaker 2: Yeah, conditional as well. Everything ages fifteen. If I say it is fifty-two. Okay, so you are eligible to vote. I can also take age as user input. So I'll say design team input, enter your age, and then the user will enter some age, and then let's say forty-five, you're eligible to vote. If I say eleven, there's nothing. And nothing means it's not getting executed because my condition is false. Okay? What if I want an L statement, like if age greater than eighteen, print eligible to vote, else print not eligible to vote. So I can do that using else. Also, I'm making the variable age as greater than equal to eighteen. Okay? Because, you know, eighteen years also can vote. If I say strictly greater than eighteen, then it will go on from nineteen onwards. So if age greater than equal to eighteen, print you are eligible to vote. And then I can write else colon Then now else should be in line with if, remember. Else student, you are not eligible. So this is how we make conditional statements. So yeah, so here the age was there, eleven, so it's still not eligible. Now let's say I'm changing the age to forty-five, then again, you're eligible to vote. Okay? So basically this is a standard syntax of if statement that we have. There will be a if condition, I mean there will be if keywords, if and else is a keyword, like you have print, and int, input, all those things. So after, if you have to write a condition that age greater than eighteen, yeah, it is greater than eighteen, then print, if this condition is true, this statement would be executed. If this is false, else statement would be executed. Okay. Can, can you quickly write a program to check a number is greater, is even or not? Can you quickly do that? Write a program to check number is even or odd. Yeah, can you tell me guys how we can do that? You know, the number will be even if it's even or odd. No, even or odd number. One will.
+
+[1:21:08] Speaker 4: First, we need to, take a two variable, add and u one.
+
+[1:21:19] Speaker 2: Two variable or one variable with one?
+
+[1:21:22] Speaker 4: Yeah, one variable spoken.
+
+[1:21:23] Speaker 2: Yeah, so let's say, shall declare, shall I take the user input?
+
+[1:21:31] Speaker 4: Yeah.
+
+[1:21:35] Speaker 2: Let's say I'm declaring it.
+
+[1:21:37] Speaker 4: In the input our podcast. Okay, you want input,
+
+[1:21:41] Speaker 2: I'll take user input. So I'll take input at the your number. Okay, then I'll check. Sorry.
+
+[1:21:53] Speaker 4: If A is equal to, yeah. If A equal. Now again.
+
+[1:22:05] Speaker 2: Yeah, right. Percentage two equal equals zero. Now what do you mean by A percentage two? This is a operator called modulus operator.
+
+[1:22:14] Speaker 3: Reminder will be zero.
+
+[1:22:16] Speaker 2: Yes, remainder will be zero. So if the remainder.
+
+[1:22:19] Speaker 3: Number will be even number, yes.
+
+[1:22:20] Speaker 2: Number will be even, cool. So now again, I'm using double equal here because I want to check, okay, not assign. So if my remainder is zero, print even number.
+
+[1:22:35] Speaker 4: Else print odd number.
+
+[1:22:41] Speaker 2: Odd number, simple. Suppose you're writing something, 43, it's an odd number. 12, it's an even number. I can also, print something like A comma is even number. A. Comma is odd number, like not just decorating a little bit. Twelve, let's say twelve is even number. If I say sixty-seven, sixty-seven is odd number. Right?
+
+[1:23:15] Speaker 1: Yeah.
+
+[1:23:18] Speaker 2: It's a simple, just a very simple program. But you know, you can have a nested reference number also. For example, just see the condition. I'm telling, write a program to check a number is positive or not negative. A number is positive or negative. Okay? Now, it's simple. How will you check if a number is positive or negative? Positive means if it greater than zero. Perfect. Greater than zero, less than zero. So let's do this. So like, I, I'm taking my own number. Number is forty-five. If n is greater than zero, print positive. And else, print negative. Now, I am adding a condition to it over here. Else, print negative. Now, I am adding one condition that, remember, a nested condition that if it is positive, if it is positive, and greater than hundred, then big number, then big number. So I'm saying first I have to check whether it is positive or not. Okay, so I got that this is positive. Then I want to write that if the number is positive and it is greater than hundred, then it will be a big number. So what will I do over here? Here only, after my positive, I have to check whether my n is greater than hundred or not. If it is greater than hundred, I want to print, let's say, big number. Okay? So here you can see I am having a loop inside a loop. And this is like what we call as a nested loop. There's a one loop, there's another loop. Okay, so if I enter a number, let's say 450, so it's showing me positive also and showing me big number also. If I enter a number, negative 450. Yes, it's showing negative because this C. If n is greater than zero, then it will print positive. So the positive will be printed only when the n is greater than zero. And then if it is positive, then it will check the second condition also, which is, is it greater than hundred or not? If it is greater than hundred, it will print big number. Or else it will, if it is not, it will not execute this. Okay? If it is not positive, it will not execute this. It will execute the else one. Okay? Now what if I put zero over here? Will it show positive or negative? Positive. See the condition, I just written greater than zero. Actually, what can I consider? Can I consider zero as positive or negative? Yeah.
+
+[1:26:33] Speaker 4: If it is equal, if you, then it consider as a positive or? Yeah. Right.
+
+[1:26:40] Speaker 2: But is zero positive or is zero negative?
+
+[1:26:44] Speaker 4: Zero is positive number, I think. Whole number.
+
+[1:26:51] Speaker 2: Yeah, zero is a whole number. So actually zero is zero, you know, we can add a, so what if the condition there are more than two conditions? Then I can simply make it as zero actually. Okay. Just check whether zero is positive or negative, that can be a good thing. So. It's neither positive nor
+
+[1:27:13] Speaker 4: negative. Neither of them are negative.
+
+[1:27:16] Speaker 2: Yeah, zero is non-negative, but.
+
+[1:27:20] Speaker 4: It's non-negative.
+
+[1:27:23] Speaker 2: Non-negative. So can I consider positive then?
+
+[1:27:28] Speaker 4: Neither positive nor negative.
+
+[1:27:30] Speaker 2: Yeah, it's zero, right? Yeah, there's a special condition for zero, which is like zero is zero. It's either positive, non-negative. Okay.
+
+[1:27:40] Speaker 4: Yeah,
+
+[1:27:42] Speaker 2: neutral number or zero. Zero has a special case called it's a zero number, Z E R O. So if we have more than two conditions, you know, like there's a marks, for example. So if your marks are greater than ninety, let's say it's A grade, if your marks are between, you know, eighty to ninety, B grade. So what if you have multiple conditions? Then we can have, we can use one more statement called else. For example, we are considering something called as, probability. Let's say, let's say grade only, okay? So suppose if your grade is A, you have to say excellent. If your grade is B, you have to say very good. If your grade is C, you have to say good. And let's say if your grade, and then any apart from there, you say invalid. Okay, anything apart from A, B, C, you say invalid. So here now I have four conditions to work on. So I'll use again, I'll have a grade is equal to, I can, will I write INT over here?
+
+[1:29:09] Speaker 4: No.
+
+[1:29:11] Speaker 2: Enter your grade. No INT over here, because it should be a string, A, B, C, D. And now I will say if grade A is excellent, if I say grade Double equal, now A should be in quotation marks because it's a string. Then what I have to print? Print Excel. And Ellis. So next condition, there is an else if, so else if is called elephant. So Ellis, great, equal, equal, B. Print. Very good. And C was good. So I'll write Ellis again, great, equal, equal, C. I can use print. Good. Else, invalid. Like someone is writing apart from ABC, I want to show it invalid grade, okay? So I can use that in else, invalid grade. Okay, I'll send you a way to formatting B is showing very good, okay? If I'm entering A, it's showing excellent. If I'm entering, let's say, H, it's showing me invalid grade. Now, what if I enter lowercase a over here, what it should show? In Python, in Python is case sensitive. Okay? Now, case sensitive means capital A, small a, uppercase A, and lowercase a are different in Python. So, even if I'm writing small a, it's showing me invalid grade, because I have written the condition for, capital A, capital B, capital C. So, only capital A, B, C work. Now, suppose if I want to make capital A work as well as small a, how will I tackle that situation?
+
+[1:31:18] Speaker 4: Using upper, using upper function.
+
+[1:31:22] Speaker 2: Yeah, there is a function, upper function will come to string functions in some time. But another way I can do using thing, we can say grade equal to A or A, or grade equals small a. I guess now even if I enter small a, it will show me small. So now again, I'm writing logical operator over here, so only if one condition is true, it would be true, or it would show true. Okay, similarly I can say grade equal B or grade W equal small b. Similar. I can do with C. So, greater C or small c. Now, apart from these things. Okay, now tell me what is the syntax error here? Single equal. Right, double, single equal is, it should be double equal. Okay? So, simple, it's working. Is it clear, guys? Yeah. Okay. Can you quickly, like, just, just say in a minute or so, you could make a program on, similar condition statement, let's say, to check, let's say to, to, to determine the probabilities. Let's say if the probability is greater than 80 percent, like, you know, you can take a user input for a sum, for, for a variable called prediction probability. Prediction probability, take a user input, and there are conditions like, more than 80, high, say high, between 60 and 80, say medium, and less than 60, say low. Let's do it together. Let's see how will we tackle this together. Okay? You got the question what we have to do? Yes. Yeah. Suppose you have to take a prediction probability variable, so I can say prediction underscore probability is, I can ask the user to enter. Now again, it can be decimal also, right? So I can use float input also, you remember. int input, enter the probability. Then I have to make this condition, so how will I make more than eighty condition? If, if prediction probability greater than eighty, print I. Now I want a condition of between sixty and eighty. So between sixty eighty, how will I tackle this? Greater than sixty and less than eight. Yeah, so I can say L prediction probability is a greater than sixty or, or prediction probability is less than eighty. I can also write this statement something like this, sixty greater than prediction probability like less than eighty. Can this work? Like here the prediction probability should be greater than. And here the prediction probability should, sorry, the first condition prediction probability should be greater than sixty. Second condition less than eighty. I can, I can make here equals, and I can consider sixty gray less than equals. Okay, times, ten million. And then less than sixty low, so I can write, anything else in low condition, right? Else condition only. Else low, because anything less than sixty will be low, there is no more conditions to that. Okay, so enter a probability thirty-four, it's showing low, eighty-nine, high, and, sixty-five, it's showing medium. What if I enter sixty? Medium. Medium, because it's less than equal. What if I enter 80? High, right? What if I enter 11? Low. Actually, it's in percentage. Probability can never be greater than, one, right? So in percentage, just a logic percentage. You know, right? Probability can never be greater than one, so it's in percentage, just a logical thing. Conditions are okay, guys? Now, there are, some more things to it. You know, you, if you want, you can have like, like you want to, there's a conditional of break, continue, all those things also will come. It will be come under loop. You can use that, like there will be more things to conditional, but you know when you are reading that, you can figure out or you can, just read for yourself. Now we're moving to something called this loop. What is the loop, guys?
+
+[1:38:14] Speaker 3: Running the code multiple times. When we need to run the conditions for multiple times, we can use loops.
+
+[1:38:22] Speaker 2: Perfect. Like if I'm saying you, you have to write good morning five times. So instead of writing it, print good morning, print good morning five times, copy pasting it, what can I do is, like I'm going to write it five times. So instead of copy, paste, copy, paste again and again. I can use this inside the loop. Okay, so it is said that loop runs because you don't have to. Okay, so I can say for i in range 5, print good morning. So what will happen now, what is an i? i is a temporary variable just for counting. Print 5 means I will count 5 values. I will take 5 values and good morning will be printed. Okay, guys? Okay, so this is how I can use loop to print something for a particular times. Now what if I print i? So for i in range 5. What if I do print I? What do you think it will come? 0 to 4. 0 to 4. So, see in Python, remember the counting or the indexing starts from 0. So if I'm saying 5, I will take value as 0, 1, 0 first, then 1, then 2, 3, 4. It will stop before 5, which is at 4. I can also modify, like I want 1 to 100, so I can say for I range. Now I want 1 to 100, like let's say I want to start from 1, so I can say 1 comma 1 0 1. Because I want from 1 up to 100 only, I don't want, like if I say 100, it will give me 99. That's the reason I'm going 1 0 1, so it will give me up to 100. Okay, so I can modify this range also. If you want from five to twenty five, you can do that also. Now, apart from this, I can also print like, you know, I plus one, I star, and like, for example, for I in range, let's say twenty, print I. So what will happen over here, zero to twenty will print. I can also print I plus ten. So every number will be incremented by ten. Okay. I can also do some mathematical multiplication. I can say I star I. Like what will happen now? Square will comes to twenty. Right? I star I squares will be there.
+
+[1:41:43] Speaker 1: Guys, okay?
+
+[1:41:47] Speaker 2: Okay. Using loops, you can do so many things. Just remember the syntax and just remember how the loops are working and, how you're getting the repetitive kind of I star I, I plus I or something. I can also have a step size, let's say, the range. So I can start from one, I can end at hundred, and I can give a step size of two. That means all the alternate, like it will skip one and it will print the next one. Okay? Now, instead of I, can I write any other thing, A, B, C, D, cat, dog, donkey? Yes. Yes, you can. So instead of I, you can write A, B, C, D, anything. So it's just for our understanding. I mean, I, if you take I, because it's a common thing that all the programmers out there do. Right, guys? Okay. You can also combine if loop, inside for loop, and such, such things also. You know, you can also print, let's say you want to print a table of seven. Let's print a table of seven. Now, table of seven means I want seven, fourteen, twenty-one, up to ten places, like up to the ten multiples. So, now I want table of seven. So first of all, I in range, it should start from one and should end at ten. So one comma ten. If I simply do print I, what will happen? I will get one. Now I want seven, so what will I do? Table of seven, prints?
+
+[1:43:27] Speaker 4: Eight to seven.
+
+[1:43:29] Speaker 2: Yeah, I will do. I suspect I got a table of seven only. What's the multiple of seven, whatever you call it, it does. Okay. So this is about for loop. Another loop that we have is while loop. Now what will while loop do? Now while loop will keep on executing something until and unless one condition is met. Okay. Remember, while loop will keep on executing something until and unless one condition is met. So for example, if I'm doing a is equal to five, and I'm writing while a is, less than, or let's say while A is less than equal, zero, sorry, while A is greater than equal zero, print A. What will happen over here? What is the value of five? What is the value of A? Five.
+
+[1:44:49] Speaker 1: Is
+
+[1:44:52] Speaker 2: it greater than zero? Yes, so it will keep on printing. How many times? If I run this, it will go into indefinite loop. Like it will keep on running, running, and running. See. See. You know, it's running. It's running continuously. It will never stop because the condition has never met. That's why I have to interrupt the kernel. Okay, so that's why it is, it will never stop, why? Because the value of a is always greater than zero. Now suppose I'm incrementing, I'm doing a is equal to a minus one. Wait, I'll do it again because it's lag. I'll write again. So let's say we are doing while loop. I'm setting value of a as five, and I'm writing while a is greater than equal zero, print a, then increment it. So I'm saying a is equal to a minus one. What will happen now? Now I'll just get five, four, three, two, one, zero. Why this is happening, guys? Because in first equation, what is happening? What is the value of a in first equation? Five, right? Is it greater than zero? Is it greater than zero?
+
+[1:46:18] Speaker 4: Yes. Yes.
+
+[1:46:21] Speaker 2: Yeah, so condition is met. I will say yes. So what will be printed? Print will be five. So I got the first five. Then what is happening? A will become, A will become A minus one, which is five minus one, which is four. So this is happening inside the first loop. Now, for the sec- second iteration, what is my value of A?
+
+[1:46:51] Speaker 1: Four.
+
+[1:46:52] Speaker 2: Four, okay. So second iteration value of A. Is it greater than zero?
+
+[1:46:55] Speaker 4: Yes.
+
+[1:46:57] Speaker 2: Yes. Will it get printed? Yes, because what will get printed? Four, because four is greater than zero. Now what will value of A become?
+
+[1:47:06] Speaker 1: Three.
+
+[1:47:08] Speaker 2: Yeah, four minus one, which will become three. Now for third iteration, what is A? Three from the previous one, right? Look at this condition. What is A3? Is it greater than equal to zero? Yes, yes. So what it will get printed? It will print three, right? And then what will my A become? Then two. So on and so forth, up to how much it will print. The condition is A should be greater than equal to zero. So it will stop at zero. Because see when my A will become zero, is it greater than equal to zero? Yes. So it will print zero. Print zero, but then what will be the condition of A become? A will become minus one. Next, is it, is minus one greater than zero? Hmm? Is minus one greater than zero? No. So that is why my loop will break. I mean, my loop will stop at zero. Got it, guys? Any queries here? Anyone want me to repeat how the loop works? Because it's very important that we understand the logic behind the codes. Are we good to go, guys? Hello? Yes, ma'am.
+
+[1:49:01] Speaker 4: Okay.
+
+[1:49:04] Speaker 2: Now, when we are talking about loops, there are two, statement over here. I, what we call it, there is break and continue. Break and continue. Now, what will happen? So, for example, I am writing for i in range, let's say for i in range one comma eleven, and I am printing i, simple i. Say for i in range one comma eleven, print i. What will happen? I will get printed of one to ten. Now, see what if I use the statement called break? Now, if I say if, see the condition. So, I'm writing the condition, if i is equal equals six, then break. So, if I write this break condition, see what happens. So, tell me what has happened.
+
+[1:50:09] Speaker 4: I continue, and then come out, come out from this road.
+
+[1:50:18] Speaker 2: Yes, okay. So, brake means come out of the loop. Right? Now, let's see continue. So, I'm writing for I in range one comma eleven. If I equal equals six, continue, and then I will, not tell me what will happen. What has happened?
+
+[1:51:06] Speaker 3: As we are mentioned for IN range one to eleven, it prints up to ten. It continues.
+
+[1:51:14] Speaker 2: And I'm writing if I is equal to six, continue. See what's happening. Six is missing here.
+
+[1:51:23] Speaker 4: Skip for the, yes.
+
+[1:51:26] Speaker 2: Right. So what will happen? Continue, skip current iteration. So whenever I'm writing continue, it will skip the current iteration. You got a different button where you can continue?
+
+[1:51:52] Speaker 4: Yes, ma'am.
+
+[1:51:56] Speaker 2: Okay. Like, if I use break, it will break at that condition. But if I use continue, what will happen? It will keep on executing, but it will skip only the current iteration. Okay. So this is what happen using bake and using continue. Okay. Since we know all the loop, let's do one thing. Le-Let's have, let's print all the numbers. There's a question I'll do this. Print, let's do it together, okay? Print all numbers between one and hundred, which are divisible by seven. So, I just want to print those numbers between 1 to 100, which are divisible by 7. How will I do that?
+
+[1:53:10] Speaker 4: So, I want 1 to 100, so 1 200 and
+
+[1:53:16] Speaker 2: 1, divisible by?
+
+[1:53:21] Speaker 4: If, if, if, I percentile 7 double equal 0.
+
+[1:53:29] Speaker 2: If I percentile 7
+
+[1:53:35] Speaker 4: double equal 0, then, print? It is, is number is divisible by 7. Okay.
+
+[1:53:48] Speaker 2: Divisible by 7, let's check.
+
+[1:53:53] Speaker 4: Using formatting functions, we can also take a variable
+
+[1:53:59] Speaker 2: of type. Print I, print I. Yes. Okay, yeah, this is the way. Or simple, I can do print I, simple thing will work. Right? So these are all number divisible over seven. Another way I can do is using, no, I told step size.
+
+[1:54:19] Speaker 3: I in range seven comma one zero one comma seven.
+
+[1:54:24] Speaker 2: Yeah, so for I in range, I should start with one only, one comma one zero one comma seven. Think I. So, you know, there are so many ways you can do that, but if I, I think I should start from zero.
+
+[1:54:44] Speaker 4: And skip for seven, seven eleven.
+
+[1:54:52] Speaker 2: This is how, but if I don't want zero, then I should start with? Seven. Seven, right, thank you. Right. I guess this is how I can tackle the situations. Okay. Now suppose I want to print sum of numbers from one to hundred. So, or one to ten. Sum of numbers one to ten, like I want to print one plus two plus three plus four up to ten. So, you got it what I have to do? So basically I have to do one plus two plus three plus four plus five up to ten. Yeah, so what will I do?
+
+[1:55:50] Speaker 4: Take a range using Charlotte.
+
+[1:55:52] Speaker 2: Oh, yeah, so I will take range. Range means like maybe what, what range, what I should take? See, obviously.
+
+[1:56:10] Speaker 3: For I in range one to eleven.
+
+[1:56:14] Speaker 2: For I in range one to eleven.
+
+[1:56:21] Speaker 3: Sum is equal to sum plus I.
+
+[1:56:22] Speaker 2: Yeah. Now what's sum like I'm, I have to take a temporary variable, declare it as zero. In order to store S is equal to S plus I and that print S. Now what will happen over here? Now what will happen in the first iteration, what is my S? S is zero. Let's understand the logic. In my first iteration, S is zero, what is I? First iteration, one. So what value of S becomes? One. Zero plus one, one. In the second iteration, what is S? One. One. What is I?
+
+[1:57:12] Speaker 4: Two.
+
+[1:57:13] Speaker 2: Yes, I is my two now. So what will S become?
+
+[1:57:16] Speaker 1: Three.
+
+[1:57:17] Speaker 2: Two plus one, three. So here I am getting three. Similarly, in my third iteration, what is S? Three. Three, three, right, three. What is I? Three. So then my final S will become three plus three, six. You know, so this is how what's happening, I'm incrementing my previous number with the next thing. So this is how I get the sum. Now, if I just want to print the last thing, I want just
+
+[1:57:48] Speaker 4: fifty,
+
+[1:57:59] Speaker 2: fine, not all. Okay? Now, print function out of the loop means it will just give me the last value which the loop has executed or which the loop has, you know, out, like, what was the value when the loop was entered. Okay, guys? Yeah. So, like, today we have, let's devise of four total concepts that we have done today. So today we started on with simple print statement, right? And then we moved to comments, variables, data types, and then the operators, comparison operators, logical operators, arithmetic operators. And then we have done if conditionals and for loop and while loop. In for loop, while loop, we have looked on two keywords called break and continue. Okay? Okay. Any questions from you? Any question, guys? So obviously, see while studying, why after the last class, how will you study all these things? So take the concept, I mean, now as you know, you have, you have AI, you have everything, to, to follow you to take the help. So as I told in the start also, you know, your goal is to not memorize the syntax, but your goal is to learn how a coding works, how you can code, how you can, you know, make something, work or, how, how, you don't need to remember the syntax, but you need to remember the logic of the code. Okay? Learn to work with AI, not compete with AI. There's a, there's a very fancy thing that we hear that humans will be replaced by AI. Have you heard that, guys? Yeah. So we think that tomorrow on our chairs, there will be, robots sitting and doing the work. So people say humans will be replaced by AI. But you know what's the reality? Reality is humans will be replaced by humans who knows AI. Right? So your chair will be replaced by someone who's well versed with AI things and everything. You don't need to worry about robot working, but what you need to worry about the person having the necessary AI skills to work instead of your face. So that was just a small motivation or a small quote that I was doing. Okay, let's do one or two more questions since we have time. I wanted to print ten to one in reverse. Opposite way, like say if you want to print ten to one in opposite way, what we can do here? Hm? I can simply say I was using the range as one to hundred or one to ten, I can use the range from ten to one. Print I. So if I, what happened to my name? What's my mistake here? I can't do this, guys. Ten to one, I'm saying.
+
+[2:02:15] Speaker 4: Oh, uh-huh. Yeah, we want
+
+[2:02:16] Speaker 2: minus one now. Minus one means take is increment, a decrement. Yeah, thank you. I was missing minus one over there. So yeah, if I want to print something in reverse, as you said, reverse indexing. Okay? Step size, like the reverse step size, that happens. Basically in program. Okay? And I suppose I'm making a condition, like, just, just, I'm making this question, oh no, let's, like, let's make a question and let's solve it. For example, I want to print one two tens. Print one two tens, but instead of five, print, let's say What can I have instead of five? You know, we used to play this game that instead of five speak this thing. Let's say print five, F I V five. Means I want the output as one, two, three, four, and then F I V five, and then six, seven, eight, nine, ten. Let's try to tackle this together. You got it, what I want?
+
+[2:03:32] Speaker 4: Yeah, yes, definitely.
+
+[2:03:34] Speaker 2: Yeah, so let's try. I just made this on the spot. Let's try to do this together. So for I in range one to ten, so one to eleven, print I. So if I do this, one to ten will be printed. Sorry? Okay. If I do this, one to ten will be printed, but instead of five, I want to print Any other things? Like, I want to print a F I V five. So if I equal equal five, then print, what will happen if I do this? Yeah, I've got it. But there is extra five also coming.
+
+[2:04:26] Speaker 4: Yeah.
+
+[2:04:27] Speaker 2: Yeah, I else. Print I. Print I. Again, I'm getting so many things. Here I have to put print I. Got it? Simple thing. So instead of I, I'm getting five, as simple as that. Yes, you can do that also. You can do using continue statement also. So, how can I use continue? So, I can say for i in range 1 comma 11. Please help me. How will I do this? If i equal equal 5,
+
+[2:05:25] Speaker 1: then print
+
+[2:05:27] Speaker 2: 5 and then, no, no print, only continue.
+
+[2:05:31] Speaker 1: Only continue. Stop here and straight to 6.
+
+[2:05:35] Speaker 2: Yeah, but I want, F I V 5 also instead of.
+
+[2:05:40] Speaker 1: But I want F I V 5.
+
+[2:05:43] Speaker 2: Can you do it yourself? Who's speaking? Can you mute yourself, whoever is speaking? Thank you. Okay. But I want FIV five also for you. Okay, I can separate FIV five. Now got it. Okay. So for one problem, there can be more than one way of doing the things also. Is it okay, guys? Okay.
+
+[2:06:40] Speaker 4: Okay, I think. You are from Karnataka?
+
+[2:06:44] Speaker 2: Sorry?
+
+[2:06:45] Speaker 4: Are you from Karnataka? No.
+
+[2:06:49] Speaker 2: So, what happened?
+
+[2:06:55] Speaker 4: I think it happened. Okay.
+
+[2:06:58] Speaker 2: Okay, so that's it for today from my side. Any questions? No, I don't. I'm from Mumbai, actually. Okay, so I hope everyone has understood whatever I spoke for the last 20 minutes. Let me take the answer. Yeah. Thank you. Hi. Yeah. You want to speak something, Vinay?
+
+[2:07:40] Speaker 4: Yeah, yeah. You like how long you will continue the class?
+
+[2:07:45] Speaker 2: I'll be there for you for the whole course. You mean till for today or you mean for the whole thing?
+
+[2:07:58] Speaker 1: No, the AI, AI will course, entire course you'll be handling it or like? Yes,
+
+[2:08:02] Speaker 2: I'll be handling the whole AI my entire course.
+
+[2:08:07] Speaker 1: Okay.
+
+[2:08:09] Speaker 2: I hope I'm not scaring you for that.
+
+[2:08:12] Speaker 1: No, no, nothing like that.
+
+[2:08:17] Speaker 2: Okay. Thank you. Okay, thank you so much, then. See you tomorrow, guys. Bye-bye. I'll give you some assignment. I'll share some assignments with you. Please complete those before coming to class tomorrow because, you know, it's very necessary to practice. See, coding is something like no matter how much I speak, how much I teach, it's on you that you have to practice, then only you will understand the stuffs. Agree? So, please. No, is there QA session today, daily? Yeah, you do have that daily, right? I think there will be someone on the trainer for that. I'm not a villain. Don't worry about it, there will be. I'll, I'll see to it. And anyways, if you have any query, you can ask me tomorrow morning also. Okay, and make sure that you understand whatever you are learning from the class, you know, whatever two hours you are spending over here, at the end of the class, you should have a realization that today I understood this, this thing, okay? Something like that. So you should be satisfied with yourself. Okay, then thank you so much. I'm ending the class over here.
+
+[2:09:40] Speaker 1: Can you share the syllabus one?
+
+[2:09:43] Speaker 2: Yes, I'll share, I'll share the team and they will share it with you.
+
+[2:09:50] Speaker 1: Okay, thank you.
+
+[2:09:52] Speaker 2: Assignment also I'm sharing after the class. Or if you want, you have your coordinator, right? Your coordinator from the TechMind will share the things with you. And yeah, like maybe if you want tomorrow onwards, I will share the assignment in the live class also so that everyone gets it. Okay, but just for today, I'll just, yeah, live class will be better. Just for today, I'll share with the coordinator from tomorrow onwards, I'll share in the Zoom chat itself. Okay. Okay, nice. Thank you so much. See you tomorrow. Bye-bye. Thank you. Thank you, ma'am.

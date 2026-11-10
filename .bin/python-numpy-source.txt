@@ -1,0 +1,2708 @@
+=======
+                 NUMPY COMPLETE INTERVIEW PREPARATION
+                    BEGINNER TO ADVANCED LEVEL
+======================================================================
+
+CONTENTS
+----------------------------------------------------------------------
+01. NumPy Fundamentals
+02. Array Dimensions and Attributes
+03. Array Creation Methods
+04. NumPy Data Types
+05. Indexing and Slicing
+06. Array Operations
+07. Mathematical Functions
+08. Statistical Functions
+09. Reshaping and Array Manipulation
+10. Joining and Splitting Arrays
+11. Broadcasting
+12. Copy and View
+13. Boolean Indexing and Filtering
+14. Random Module
+15. Linear Algebra
+16. Missing Values and Special Values
+17. Searching and Sorting
+18. File Handling
+19. NumPy Modules and Submodules
+20. Difference-Based Questions
+21. Output-Based Questions
+22. Tricky Interview Questions
+23. Scenario-Based Questions
+24. Coding Interview Programs
+25. Rapid-Fire Revision
+26. Interview Preparation Roadmap
+
+======================================================================
+01. NUMPY FUNDAMENTALS
+======================================================================
+
+Q1. What is NumPy?
+Ans: NumPy stands for Numerical Python. It is a Python library used
+for numerical calculations, mathematical operations and working
+with multidimensional arrays.
+
+Q2. Why do we use NumPy?
+Ans:
+- Faster numerical calculations.
+- Efficient memory management.
+- Multidimensional array support.
+- Mathematical and statistical operations.
+- Matrix and linear algebra operations.
+- Useful for Data Science and Machine Learning.
+
+Q3. What is the full form of NumPy?
+Ans: Numerical Python.
+
+Q4. How do you install NumPy?
+Ans:
+pip install numpy
+
+Q5. How do you import NumPy?
+Ans:
+import numpy as np
+
+Q6. Why do we use np?
+Ans: np is an alias for NumPy. It makes accessing NumPy functions
+easier.
+
+Q7. What is ndarray?
+Ans: ndarray means N-dimensional array. It is the main data
+structure in NumPy.
+
+Q8. Difference between Python list and NumPy array?
+
+Python List:
+- Built into Python.
+- Can store different data types.
+- General-purpose data structure.
+- Multiplication by a number repeats the list.
+- Generally slower for large numerical operations.
+
+NumPy Array:
+- Requires NumPy.
+- Usually stores elements using one data type.
+- Designed for numerical operations.
+- Supports element-wise mathematical operations.
+- Generally faster for large numerical operations.
+
+Q9. Is NumPy written in Python?
+Ans: NumPy provides a Python interface, but many computational
+operations are implemented in compiled languages such as C.
+
+Q10. Is NumPy mutable?
+Ans: Yes. NumPy arrays are mutable. We can modify their elements.
+
+Example:
+a = np.array([10, 20, 30])
+a[0] = 100
+print(a)
+
+Output:
+[100  20  30]
+
+Q11. Can NumPy store strings?
+Ans: Yes. NumPy supports string arrays.
+
+Q12. Can NumPy store mixed data types?
+Ans: Yes. NumPy generally converts values into a common compatible
+data type. Object arrays can also store mixed Python objects.
+
+Q13. What is vectorization?
+Ans: Vectorization means performing operations on entire arrays
+without explicitly writing Python loops.
+
+Example:
+a = np.array([1, 2, 3])
+print(a * 2)
+
+Output:
+[2 4 6]
+
+Q14. Difference between NumPy and Pandas?
+
+NumPy:
+- Works mainly with arrays.
+- Numerical calculations.
+- Main object is ndarray.
+
+Pandas:
+- Works with Series and DataFrames.
+- Data manipulation and analysis.
+- Supports different data types across columns.
+
+Q15. What is the relationship between NumPy and Machine Learning?
+Ans: NumPy is used for numerical calculations, matrix operations,
+data preprocessing and mathematical computations in Machine Learning.
+
+======================================================================
+02. ARRAY DIMENSIONS AND ATTRIBUTES
+======================================================================
+
+Q16. What are the different dimensions in NumPy?
+
+0D = Scalar
+1D = Single-dimensional array
+2D = Rows and columns
+3D = Collection of 2D arrays
+ND = Multidimensional array
+
+Q17. What is a 0D array?
+Ans: An array containing a single scalar value.
+
+a = np.array(10)
+print(a.ndim)
+
+Output:
+0
+
+Q18. What is a 1D array?
+Ans: An array containing elements along one axis.
+
+a = np.array([10, 20, 30])
+print(a.ndim)
+
+Output:
+1
+
+Q19. What is a 2D array?
+Ans: An array containing rows and columns.
+
+a = np.array([[10, 20], [30, 40]])
+print(a.ndim)
+
+Output:
+2
+
+Q20. What is a 3D array?
+Ans: An array containing multiple 2D arrays.
+
+Q21. What is ndim?
+Ans: Returns the number of dimensions.
+
+Q22. What is shape?
+Ans: Returns the size of an array along each dimension.
+
+Example:
+a = np.array([[1, 2, 3], [4, 5, 6]])
+print(a.shape)
+
+Output:
+(2, 3)
+
+Q23. What is size?
+Ans: Returns the total number of elements.
+
+Q24. What is dtype?
+Ans: Returns the data type of array elements.
+
+Q25. What is itemsize?
+Ans: Returns memory occupied by one array element in bytes.
+
+Q26. What is nbytes?
+Ans: Returns total memory occupied by array elements in bytes.
+
+Q27. Difference between shape and size?
+Ans:
+shape = Dimensions and lengths of dimensions.
+size = Total number of elements.
+
+Q28. How do you find rows and columns?
+
+a = np.array([[1, 2, 3], [4, 5, 6]])
+rows, columns = a.shape
+
+print(rows)
+print(columns)
+
+Output:
+2
+3
+
+Q29. What are ndim, shape and size of a 3x3 matrix?
+
+ndim  = 2
+shape = (3, 3)
+size  = 9
+
+Q30. What is axis?
+Ans: Axis represents the dimension along which an operation
+is performed.
+
+axis=0 : Down rows, producing column results.
+axis=1 : Across columns, producing row results.
+axis=None : Entire array.
+
+======================================================================
+03. ARRAY CREATION METHODS
+======================================================================
+
+Q31. How do you create a NumPy array?
+
+a = np.array([10, 20, 30])
+
+Q32. What is np.zeros()?
+Ans: Creates an array filled with zeros.
+
+np.zeros(5)
+
+Output:
+[0. 0. 0. 0. 0.]
+
+Q33. What is np.ones()?
+Ans: Creates an array filled with ones.
+
+np.ones(4)
+
+Output:
+[1. 1. 1. 1.]
+
+Q34. What is np.empty()?
+Ans: Creates an array without initializing its values.
+Its contents are arbitrary.
+
+Q35. What is np.full()?
+Ans: Creates an array filled with a specified value.
+
+np.full(4, 7)
+
+Output:
+[7 7 7 7]
+
+Q36. What is np.arange()?
+Ans: Generates values using start, stop and step.
+
+np.arange(1, 10, 2)
+
+Output:
+[1 3 5 7 9]
+
+Q37. What is np.linspace()?
+Ans: Generates a specified number of evenly spaced values.
+
+np.linspace(1, 10, 5)
+
+Output:
+[1.   3.25 5.5  7.75 10. ]
+
+Q38. Difference between arange() and linspace()?
+
+arange():
+- Uses step size.
+- Stop excluded by default.
+
+linspace():
+- Uses number of values.
+- Endpoint included by default.
+
+Q39. What is np.eye()?
+Ans: Creates a matrix with ones on the diagonal and zeros elsewhere.
+
+Q40. What is np.identity()?
+Ans: Creates a square identity matrix.
+
+Q41. What is np.diag()?
+Ans: Creates a diagonal matrix or extracts diagonal elements.
+
+Q42. What is np.asarray()?
+Ans: Converts input into a NumPy array. It can reuse an existing
+compatible array without copying.
+
+Q43. What is np.zeros_like()?
+Ans: Creates a zero-filled array with the same shape as another array.
+
+Q44. What is np.ones_like()?
+Ans: Creates a one-filled array with the same shape as another array.
+
+Q45. What is np.full_like()?
+Ans: Creates an array with the same shape as another array and
+fills it with a specified value.
+
+======================================================================
+04. NUMPY DATA TYPES
+======================================================================
+
+Q46. What data types are supported by NumPy?
+
+Integer:
+int8, int16, int32, int64
+
+Unsigned Integer:
+uint8, uint16, uint32, uint64
+
+Float:
+float16, float32, float64
+
+Other:
+bool_, complex64, complex128, strings, object.
+
+Q47. What is astype()?
+Ans: Converts an array into another data type.
+
+a = np.array([10, 20, 30])
+b = a.astype(float)
+
+print(b)
+
+Output:
+[10. 20. 30.]
+
+Q48. Difference between int32 and int64?
+
+int32 = Uses 32 bits.
+int64 = Uses 64 bits.
+
+Q49. What is type casting?
+Ans: Converting data from one data type into another.
+
+Q50. What happens when integer and float values are stored together?
+Ans: NumPy generally promotes them to a common compatible type,
+such as float.
+
+Q51. What is float64?
+Ans: A 64-bit floating-point data type.
+
+Q52. What is int64?
+Ans: A 64-bit signed integer data type.
+
+Q53. Can we change the dtype of an existing array?
+Ans: We can create a converted array using astype(). It does not
+normally change the original array's dtype in place.
+
+======================================================================
+05. INDEXING AND SLICING
+======================================================================
+
+Q54. What is indexing?
+Ans: Accessing a specific element using its index.
+
+a = np.array([10, 20, 30])
+print(a[0])
+
+Output:
+10
+
+Q55. What is slicing?
+Ans: Extracting a range of elements from an array.
+
+a = np.array([10, 20, 30, 40, 50])
+print(a[1:4])
+
+Output:
+[20 30 40]
+
+Q56. What is negative indexing?
+Ans: Accessing elements from the end of an array.
+
+a = np.array([10, 20, 30])
+print(a[-1])
+
+Output:
+30
+
+Q57. What is slicing syntax?
+
+array[start:stop:step]
+
+Q58. How do you reverse an array?
+
+a = np.array([10, 20, 30, 40])
+print(a[::-1])
+
+Output:
+[40 30 20 10]
+
+Q59. How do you access an element from a 2D array?
+
+a = np.array([[10, 20], [30, 40]])
+print(a[1, 0])
+
+Output:
+30
+
+Q60. What does a[:, 1] mean?
+Ans: Selects the second column from all rows.
+
+Q61. What does a[0, :] mean?
+Ans: Selects all columns from the first row.
+
+Q62. What does a[1:3, 0:2] mean?
+Ans: Selects rows at indices 1 and 2 and columns at indices
+0 and 1.
+
+Q63. What happens when we access an invalid index?
+Ans: NumPy raises IndexError.
+
+Q64. Can we modify array elements using indexing?
+Ans: Yes. NumPy arrays are mutable.
+
+======================================================================
+06. ARRAY OPERATIONS
+======================================================================
+
+Q65. What are arithmetic operations in NumPy?
+Ans: Operations that perform mathematical calculations.
+
+Functions:
+np.add()
+np.subtract()
+np.multiply()
+np.divide()
+np.power()
+np.mod()
+
+Q66. What is element-wise addition?
+Ans: Adds corresponding elements.
+
+a = np.array([10, 20])
+b = np.array([1, 2])
+print(a + b)
+
+Output:
+[11 22]
+
+Q67. What is element-wise multiplication?
+Ans: Multiplies corresponding elements.
+
+a = np.array([2, 3])
+b = np.array([4, 5])
+print(a * b)
+
+Output:
+[ 8 15]
+
+Q68. Difference between * and @?
+
+* = Element-wise multiplication.
+@ = Matrix multiplication.
+
+Q69. What are comparison operators?
+
+>
+<
+>=
+<=
+==
+!=
+
+They return Boolean arrays.
+
+Q70. What are logical operations?
+
+np.logical_and()
+np.logical_or()
+np.logical_not()
+np.logical_xor()
+
+Q71. What is np.add()?
+Ans: Adds two arrays element by element.
+
+Q72. What is np.subtract()?
+Ans: Subtracts corresponding elements.
+
+Q73. What is np.multiply()?
+Ans: Performs element-wise multiplication.
+
+Q74. What is np.divide()?
+Ans: Performs element-wise division.
+
+Q75. What is np.power()?
+Ans: Raises elements to a specified power.
+
+======================================================================
+07. MATHEMATICAL FUNCTIONS
+======================================================================
+
+Q76. What is np.sqrt()?
+Ans: Calculates square root.
+
+Q77. What is np.square()?
+Ans: Calculates square of each element.
+
+Q78. What is np.abs()?
+Ans: Returns absolute values.
+
+Q79. What is np.round()?
+Ans: Rounds values to a specified number of decimal places.
+
+Q80. What is np.floor()?
+Ans: Rounds values down to the nearest integer.
+
+Q81. What is np.ceil()?
+Ans: Rounds values up to the nearest integer.
+
+Q82. What is np.exp()?
+Ans: Calculates exponential e^x.
+
+Q83. What is np.log()?
+Ans: Calculates natural logarithm.
+
+Q84. What is np.log10()?
+Ans: Calculates logarithm to base 10.
+
+Q85. What is np.sin()?
+Ans: Calculates sine of values in radians.
+
+Q86. What is np.cos()?
+Ans: Calculates cosine of values in radians.
+
+Q87. What is np.tan()?
+Ans: Calculates tangent of values in radians.
+
+Q88. What is np.sum()?
+Ans: Calculates sum of array elements.
+
+Q89. What is np.cumsum()?
+Ans: Calculates cumulative sum.
+
+a = np.array([1, 2, 3, 4])
+print(np.cumsum(a))
+
+Output:
+[1 3 6 10]
+
+Q90. What is np.cumprod()?
+Ans: Calculates cumulative product.
+
+======================================================================
+08. STATISTICAL FUNCTIONS
+======================================================================
+
+Q91. What is np.mean()?
+Ans: Calculates arithmetic average.
+
+Q92. What is np.median()?
+Ans: Returns the middle value after sorting.
+
+Q93. Does NumPy have np.mode()?
+Ans: No. Use scipy.stats.mode() or another method.
+
+Q94. What is np.std()?
+Ans: Calculates standard deviation.
+
+Q95. What is np.var()?
+Ans: Calculates variance.
+
+Q96. Difference between variance and standard deviation?
+
+Variance = Average squared deviation from the mean.
+Standard deviation = Square root of variance.
+
+Q97. What is np.min()?
+Ans: Returns smallest element.
+
+Q98. What is np.max()?
+Ans: Returns largest element.
+
+Q99. What is np.argmax()?
+Ans: Returns index of maximum element.
+
+Q100. What is np.argmin()?
+Ans: Returns index of minimum element.
+
+Q101. What is np.percentile()?
+Ans: Calculates a specified percentile.
+
+Q102. What is np.quantile()?
+Ans: Calculates a specified quantile.
+
+Q103. What is np.prod()?
+Ans: Calculates product of array elements.
+
+Q104. What is np.average()?
+Ans: Calculates average, optionally using weights.
+
+======================================================================
+09. RESHAPING AND ARRAY MANIPULATION
+======================================================================
+
+Q105. What is reshaping?
+Ans: Changing array dimensions without changing its elements.
+
+Q106. What is reshape()?
+
+a = np.array([1, 2, 3, 4, 5, 6])
+print(a.reshape(2, 3))
+
+Output:
+[[1 2 3]
+ [4 5 6]]
+
+Q107. What happens if requested shape is incompatible?
+Ans: NumPy raises ValueError.
+
+Q108. What is flatten()?
+Ans: Converts multidimensional array into a 1D copy.
+
+Q109. What is ravel()?
+Ans: Converts array into 1D, returning a view when possible.
+
+Q110. Difference between flatten() and ravel()?
+
+flatten():
+- Always returns a copy.
+
+ravel():
+- Returns a view when possible.
+- Can avoid unnecessary copying.
+
+Q111. What is transpose?
+Ans: Swaps the axes of an array.
+
+Q112. What is a.T?
+Ans: Shortcut for transposing an array.
+
+Q113. What is np.squeeze()?
+Ans: Removes dimensions with size 1.
+
+Q114. What is np.expand_dims()?
+Ans: Adds a new dimension.
+
+Q115. What is np.resize()?
+Ans: Returns an array with a specified new shape. It can repeat
+values if more elements are needed.
+
+Q116. What is np.swapaxes()?
+Ans: Swaps two specified axes.
+
+Q117. What is np.moveaxis()?
+Ans: Moves specified axes to new positions.
+
+======================================================================
+10. JOINING AND SPLITTING ARRAYS
+======================================================================
+
+Q118. What is concatenation?
+Ans: Joining arrays along an existing axis.
+
+Q119. What is np.concatenate()?
+Ans: Joins arrays along an existing axis.
+
+Q120. What is np.stack()?
+Ans: Joins arrays along a new axis.
+
+Q121. Difference between concatenate and stack?
+
+concatenate:
+- Uses existing axis.
+
+stack:
+- Creates a new axis.
+- Input shapes must match.
+
+Q122. What is np.vstack()?
+Ans: Stacks arrays vertically.
+
+Q123. What is np.hstack()?
+Ans: Stacks arrays horizontally.
+
+Q124. What is np.dstack()?
+Ans: Stacks arrays along the third axis.
+
+Q125. What is np.split()?
+Ans: Splits an array into equal sections.
+
+Q126. What is np.array_split()?
+Ans: Splits an array into sections that can have unequal sizes.
+
+Q127. Difference between split and array_split?
+
+split = Equal sections required.
+array_split = Unequal sections allowed.
+
+Q128. What is np.hsplit()?
+Ans: Horizontal splitting.
+
+Q129. What is np.vsplit()?
+Ans: Vertical splitting.
+
+Q130. What is np.dsplit()?
+Ans: Splitting along the third axis.
+
+======================================================================
+11. BROADCASTING
+======================================================================
+
+Q131. What is broadcasting?
+Ans: Allows operations between arrays of different shapes
+when their dimensions are compatible.
+
+Q132. Why do we use broadcasting?
+Ans:
+- Avoids manually repeating values.
+- Makes calculations easier.
+- Reduces unnecessary memory usage.
+- Supports efficient operations.
+
+Q133. What are broadcasting rules?
+
+1. Compare dimensions from right to left.
+2. Dimensions must be equal or one must be 1.
+3. Missing dimensions are treated as 1.
+
+Q134. Can arrays of different shapes be added?
+Ans: Yes, if broadcasting rules are satisfied.
+
+Q135. What happens when broadcasting rules fail?
+Ans: NumPy raises ValueError.
+
+Q136. Difference between broadcasting and vectorization?
+
+Broadcasting = Handles compatible array shapes.
+Vectorization = Performs operations on entire arrays.
+
+Q137. Predict output:
+
+a = np.array([1, 2, 3])
+print(a + 10)
+
+Output:
+[11 12 13]
+
+Q138. Predict output:
+
+a = np.array([[1], [2], [3]])
+b = np.array([10, 20])
+print(a + b)
+
+Output:
+[[11 21]
+ [12 22]
+ [13 23]]
+
+======================================================================
+12. COPY AND VIEW
+======================================================================
+
+Q139. What is copy?
+Ans: Creates an independent array with separate data storage.
+
+Q140. What is view?
+Ans: Creates a new array object sharing the original array's data.
+
+Q141. Difference between copy and view?
+
+Copy:
+- Independent data.
+- Changes do not affect original.
+
+View:
+- Shares data.
+- Changes can affect original.
+
+Q142. How do you create a copy?
+
+b = a.copy()
+
+Q143. How do you create a view?
+
+b = a.view()
+
+Q144. How do you check shared memory?
+
+np.shares_memory(a, b)
+
+Q145. Does slicing create copy or view?
+Ans: Basic slicing generally creates a view.
+
+Q146. Does Boolean indexing create copy or view?
+Ans: Boolean indexing returns a copy.
+
+Q147. What is shallow copy?
+Ans: Creates a new outer object but can retain references to
+nested objects.
+
+Q148. What is deep copy?
+Ans: Recursively copies nested objects.
+
+======================================================================
+13. BOOLEAN INDEXING AND FILTERING
+======================================================================
+
+Q149. What is Boolean indexing?
+Ans: Uses True and False conditions to select elements.
+
+a = np.array([10, 20, 30, 40])
+print(a[a > 20])
+
+Output:
+[30 40]
+
+Q150. What is filtering?
+Ans: Extracting elements that satisfy a condition.
+
+Q151. What is np.where()?
+Ans: Returns indices where a condition is true, or selects values
+based on a condition.
+
+a = np.array([10, 20, 30, 40])
+print(np.where(a > 20))
+
+Output:
+(array([2, 3]),)
+
+Q152. What is np.extract()?
+Ans: Extracts elements based on a condition.
+
+Q153. How do you filter even numbers?
+
+a = np.array([1, 2, 3, 4, 5, 6])
+print(a[a % 2 == 0])
+
+Output:
+[2 4 6]
+
+Q154. How do you filter numbers between 10 and 50?
+
+a = np.array([5, 15, 25, 55])
+print(a[(a >= 10) & (a <= 50)])
+
+Output:
+[15 25]
+
+Q155. Why use & instead of and?
+Ans: & performs element-wise logical AND. Python's and expects
+single truth values.
+
+Q156. What is np.any()?
+Ans: Returns True if at least one element satisfies the condition.
+
+Q157. What is np.all()?
+Ans: Returns True if all elements satisfy the condition.
+
+Logical operators:
+
+& = AND
+| = OR
+~ = NOT
+
+======================================================================
+14. RANDOM MODULE
+======================================================================
+
+Q158. What is np.random?
+Ans: NumPy submodule used for random number generation.
+
+Q159. What is np.random.rand()?
+Ans: Generates random floats between 0 and 1.
+
+Q160. What is np.random.randn()?
+Ans: Generates values from a standard normal distribution.
+
+Q161. What is np.random.randint()?
+Ans: Generates random integers within a specified range.
+
+Q162. What is np.random.choice()?
+Ans: Randomly selects elements from a collection.
+
+Q163. What is np.random.shuffle()?
+Ans: Shuffles an array in place.
+
+Q164. What is np.random.permutation()?
+Ans: Returns a shuffled permutation without modifying the original.
+
+Q165. What is np.random.seed()?
+Ans: Sets the seed for reproducible results using the legacy API.
+
+Q166. What is np.random.default_rng()?
+Ans: Creates a modern random number generator.
+
+Q167. Difference between rand and randint?
+
+rand = Random floating-point numbers.
+randint = Random integers.
+
+Q168. Why use random numbers in Machine Learning?
+Ans: Used for initializing weights, shuffling datasets, generating
+samples and splitting data.
+
+Modern example:
+
+rng = np.random.default_rng(42)
+print(rng.integers(1, 10, size=5))
+
+======================================================================
+15. LINEAR ALGEBRA
+======================================================================
+
+Q169. What is linear algebra in NumPy?
+Ans: Mathematical operations involving vectors and matrices.
+
+Q170. What is np.linalg.inv()?
+Ans: Calculates inverse of an invertible square matrix.
+
+Q171. What is np.linalg.det()?
+Ans: Calculates matrix determinant.
+
+Q172. What is np.linalg.matrix_rank()?
+Ans: Calculates matrix rank.
+
+Q173. What is np.linalg.solve()?
+Ans: Solves a system of linear equations.
+
+Q174. What is np.linalg.eig()?
+Ans: Calculates eigenvalues and eigenvectors.
+
+Q175. What is np.linalg.norm()?
+Ans: Calculates vector or matrix norm.
+
+Q176. What is np.linalg.svd()?
+Ans: Performs singular value decomposition.
+
+Q177. Difference between dot() and matmul()?
+
+dot():
+- Performs dot product and matrix multiplication depending
+  on input dimensions.
+
+matmul():
+- Specifically performs matrix multiplication.
+- Supports stacked matrices.
+
+Q178. Difference between * and np.dot()?
+
+* = Element-wise multiplication.
+np.dot() = Dot product or matrix product depending on dimensions.
+
+======================================================================
+16. MISSING VALUES AND SPECIAL VALUES
+======================================================================
+
+Q179. What is NaN?
+Ans: Not a Number. Represents undefined or missing numerical data.
+
+Q180. How do you create NaN?
+
+a = np.array([10, 20, np.nan, 40])
+
+Q181. What is np.isnan()?
+Ans: Checks for NaN values.
+
+Q182. What is np.nanmean()?
+Ans: Calculates mean while ignoring NaN values.
+
+Q183. What is np.nansum()?
+Ans: Calculates sum while treating NaN values as zero.
+
+Q184. What is np.nanmax()?
+Ans: Returns maximum while ignoring NaN values.
+
+Q185. What is np.nanmin()?
+Ans: Returns minimum while ignoring NaN values.
+
+Q186. What is np.isinf()?
+Ans: Checks for positive or negative infinity.
+
+Q187. What is np.isfinite()?
+Ans: Checks for values that are neither NaN nor infinity.
+
+Q188. What is np.nan_to_num()?
+Ans: Replaces NaN and infinite values with finite values.
+
+======================================================================
+17. SEARCHING AND SORTING
+======================================================================
+
+Q189. What is np.sort()?
+Ans: Returns a sorted copy of an array.
+
+Q190. What is np.argsort()?
+Ans: Returns indices that would sort an array.
+
+Q191. What is np.unique()?
+Ans: Returns unique elements.
+
+Q192. What is np.where()?
+Ans: Returns indices or conditionally selected values.
+
+Q193. What is np.argmax()?
+Ans: Returns index of maximum element.
+
+Q194. What is np.argmin()?
+Ans: Returns index of minimum element.
+
+Q195. What is np.searchsorted()?
+Ans: Finds insertion position in sorted data.
+
+Q196. What is np.intersect1d()?
+Ans: Returns common unique elements between two arrays.
+
+Q197. What is np.union1d()?
+Ans: Returns sorted unique union of two arrays.
+
+Q198. What is np.setdiff1d()?
+Ans: Returns elements present in first array but not second.
+
+Q199. What is np.setxor1d()?
+Ans: Returns elements present in either array but not both.
+
+======================================================================
+18. FILE HANDLING
+======================================================================
+
+Q200. How do you save a NumPy array?
+
+np.save("data.npy", a)
+
+Q201. How do you load a NumPy array?
+
+a = np.load("data.npy")
+
+Q202. What is .npy?
+Ans: Binary file format for storing a single NumPy array.
+
+Q203. What is .npz?
+Ans: Archive format used to store multiple NumPy arrays.
+
+Q204. What is np.savez()?
+Ans: Saves multiple arrays in an uncompressed .npz archive.
+
+Q205. What is np.savez_compressed()?
+Ans: Saves multiple arrays in a compressed .npz archive.
+
+Q206. What is np.savetxt()?
+Ans: Saves arrays in text format such as CSV.
+
+Q207. What is np.loadtxt()?
+Ans: Loads numerical data from text files.
+
+Q208. What is np.genfromtxt()?
+Ans: Loads text data and supports missing-value handling.
+
+Q209. Difference between loadtxt and genfromtxt?
+
+loadtxt:
+- Suitable for clean numerical data.
+- Simpler and often faster.
+
+genfromtxt:
+- More flexible.
+- Supports missing-value handling.
+
+======================================================================
+19. NUMPY MODULES AND SUBMODULES
+======================================================================
+
+Q210. What are the main NumPy modules?
+
+numpy             = Main library
+numpy.random      = Random numbers
+numpy.linalg      = Linear algebra
+numpy.fft         = Fourier transforms
+numpy.ma          = Masked arrays
+numpy.char        = String operations
+numpy.testing     = Testing
+numpy.polynomial  = Polynomial operations
+
+Q211. What is np.fft?
+Ans: Used for Fourier transforms and frequency-domain calculations.
+
+Q212. What is np.ma?
+Ans: Used for masked arrays.
+
+Q213. What is np.char?
+Ans: Provides vectorized string operations.
+
+Q214. What is np.testing?
+Ans: Provides functions to test and compare arrays.
+
+Q215. What is np.polynomial?
+Ans: Used for polynomial calculations and fitting.
+
+Q216. Difference between module and function?
+
+Module:
+A collection of related functionality.
+
+Function:
+Performs a specific operation.
+
+Example:
+np.random.randint(1, 10)
+
+np = Main library.
+random = Submodule.
+randint() = Function.
+
+======================================================================
+20. DIFFERENCE-BASED QUESTIONS
+======================================================================
+
+List vs Array:
+List is general-purpose; array is optimized for numerical operations.
+
+1D vs 2D:
+One axis vs two axes.
+
+ndim vs shape:
+Number of dimensions vs dimension lengths.
+
+shape vs size:
+Dimension lengths vs total elements.
+
+arange vs linspace:
+Step size vs number of values.
+
+zeros vs ones:
+Fills with 0 vs fills with 1.
+
+array vs asarray:
+Creates array vs avoids copying when possible.
+
+copy vs view:
+Independent data vs shared data.
+
+flatten vs ravel:
+Always copy vs view when possible.
+
+* vs @:
+Element-wise multiplication vs matrix multiplication.
+
+dot vs matmul:
+Dot/matrix product vs matrix multiplication.
+
+concatenate vs stack:
+Existing axis vs new axis.
+
+split vs array_split:
+Equal sections vs potentially unequal sections.
+
+vstack vs hstack:
+Vertical vs horizontal stacking.
+
+sort vs argsort:
+Sorted values vs sorting indices.
+
+argmax vs max:
+Index vs value.
+
+argmin vs min:
+Index vs value.
+
+mean vs median:
+Average vs middle value.
+
+var vs std:
+Variance vs standard deviation.
+
+any vs all:
+At least one True vs all True.
+
+loadtxt vs genfromtxt:
+Clean numerical text vs missing-value handling.
+
+rand vs randint:
+Random floats vs random integers.
+
+shuffle vs permutation:
+Modifies array in place vs returns a permutation.
+
+======================================================================
+21. OUTPUT-BASED QUESTIONS
+======================================================================
+
+Q217.
+a = np.array([10, 20, 30])
+print(a + 5)
+
+Answer:
+[15 25 35]
+
+Q218.
+a = np.array([1, 2, 3])
+print(a * 3)
+
+Answer:
+[3 6 9]
+
+Q219.
+a = np.array([10, 20, 30, 40])
+print(a[1:3])
+
+Answer:
+[20 30]
+
+Q220.
+a = np.array([1, 2, 3, 4])
+print(a[::-1])
+
+Answer:
+[4 3 2 1]
+
+Q221.
+a = np.array([10, 20, 30])
+print(a.ndim)
+print(a.shape)
+print(a.size)
+
+Answer:
+1
+(3,)
+3
+
+Q222.
+a = np.array([[1, 2], [3, 4]])
+print(a.sum())
+
+Answer:
+10
+
+Q223.
+a = np.array([[1, 2], [3, 4]])
+print(a.sum(axis=0))
+
+Answer:
+[4 6]
+
+Q224.
+a = np.array([[1, 2], [3, 4]])
+print(a.sum(axis=1))
+
+Answer:
+[3 7]
+
+Q225.
+a = np.array([1, 2, 3, 4])
+print(a > 2)
+
+Answer:
+[False False True True]
+
+Q226.
+a = np.array([1, 2, 2, 3, 3, 3])
+print(np.unique(a))
+
+Answer:
+[1 2 3]
+
+Q227.
+a = np.array([10, 20, 30, 40])
+print(np.argmax(a))
+
+Answer:
+3
+
+Q228.
+a = np.array([1, 2, 3])
+print(np.mean(a))
+
+Answer:
+2.0
+
+Q229.
+a = np.array([1, 2, 3, 4])
+print(a.reshape(2, 2))
+
+Answer:
+[[1 2]
+ [3 4]]
+
+Q230.
+a = np.array([1, 2, 3])
+b = a.copy()
+b[0] = 100
+print(a)
+
+Answer:
+[1 2 3]
+
+Q231.
+a = np.array([1, 2, 3])
+b = a.view()
+b[0] = 100
+print(a)
+
+Answer:
+[100   2   3]
+
+Q232.
+a = np.array([1, 2, 3, 4, 5])
+print(a[a % 2 == 0])
+
+Answer:
+[2 4]
+
+Q233.
+a = np.array([1, 2, 3])
+b = np.array([10])
+print(a + b)
+
+Answer:
+[11 12 13]
+
+Q234.
+a = np.array([1, 2, 3])
+print(np.cumsum(a))
+
+Answer:
+[1 3 6]
+
+Q235.
+a = np.array([1, 2, 3])
+print(np.where(a > 1, 100, 0))
+
+Answer:
+[  0 100 100]
+
+Q236.
+a = np.array([10, 20, 30])
+print(np.min(a))
+print(np.max(a))
+
+Answer:
+10
+30
+
+======================================================================
+22. TRICKY INTERVIEW QUESTIONS
+======================================================================
+
+Q237. Can a NumPy array contain another NumPy array?
+Ans: Yes. Compatible nested arrays generally form multidimensional
+arrays. Object arrays can store arrays as objects.
+
+Q238. Can we change array shape without changing data?
+Ans: Yes, using reshape() when compatible.
+
+Q239. Does reshape() always return a view?
+Ans: No. It returns a view when possible and otherwise may return
+a copy.
+
+Q240. Is NumPy always faster than Python lists?
+Ans: No. NumPy is generally faster for large numerical operations.
+
+Q241. Can NumPy arrays have different data types?
+Ans: Standard arrays use one dtype. Object arrays can hold
+different Python object types.
+
+Q242. What happens when dividing an integer array by another?
+Ans: Normal division generally produces floating-point results.
+
+Q243. What happens when dividing by zero?
+Ans: Depending on dtype and error settings, NumPy can return
+inf or nan and issue a warning.
+
+Q244. What is memory efficiency?
+Ans: NumPy stores homogeneous array elements in compact buffers,
+reducing overhead compared with Python lists.
+
+Q245. What is contiguous memory?
+Ans: Array elements stored continuously in a particular memory order.
+
+Q246. What is C order?
+Ans: Row-major memory order.
+
+Q247. What is Fortran order?
+Ans: Column-major memory order.
+
+Q248. What is np.newaxis?
+Ans: Adds a new dimension. It is an alias for None.
+
+a = np.array([1, 2, 3])
+print(a[:, np.newaxis].shape)
+
+Output:
+(3, 1)
+
+Q249. What is np.clip()?
+Ans: Restricts values to a specified minimum and maximum.
+
+a = np.array([5, 15, 25, 35])
+print(np.clip(a, 10, 30))
+
+Output:
+[10 15 25 30]
+
+Q250. What is np.meshgrid()?
+Ans: Generates coordinate matrices from coordinate vectors.
+
+Q251. What is np.broadcast_to()?
+Ans: Creates a broadcasted view with a compatible shape.
+
+Q252. What is np.fromiter()?
+Ans: Creates an array from an iterable.
+
+Q253. What is np.fromfunction()?
+Ans: Creates an array by applying a function to coordinate arrays.
+
+Q254. What is np.vectorize()?
+Ans: Applies a Python function element-wise as a convenience
+wrapper. It is not generally a performance optimization.
+
+Q255. What is np.apply_along_axis()?
+Ans: Applies a function to 1D slices along a specified axis.
+
+======================================================================
+23. SCENARIO-BASED QUESTIONS
+======================================================================
+
+Q256. You have a large list of numbers. How do you perform
+mathematical calculations efficiently?
+
+Ans:
+a = np.array(numbers)
+print(a * 2)
+
+Q257. How do you calculate an average ignoring NaN?
+
+Ans:
+np.nanmean(a)
+
+Q258. How do you remove duplicate values?
+
+Ans:
+np.unique(a)
+
+Q259. How do you find values greater than 50?
+
+Ans:
+a[a > 50]
+
+Q260. How do you convert 12 elements into a 3x4 matrix?
+
+Ans:
+a.reshape(3, 4)
+
+Q261. How do you calculate column-wise totals?
+
+Ans:
+np.sum(a, axis=0)
+
+Q262. How do you calculate row-wise totals?
+
+Ans:
+np.sum(a, axis=1)
+
+Q263. How do you modify a new array without affecting original?
+
+Ans:
+b = a.copy()
+
+Q264. How do you randomly select five records?
+
+Ans:
+rng = np.random.default_rng()
+rng.choice(a, size=5, replace=False)
+
+Q265. How do you combine two arrays vertically?
+
+Ans:
+np.vstack((a, b))
+
+Q266. How do you find common values?
+
+Ans:
+np.intersect1d(a, b)
+
+Q267. How do you calculate matrix inverse?
+
+Ans:
+np.linalg.inv(a)
+
+Q268. How do you save and load an array?
+
+Ans:
+np.save("data.npy", a)
+a = np.load("data.npy")
+
+Q269. How do you replace all values below 10 with 10?
+
+Ans:
+np.maximum(a, 10)
+
+Q270. How do you find indices of elements greater than 20?
+
+Ans:
+np.where(a > 20)
+
+======================================================================
+24. CODING INTERVIEW PROGRAMS
+======================================================================
+
+First import NumPy:
+
+import numpy as np
+
+Q271. Create a NumPy array.
+
+a = np.array([10, 20, 30, 40])
+print(a)
+
+Q272. Find sum of all elements.
+
+a = np.array([10, 20, 30, 40])
+print(np.sum(a))
+
+Output:
+100
+
+Q273. Find maximum and minimum.
+
+a = np.array([10, 50, 20, 80, 30])
+print("Maximum:", np.max(a))
+print("Minimum:", np.min(a))
+
+Output:
+Maximum: 80
+Minimum: 10
+
+Q274. Find average.
+
+a = np.array([10, 20, 30, 40])
+print(np.mean(a))
+
+Output:
+25.0
+
+Q275. Find even numbers.
+
+a = np.array([1, 2, 3, 4, 5, 6])
+print(a[a % 2 == 0])
+
+Output:
+[2 4 6]
+
+Q276. Find odd numbers.
+
+a = np.array([1, 2, 3, 4, 5, 6])
+print(a[a % 2 != 0])
+
+Output:
+[1 3 5]
+
+Q277. Reverse an array.
+
+a = np.array([10, 20, 30, 40])
+print(a[::-1])
+
+Q278. Remove duplicates.
+
+a = np.array([10, 20, 20, 30, 30, 40])
+print(np.unique(a))
+
+Output:
+[10 20 30 40]
+
+Q279. Sort an array.
+
+a = np.array([40, 10, 30, 20])
+print(np.sort(a))
+
+Output:
+[10 20 30 40]
+
+Q280. Find second-largest unique number.
+
+a = np.array([10, 50, 30, 50, 40])
+unique = np.unique(a)
+print(unique[-2])
+
+Output:
+40
+
+Q281. Find common elements.
+
+a = np.array([10, 20, 30, 40])
+b = np.array([30, 40, 50, 60])
+print(np.intersect1d(a, b))
+
+Output:
+[30 40]
+
+Q282. Find elements in first array but not second.
+
+a = np.array([10, 20, 30, 40])
+b = np.array([30, 40, 50])
+print(np.setdiff1d(a, b))
+
+Output:
+[10 20]
+
+Q283. Replace negative numbers with zero.
+
+a = np.array([-10, 20, -30, 40])
+result = np.where(a < 0, 0, a)
+print(result)
+
+Output:
+[ 0 20  0 40]
+
+Q284. Find index of largest number.
+
+a = np.array([10, 50, 30, 80, 20])
+print(np.argmax(a))
+
+Output:
+3
+
+Q285. Find cumulative sum.
+
+a = np.array([1, 2, 3, 4])
+print(np.cumsum(a))
+
+Output:
+[1 3 6 10]
+
+Q286. Convert 1D into 2D.
+
+a = np.array([1, 2, 3, 4, 5, 6])
+print(a.reshape(2, 3))
+
+Output:
+[[1 2 3]
+ [4 5 6]]
+
+Q287. Transpose a matrix.
+
+a = np.array([[1, 2, 3], [4, 5, 6]])
+print(a.T)
+
+Output:
+[[1 4]
+ [2 5]
+ [3 6]]
+
+Q288. Calculate row-wise and column-wise sums.
+
+a = np.array([[10, 20, 30], [40, 50, 60]])
+
+print("Column sum:", np.sum(a, axis=0))
+print("Row sum:", np.sum(a, axis=1))
+
+Output:
+Column sum: [50 70 90]
+Row sum: [60 150]
+
+Q289. Multiply two matrices.
+
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
+
+print(np.matmul(a, b))
+
+Output:
+[[19 22]
+ [43 50]]
+
+Q290. Calculate standard deviation and variance.
+
+a = np.array([10, 20, 30, 40, 50])
+
+print("Variance:", np.var(a))
+print("Standard deviation:", np.std(a))
+
+Output:
+Variance: 200.0
+Standard deviation: 14.142135623730951
+
+Q291. Replace NaN with zero.
+
+a = np.array([10, 20, np.nan, 40])
+print(np.nan_to_num(a, nan=0))
+
+Output:
+[10. 20.  0. 40.]
+
+Q292. Generate 10 random integers between 1 and 100.
+
+rng = np.random.default_rng(42)
+a = rng.integers(1, 101, size=10)
+print(a)
+
+Q293. Find numbers greater than average.
+
+a = np.array([10, 20, 30, 40, 50])
+average = np.mean(a)
+print(a[a > average])
+
+Output:
+[40 50]
+
+Q294. Convert 2D array into 1D.
+
+a = np.array([[1, 2], [3, 4]])
+print(a.flatten())
+
+Output:
+[1 2 3 4]
+
+Q295. Find unique values and their counts.
+
+a = np.array([10, 20, 20, 30, 30, 30])
+
+values, counts = np.unique(a, return_counts=True)
+
+print(values)
+print(counts)
+
+Output:
+[10 20 30]
+[1 2 3]
+
+Q296. Check whether two arrays share memory.
+
+a = np.array([10, 20, 30])
+b = a.view()
+
+print(np.shares_memory(a, b))
+
+Output:
+True
+
+Q297. Find diagonal elements.
+
+a = np.array([[10, 20, 30],
+              [40, 50, 60],
+              [70, 80, 90]])
+
+print(np.diag(a))
+
+Output:
+[10 50 90]
+
+Q298. Create identity matrix.
+
+print(np.eye(4))
+
+Output:
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+
+Q299. Find absolute values.
+
+a = np.array([-10, -20, 30, -40])
+print(np.abs(a))
+
+Output:
+[10 20 30 40]
+
+Q300. Find 50th percentile.
+
+a = np.array([10, 20, 30, 40, 50])
+print(np.percentile(a, 50))
+
+Output:
+30.0
+
+======================================================================
+25. RAPID-FIRE INTERVIEW REVISION
+======================================================================
+
+Full form of NumPy?
+Numerical Python.
+
+Main NumPy object?
+ndarray.
+
+Import statement?
+import numpy as np
+
+Create array?
+np.array()
+
+Find dimensions?
+ndim
+
+Find shape?
+shape
+
+Find total elements?
+size
+
+Find data type?
+dtype
+
+Create zeros?
+np.zeros()
+
+Create ones?
+np.ones()
+
+Generate range?
+np.arange()
+
+Generate evenly spaced values?
+np.linspace()
+
+Change shape?
+reshape()
+
+Convert into 1D?
+flatten() / ravel()
+
+Transpose?
+.T
+
+Find average?
+mean()
+
+Find median?
+median()
+
+Find standard deviation?
+std()
+
+Find variance?
+var()
+
+Find maximum?
+max()
+
+Find minimum?
+min()
+
+Find maximum index?
+argmax()
+
+Find minimum index?
+argmin()
+
+Find unique elements?
+unique()
+
+Sort array?
+sort()
+
+Filter values?
+Boolean indexing.
+
+Find indices by condition?
+where()
+
+Generate random integers?
+rng.integers()
+
+Matrix inverse?
+np.linalg.inv()
+
+Matrix determinant?
+np.linalg.det()
+
+Join arrays?
+concatenate()
+
+Split arrays?
+split()
+
+Add dimension?
+expand_dims()
+
+Remove size-1 dimensions?
+squeeze()
+
+Handle NaN in mean?
+nanmean()
+
+Save array?
+save()
+
+Load array?
+load()
+
+Create copy?
+copy()
+
+Create view?
+view()
+
+Check shared memory?
+shares_memory()
+
+======================================================================
+26. INTERVIEW PREPARATION ROADMAP
+======================================================================
+
+DAY 1 - FUNDAMENTALS
+- What is NumPy?
+- Installation and importing.
+- Array creation.
+- Dimensions.
+- Attributes.
+- Data types.
+
+DAY 2 - ARRAY OPERATIONS
+- Indexing.
+- Slicing.
+- Arithmetic operations.
+- Comparison operations.
+- Logical operations.
+- Mathematical functions.
+
+DAY 3 - STATISTICS AND MANIPULATION
+- Mean.
+- Median.
+- Mode.
+- Variance.
+- Standard deviation.
+- Reshape.
+- Flatten.
+- Ravel.
+- Transpose.
+- Joining and splitting.
+
+DAY 4 - IMPORTANT CONCEPTS
+- Broadcasting.
+- Vectorization.
+- Copy vs View.
+- Boolean indexing.
+- Filtering.
+- Axis 0 vs Axis 1.
+
+DAY 5 - ADVANCED NUMPY
+- Random module.
+- Linear algebra.
+- Missing values.
+- Searching and sorting.
+- File handling.
+- Modules and submodules.
+
+DAY 6 - INTERVIEW PRACTICE
+- Theory questions.
+- Difference-based questions.
+- Output-based questions.
+- Tricky questions.
+- Scenario-based questions.
+
+DAY 7 - CODING PRACTICE
+- Practice all 30 coding questions.
+- Write code without looking at answers.
+- Predict outputs.
+- Explain every function.
+
+======================================================================
+MOST IMPORTANT TOPICS FOR INTERVIEWS
+======================================================================
+
+1. What is ndarray?
+2. List vs NumPy array.
+3. Array dimensions.
+4. ndim, shape, size and dtype.
+5. Array creation methods.
+6. Indexing and slicing.
+7. Broadcasting.
+8. Vectorization.
+9. Axis 0 vs Axis 1.
+10. Copy vs View.
+11. Flatten vs Ravel.
+12. Reshape and transpose.
+13. Mathematical functions.
+14. Statistical functions.
+15. Boolean indexing.
+16. Random module.
+17. Linear algebra.
+18. Handling NaN values.
+19. Joining and splitting.
+20. NumPy vs Pandas.
+
+======================================================================
+END OF NUMPY COMPLETE INTERVIEW PREPARATION
+======================================================================
+
+REMEMBER:
+Understand the concept, practise the code and learn to explain
+the output. Do not only memorize definitions.
+
+NumPy is an important foundation for:
+Python -> NumPy -> Pandas -> Matplotlib -> Machine Learning -> AI.
+
+======================================================================
+
+======================================================================
+27. ADVANCED NUMPY STUDY NOTES
+======================================================================
+
+Q301. WHAT IS NUMPY
+Ans:
+NumPy stands for Numerical Python.
+
+It is a Python library used for numerical calculations,
+scientific computing, and working with multidimensional arrays.
+
+Main object:
+    ndarray
+
+Import:
+    import numpy as np
+
+Example:
+    arr = np.array([10, 20, 30, 40])
+
+Why NumPy?
+    - Faster numerical calculations
+    - Multidimensional arrays
+    - Mathematical operations
+    - Statistical operations
+    - Matrix operations
+    - Broadcasting
+    - Data manipulation
+
+Q302. ARRAY DIMENSIONS
+Ans:
+0D ARRAY:
+    Single value.
+
+    arr = np.array(10)
+
+1D ARRAY:
+    Single-dimensional array.
+
+    arr = np.array([10, 20, 30])
+
+2D ARRAY:
+    Rows and columns.
+
+    arr = np.array([[1, 2], [3, 4]])
+
+3D ARRAY:
+    Collection of 2D arrays.
+
+    arr = np.array([
+        [[1, 2], [3, 4]],
+        [[5, 6], [7, 8]]
+    ])
+
+Important attributes:
+
+    arr.ndim       -> Number of dimensions
+    arr.shape      -> Dimensions of array
+    arr.size       -> Total number of elements
+    arr.dtype      -> Data type of elements
+    arr.itemsize   -> Size of each element in bytes
+    arr.nbytes     -> Total memory occupied by elements
+
+Q303. BASIC ARRAY INDEXING
+Ans:
+Indexing means accessing individual elements.
+
+arr = np.array([10, 20, 30, 40, 50])
+
+arr[0]       -> 10
+arr[1]       -> 20
+arr[-1]      -> 50
+arr[-2]      -> 40
+
+2D indexing:
+
+arr = np.array([[10, 20, 30],
+                [40, 50, 60]])
+
+arr[0, 0]    -> 10
+arr[0, 1]    -> 20
+arr[1, 2]    -> 60
+arr[1, -1]   -> 60
+
+Q304. BASIC SLICING
+Ans:
+Slicing extracts a portion of an array.
+
+Syntax:
+
+    array[start:stop:step]
+
+start = Starting index (included)
+stop  = Ending index (excluded)
+step  = Number of positions to skip
+
+Example:
+
+    arr = np.array([10, 20, 30, 40, 50, 60])
+
+    arr[1:4]    -> [20 30 40]
+    arr[:3]     -> [10 20 30]
+    arr[2:]     -> [30 40 50 60]
+    arr[::2]    -> [10 30 50]
+    arr[::-1]   -> [60 50 40 30 20 10]
+
+Q305. ADVANCED SLICING
+Ans:
+Slicing in 2D arrays:
+
+    arr = np.array([
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
+    ])
+
+Select first two rows:
+
+    arr[:2, :]
+
+Output:
+    [[1 2 3 4]
+     [5 6 7 8]]
+
+Select first two columns:
+
+    arr[:, :2]
+
+Output:
+    [[1 2]
+     [5 6]
+     [9 10]]
+
+Select rows 1 to 2 and columns 1 to 3:
+
+    arr[1:3, 1:3]
+
+Output:
+    [[ 6  7]
+     [10 11]]
+
+Select a single column:
+
+    arr[:, 1]
+
+Output:
+    [ 2  6 10]
+
+Select a single row:
+
+    arr[1, :]
+
+Output:
+    [5 6 7 8]
+
+Reverse rows:
+
+    arr[::-1, :]
+
+Reverse columns:
+
+    arr[:, ::-1]
+
+Reverse both:
+
+    arr[::-1, ::-1]
+
+Q306. FANCY INDEXING
+Ans:
+Fancy indexing means accessing multiple elements using
+a list or array of indexes.
+
+Example:
+
+    arr = np.array([10, 20, 30, 40, 50])
+
+    arr[[0, 2, 4]]
+
+Output:
+    [10 30 50]
+
+2D fancy indexing:
+
+    arr = np.array([
+        [1, 2],
+        [3, 4],
+        [5, 6]
+    ])
+
+    arr[[0, 2]]
+
+Output:
+    [[1 2]
+     [5 6]]
+
+Important:
+    Fancy indexing generally returns a copy,
+    not a view.
+
+Q307. BOOLEAN INDEXING
+Ans:
+Boolean indexing selects values based on conditions.
+
+Example:
+
+    arr = np.array([10, 20, 30, 40, 50])
+
+    arr[arr > 25]
+
+Output:
+    [30 40 50]
+
+Other examples:
+
+    arr[arr < 30]
+    arr[arr == 20]
+    arr[arr != 30]
+    arr[arr % 2 == 0]
+
+Multiple conditions:
+
+    arr[(arr > 20) & (arr < 50)]
+
+Output:
+    [30 40]
+
+Operators:
+    &  -> AND
+    |  -> OR
+    ~  -> NOT
+
+Use parentheses around each condition.
+
+Q308. WHERE FUNCTION
+Ans:
+np.where() returns indexes or selects values based
+on a condition.
+
+Syntax:
+
+    np.where(condition, value_if_true, value_if_false)
+
+Example:
+
+    arr = np.array([10, 20, 30, 40])
+
+    np.where(arr > 20, 1, 0)
+
+Output:
+    [0 0 1 1]
+
+Find indexes:
+
+    np.where(arr > 20)
+
+Output:
+    (array([2, 3]),)
+
+Q309. NONZERO AND ARGWHERE
+Ans:
+np.nonzero():
+
+Returns indexes of non-zero elements.
+
+    arr = np.array([0, 10, 0, 20])
+
+    np.nonzero(arr)
+
+np.argwhere():
+
+Returns indexes where a condition is true.
+
+    arr = np.array([10, 20, 30, 40])
+
+    np.argwhere(arr > 20)
+
+Q310. RESHAPING ARRAYS
+Ans:
+Reshape changes the dimensions of an array
+without changing its elements.
+
+    arr = np.array([1, 2, 3, 4, 5, 6])
+
+    arr.reshape(2, 3)
+
+Output:
+    [[1 2 3]
+     [4 5 6]]
+
+Other examples:
+
+    arr.reshape(3, 2)
+    arr.reshape(1, 6)
+    arr.reshape(2, -1)
+
+-1 means NumPy automatically calculates that dimension.
+
+Important:
+    Total number of elements must remain the same.
+
+Q311. FLATTEN AND RAVEL
+Ans:
+Both convert multidimensional arrays into 1D arrays.
+
+flatten():
+    Returns a copy.
+
+ravel():
+    Returns a view when possible.
+
+Example:
+
+    arr = np.array([[1, 2], [3, 4]])
+
+    arr.flatten()
+    arr.ravel()
+
+Q312. TRANSPOSE
+Ans:
+Transpose changes rows into columns and columns into rows.
+
+    arr = np.array([[1, 2, 3],
+                    [4, 5, 6]])
+
+    arr.T
+
+Output:
+    [[1 4]
+     [2 5]
+     [3 6]]
+
+Alternative:
+
+    np.transpose(arr)
+
+Q313. EXPAND_DIMS AND SQUEEZE
+Ans:
+expand_dims():
+    Adds a new dimension.
+
+    arr = np.array([1, 2, 3])
+
+    np.expand_dims(arr, axis=0)
+
+Output shape:
+    (1, 3)
+
+    np.expand_dims(arr, axis=1)
+
+Output shape:
+    (3, 1)
+
+squeeze():
+    Removes dimensions whose size is 1.
+
+    arr = np.array([[1, 2, 3]])
+
+    np.squeeze(arr)
+
+Output:
+    [1 2 3]
+
+Q314. STACKING ARRAYS
+Ans:
+Stacking combines multiple arrays.
+
+vstack():
+    Combines arrays vertically.
+
+hstack():
+    Combines arrays horizontally.
+
+stack():
+    Combines arrays along a new axis.
+
+Example:
+
+    a = np.array([1, 2])
+    b = np.array([3, 4])
+
+    np.vstack((a, b))
+
+    np.hstack((a, b))
+
+    np.stack((a, b))
+
+Other functions:
+
+    np.concatenate()
+    np.dstack()
+    np.column_stack()
+    np.row_stack()  # Legacy alias; prefer vstack.
+
+Q315. SPLITTING ARRAYS
+Ans:
+Splitting divides an array into multiple arrays.
+
+    arr = np.array([1, 2, 3, 4, 5, 6])
+
+    np.split(arr, 3)
+
+Output:
+    [array([1, 2]),
+     array([3, 4]),
+     array([5, 6])]
+
+Other functions:
+
+    np.array_split()
+    np.hsplit()
+    np.vsplit()
+    np.dsplit()
+
+Difference:
+
+split():
+    Requires equal division.
+
+array_split():
+    Allows unequal division.
+
+Q316. BROADCASTING
+Ans:
+Broadcasting allows NumPy to perform operations
+on arrays with different but compatible shapes.
+
+Example:
+
+    arr = np.array([10, 20, 30])
+
+    arr + 5
+
+Output:
+    [15 25 35]
+
+2D broadcasting:
+
+    arr = np.array([[1, 2, 3],
+                    [4, 5, 6]])
+
+    arr + np.array([10, 20, 30])
+
+Output:
+    [[11 22 33]
+     [14 25 36]]
+
+Broadcasting rules:
+
+Compare dimensions from right to left.
+
+Dimensions are compatible if:
+    1. They are equal.
+    2. One of them is 1.
+    3. One dimension is missing and treated as 1.
+
+Otherwise, broadcasting raises ValueError.
+
+Q317. MATHEMATICAL FUNCTIONS
+Ans:
+Basic operations:
+
+    np.add(a, b)
+    np.subtract(a, b)
+    np.multiply(a, b)
+    np.divide(a, b)
+    np.power(a, b)
+    np.mod(a, b)
+    np.sqrt(arr)
+    np.square(arr)
+    np.abs(arr)
+    np.round(arr)
+    np.floor(arr)
+    np.ceil(arr)
+
+Trigonometric functions:
+
+    np.sin(arr)
+    np.cos(arr)
+    np.tan(arr)
+    np.degrees(arr)
+    np.radians(arr)
+
+Q318. AGGREGATE FUNCTIONS
+Ans:
+These functions calculate summary values.
+
+    np.sum(arr)
+    np.min(arr)
+    np.max(arr)
+    np.mean(arr)
+    np.median(arr)
+    np.std(arr)
+    np.var(arr)
+    np.prod(arr)
+    np.cumsum(arr)
+    np.cumprod(arr)
+    np.percentile(arr, 50)
+    np.quantile(arr, 0.5)
+
+Example:
+
+    arr = np.array([10, 20, 30, 40])
+
+    np.sum(arr)       -> 100
+    np.mean(arr)      -> 25
+    np.min(arr)       -> 10
+    np.max(arr)       -> 40
+    np.median(arr)    -> 25
+
+Q319. AXIS IN NUMPY
+Ans:
+Axis determines the direction of an operation.
+
+    arr = np.array([[1, 2, 3],
+                    [4, 5, 6]])
+
+    np.sum(arr, axis=0)
+
+Output:
+    [5 7 9]
+
+axis=0:
+    Operation down the rows, producing column results.
+
+    np.sum(arr, axis=1)
+
+Output:
+    [6 15]
+
+axis=1:
+    Operation across columns, producing row results.
+
+Q320. SORTING AND SEARCHING
+Ans:
+np.sort(arr)
+    np.argsort(arr)
+    np.argmax(arr)
+    np.argmin(arr)
+    np.searchsorted(arr, value)
+    np.partition(arr, kth)
+
+Examples:
+
+    np.sort([30, 10, 20])
+        -> [10 20 30]
+
+    np.argmax([10, 50, 20])
+        -> 1
+
+    np.argmin([10, 50, 20])
+        -> 0
+
+Q321. UNIQUE AND SET OPERATIONS
+Ans:
+np.unique(arr)
+    np.union1d(a, b)
+    np.intersect1d(a, b)
+    np.setdiff1d(a, b)
+    np.setxor1d(a, b)
+    np.isin(a, b)
+
+Purpose:
+
+unique:
+    Returns distinct values.
+
+union1d:
+    Combines unique elements.
+
+intersect1d:
+    Returns common elements.
+
+setdiff1d:
+    Elements in first array but not second.
+
+setxor1d:
+    Elements present in either array but not both.
+
+isin:
+    Checks whether elements exist in another array.
+
+Q322. RANDOM MODULE
+Ans:
+Use:
+
+    np.random
+
+Functions:
+
+    np.random.rand()
+    np.random.randn()
+    np.random.randint()
+    np.random.random()
+    np.random.choice()
+    np.random.shuffle()
+    np.random.permutation()
+    np.random.seed()
+
+Modern recommended approach:
+
+    rng = np.random.default_rng(42)
+
+    rng.random(5)
+    rng.integers(1, 100, size=5)
+    rng.choice([10, 20, 30], size=2)
+
+Q323. MATRIX OPERATIONS
+Ans:
+np.dot(a, b)
+    np.matmul(a, b)
+    a @ b
+    np.linalg.inv(a)
+    np.linalg.det(a)
+    np.linalg.eig(a)
+    np.linalg.solve(a, b)
+    np.linalg.svd(a)
+
+Important:
+    Matrix multiplication is different from
+    element-wise multiplication.
+
+    a * b   -> Element-wise multiplication
+    a @ b   -> Matrix multiplication
+
+Q324. COPYING AND VIEWS
+Ans:
+View:
+    Shares the underlying data when possible.
+
+Copy:
+    Creates independent data.
+
+    arr.copy()
+
+Basic slicing generally returns a view.
+
+Fancy indexing generally returns a copy.
+
+Example:
+
+    arr = np.array([10, 20, 30])
+
+    view = arr[1:]
+    copy = arr[[1, 2]]
+
+    view[0] = 99
+
+    # Original array may change because view shares data.
+
+    copy[0] = 88
+
+    # Original array remains unchanged.
+
+Q325. HANDLING MISSING AND SPECIAL VALUES
+Ans:
+np.nan
+    np.inf
+    -np.inf
+
+Functions:
+
+    np.isnan(arr)
+    np.isinf(arr)
+    np.isfinite(arr)
+    np.nanmean(arr)
+    np.nansum(arr)
+    np.nanmax(arr)
+    np.nanmin(arr)
+
+Example:
+
+    arr = np.array([10, 20, np.nan])
+
+    np.nanmean(arr)
+
+Q326. OTHER IMPORTANT NUMPY FUNCTIONS
+Ans:
+np.zeros()
+    np.ones()
+    np.empty()
+    np.full()
+    np.eye()
+    np.arange()
+    np.linspace()
+    np.logspace()
+    np.diag()
+    np.repeat()
+    np.tile()
+    np.clip()
+    np.where()
+    np.diff()
+    np.gradient()
+    np.meshgrid()
+    np.save()
+    np.load()
+    np.savez()
+    np.savetxt()
+    np.loadtxt()

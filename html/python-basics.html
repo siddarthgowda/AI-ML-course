@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Python Basics · Interview Questions</title>
+<style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --panel: #202020;
+      --text: #e8e8e8;
+      --muted: #9a9a9a;
+      --line: #3a3a3a;
+      --accent: #7dcea0;
+      --code-bg: #141414;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 820px);
+      gap: 0;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 16px 40px;
+      border-right: 1px solid var(--line);
+      background: #161616;
+    }
+    nav h1 { font-size: 15px; margin: 0 0 4px; }
+    nav .sub { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+    nav a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12.5px;
+      padding: 3px 0;
+    }
+    nav a:hover { color: var(--accent); }
+    .toc-stage {
+      margin: 14px 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    main { padding: 28px 28px 80px; }
+    .intro {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 0 0 20px;
+    }
+    .intro h1 { margin: 0 0 8px; font-size: 22px; }
+    .intro p { margin: 0; color: var(--muted); }
+    h1.stage {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 12px;
+      padding-top: 8px;
+    }
+    article.topic {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px 16px;
+      margin: 0 0 14px;
+    }
+    article h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      font-weight: 650;
+    }
+    .num {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+    .body p { margin: 0 0 8px; }
+    .body ul, .body ol { margin: 0 0 10px; padding-left: 20px; }
+    .body li { margin: 2px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      background: #2a2a2a;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      overflow: auto;
+      margin: 10px 0 0;
+    }
+    pre code { background: transparent; padding: 0; font-size: 13px; }
+    .qmeta { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; height: auto; max-height: 40vh; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Python Basics</h1>
+<p class="sub">Interview question bank · complete</p>
+<p class="toc-stage">Topic 1: Python Introduction</p><a href="#q1">1. What is Python?</a><a href="#q2">2. What are the features of Python?</a><a href="#q3">3. Why is Python called a high-level language?</a><a href="#q4">4. Is Python compiled or interpreted?</a><a href="#q5">5. What is an interpreter?</a><a href="#q6">6. Difference between compiler and interpreter?</a><a href="#q7">7. What is indentation?</a><a href="#q8">8. What happens if indentation is incorrect?</a><a href="#q9">9. What are comments?</a><a href="#q10">10. What is PEP 8?</a><a href="#q11">11. Is Python case-sensitive?</a><a href="#q12">12. What is the difference between input() and print()?</a><a href="#q13">13. What is the use of input()?</a><a href="#q14">14. What is the use of print()?</a><p class="toc-stage">Topic 2: Variables And Constants</p><a href="#q15">15. What is a variable?</a><a href="#q16">16. How do you declare a variable?</a><a href="#q17">17. What are variable naming rules?</a><a href="#q18">18. What is multiple assignment?</a><a href="#q19">19. How do you assign the same value to multiple variables?</a><a href="#q20">20. What is a constant?</a><a href="#q21">21. What is dynamic typing?</a><a href="#q22">22. What is type casting?</a><a href="#q23">23. Difference between implicit and explicit conversion?</a><a href="#q24">24. What is type()?</a><a href="#q25">25. What is isinstance()?</a><a href="#q26">26. Difference between type() and isinstance()?</a><a href="#q27">27. What is id()?</a><a href="#q28">28. What are common type conversion functions?</a><a href="#q29">29. Output-based question:</a><p class="toc-stage">Topic 3: Data Types</p><a href="#q30">30. What are data types?</a><a href="#q31">31. What are the main built-in data types?</a><a href="#q32">32. What is int?</a><a href="#q33">33. What is float?</a><a href="#q34">34. What is complex?</a><a href="#q35">35. What is string?</a><a href="#q36">36. What is Boolean?</a><a href="#q37">37. What is NoneType?</a><a href="#q38">38. What are mutable data types?</a><a href="#q39">39. What are immutable data types?</a><a href="#q40">40. Difference between mutable and immutable?</a><a href="#q41">41. Difference between list and tuple?</a><a href="#q42">42. Difference between set and frozenset?</a><a href="#q43">43. Difference between list, tuple, set and dictionary?</a><a href="#q44">44. Can a list contain different data types?</a><a href="#q45">45. Can a tuple contain a list?</a><a href="#q46">46. Can a dictionary have duplicate keys?</a><a href="#q47">47. What are truthy and falsy values?</a><a href="#q48">48. What are binary data types?</a><a href="#q49">49. Output-based question:</a><p class="toc-stage">Topic 4: Operators</p><a href="#q50">50. What are operators?</a><a href="#q51">51. What are the types of operators?</a><a href="#q52">52. What are arithmetic operators?</a><a href="#q53">53. Difference between / and //?</a><a href="#q54">54. What is modulus?</a><a href="#q55">55. What are comparison operators?</a><a href="#q56">56. What are logical operators?</a><a href="#q57">57. Difference between and and or?</a><a href="#q58">58. What are assignment operators?</a><a href="#q59">59. What are membership operators?</a><a href="#q60">60. What are identity operators?</a><a href="#q61">61. Difference between == and is?</a><a href="#q62">62. What are bitwise operators?</a><a href="#q63">63. What is operator precedence?</a><a href="#q64">64. Output-based question:</a><p class="toc-stage">Topic 5: Conditional Statements</p><a href="#q65">65. What are conditional statements?</a><a href="#q66">66. What are the types?</a><a href="#q67">67. What is if?</a><a href="#q68">68. What is if-else?</a><a href="#q69">69. What is if-elif-else?</a><a href="#q70">70. What is nested if?</a><a href="#q71">71. What is a ternary operator?</a><a href="#q72">72. Difference between if, elif and else?</a><a href="#q73">73. Can we use multiple elif statements?</a><a href="#q74">74. Can we use if without else?</a><a href="#q75">75. What happens if multiple if statements are True?</a><a href="#q76">76. What are truthy and falsy conditions?</a><a href="#q77">77. Practical question: Find the largest of three numbers.</a><p class="toc-stage">Topic 6: Loops</p><a href="#q78">78. What is a loop?</a><a href="#q79">79. What are the types of loops?</a><a href="#q80">80. What is a for loop?</a><a href="#q81">81. What is a while loop?</a><a href="#q82">82. Difference between for and while?</a><a href="#q83">83. What is a nested loop?</a><a href="#q84">84. What is an infinite loop?</a><a href="#q85">85. What is range()?</a><a href="#q86">86. What are loop control statements?</a><a href="#q87">87. What is break?</a><a href="#q88">88. What is continue?</a><a href="#q89">89. What is pass?</a><a href="#q90">90. Difference between break, continue and pass?</a><a href="#q91">91. Can we use else with loops?</a><a href="#q92">92. What is enumerate()?</a><a href="#q93">93. What is zip()?</a><a href="#q94">94. Difference between range() and enumerate()?</a><a href="#q95">95. Practical: Print even numbers from 1 to 20.</a><a href="#q96">96. Practical: Factorial of a number.</a><a href="#q97">97. Practical: Reverse a number.</a><p class="toc-stage">Topic 7: Strings</p><a href="#q98">98. What is a string?</a><a href="#q99">99. How do you create strings?</a><a href="#q100">100. What is indexing?</a><a href="#q101">101. What is slicing?</a><a href="#q102">102. What is negative indexing?</a><a href="#q103">103. Why are strings immutable?</a><a href="#q104">104. What are string methods?</a><a href="#q105">105. Difference between find() and index()?</a><a href="#q106">106. Difference between split() and join()?</a><a href="#q107">107. Difference between strip(), lstrip() and rstrip()?</a><a href="#q108">108. What is string formatting?</a><a href="#q109">109. What are escape characters?</a><a href="#q110">110. Output-based question:</a><a href="#q111">111. Practical: Reverse a string.</a><a href="#q112">112. Practical: Check palindrome.</a><a href="#q113">113. Practical: Count vowels.</a><p class="toc-stage">Topic 8: List</p><a href="#q114">114. What is a list?</a><a href="#q115">115. What are list characteristics?</a><a href="#q116">116. How do you create a list?</a><a href="#q117">117. What are list methods?</a><a href="#q118">118. Difference between append() and extend()?</a><a href="#q119">119. Difference between remove() and pop()?</a><a href="#q120">120. Difference between sort() and sorted()?</a><a href="#q121">121. What is a nested list?</a><a href="#q122">122. What is list comprehension?</a><a href="#q123">123. Practical: Remove duplicates.</a><a href="#q124">124. Practical: Find the second-largest unique number.</a><a href="#q125">125. Practical: Find maximum and minimum.</a><p class="toc-stage">Topic 9: Tuple</p><a href="#q126">126. What is a tuple?</a><a href="#q127">127. What are tuple methods?</a><a href="#q128">128. Why are tuples immutable?</a><a href="#q129">129. What is tuple packing?</a><a href="#q130">130. What is tuple unpacking?</a><a href="#q131">131. How do you create a single-element tuple?</a><a href="#q132">132. Can a tuple contain duplicates?</a><a href="#q133">133. Can a tuple contain a mutable object?</a><a href="#q134">134. Can we modify a tuple?</a><p class="toc-stage">Topic 10: Set</p><a href="#q135">135. What is a set?</a><a href="#q136">136. What are set characteristics?</a><a href="#q137">137. How do you create an empty set?</a><a href="#q138">138. What are set methods?</a><a href="#q139">139. Difference between remove() and discard()?</a><a href="#q140">140. What is union?</a><a href="#q141">141. What is intersection?</a><a href="#q142">142. What is difference?</a><a href="#q143">143. What is symmetric difference?</a><a href="#q144">144. What is subset?</a><a href="#q145">145. What is superset?</a><a href="#q146">146. What is disjoint?</a><a href="#q147">147. What is frozenset?</a><p class="toc-stage">Topic 11: Dictionary</p><a href="#q148">148. What is a dictionary?</a><a href="#q149">149. What are dictionary characteristics?</a><a href="#q150">150. How do you create a dictionary?</a><a href="#q151">151. How do you access dictionary values?</a><a href="#q152">152. Difference between get() and square brackets?</a><a href="#q153">153. What are dictionary methods?</a><a href="#q154">154. What is keys()?</a><a href="#q155">155. What is values()?</a><a href="#q156">156. What is items()?</a><a href="#q157">157. How do you add or update values?</a><a href="#q158">158. How do you remove a dictionary element?</a><a href="#q159">159. What is dictionary comprehension?</a><a href="#q160">160. Practical: Character frequency.</a><a href="#q161">161. Can dictionary keys be lists?</a><a href="#q162">162. Can dictionary values be duplicated?</a><p class="toc-stage">Topic 12: Comprehensions</p><a href="#q163">163. What is comprehension?</a><a href="#q164">164. What are the types?</a><a href="#q165">165. What is list comprehension?</a><a href="#q166">166. What is conditional list comprehension?</a><a href="#q167">167. What is dictionary comprehension?</a><a href="#q168">168. What is set comprehension?</a><a href="#q169">169. What is generator expression?</a><a href="#q170">170. Difference between list comprehension and generator?</a><a href="#q171">171. Practical: Increase elements by 10.</a><p class="toc-stage">Topic 13: Functions</p><a href="#q172">172. What is a function?</a><a href="#q173">173. Why do we use functions?</a><a href="#q174">174. How do you define a function?</a><a href="#q175">175. How do you call a function?</a><a href="#q176">176. What are the types of functions?</a><a href="#q177">177. What are built-in functions?</a><a href="#q178">178. What is a user-defined function?</a><a href="#q179">179. What is an anonymous function?</a><a href="#q180">180. What is a recursive function?</a><a href="#q181">181. What is a return statement?</a><a href="#q182">182. Difference between return and print?</a><a href="#q183">183. What happens if a function has no return statement?</a><a href="#q184">184. What is a docstring?</a><a href="#q185">185. What is function calling?</a><a href="#q186">186. What is a higher-order function?</a><p class="toc-stage">Topic 14: Function Arguments</p><a href="#q187">187. What is a parameter?</a><a href="#q188">188. What is an argument?</a><a href="#q189">189. What are the types of function arguments?</a><a href="#q190">190. What are positional arguments?</a><a href="#q191">191. What are keyword arguments?</a><a href="#q192">192. What are default arguments?</a><a href="#q193">193. What is *args?</a><a href="#q194">194. What is **kwargs?</a><a href="#q195">195. Difference between *args and **kwargs?</a><a href="#q196">196. Can we use both *args and **kwargs?</a><a href="#q197">197. What is argument unpacking?</a><a href="#q198">198. What is a keyword-only argument?</a><a href="#q199">199. What is a positional-only argument?</a><a href="#q200">200. Tricky question: What is the problem with mutable</a><p class="toc-stage">Topic 15: Lambda, Map, Filter And Reduce</p><a href="#q201">201. What is a lambda function?</a><a href="#q202">202. What is map()?</a><a href="#q203">203. What is filter()?</a><a href="#q204">204. What is reduce()?</a><a href="#q205">205. Difference between map() and filter()?</a><a href="#q206">206. Difference between map() and reduce()?</a><a href="#q207">207. What is sorted() with lambda?</a><a href="#q208">208. What is the difference between lambda and def?</a><p class="toc-stage">Topic 16: Variable Scope</p><a href="#q209">209. What is variable scope?</a><a href="#q210">210. What are the four scopes in Python?</a><a href="#q211">211. What is local scope?</a><a href="#q212">212. What is global scope?</a><a href="#q213">213. What is enclosing scope?</a><a href="#q214">214. What is built-in scope?</a><a href="#q215">215. What is LEGB?</a><a href="#q216">216. What is global keyword?</a><a href="#q217">217. What is nonlocal keyword?</a><a href="#q218">218. Difference between global and nonlocal?</a><a href="#q219">219. Can a local variable have the same name as a</a><p class="toc-stage">Topic 17: Modules And Packages</p><a href="#q220">220. What is a module?</a><a href="#q221">221. What is a package?</a><a href="#q222">222. Difference between module and package?</a><a href="#q223">223. What is import?</a><a href="#q224">224. What is from import?</a><a href="#q225">225. What is an alias?</a><a href="#q226">226. What are built-in modules?</a><a href="#q227">227. What are important Python modules?</a><a href="#q228">228. Difference between json.load() and json.loads()?</a><a href="#q229">229. Difference between json.dump() and json.dumps()?</a><a href="#q230">230. What is a custom module?</a><a href="#q231">231. What is __name__ == &quot;__main__&quot;?</a><a href="#q232">232. What is the difference between standard and</a><a href="#q233">233. What is pip?</a><p class="toc-stage">Topic 18: Exception Handling</p><a href="#q234">234. What is an error?</a><a href="#q235">235. What are the types of errors?</a><a href="#q236">236. What is a syntax error?</a><a href="#q237">237. What is an exception?</a><a href="#q238">238. Difference between syntax error and exception?</a><a href="#q239">239. What are common Python exceptions?</a><a href="#q240">240. What is exception handling?</a><a href="#q241">241. What are exception handling keywords?</a><a href="#q242">242. What is try?</a><a href="#q243">243. What is except?</a><a href="#q244">244. What is else?</a><a href="#q245">245. What is finally?</a><a href="#q246">246. Difference between else and finally?</a><a href="#q247">247. What is raise?</a><a href="#q248">248. What is a custom exception?</a><a href="#q249">249. Can we use multiple except blocks?</a><a href="#q250">250. Can we handle multiple exceptions in one except?</a><a href="#q251">251. What happens if an exception is not handled?</a><a href="#q252">252. What is exception propagation?</a><a href="#q253">253. Output-based question:</a><p class="toc-stage">Topic 19: File Handling</p><a href="#q254">254. What is file handling?</a><a href="#q255">255. What are the types of files?</a><a href="#q256">256. What is a text file?</a><a href="#q257">257. What is a binary file?</a><a href="#q258">258. What is open()?</a><a href="#q259">259. What are file modes?</a><a href="#q260">260. What is read()?</a><a href="#q261">261. What is readline()?</a><a href="#q262">262. What is readlines()?</a><a href="#q263">263. What is write()?</a><a href="#q264">264. What is writelines()?</a><a href="#q265">265. Difference between read() and readline()?</a><a href="#q266">266. Difference between write() and writelines()?</a><a href="#q267">267. What is close()?</a><a href="#q268">268. What is a file pointer?</a><a href="#q269">269. What is tell()?</a><a href="#q270">270. What is seek()?</a><a href="#q271">271. What is a context manager?</a><a href="#q272">272. What is with open()?</a><a href="#q273">273. Difference between open() and with open()?</a><a href="#q274">274. What exceptions can occur in file handling?</a><a href="#q275">275. What is encoding?</a><a href="#q276">276. Practical: Write into a file.</a><a href="#q277">277. Practical: Read a file.</a><a href="#q278">278. Practical: Append to a file.</a><a href="#q279">279. Practical: Read line by line.</a><p class="toc-stage">Topic 20: Shallow Copy And Deep Copy</p><a href="#q280">280. What is copying?</a><a href="#q281">281. What are the types of copying?</a><a href="#q282">282. What is assignment?</a><a href="#q283">283. What is shallow copy?</a><a href="#q284">284. What is deep copy?</a><a href="#q285">285. Difference between shallow and deep copy?</a><a href="#q286">286. Practical example:</a><a href="#q287">287. What is the difference between copy.copy()</a><p class="toc-stage">Topic 21: Iterators And Generators</p><a href="#q288">288. What is an iterable?</a><a href="#q289">289. What is an iterator?</a><a href="#q290">290. What is iter()?</a><a href="#q291">291. What is next()?</a><a href="#q292">292. What is StopIteration?</a><a href="#q293">293. Difference between iterable and iterator?</a><a href="#q294">294. What is a generator?</a><a href="#q295">295. What is yield?</a><a href="#q296">296. Difference between return and yield?</a><a href="#q297">297. What is lazy evaluation?</a><a href="#q298">298. What is generator expression?</a><a href="#q299">299. Practical: Generator function.</a><a href="#q300">300. WHAT IS A GENERATOR</a><a href="#q301">301. NORMAL FUNCTION VS GENERATOR</a><a href="#q302">302. YIELD KEYWORD</a><a href="#q303">303. NEXT FUNCTION</a><a href="#q304">304. GENERATOR EXPRESSION</a><a href="#q305">305. ITERATOR VS GENERATOR</a><a href="#q306">306. SEND, THROW AND CLOSE</a><a href="#q307">307. GENERATOR USE CASES</a><p class="toc-stage">Topic 22: Decorators</p><a href="#q308">308. What is a decorator?</a><a href="#q309">309. Why do we use decorators?</a><a href="#q310">310. What is a wrapper function?</a><a href="#q311">311. What is the @ symbol?</a><a href="#q312">312. What are function decorators?</a><a href="#q313">313. What are nested decorators?</a><a href="#q314">314. Can decorators accept arguments?</a><a href="#q315">315. Practical: Simple decorator.</a><a href="#q316">316. What is functools.wraps?</a><a href="#q317">317. WHAT IS A DECORATOR</a><a href="#q318">318. FUNCTIONS ARE FIRST-CLASS OBJECTS</a><a href="#q319">319. FUNCTION INSIDE FUNCTION</a><a href="#q320">320. RETURNING A FUNCTION</a><a href="#q321">321. BASIC DECORATOR</a><a href="#q322">322. DECORATOR WITH ARGUMENTS</a><a href="#q323">323. DECORATOR WITH PARAMETERS</a><a href="#q324">324. FUNCTOOLS WRAPS</a><a href="#q325">325. BUILT-IN DECORATORS</a><a href="#q326">326. PRACTICAL DECORATOR USE CASES</a><p class="toc-stage">Important Difference Questions</p><a href="#important-difference-questions">Important Difference Questions</a><p class="toc-stage">Important Output-Based Questions</p><a href="#q327">327. Output question 1</a><a href="#q328">328. Output question 2</a><a href="#q329">329. Output question 3</a><a href="#q330">330. Output question 4</a><a href="#q331">331. Output question 5</a><a href="#q332">332. Output question 6</a><a href="#q333">333. Output question 7</a><a href="#q334">334. Output question 8</a><a href="#q335">335. Output question 9</a><a href="#q336">336. Output question 10</a><p class="toc-stage">Important Practical Coding Questions</p><a href="#important-practical-coding-questions">Important Practical Coding Questions</a><p class="toc-stage">Important Modules Revision</p><a href="#important-modules-revision">Important Modules Revision</a><p class="toc-stage">Python Built-in Functions</p><a href="#python-built-in-functions">Python Built-in Functions</a><p class="toc-stage">Next Topic — Object-Oriented Programming (OOP)</p><a href="#next-topic-object-oriented-programming-oop">Next Topic — Object-Oriented Programming (OOP)</a>
+</nav>
+<main>
+<div class="intro">
+<h1>Python Basics — Interview Questions</h1>
+<p>Complete question bank covering introduction through decorators, plus differences, outputs, practicals, modules and built-ins. Next: OOP.</p>
+</div>
+<p class="qmeta">336 Q&amp;A items across topics 1–22 and extras.</p>
+<h1 class="stage" id="python-introduction">Topic 1: Python Introduction</h1><article class="topic" id="q1"><h2><span class="num">1</span> What is Python?</h2><div class="body"><p>Python is a high-level, interpreted, general-purpose<br>programming language. It is easy to read and understand.</p></div></article><article class="topic" id="q2"><h2><span class="num">2</span> What are the features of Python?</h2><div class="body"><ul><li>Easy to learn</li><li>High-level language</li><li>Interpreted execution model</li><li>Dynamically typed</li><li>Object-oriented</li><li>Platform independent</li><li>Open-source</li><li>Large standard library</li></ul></div></article><article class="topic" id="q3"><h2><span class="num">3</span> Why is Python called a high-level language?</h2><div class="body"><p>Because its syntax is close to human language and developers<br>do not need to manage low-level hardware operations directly.</p></div></article><article class="topic" id="q4"><h2><span class="num">4</span> Is Python compiled or interpreted?</h2><div class="body"><p>Python is commonly called an interpreted language.<br>In CPython, source code is first compiled into bytecode,<br>which is executed by the Python virtual machine.</p></div></article><article class="topic" id="q5"><h2><span class="num">5</span> What is an interpreter?</h2><div class="body"><p>An interpreter is a program that executes code.</p></div></article><article class="topic" id="q6"><h2><span class="num">6</span> Difference between compiler and interpreter?</h2><div class="body"><p>Compiler:<br>- Translates source code before execution.<br>- Commonly generates machine code or another target form.</p>
+<p>Interpreter:<br>- Executes code through an execution environment.<br>- Runtime errors can occur during execution.</p></div></article><article class="topic" id="q7"><h2><span class="num">7</span> What is indentation?</h2><div class="body"><p>Indentation means spaces at the beginning of a line.<br>Python uses indentation to define code blocks.</p></div></article><article class="topic" id="q8"><h2><span class="num">8</span> What happens if indentation is incorrect?</h2><div class="body"><p>Python may raise IndentationError or another syntax error.</p></div></article><article class="topic" id="q9"><h2><span class="num">9</span> What are comments?</h2><div class="body"><p>Comments are notes in code that are ignored during<br>normal execution.</p>
+<p>Example:<br># This is a comment</p></div></article><article class="topic" id="q10"><h2><span class="num">10</span> What is PEP 8?</h2><div class="body"><p>PEP 8 is the Python style guide that defines coding<br>conventions and improves code readability.</p></div></article><article class="topic" id="q11"><h2><span class="num">11</span> Is Python case-sensitive?</h2><div class="body"><p>Yes. Name and name are treated as different identifiers.</p></div></article><article class="topic" id="q12"><h2><span class="num">12</span> What is the difference between input() and print()?</h2><div class="body"><pre><code>input()  - Receives input from the user.
+print()  - Displays output to the user.</code></pre></div></article><article class="topic" id="q13"><h2><span class="num">13</span> What is the use of input()?</h2><div class="body"><p>It receives user input and returns it as a string.</p></div></article><article class="topic" id="q14"><h2><span class="num">14</span> What is the use of print()?</h2><div class="body"><p>It displays information on the screen.</p></div></article><h1 class="stage" id="variables-and-constants">Topic 2: Variables And Constants</h1><article class="topic" id="q15"><h2><span class="num">15</span> What is a variable?</h2><div class="body"><p>A variable is a name that refers to an object in memory.<br>It is used to store and access data.</p></div></article><article class="topic" id="q16"><h2><span class="num">16</span> How do you declare a variable?</h2><div class="body"><p>By assigning a value using the assignment operator.</p>
+<p>Example:</p>
+<pre><code>x = 10</code></pre></div></article><article class="topic" id="q17"><h2><span class="num">17</span> What are variable naming rules?</h2><div class="body"><ul><li>Must start with a letter or underscore.</li><li>Cannot start with a number.</li><li>Can contain letters, numbers and underscores.</li><li>Spaces are not allowed.</li><li>Keywords cannot be used.</li><li>Names are case-sensitive.</li></ul></div></article><article class="topic" id="q18"><h2><span class="num">18</span> What is multiple assignment?</h2><div class="body"><p>Assigning values to multiple variables in one statement.</p>
+<p>Example:<br>a, b, c = 10, 20, 30</p></div></article><article class="topic" id="q19"><h2><span class="num">19</span> How do you assign the same value to multiple variables?</h2><div class="body"><pre><code>a = b = c = 100</code></pre></div></article><article class="topic" id="q20"><h2><span class="num">20</span> What is a constant?</h2><div class="body"><p>A constant is a value intended not to change.<br>Python does not strictly enforce constants.<br>Uppercase names are used by convention.</p>
+<p>Example:</p>
+<pre><code>PI = 3.14</code></pre></div></article><article class="topic" id="q21"><h2><span class="num">21</span> What is dynamic typing?</h2><div class="body"><p>Python determines the data type of an object at runtime.<br>A variable can refer to objects of different types.</p>
+<p>Example:</p>
+<pre><code>x = 10
+x = &quot;Python&quot;</code></pre></div></article><article class="topic" id="q22"><h2><span class="num">22</span> What is type casting?</h2><div class="body"><p>Converting one data type into another.</p>
+<p>Types:<br>1. Implicit type conversion<br>2. Explicit type conversion</p></div></article><article class="topic" id="q23"><h2><span class="num">23</span> Difference between implicit and explicit conversion?</h2><div class="body"><p>Implicit:<br>Python performs conversion automatically in supported<br>operations.</p>
+<p>Explicit:<br>Developer manually converts using functions such as</p>
+<pre><code>int(), float(), str() and bool().</code></pre></div></article><article class="topic" id="q24"><h2><span class="num">24</span> What is type()?</h2><div class="body"><p>Returns the exact type of an object.</p>
+<p>Example:</p>
+<pre><code>print(type(10))</code></pre>
+<p>Output:<br>&lt;class &#x27;int&#x27;&gt;</p></div></article><article class="topic" id="q25"><h2><span class="num">25</span> What is isinstance()?</h2><div class="body"><p>Checks whether an object belongs to a particular class<br>or its subclass.</p>
+<p>Example:</p>
+<pre><code>print(isinstance(10, int))</code></pre>
+<p>Output:<br>True</p></div></article><article class="topic" id="q26"><h2><span class="num">26</span> Difference between type() and isinstance()?</h2><div class="body"><pre><code>type()       - Checks exact type.
+isinstance() - Checks class and subclass compatibility.</code></pre></div></article><article class="topic" id="q27"><h2><span class="num">27</span> What is id()?</h2><div class="body"><p>Returns an object&#x27;s identity, which remains constant<br>during the object&#x27;s lifetime.</p></div></article><article class="topic" id="q28"><h2><span class="num">28</span> What are common type conversion functions?</h2><div class="body"><pre><code>int()
+float()
+str()
+bool()
+list()
+tuple()
+set()
+dict()
+complex()</code></pre></div></article><article class="topic" id="q29"><h2><span class="num">29</span> Output-based question:</h2><div class="body"><pre><code>x = 10
+y = x
+x = 20
+
+print(x)
+print(y)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>20<br>10</p>
+<p><strong>EXPLANATION:</strong> </p>
+<p>Reassigning x does not change the object referred to by y.</p></div></article><h1 class="stage" id="data-types">Topic 3: Data Types</h1><article class="topic" id="q30"><h2><span class="num">30</span> What are data types?</h2><div class="body"><p>Data types define the kind of value an object represents<br>and the operations that can be performed on it.</p></div></article><article class="topic" id="q31"><h2><span class="num">31</span> What are the main built-in data types?</h2><div class="body"><p>1. Numeric:<br>   int, float, complex</p>
+<p>2. Text:<br>   str</p>
+<p>3. Boolean:<br>   bool</p>
+<p>4. Sequence:<br>   list, tuple, range</p>
+<p>5. Set:<br>   set, frozenset</p>
+<p>6. Mapping:<br>   dict</p>
+<p>7. Binary:<br>   bytes, bytearray, memoryview</p>
+<p>8. None:<br>   NoneType</p></div></article><article class="topic" id="q32"><h2><span class="num">32</span> What is int?</h2><div class="body"><p>Stores whole numbers without decimal points.</p></div></article><article class="topic" id="q33"><h2><span class="num">33</span> What is float?</h2><div class="body"><p>Stores decimal numbers.</p></div></article><article class="topic" id="q34"><h2><span class="num">34</span> What is complex?</h2><div class="body"><p>Stores real and imaginary numbers.<br>Python uses j for the imaginary part.</p>
+<p>Example:</p>
+<pre><code>x = 5 + 3j</code></pre></div></article><article class="topic" id="q35"><h2><span class="num">35</span> What is string?</h2><div class="body"><p>A sequence of characters enclosed in quotes.</p></div></article><article class="topic" id="q36"><h2><span class="num">36</span> What is Boolean?</h2><div class="body"><p>A data type that represents True or False.</p></div></article><article class="topic" id="q37"><h2><span class="num">37</span> What is NoneType?</h2><div class="body"><p>Represents the absence of a value.<br>Its only value is None.</p></div></article><article class="topic" id="q38"><h2><span class="num">38</span> What are mutable data types?</h2><div class="body"><p>Objects whose contents can be modified after creation.</p>
+<p>Examples:<br>list, dict, set, bytearray</p></div></article><article class="topic" id="q39"><h2><span class="num">39</span> What are immutable data types?</h2><div class="body"><p>Objects whose contents cannot be modified after creation.</p>
+<p>Examples:<br>int, float, complex, str, tuple, bool,<br>frozenset, bytes</p></div></article><article class="topic" id="q40"><h2><span class="num">40</span> Difference between mutable and immutable?</h2><div class="body"><p>Mutable   - Can be modified after creation.<br>Immutable - Cannot be modified after creation.</p></div></article><article class="topic" id="q41"><h2><span class="num">41</span> Difference between list and tuple?</h2><div class="body"><p>List:<br>- Mutable<br>- Uses []<br>- Supports modification<br>- Allows duplicates</p>
+<p>Tuple:<br>- Immutable<br>- Uses ()<br>- Does not support element reassignment<br>- Allows duplicates</p></div></article><article class="topic" id="q42"><h2><span class="num">42</span> Difference between set and frozenset?</h2><div class="body"><p>Set:<br>- Mutable<br>- Can add and remove elements</p>
+<p>Frozenset:<br>- Immutable<br>- Cannot add or remove elements</p></div></article><article class="topic" id="q43"><h2><span class="num">43</span> Difference between list, tuple, set and dictionary?</h2><div class="body"><p>List:<br>Ordered, mutable, duplicates allowed.</p>
+<p>Tuple:<br>Ordered, immutable, duplicates allowed.</p>
+<p>Set:<br>No positional order, mutable, unique elements.</p>
+<p>Dictionary:<br>Insertion ordered, mutable, key-value pairs,<br>unique keys.</p></div></article><article class="topic" id="q44"><h2><span class="num">44</span> Can a list contain different data types?</h2><div class="body"><p>Yes.</p>
+<p>Example:</p>
+<pre><code>data = [10, &quot;Python&quot;, 20.5, True]</code></pre></div></article><article class="topic" id="q45"><h2><span class="num">45</span> Can a tuple contain a list?</h2><div class="body"><p>Yes. The tuple is immutable, but its nested list<br>can still be modified.</p></div></article><article class="topic" id="q46"><h2><span class="num">46</span> Can a dictionary have duplicate keys?</h2><div class="body"><p>No. Duplicate keys overwrite previous values.</p></div></article><article class="topic" id="q47"><h2><span class="num">47</span> What are truthy and falsy values?</h2><div class="body"><p>Truthy values evaluate to True in Boolean conditions.<br>Falsy values evaluate to False.</p>
+<p>Common falsy values:<br>False, None, 0, 0.0, &quot;&quot;, [], (), {}, <code>set()</code></p></div></article><article class="topic" id="q48"><h2><span class="num">48</span> What are binary data types?</h2><div class="body"><p>bytes       - Immutable byte sequence.<br>bytearray   - Mutable byte sequence.<br>memoryview  - Accesses binary data without copying it.</p></div></article><article class="topic" id="q49"><h2><span class="num">49</span> Output-based question:</h2><div class="body"><pre><code>a = 10
+b = 10.0
+
+print(a == b)
+print(type(a) == type(b))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>True<br>False</p></div></article><h1 class="stage" id="operators">Topic 4: Operators</h1><article class="topic" id="q50"><h2><span class="num">50</span> What are operators?</h2><div class="body"><p>Operators are symbols or keywords used to perform<br>operations on variables and values.</p></div></article><article class="topic" id="q51"><h2><span class="num">51</span> What are the types of operators?</h2><div class="body"><ul><li>Arithmetic</li><li>Comparison</li><li>Logical</li><li>Assignment</li><li>Membership</li><li>Identity</li><li>Bitwise</li></ul></div></article><article class="topic" id="q52"><h2><span class="num">52</span> What are arithmetic operators?</h2><div class="body"><p>+   Addition<br>-   Subtraction<br>*   Multiplication<br>/   Division<br>//  Floor division<br>%   Modulus<br>**  Exponentiation</p></div></article><article class="topic" id="q53"><h2><span class="num">53</span> Difference between / and //?</h2><div class="body"><p>/  - Division, returns a float.<br> // - Floor division, rounds down.</p>
+<p>Example:</p>
+<pre><code>print(10 / 3)
+print(10 // 3)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>3.3333333333333335<br>3</p></div></article><article class="topic" id="q54"><h2><span class="num">54</span> What is modulus?</h2><div class="body"><p>Returns the remainder after division.</p>
+<p>Example:</p>
+<pre><code>print(10 % 3)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>1</p></div></article><article class="topic" id="q55"><h2><span class="num">55</span> What are comparison operators?</h2><div class="body"><p>==  Equal<br>!=  Not equal<br>&gt;   Greater than<br>&lt;   Less than<br>&gt;=  Greater than or equal<br>&lt;=  Less than or equal</p></div></article><article class="topic" id="q56"><h2><span class="num">56</span> What are logical operators?</h2><div class="body"><p>and - Both operands must be truthy.<br>or  - At least one operand must be truthy.<br>not - Reverses the truth value.</p></div></article><article class="topic" id="q57"><h2><span class="num">57</span> Difference between and and or?</h2><div class="body"><p>and requires both conditions to be True.<br>or requires at least one condition to be True.</p></div></article><article class="topic" id="q58"><h2><span class="num">58</span> What are assignment operators?</h2><div class="body"><p>=, +=, -=, *=, /=, //=, %=, **=</p></div></article><article class="topic" id="q59"><h2><span class="num">59</span> What are membership operators?</h2><div class="body"><p>in      - Checks whether an element exists.<br>not in  - Checks whether an element does not exist.</p></div></article><article class="topic" id="q60"><h2><span class="num">60</span> What are identity operators?</h2><div class="body"><p>is     - Checks whether two references point to</p>
+<pre><code>         the same object.</code></pre>
+<p>is not - Checks whether they point to different objects.</p></div></article><article class="topic" id="q61"><h2><span class="num">61</span> Difference between == and is?</h2><div class="body"><p>== checks value equality.<br>is checks object identity.</p></div></article><article class="topic" id="q62"><h2><span class="num">62</span> What are bitwise operators?</h2><div class="body"><p>&amp;   AND<br>|   OR<br>^   XOR<br>~   NOT<br>&lt;&lt;  Left shift<br>&gt;&gt;  Right shift</p></div></article><article class="topic" id="q63"><h2><span class="num">63</span> What is operator precedence?</h2><div class="body"><p>Determines the order in which operators are evaluated.</p></div></article><article class="topic" id="q64"><h2><span class="num">64</span> Output-based question:</h2><div class="body"><pre><code>print(True + True)
+print(False + True)
+print(True * 10)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>2<br>1<br>10</p>
+<p><strong>EXPLANATION:</strong> </p>
+<p>True behaves like 1 and False behaves like 0<br>in arithmetic operations.</p></div></article><h1 class="stage" id="conditional-statements">Topic 5: Conditional Statements</h1><article class="topic" id="q65"><h2><span class="num">65</span> What are conditional statements?</h2><div class="body"><p>Used to execute code depending on whether conditions<br>are True or False.</p></div></article><article class="topic" id="q66"><h2><span class="num">66</span> What are the types?</h2><div class="body"><ul><li>if</li><li>if-else</li><li>if-elif-else</li><li>Nested if</li><li>Short-hand if</li><li>Ternary conditional expression</li></ul></div></article><article class="topic" id="q67"><h2><span class="num">67</span> What is if?</h2><div class="body"><p>Executes a block when the condition is True.</p></div></article><article class="topic" id="q68"><h2><span class="num">68</span> What is if-else?</h2><div class="body"><p>Executes one block if True and another if False.</p></div></article><article class="topic" id="q69"><h2><span class="num">69</span> What is if-elif-else?</h2><div class="body"><p>Checks multiple conditions and executes the first<br>matching branch.</p></div></article><article class="topic" id="q70"><h2><span class="num">70</span> What is nested if?</h2><div class="body"><p>An if statement written inside another if statement.</p></div></article><article class="topic" id="q71"><h2><span class="num">71</span> What is a ternary operator?</h2><div class="body"><p>A one-line conditional expression.</p>
+<p><strong>Syntax:</strong> </p>
+<p>value_if_true if condition else value_if_false</p>
+<p>Example:</p>
+<pre><code>age = 20
+result = &quot;Adult&quot; if age &gt;= 18 else &quot;Minor&quot;</code></pre></div></article><article class="topic" id="q72"><h2><span class="num">72</span> Difference between if, elif and else?</h2><div class="body"><pre><code>if   - First condition.
+elif - Additional conditions.</code></pre>
+<p>else - Executes when previous conditions are False.</p></div></article><article class="topic" id="q73"><h2><span class="num">73</span> Can we use multiple elif statements?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q74"><h2><span class="num">74</span> Can we use if without else?</h2><div class="body"><p>Yes. Else is optional.</p></div></article><article class="topic" id="q75"><h2><span class="num">75</span> What happens if multiple if statements are True?</h2><div class="body"><p>Separate if statements execute independently.<br>In an if-elif-else chain, only the first matching<br>branch executes.</p></div></article><article class="topic" id="q76"><h2><span class="num">76</span> What are truthy and falsy conditions?</h2><div class="body"><p>Truthy values evaluate to True.<br>Falsy values evaluate to False.</p></div></article><article class="topic" id="q77"><h2><span class="num">77</span> Practical question: Find the largest of three numbers.</h2><div class="body"><pre><code>a = 10
+b = 25
+c = 15
+
+if a &gt; b and a &gt; c:
+    print(&quot;A is largest&quot;)
+elif b &gt; a and b &gt; c:
+    print(&quot;B is largest&quot;)
+else:
+    print(&quot;C is largest&quot;)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>B is largest</p></div></article><h1 class="stage" id="loops">Topic 6: Loops</h1><article class="topic" id="q78"><h2><span class="num">78</span> What is a loop?</h2><div class="body"><p>A loop repeatedly executes a block of code.</p></div></article><article class="topic" id="q79"><h2><span class="num">79</span> What are the types of loops?</h2><div class="body"><ul><li>for loop</li><li>while loop</li><li>Nested loops</li></ul></div></article><article class="topic" id="q80"><h2><span class="num">80</span> What is a for loop?</h2><div class="body"><p>Iterates over an iterable such as a list, tuple,<br>string or range.</p></div></article><article class="topic" id="q81"><h2><span class="num">81</span> What is a while loop?</h2><div class="body"><p>Executes repeatedly while the condition is True.</p></div></article><article class="topic" id="q82"><h2><span class="num">82</span> Difference between for and while?</h2><div class="body"><p>for:<br>- Iterates over an iterable.<br>- Commonly used to traverse sequences.</p>
+<p>while:<br>- Runs based on a condition.<br>- Commonly used when repetitions depend on a condition.</p></div></article><article class="topic" id="q83"><h2><span class="num">83</span> What is a nested loop?</h2><div class="body"><p>A loop inside another loop.</p></div></article><article class="topic" id="q84"><h2><span class="num">84</span> What is an infinite loop?</h2><div class="body"><p>A loop that does not terminate because its stopping<br>condition is never reached.</p></div></article><article class="topic" id="q85"><h2><span class="num">85</span> What is range()?</h2><div class="body"><p>Generates a sequence of integers.</p>
+<p><strong>Syntax:</strong> </p>
+<pre><code>range(start, stop, step)</code></pre></div></article><article class="topic" id="q86"><h2><span class="num">86</span> What are loop control statements?</h2><div class="body"><ul><li>break</li><li>continue</li><li>pass</li></ul></div></article><article class="topic" id="q87"><h2><span class="num">87</span> What is break?</h2><div class="body"><p>Immediately terminates the nearest enclosing loop.</p></div></article><article class="topic" id="q88"><h2><span class="num">88</span> What is continue?</h2><div class="body"><p>Skips the remaining statements in the current iteration<br>and moves to the next iteration.</p></div></article><article class="topic" id="q89"><h2><span class="num">89</span> What is pass?</h2><div class="body"><p>Does nothing. It is used as a placeholder.</p></div></article><article class="topic" id="q90"><h2><span class="num">90</span> Difference between break, continue and pass?</h2><div class="body"><p>break    - Exits the loop.<br>continue - Skips current iteration.<br>pass     - Does nothing.</p></div></article><article class="topic" id="q91"><h2><span class="num">91</span> Can we use else with loops?</h2><div class="body"><p>Yes. The else block executes when the loop finishes<br>normally, but not when it terminates using break.</p></div></article><article class="topic" id="q92"><h2><span class="num">92</span> What is enumerate()?</h2><div class="body"><p>Returns an index and corresponding value while iterating.</p></div></article><article class="topic" id="q93"><h2><span class="num">93</span> What is zip()?</h2><div class="body"><p>Combines multiple iterables element by element.<br>By default, stops at the shortest iterable.</p></div></article><article class="topic" id="q94"><h2><span class="num">94</span> Difference between range() and enumerate()?</h2><div class="body"><pre><code>range() generates numbers.
+enumerate() provides index and value.</code></pre></div></article><article class="topic" id="q95"><h2><span class="num">95</span> Practical: Print even numbers from 1 to 20.</h2><div class="body"><pre><code>for i in range(1, 21):
+    if i % 2 == 0:
+        print(i)</code></pre></div></article><article class="topic" id="q96"><h2><span class="num">96</span> Practical: Factorial of a number.</h2><div class="body"><pre><code>number = 5
+factorial = 1
+
+for i in range(1, number + 1):
+    factorial *= i
+
+print(factorial)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>120</p></div></article><article class="topic" id="q97"><h2><span class="num">97</span> Practical: Reverse a number.</h2><div class="body"><pre><code>number = 1234
+reverse = 0
+
+while number &gt; 0:
+    digit = number % 10
+    reverse = reverse * 10 + digit
+    number //= 10
+
+print(reverse)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>4321</p></div></article><h1 class="stage" id="strings">Topic 7: Strings</h1><article class="topic" id="q98"><h2><span class="num">98</span> What is a string?</h2><div class="body"><p>A string is an immutable sequence of characters.</p></div></article><article class="topic" id="q99"><h2><span class="num">99</span> How do you create strings?</h2><div class="body"><p>Single quotes: &#x27;Python&#x27;<br>Double quotes: &quot;Python&quot;<br>Triple quotes: &quot;&quot;&quot;Python&quot;&quot;&quot;</p></div></article><article class="topic" id="q100"><h2><span class="num">100</span> What is indexing?</h2><div class="body"><p>Accessing individual characters using their positions.</p></div></article><article class="topic" id="q101"><h2><span class="num">101</span> What is slicing?</h2><div class="body"><p>Extracting a portion of a sequence.</p>
+<p><strong>Syntax:</strong> </p>
+<p>string[start:stop:step]</p></div></article><article class="topic" id="q102"><h2><span class="num">102</span> What is negative indexing?</h2><div class="body"><p>Accessing elements from the end using negative indexes.</p></div></article><article class="topic" id="q103"><h2><span class="num">103</span> Why are strings immutable?</h2><div class="body"><p>String contents cannot be changed after creation.<br>Operations that modify a string return a new string.</p></div></article><article class="topic" id="q104"><h2><span class="num">104</span> What are string methods?</h2><div class="body"><p>CASE CONVERSION:</p>
+<pre><code>upper()
+lower()
+title()
+capitalize()
+swapcase()</code></pre>
+<p>SEARCHING:</p>
+<pre><code>find()
+index()
+count()</code></pre>
+<p>CHECKING:</p>
+<pre><code>isalpha()
+isdigit()
+isalnum()
+islower()
+isupper()
+isspace()</code></pre>
+<p>REMOVING:</p>
+<pre><code>strip()
+lstrip()
+rstrip()</code></pre>
+<p>REPLACING:</p>
+<pre><code>replace()</code></pre>
+<p>SPLITTING:</p>
+<pre><code>split()
+rsplit()
+splitlines()</code></pre>
+<p>JOINING:</p>
+<pre><code>join()</code></pre>
+<p>OTHER:</p>
+<pre><code>startswith()
+endswith()
+partition()
+center()</code></pre></div></article><article class="topic" id="q105"><h2><span class="num">105</span> Difference between find() and index()?</h2><div class="body"><pre><code>find()  - Returns -1 if not found.
+index() - Raises ValueError if not found.</code></pre></div></article><article class="topic" id="q106"><h2><span class="num">106</span> Difference between split() and join()?</h2><div class="body"><pre><code>split() - Converts string into a list.
+join()  - Combines strings into one string.</code></pre></div></article><article class="topic" id="q107"><h2><span class="num">107</span> Difference between strip(), lstrip() and rstrip()?</h2><div class="body"><pre><code>strip()  - Removes leading and trailing whitespace.
+lstrip() - Removes leading whitespace.
+rstrip() - Removes trailing whitespace.</code></pre></div></article><article class="topic" id="q108"><h2><span class="num">108</span> What is string formatting?</h2><div class="body"><p>Used to insert values into strings.</p>
+<p>Types:<br>1. f-strings<br>2. <code>format()</code><br>3. % formatting</p></div></article><article class="topic" id="q109"><h2><span class="num">109</span> What are escape characters?</h2><div class="body"><p>\n - New line<br>\t - Tab<br>\\ - Backslash<br>\&#x27; - Single quote<br>\&quot; - Double quote</p></div></article><article class="topic" id="q110"><h2><span class="num">110</span> Output-based question:</h2><div class="body"><pre><code>text = &quot;Python&quot;
+
+print(text[1:5:2])
+print(text[::-1])
+print(len(text))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>yh<br>nohtyP<br>6</p></div></article><article class="topic" id="q111"><h2><span class="num">111</span> Practical: Reverse a string.</h2><div class="body"><pre><code>text = &quot;Python&quot;
+print(text[::-1])</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>nohtyP</p></div></article><article class="topic" id="q112"><h2><span class="num">112</span> Practical: Check palindrome.</h2><div class="body"><pre><code>text = &quot;madam&quot;
+
+if text == text[::-1]:
+    print(&quot;Palindrome&quot;)
+else:
+    print(&quot;Not palindrome&quot;)</code></pre></div></article><article class="topic" id="q113"><h2><span class="num">113</span> Practical: Count vowels.</h2><div class="body"><pre><code>text = &quot;Python Programming&quot;
+count = 0
+
+for char in text.lower():
+    if char in &quot;aeiou&quot;:
+        count += 1
+
+print(count)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>4</p></div></article><h1 class="stage" id="list">Topic 8: List</h1><article class="topic" id="q114"><h2><span class="num">114</span> What is a list?</h2><div class="body"><p>An ordered, mutable collection that allows duplicates.</p></div></article><article class="topic" id="q115"><h2><span class="num">115</span> What are list characteristics?</h2><div class="body"><ul><li>Ordered</li><li>Mutable</li><li>Duplicates allowed</li><li>Supports indexing</li><li>Supports slicing</li><li>Supports nested lists</li><li>Supports different data types</li></ul></div></article><article class="topic" id="q116"><h2><span class="num">116</span> How do you create a list?</h2><div class="body"><pre><code>a = [10, 20, 30]
+b = list((10, 20, 30))</code></pre></div></article><article class="topic" id="q117"><h2><span class="num">117</span> What are list methods?</h2><div class="body"><pre><code>append() - Add one element at the end.
+extend() - Add multiple elements.
+insert() - Insert at a specified position.
+remove() - Remove first matching value.
+pop()    - Remove and return an element.
+clear()  - Remove all elements.
+index()  - Find an element position.
+count()  - Count occurrences.
+sort()   - Sort original list.
+reverse()- Reverse original list.
+copy()   - Create shallow copy.</code></pre></div></article><article class="topic" id="q118"><h2><span class="num">118</span> Difference between append() and extend()?</h2><div class="body"><pre><code>append() adds an object as one element.
+extend() adds elements from an iterable individually.</code></pre></div></article><article class="topic" id="q119"><h2><span class="num">119</span> Difference between remove() and pop()?</h2><div class="body"><pre><code>remove() removes by value.
+pop() removes by index and returns the element.</code></pre></div></article><article class="topic" id="q120"><h2><span class="num">120</span> Difference between sort() and sorted()?</h2><div class="body"><pre><code>sort() modifies the original list and returns None.
+sorted() returns a new sorted list.</code></pre></div></article><article class="topic" id="q121"><h2><span class="num">121</span> What is a nested list?</h2><div class="body"><p>A list containing another list.</p></div></article><article class="topic" id="q122"><h2><span class="num">122</span> What is list comprehension?</h2><div class="body"><p>A concise way to create lists using an expression<br>and iteration.</p></div></article><article class="topic" id="q123"><h2><span class="num">123</span> Practical: Remove duplicates.</h2><div class="body"><pre><code>numbers = [10, 20, 10, 30, 20]
+
+result = list(dict.fromkeys(numbers))
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[10, 20, 30]</p></div></article><article class="topic" id="q124"><h2><span class="num">124</span> Practical: Find the second-largest unique number.</h2><div class="body"><pre><code>numbers = [10, 20, 30, 40, 30]
+
+unique = sorted(set(numbers))
+
+print(unique[-2])</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>30</p></div></article><article class="topic" id="q125"><h2><span class="num">125</span> Practical: Find maximum and minimum.</h2><div class="body"><pre><code>numbers = [10, 50, 20, 5, 30]
+
+print(max(numbers))
+print(min(numbers))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>50<br>5</p></div></article><h1 class="stage" id="tuple">Topic 9: Tuple</h1><article class="topic" id="q126"><h2><span class="num">126</span> What is a tuple?</h2><div class="body"><p>An ordered, immutable collection that allows duplicates.</p></div></article><article class="topic" id="q127"><h2><span class="num">127</span> What are tuple methods?</h2><div class="body"><pre><code>count()
+index()</code></pre></div></article><article class="topic" id="q128"><h2><span class="num">128</span> Why are tuples immutable?</h2><div class="body"><p>Their element references cannot be reassigned after<br>creation. They are useful for fixed collections.</p></div></article><article class="topic" id="q129"><h2><span class="num">129</span> What is tuple packing?</h2><div class="body"><p>Combining multiple values into a tuple.</p>
+<p>Example:</p>
+<pre><code>data = 10, 20, 30</code></pre></div></article><article class="topic" id="q130"><h2><span class="num">130</span> What is tuple unpacking?</h2><div class="body"><p>Assigning tuple elements to separate variables.</p>
+<p>Example:<br>a, b, c = (10, 20, 30)</p></div></article><article class="topic" id="q131"><h2><span class="num">131</span> How do you create a single-element tuple?</h2><div class="body"><p>Use a trailing comma.</p>
+<p>Example:</p>
+<pre><code>data = (10,)</code></pre></div></article><article class="topic" id="q132"><h2><span class="num">132</span> Can a tuple contain duplicates?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q133"><h2><span class="num">133</span> Can a tuple contain a mutable object?</h2><div class="body"><p>Yes. A tuple can contain a list, dictionary or set.<br>The nested mutable object can still be modified.</p></div></article><article class="topic" id="q134"><h2><span class="num">134</span> Can we modify a tuple?</h2><div class="body"><p>No, its elements cannot be reassigned.<br>However, mutable objects inside it can be changed.</p></div></article><h1 class="stage" id="set">Topic 10: Set</h1><article class="topic" id="q135"><h2><span class="num">135</span> What is a set?</h2><div class="body"><p>A mutable collection of unique, hashable elements.<br>It does not support indexing or slicing.</p></div></article><article class="topic" id="q136"><h2><span class="num">136</span> What are set characteristics?</h2><div class="body"><ul><li>Unique elements</li><li>Mutable collection</li><li>No positional order</li><li>No indexing</li><li>Supports mathematical set operations</li></ul></div></article><article class="topic" id="q137"><h2><span class="num">137</span> How do you create an empty set?</h2><div class="body"><pre><code>data = set()</code></pre>
+<p>Note:<br>{} creates an empty dictionary.</p></div></article><article class="topic" id="q138"><h2><span class="num">138</span> What are set methods?</h2><div class="body"><pre><code>add()
+update()
+remove()
+discard()
+pop()
+clear()
+copy()
+union()
+intersection()
+difference()
+symmetric_difference()
+issubset()
+issuperset()
+isdisjoint()</code></pre></div></article><article class="topic" id="q139"><h2><span class="num">139</span> Difference between remove() and discard()?</h2><div class="body"><pre><code>remove() raises KeyError when the element is missing.
+discard() does not raise an error.</code></pre></div></article><article class="topic" id="q140"><h2><span class="num">140</span> What is union?</h2><div class="body"><p>Combines unique elements from both sets.</p>
+<pre><code>a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a.union(b))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{1, 2, 3, 4, 5}</p></div></article><article class="topic" id="q141"><h2><span class="num">141</span> What is intersection?</h2><div class="body"><p>Returns common elements.</p>
+<pre><code>print(a.intersection(b))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{3}</p></div></article><article class="topic" id="q142"><h2><span class="num">142</span> What is difference?</h2><div class="body"><p>Returns elements present in the first set but not<br>in the second.</p>
+<pre><code>print(a.difference(b))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{1, 2}</p></div></article><article class="topic" id="q143"><h2><span class="num">143</span> What is symmetric difference?</h2><div class="body"><p>Returns elements that exist in either set but not both.</p>
+<pre><code>print(a.symmetric_difference(b))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{1, 2, 4, 5}</p></div></article><article class="topic" id="q144"><h2><span class="num">144</span> What is subset?</h2><div class="body"><p>A set is a subset if all its elements are contained<br>in another set.</p></div></article><article class="topic" id="q145"><h2><span class="num">145</span> What is superset?</h2><div class="body"><p>A set is a superset if it contains all elements of<br>another set.</p></div></article><article class="topic" id="q146"><h2><span class="num">146</span> What is disjoint?</h2><div class="body"><p>Two sets are disjoint if they have no common elements.</p></div></article><article class="topic" id="q147"><h2><span class="num">147</span> What is frozenset?</h2><div class="body"><p>An immutable version of a set.</p></div></article><h1 class="stage" id="dictionary">Topic 11: Dictionary</h1><article class="topic" id="q148"><h2><span class="num">148</span> What is a dictionary?</h2><div class="body"><p>A mutable collection that stores data in key-value pairs.</p></div></article><article class="topic" id="q149"><h2><span class="num">149</span> What are dictionary characteristics?</h2><div class="body"><ul><li>Key-value pairs</li><li>Mutable</li><li>Insertion ordered</li><li>Unique keys</li><li>Keys must be hashable</li><li>Values can be duplicated</li></ul></div></article><article class="topic" id="q150"><h2><span class="num">150</span> How do you create a dictionary?</h2><div class="body"><pre><code>data = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}</code></pre></div></article><article class="topic" id="q151"><h2><span class="num">151</span> How do you access dictionary values?</h2><div class="body"><p>Using keys or <code>get()</code>.</p></div></article><article class="topic" id="q152"><h2><span class="num">152</span> Difference between get() and square brackets?</h2><div class="body"><pre><code>get() returns None by default for a missing key.</code></pre>
+<p>Square brackets raise KeyError for a missing key.</p></div></article><article class="topic" id="q153"><h2><span class="num">153</span> What are dictionary methods?</h2><div class="body"><pre><code>keys()
+values()
+items()
+get()
+update()
+pop()
+popitem()
+setdefault()
+clear()
+copy()
+fromkeys()</code></pre></div></article><article class="topic" id="q154"><h2><span class="num">154</span> What is keys()?</h2><div class="body"><p>Returns a view of dictionary keys.</p></div></article><article class="topic" id="q155"><h2><span class="num">155</span> What is values()?</h2><div class="body"><p>Returns a view of dictionary values.</p></div></article><article class="topic" id="q156"><h2><span class="num">156</span> What is items()?</h2><div class="body"><p>Returns a view of key-value pairs.</p></div></article><article class="topic" id="q157"><h2><span class="num">157</span> How do you add or update values?</h2><div class="body"><p>data[&quot;age&quot;] = 25</p></div></article><article class="topic" id="q158"><h2><span class="num">158</span> How do you remove a dictionary element?</h2><div class="body"><pre><code>pop()     - Removes a specified key.
+popitem() - Removes the last inserted pair.</code></pre>
+<p>del       - Deletes a specified key.</p>
+<pre><code>clear()   - Removes all elements.</code></pre></div></article><article class="topic" id="q159"><h2><span class="num">159</span> What is dictionary comprehension?</h2><div class="body"><p>A short way to create dictionaries using an expression.</p></div></article><article class="topic" id="q160"><h2><span class="num">160</span> Practical: Character frequency.</h2><div class="body"><pre><code>text = &quot;banana&quot;
+result = {}
+
+for char in text:
+    result[char] = result.get(char, 0) + 1
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{&#x27;b&#x27;: 1, &#x27;a&#x27;: 3, &#x27;n&#x27;: 2}</p></div></article><article class="topic" id="q161"><h2><span class="num">161</span> Can dictionary keys be lists?</h2><div class="body"><p>No. Lists are unhashable and cannot be dictionary keys.</p></div></article><article class="topic" id="q162"><h2><span class="num">162</span> Can dictionary values be duplicated?</h2><div class="body"><p>Yes.</p></div></article><h1 class="stage" id="comprehensions">Topic 12: Comprehensions</h1><article class="topic" id="q163"><h2><span class="num">163</span> What is comprehension?</h2><div class="body"><p>A concise way to create collections using expressions<br>and iteration.</p></div></article><article class="topic" id="q164"><h2><span class="num">164</span> What are the types?</h2><div class="body"><ul><li>List comprehension</li><li>Dictionary comprehension</li><li>Set comprehension</li><li>Generator expression</li></ul></div></article><article class="topic" id="q165"><h2><span class="num">165</span> What is list comprehension?</h2><div class="body"><p>Creates a list using a compact expression.</p>
+<p>Example:</p>
+<pre><code>numbers = [1, 2, 3, 4]
+result = [x * 2 for x in numbers]</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[2, 4, 6, 8]</p></div></article><article class="topic" id="q166"><h2><span class="num">166</span> What is conditional list comprehension?</h2><div class="body"><p>A comprehension that filters values using an if condition.</p>
+<p>Example:<br>[x for x in range(10) if x % 2 == 0]</p></div></article><article class="topic" id="q167"><h2><span class="num">167</span> What is dictionary comprehension?</h2><div class="body"><p>Creates dictionaries using an expression.</p>
+<p>Example:<br>{x: x**2 for x in range(1, 4)}</p>
+<p><strong>OUTPUT:</strong> </p>
+<p>{1: 1, 2: 4, 3: 9}</p></div></article><article class="topic" id="q168"><h2><span class="num">168</span> What is set comprehension?</h2><div class="body"><p>Creates a set using a comprehension expression.</p></div></article><article class="topic" id="q169"><h2><span class="num">169</span> What is generator expression?</h2><div class="body"><p>Creates a generator that produces values on demand.</p></div></article><article class="topic" id="q170"><h2><span class="num">170</span> Difference between list comprehension and generator?</h2><div class="body"><p>List comprehension:<br>- Uses []<br>- Creates the list immediately<br>- Stores all results in memory</p>
+<p>Generator expression:<br>- Uses ()<br>- Produces values on demand<br>- Generally uses less memory</p></div></article><article class="topic" id="q171"><h2><span class="num">171</span> Practical: Increase elements by 10.</h2><div class="body"><pre><code>numbers = [10, 20, 30]
+
+result = [x + 10 for x in numbers]
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[20, 30, 40]</p></div></article><h1 class="stage" id="functions">Topic 13: Functions</h1><article class="topic" id="q172"><h2><span class="num">172</span> What is a function?</h2><div class="body"><p>A function is a reusable block of code designed to<br>perform a specific task.</p></div></article><article class="topic" id="q173"><h2><span class="num">173</span> Why do we use functions?</h2><div class="body"><ul><li>Code reusability</li><li>Reduces repetition</li><li>Improves readability</li><li>Easy maintenance</li><li>Better organization</li></ul></div></article><article class="topic" id="q174"><h2><span class="num">174</span> How do you define a function?</h2><div class="body"><p>Using the def keyword.</p>
+<p>Example:</p>
+<pre><code>def greet():
+    print(&quot;Hello&quot;)</code></pre></div></article><article class="topic" id="q175"><h2><span class="num">175</span> How do you call a function?</h2><div class="body"><p>By writing its name followed by parentheses.</p>
+<p>Example:</p>
+<pre><code>greet()</code></pre></div></article><article class="topic" id="q176"><h2><span class="num">176</span> What are the types of functions?</h2><div class="body"><ul><li>Built-in functions</li><li>User-defined functions</li><li>Anonymous (lambda) functions</li><li>Recursive functions</li><li>Generator functions</li></ul></div></article><article class="topic" id="q177"><h2><span class="num">177</span> What are built-in functions?</h2><div class="body"><p>Functions already provided by Python.</p>
+<p>Examples:</p>
+<pre><code>print()
+input()
+len()
+type()
+range()
+sum()
+min()
+max()
+sorted()
+abs()
+round()
+enumerate()
+zip()
+map()
+filter()
+all()
+any()</code></pre></div></article><article class="topic" id="q178"><h2><span class="num">178</span> What is a user-defined function?</h2><div class="body"><p>A function created by the developer using def.</p></div></article><article class="topic" id="q179"><h2><span class="num">179</span> What is an anonymous function?</h2><div class="body"><p>A function without a regular name, created using lambda.</p></div></article><article class="topic" id="q180"><h2><span class="num">180</span> What is a recursive function?</h2><div class="body"><p>A function that calls itself.</p></div></article><article class="topic" id="q181"><h2><span class="num">181</span> What is a return statement?</h2><div class="body"><p>Returns a result from a function and terminates<br>that function&#x27;s execution.</p></div></article><article class="topic" id="q182"><h2><span class="num">182</span> Difference between return and print?</h2><div class="body"><p>return:<br>- Sends a result back to the caller.<br>- Can be stored in a variable.<br>- Exits the function.</p>
+<pre><code>print():</code></pre>
+<ul><li>Displays information.</li><li>Does not return the displayed value.</li><li><code>print()</code> itself returns None.</li></ul></div></article><article class="topic" id="q183"><h2><span class="num">183</span> What happens if a function has no return statement?</h2><div class="body"><p>It implicitly returns None.</p></div></article><article class="topic" id="q184"><h2><span class="num">184</span> What is a docstring?</h2><div class="body"><p>A string literal used to document a function,</p>
+<pre><code>class or module.</code></pre>
+<p>Example:</p>
+<pre><code>def add(a, b):
+    &quot;&quot;&quot;Returns the sum of two numbers.&quot;&quot;&quot;
+    return a + b</code></pre></div></article><article class="topic" id="q185"><h2><span class="num">185</span> What is function calling?</h2><div class="body"><p>Invoking a function to execute its code.</p></div></article><article class="topic" id="q186"><h2><span class="num">186</span> What is a higher-order function?</h2><div class="body"><p>A function that accepts another function as an argument<br>or returns a function.</p></div></article><h1 class="stage" id="function-arguments">Topic 14: Function Arguments</h1><article class="topic" id="q187"><h2><span class="num">187</span> What is a parameter?</h2><div class="body"><p>A variable defined in a function&#x27;s definition.</p></div></article><article class="topic" id="q188"><h2><span class="num">188</span> What is an argument?</h2><div class="body"><p>An actual value passed to a function when it is called.</p></div></article><article class="topic" id="q189"><h2><span class="num">189</span> What are the types of function arguments?</h2><div class="body"><ul><li>Positional arguments</li><li>Keyword arguments</li><li>Default arguments</li><li>Variable-length positional arguments (*args)</li><li>Variable-length keyword arguments (**kwargs)</li></ul></div></article><article class="topic" id="q190"><h2><span class="num">190</span> What are positional arguments?</h2><div class="body"><p>Values passed according to the order of parameters.</p>
+<p>Example:</p>
+<pre><code>def add(a, b):
+    return a + b
+
+add(10, 20)</code></pre></div></article><article class="topic" id="q191"><h2><span class="num">191</span> What are keyword arguments?</h2><div class="body"><p>Values passed using parameter names.</p>
+<p>Example:</p>
+<pre><code>def student(name, age):
+    print(name, age)
+
+student(age=25, name=&quot;John&quot;)</code></pre></div></article><article class="topic" id="q192"><h2><span class="num">192</span> What are default arguments?</h2><div class="body"><p>Parameters that have default values if the caller<br>does not provide an argument.</p>
+<p>Example:</p>
+<pre><code>def greet(name=&quot;Guest&quot;):
+    print(name)</code></pre></div></article><article class="topic" id="q193"><h2><span class="num">193</span> What is *args?</h2><div class="body"><p>Allows a function to accept a variable number of<br>positional arguments. They are collected into a tuple.</p>
+<p>Example:</p>
+<pre><code>def add(*args):
+    print(args)
+
+add(10, 20, 30)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>(10, 20, 30)</p></div></article><article class="topic" id="q194"><h2><span class="num">194</span> What is **kwargs?</h2><div class="body"><p>Allows a function to accept a variable number of<br>keyword arguments. They are collected into a dictionary.</p>
+<p>Example:</p>
+<pre><code>def details(**kwargs):
+    print(kwargs)
+
+details(name=&quot;John&quot;, age=25)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{&#x27;name&#x27;: &#x27;John&#x27;, &#x27;age&#x27;: 25}</p></div></article><article class="topic" id="q195"><h2><span class="num">195</span> Difference between *args and **kwargs?</h2><div class="body"><p>*args   - Collects positional arguments into a tuple.<br>**kwargs - Collects keyword arguments into a dictionary.</p></div></article><article class="topic" id="q196"><h2><span class="num">196</span> Can we use both *args and **kwargs?</h2><div class="body"><p>Yes.</p>
+<p>Example:</p>
+<pre><code>def display(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+display(10, 20, name=&quot;John&quot;)</code></pre></div></article><article class="topic" id="q197"><h2><span class="num">197</span> What is argument unpacking?</h2><div class="body"><p>Passing elements from an iterable using * or<br>key-value pairs from a mapping using **.</p>
+<p>Example:</p>
+<pre><code>numbers = [10, 20]
+add(*numbers)</code></pre></div></article><article class="topic" id="q198"><h2><span class="num">198</span> What is a keyword-only argument?</h2><div class="body"><p>An argument that must be supplied using its parameter<br>name. It can be defined after * in a function signature.</p></div></article><article class="topic" id="q199"><h2><span class="num">199</span> What is a positional-only argument?</h2><div class="body"><p>An argument that must be supplied by position.<br>It can be defined before / in a function signature.</p></div></article><article class="topic" id="q200"><h2><span class="num">200</span> Tricky question: What is the problem with mutable</h2><div class="body"><p>default arguments?</p>
+<p>ANS:<br>Default argument objects are created once when the<br>function is defined and reused across calls.</p>
+<p>Better approach:</p>
+<pre><code>def add_item(item, data=None):
+    if data is None:
+        data = []
+    data.append(item)
+    return data</code></pre></div></article><h1 class="stage" id="lambda-map-filter-and-reduce">Topic 15: Lambda, Map, Filter And Reduce</h1><article class="topic" id="q201"><h2><span class="num">201</span> What is a lambda function?</h2><div class="body"><p>A lambda function is a small anonymous function created<br>using the lambda keyword.</p>
+<p><strong>Syntax:</strong> </p>
+<p>lambda arguments: expression</p>
+<p>Example:</p>
+<pre><code>square = lambda x: x * x
+
+print(square(5))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>25</p></div></article><article class="topic" id="q202"><h2><span class="num">202</span> What is map()?</h2><div class="body"><p>Applies a function to every item in an iterable<br>and returns a map iterator.</p>
+<p>Example:</p>
+<pre><code>numbers = [1, 2, 3, 4]
+
+result = list(map(lambda x: x * 2, numbers))
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[2, 4, 6, 8]</p></div></article><article class="topic" id="q203"><h2><span class="num">203</span> What is filter()?</h2><div class="body"><p>Filters elements based on a condition and returns<br>a filter iterator.</p>
+<p>Example:</p>
+<pre><code>numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[2, 4, 6]</p></div></article><article class="topic" id="q204"><h2><span class="num">204</span> What is reduce()?</h2><div class="body"><p>Repeatedly applies a function to accumulate a single<br>result from an iterable.</p>
+<p>Module:<br>functools</p>
+<p>Example:</p>
+<pre><code>from functools import reduce
+
+numbers = [1, 2, 3, 4]
+
+result = reduce(lambda x, y: x + y, numbers)
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>10</p></div></article><article class="topic" id="q205"><h2><span class="num">205</span> Difference between map() and filter()?</h2><div class="body"><pre><code>map()    - Transforms every element.
+filter() - Selects elements based on a condition.</code></pre></div></article><article class="topic" id="q206"><h2><span class="num">206</span> Difference between map() and reduce()?</h2><div class="body"><pre><code>map()    - Produces a transformed result per element.
+reduce() - Combines elements into an accumulated result.</code></pre></div></article><article class="topic" id="q207"><h2><span class="num">207</span> What is sorted() with lambda?</h2><div class="body"><p>Allows custom sorting using a key function.</p>
+<p>Example:</p>
+<pre><code>students = [
+    (&quot;John&quot;, 25),
+    (&quot;David&quot;, 20),
+    (&quot;Sam&quot;, 30)
+]
+
+result = sorted(students, key=lambda x: x[1])
+
+print(result)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[(&#x27;David&#x27;, 20), (&#x27;John&#x27;, 25), (&#x27;Sam&#x27;, 30)]</p></div></article><article class="topic" id="q208"><h2><span class="num">208</span> What is the difference between lambda and def?</h2><div class="body"><p>lambda:<br>- Creates a small anonymous function.<br>- Contains a single expression.<br>- Commonly used for short operations.</p>
+<p>def:<br>- Defines a regular function.<br>- Supports multiple statements.<br>- Can contain documentation and complex logic.</p></div></article><h1 class="stage" id="variable-scope">Topic 16: Variable Scope</h1><article class="topic" id="q209"><h2><span class="num">209</span> What is variable scope?</h2><div class="body"><p>Scope determines where a variable can be accessed<br>within a program.</p></div></article><article class="topic" id="q210"><h2><span class="num">210</span> What are the four scopes in Python?</h2><div class="body"><ul><li>Local</li><li>Enclosing</li><li>Global</li><li>Built-in</li></ul></div></article><article class="topic" id="q211"><h2><span class="num">211</span> What is local scope?</h2><div class="body"><p>A variable defined inside a function.</p></div></article><article class="topic" id="q212"><h2><span class="num">212</span> What is global scope?</h2><div class="body"><p>A variable defined at module level.</p></div></article><article class="topic" id="q213"><h2><span class="num">213</span> What is enclosing scope?</h2><div class="body"><p>A variable defined in an outer function and accessed<br>inside an inner function.</p></div></article><article class="topic" id="q214"><h2><span class="num">214</span> What is built-in scope?</h2><div class="body"><p>Names provided by Python, such as <code>print()</code>, <code>len()</code><br>and <code>range()</code>.</p></div></article><article class="topic" id="q215"><h2><span class="num">215</span> What is LEGB?</h2><div class="body"><p>Python searches for a variable in this order:</p>
+<p>L - Local<br>E - Enclosing<br>G - Global<br>B - Built-in</p></div></article><article class="topic" id="q216"><h2><span class="num">216</span> What is global keyword?</h2><div class="body"><p>Allows a function to reassign a variable defined<br>at module level.</p>
+<p>Example:</p>
+<pre><code>x = 10
+
+def change():
+    global x
+    x = 20
+
+change()
+print(x)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>20</p></div></article><article class="topic" id="q217"><h2><span class="num">217</span> What is nonlocal keyword?</h2><div class="body"><p>Allows an inner function to reassign a variable</p>
+<pre><code>from its nearest enclosing function scope.</code></pre></div></article><article class="topic" id="q218"><h2><span class="num">218</span> Difference between global and nonlocal?</h2><div class="body"><p>global   - Refers to a module-level variable.<br>nonlocal - Refers to a variable in an enclosing function.</p></div></article><article class="topic" id="q219"><h2><span class="num">219</span> Can a local variable have the same name as a</h2><div class="body"><p>global variable?</p>
+<p>ANS:<br>Yes. The local variable shadows the global variable<br>inside its local scope.</p></div></article><h1 class="stage" id="modules-and-packages">Topic 17: Modules And Packages</h1><article class="topic" id="q220"><h2><span class="num">220</span> What is a module?</h2><div class="body"><p>A module is a Python file containing reusable functions,<br>classes and variables.</p></div></article><article class="topic" id="q221"><h2><span class="num">221</span> What is a package?</h2><div class="body"><p>A package is a collection of related Python modules<br>organized in a directory.</p></div></article><article class="topic" id="q222"><h2><span class="num">222</span> Difference between module and package?</h2><div class="body"><p>Module  - A single Python file.<br>Package - A directory containing related modules.</p></div></article><article class="topic" id="q223"><h2><span class="num">223</span> What is import?</h2><div class="body"><p>Used to access functionality from another module.</p>
+<p>Example:</p>
+<pre><code>import math
+
+print(math.sqrt(25))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>5.0</p></div></article><article class="topic" id="q224"><h2><span class="num">224</span> What is from import?</h2><div class="body"><p>Imports specific objects from a module.</p>
+<p>Example:</p>
+<pre><code>from math import sqrt
+
+print(sqrt(25))</code></pre></div></article><article class="topic" id="q225"><h2><span class="num">225</span> What is an alias?</h2><div class="body"><p>A shorter alternative name given during import.</p>
+<p>Example:</p>
+<pre><code>import math as m
+
+print(m.sqrt(25))</code></pre></div></article><article class="topic" id="q226"><h2><span class="num">226</span> What are built-in modules?</h2><div class="body"><p>Modules provided by Python&#x27;s standard library.</p></div></article><article class="topic" id="q227"><h2><span class="num">227</span> What are important Python modules?</h2><div class="body"><p>1. math<br>   <code>sqrt()</code>, <code>factorial()</code>, <code>ceil()</code>, <code>floor()</code>, <code>pow()</code></p>
+<p>2. random<br>   <code>random()</code>, <code>randint()</code>, <code>choice()</code>, <code>shuffle()</code></p>
+<p>3. os<br>   <code>getcwd()</code>, <code>listdir()</code>, <code>mkdir()</code>, <code>remove()</code></p>
+<p>4. sys<br>   argv, path, version, <code>exit()</code></p>
+<p>5. datetime<br>   datetime.<code>now()</code>, date.<code>today()</code>, <code>strftime()</code>, <code>strptime()</code></p>
+<p>6. time<br>   <code>sleep()</code>, <code>time()</code>, <code>ctime()</code></p>
+<p>7. json<br>   <code>loads()</code>, <code>dumps()</code>, <code>load()</code>, <code>dump()</code></p>
+<p>8. re<br>   <code>search()</code>, <code>match()</code>, <code>findall()</code>, <code>sub()</code>, <code>split()</code></p>
+<p>9. copy<br>   <code>copy()</code>, <code>deepcopy()</code></p>
+<p>10. collections</p>
+<pre><code>    Counter, defaultdict, deque, namedtuple</code></pre>
+<ul><li>itertools</li></ul>
+<pre><code>    count(), cycle(), repeat(), combinations(),
+    permutations()</code></pre>
+<ul><li>functools</li></ul>
+<pre><code>    reduce(), partial(), lru_cache()</code></pre></div></article><article class="topic" id="q228"><h2><span class="num">228</span> Difference between json.load() and json.loads()?</h2><div class="body"><p>json.<code>load()</code>  - Reads JSON from a file-like object.<br>json.<code>loads()</code> - Converts a JSON string into Python data.</p></div></article><article class="topic" id="q229"><h2><span class="num">229</span> Difference between json.dump() and json.dumps()?</h2><div class="body"><p>json.<code>dump()</code>  - Writes JSON to a file-like object.<br>json.<code>dumps()</code> - Converts Python data into a JSON string.</p></div></article><article class="topic" id="q230"><h2><span class="num">230</span> What is a custom module?</h2><div class="body"><p>A Python file created by the developer for reusable code.</p></div></article><article class="topic" id="q231"><h2><span class="num">231</span> What is __name__ == &quot;__main__&quot;?</h2><div class="body"><p>It checks whether a Python file is being executed<br>directly as the main program rather than imported<br>as a module.</p></div></article><article class="topic" id="q232"><h2><span class="num">232</span> What is the difference between standard and</h2><div class="body"><p>third-party modules?</p>
+<p>ANS:<br>Standard modules come with Python.<br>Third-party modules are installed separately.</p></div></article><article class="topic" id="q233"><h2><span class="num">233</span> What is pip?</h2><div class="body"><p>pip is a package installer used to install and manage<br>Python packages.</p>
+<p>Example:<br>pip install pandas</p></div></article><h1 class="stage" id="exception-handling">Topic 18: Exception Handling</h1><article class="topic" id="q234"><h2><span class="num">234</span> What is an error?</h2><div class="body"><p>An error is a problem that prevents code from working<br>as intended.</p></div></article><article class="topic" id="q235"><h2><span class="num">235</span> What are the types of errors?</h2><div class="body"><ul><li>Syntax errors</li><li>Runtime exceptions</li><li>Logical errors</li></ul></div></article><article class="topic" id="q236"><h2><span class="num">236</span> What is a syntax error?</h2><div class="body"><p>An error caused by violating Python&#x27;s syntax rules.</p></div></article><article class="topic" id="q237"><h2><span class="num">237</span> What is an exception?</h2><div class="body"><p>An exception is an event raised during execution<br>that interrupts the normal flow of a program.</p></div></article><article class="topic" id="q238"><h2><span class="num">238</span> Difference between syntax error and exception?</h2><div class="body"><p>Syntax error:<br>- Code violates syntax rules.<br>- Detected during parsing.</p>
+<p>Exception:<br>- Occurs during execution.<br>- Can be handled using exception handling.</p></div></article><article class="topic" id="q239"><h2><span class="num">239</span> What are common Python exceptions?</h2><div class="body"><p>ZeroDivisionError:<br>Dividing a number by zero.</p>
+<p>TypeError:<br>Performing an unsupported operation or using<br>an inappropriate argument type.</p>
+<p>ValueError:<br>Correct type but invalid value.</p>
+<p>IndexError:<br>Sequence index does not exist.</p>
+<p>KeyError:<br>Dictionary key does not exist.</p>
+<p>NameError:<br>Variable name is not defined.</p>
+<p>AttributeError:<br>Object does not have the requested attribute.</p>
+<p>FileNotFoundError:<br>Requested file does not exist.</p>
+<p>ImportError:<br>Import operation fails.</p>
+<p>ModuleNotFoundError:<br>Requested module cannot be found.</p>
+<p>IndentationError:<br>Incorrect indentation.</p></div></article><article class="topic" id="q240"><h2><span class="num">240</span> What is exception handling?</h2><div class="body"><p>Exception handling is used to handle runtime exceptions<br>and prevent unexpected program termination.</p></div></article><article class="topic" id="q241"><h2><span class="num">241</span> What are exception handling keywords?</h2><div class="body"><ul><li>try</li><li>except</li><li>else</li><li>finally</li><li>raise</li></ul></div></article><article class="topic" id="q242"><h2><span class="num">242</span> What is try?</h2><div class="body"><p>Contains code that may raise an exception.</p></div></article><article class="topic" id="q243"><h2><span class="num">243</span> What is except?</h2><div class="body"><p>Handles exceptions raised in the try block.</p></div></article><article class="topic" id="q244"><h2><span class="num">244</span> What is else?</h2><div class="body"><p>Executes when no exception occurs in the try block.</p></div></article><article class="topic" id="q245"><h2><span class="num">245</span> What is finally?</h2><div class="body"><p>Executes whether an exception occurs or not.<br>Commonly used for cleanup operations.</p></div></article><article class="topic" id="q246"><h2><span class="num">246</span> Difference between else and finally?</h2><div class="body"><pre><code>else:</code></pre>
+<p>Executes only when no exception occurs.</p>
+<p>finally:<br>Executes whether an exception occurs or not.</p></div></article><article class="topic" id="q247"><h2><span class="num">247</span> What is raise?</h2><div class="body"><p>Used to explicitly raise an exception.</p>
+<p>Example:</p>
+<pre><code>age = 15
+
+if age &lt; 18:
+    raise ValueError(&quot;Age must be 18 or above&quot;)</code></pre></div></article><article class="topic" id="q248"><h2><span class="num">248</span> What is a custom exception?</h2><div class="body"><p>An exception created by the developer by defining<br>a class that inherits from Exception.</p>
+<p>Example:</p>
+<pre><code>class AgeError(Exception):
+    pass
+
+age = 15
+
+if age &lt; 18:
+    raise AgeError(&quot;Not eligible&quot;)</code></pre></div></article><article class="topic" id="q249"><h2><span class="num">249</span> Can we use multiple except blocks?</h2><div class="body"><p>Yes. Different exceptions can be handled separately.</p></div></article><article class="topic" id="q250"><h2><span class="num">250</span> Can we handle multiple exceptions in one except?</h2><div class="body"><p>Yes.</p>
+<p>Example:</p>
+<pre><code>except (ValueError, TypeError):
+    print(&quot;Invalid input&quot;)</code></pre></div></article><article class="topic" id="q251"><h2><span class="num">251</span> What happens if an exception is not handled?</h2><div class="body"><p>The exception propagates through the call stack.<br>If it remains unhandled, the program terminates</p>
+<pre><code>with a traceback.</code></pre></div></article><article class="topic" id="q252"><h2><span class="num">252</span> What is exception propagation?</h2><div class="body"><p>When an exception moves from the current function<br>to its caller because it was not handled locally.</p></div></article><article class="topic" id="q253"><h2><span class="num">253</span> Output-based question:</h2><div class="body"><pre><code>try:
+    print(10 / 0)
+except ZeroDivisionError:
+    print(&quot;Cannot divide by zero&quot;)
+else:
+    print(&quot;Success&quot;)</code></pre>
+<p>finally:</p>
+<pre><code>    print(&quot;Completed&quot;)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>Cannot divide by zero<br>Completed</p></div></article><h1 class="stage" id="file-handling">Topic 19: File Handling</h1><article class="topic" id="q254"><h2><span class="num">254</span> What is file handling?</h2><div class="body"><p>File handling is used to create, read, write, append<br>and manage files using Python.</p></div></article><article class="topic" id="q255"><h2><span class="num">255</span> What are the types of files?</h2><div class="body"><ul><li>Text files</li><li>Binary files</li></ul></div></article><article class="topic" id="q256"><h2><span class="num">256</span> What is a text file?</h2><div class="body"><p>Stores data as readable characters.</p>
+<p>Examples:<br>.txt, .csv, .json, .py</p></div></article><article class="topic" id="q257"><h2><span class="num">257</span> What is a binary file?</h2><div class="body"><p>Stores data as bytes rather than ordinary readable text.</p>
+<p>Examples:<br>.jpg, .png, .pdf, .mp3</p></div></article><article class="topic" id="q258"><h2><span class="num">258</span> What is open()?</h2><div class="body"><p>Built-in function used to open a file.</p>
+<p><strong>Syntax:</strong> </p>
+<pre><code>open(filename, mode)</code></pre></div></article><article class="topic" id="q259"><h2><span class="num">259</span> What are file modes?</h2><div class="body"><p>r  - Read<br>w  - Write and overwrite<br>a  - Append<br>x  - Create a new file<br>r+ - Read and write<br>w+ - Write and read, truncating existing content<br>a+ - Append and read</p>
+<p>rb - Read binary<br>wb - Write binary<br>ab - Append binary</p></div></article><article class="topic" id="q260"><h2><span class="num">260</span> What is read()?</h2><div class="body"><p>Reads file content.</p></div></article><article class="topic" id="q261"><h2><span class="num">261</span> What is readline()?</h2><div class="body"><p>Reads one line from a file.</p></div></article><article class="topic" id="q262"><h2><span class="num">262</span> What is readlines()?</h2><div class="body"><p>Reads all lines and returns them as a list.</p></div></article><article class="topic" id="q263"><h2><span class="num">263</span> What is write()?</h2><div class="body"><p>Writes a string to a file.</p></div></article><article class="topic" id="q264"><h2><span class="num">264</span> What is writelines()?</h2><div class="body"><p>Writes multiple strings from an iterable.<br>It does not automatically insert newline characters.</p></div></article><article class="topic" id="q265"><h2><span class="num">265</span> Difference between read() and readline()?</h2><div class="body"><pre><code>read()     - Reads the requested file content.
+readline() - Reads one line at a time.</code></pre></div></article><article class="topic" id="q266"><h2><span class="num">266</span> Difference between write() and writelines()?</h2><div class="body"><pre><code>write()     - Writes a string.
+writelines() - Writes multiple strings from an iterable.</code></pre></div></article><article class="topic" id="q267"><h2><span class="num">267</span> What is close()?</h2><div class="body"><p>Closes an open file and releases its associated resources.</p></div></article><article class="topic" id="q268"><h2><span class="num">268</span> What is a file pointer?</h2><div class="body"><p>A file pointer represents the current position</p>
+<pre><code>from which reading or writing takes place.</code></pre></div></article><article class="topic" id="q269"><h2><span class="num">269</span> What is tell()?</h2><div class="body"><p>Returns the current file pointer position.</p></div></article><article class="topic" id="q270"><h2><span class="num">270</span> What is seek()?</h2><div class="body"><p>Moves the file pointer to a specified position.</p></div></article><article class="topic" id="q271"><h2><span class="num">271</span> What is a context manager?</h2><div class="body"><p>A context manager manages resources automatically.<br>It handles setup and cleanup operations.</p></div></article><article class="topic" id="q272"><h2><span class="num">272</span> What is with open()?</h2><div class="body"><p>It opens a file using a context manager and automatically<br>closes the file when the block exits.</p></div></article><article class="topic" id="q273"><h2><span class="num">273</span> Difference between open() and with open()?</h2><div class="body"><pre><code>open():</code></pre>
+<ul><li>Opens a file.</li><li>Developer generally needs to close it manually.</li></ul>
+<pre><code>with open():</code></pre>
+<ul><li>Opens the file using a context manager.</li><li>Automatically closes it after the block.</li></ul></div></article><article class="topic" id="q274"><h2><span class="num">274</span> What exceptions can occur in file handling?</h2><div class="body"><p>FileNotFoundError<br>PermissionError<br>IsADirectoryError<br>NotADirectoryError<br>OSError<br>UnicodeDecodeError<br>ValueError<br>TypeError</p></div></article><article class="topic" id="q275"><h2><span class="num">275</span> What is encoding?</h2><div class="body"><p>Encoding defines how text characters are converted<br>into bytes when reading or writing a file.</p>
+<p>Example:</p>
+<pre><code>encoding=&quot;utf-8&quot;</code></pre></div></article><article class="topic" id="q276"><h2><span class="num">276</span> Practical: Write into a file.</h2><div class="body"><pre><code>with open(&quot;sample.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+    file.write(&quot;Hello Python&quot;)</code></pre></div></article><article class="topic" id="q277"><h2><span class="num">277</span> Practical: Read a file.</h2><div class="body"><pre><code>with open(&quot;sample.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+    content = file.read()
+    print(content)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>Hello Python</p></div></article><article class="topic" id="q278"><h2><span class="num">278</span> Practical: Append to a file.</h2><div class="body"><pre><code>with open(&quot;sample.txt&quot;, &quot;a&quot;, encoding=&quot;utf-8&quot;) as file:
+    file.write(&quot;\nWelcome&quot;)</code></pre></div></article><article class="topic" id="q279"><h2><span class="num">279</span> Practical: Read line by line.</h2><div class="body"><pre><code>with open(&quot;sample.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+    for line in file:
+        print(line.strip())</code></pre></div></article><h1 class="stage" id="shallow-copy-and-deep-copy">Topic 20: Shallow Copy And Deep Copy</h1><article class="topic" id="q280"><h2><span class="num">280</span> What is copying?</h2><div class="body"><p>Copying means creating another reference or object<br>based on an existing object.</p></div></article><article class="topic" id="q281"><h2><span class="num">281</span> What are the types of copying?</h2><div class="body"><ul><li>Assignment</li><li>Shallow copy</li><li>Deep copy</li></ul></div></article><article class="topic" id="q282"><h2><span class="num">282</span> What is assignment?</h2><div class="body"><p>Assignment creates another reference to the same object.<br>It does not create a copy.</p>
+<p>Example:</p>
+<pre><code>a = [10, 20]
+b = a</code></pre>
+<p>b.append(30)</p>
+<pre><code>print(a)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[10, 20, 30]</p></div></article><article class="topic" id="q283"><h2><span class="num">283</span> What is shallow copy?</h2><div class="body"><p>Shallow copy creates a new outer object but references<br>the same nested objects.</p>
+<p>Module:<br>copy</p>
+<p>Method:<br>copy.<code>copy()</code></p></div></article><article class="topic" id="q284"><h2><span class="num">284</span> What is deep copy?</h2><div class="body"><p>Deep copy creates a new outer object and recursively<br>copies nested objects.</p>
+<p>Module:<br>copy</p>
+<p>Method:<br>copy.<code>deepcopy()</code></p></div></article><article class="topic" id="q285"><h2><span class="num">285</span> Difference between shallow and deep copy?</h2><div class="body"><p>Shallow copy:<br>- New outer object.<br>- Nested objects are shared.<br>- Nested modifications can affect original.</p>
+<p>Deep copy:<br>- New outer object.<br>- Nested objects are copied recursively.<br>- Nested modifications do not affect original.</p></div></article><article class="topic" id="q286"><h2><span class="num">286</span> Practical example:</h2><div class="body"><pre><code>import copy
+
+original = [[10, 20], [30, 40]]
+
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)</code></pre>
+<p>shallow[0][0] = 100<br>deep[1][0] = 999</p>
+<pre><code>print(&quot;Original:&quot;, original)
+print(&quot;Shallow:&quot;, shallow)
+print(&quot;Deep:&quot;, deep)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>Original: [[100, 20], [30, 40]]<br>Shallow:  [[100, 20], [30, 40]]<br>Deep:     [[10, 20], [999, 40]]</p></div></article><article class="topic" id="q287"><h2><span class="num">287</span> What is the difference between copy.copy()</h2><div class="body"><p>and copy.<code>deepcopy()</code>?</p>
+<p>ANS:<br>copy.<code>copy()</code> creates a shallow copy.<br>copy.<code>deepcopy()</code> creates a deep copy.</p></div></article><h1 class="stage" id="iterators-and-generators">Topic 21: Iterators And Generators</h1><article class="topic" id="q288"><h2><span class="num">288</span> What is an iterable?</h2><div class="body"><p>An object that can return an iterator.<br>Examples: list, tuple, string, dictionary and set.</p></div></article><article class="topic" id="q289"><h2><span class="num">289</span> What is an iterator?</h2><div class="body"><p>An object that produces elements one at a time<br>using the iterator protocol.</p></div></article><article class="topic" id="q290"><h2><span class="num">290</span> What is iter()?</h2><div class="body"><p>Returns an iterator from an iterable.</p></div></article><article class="topic" id="q291"><h2><span class="num">291</span> What is next()?</h2><div class="body"><p>Returns the next element from an iterator.</p></div></article><article class="topic" id="q292"><h2><span class="num">292</span> What is StopIteration?</h2><div class="body"><p>An exception raised when an iterator has no more<br>elements to return.</p></div></article><article class="topic" id="q293"><h2><span class="num">293</span> Difference between iterable and iterator?</h2><div class="body"><p>Iterable:<br>- Can provide an iterator.<br>- Example: list.</p>
+<p>Iterator:<br>- Produces values one by one.<br>- Implements <code>__iter__()</code> and <code>__next__()</code>.</p></div></article><article class="topic" id="q294"><h2><span class="num">294</span> What is a generator?</h2><div class="body"><p>A generator is a special iterator that produces<br>values lazily, one at a time.</p></div></article><article class="topic" id="q295"><h2><span class="num">295</span> What is yield?</h2><div class="body"><p>yield returns a value from a generator and suspends<br>its execution, preserving its state for the next call.</p></div></article><article class="topic" id="q296"><h2><span class="num">296</span> Difference between return and yield?</h2><div class="body"><p>return:<br>- Returns a result and exits the function.</p>
+<p>yield:<br>- Produces a value and suspends the function.<br>- Execution can resume later.</p></div></article><article class="topic" id="q297"><h2><span class="num">297</span> What is lazy evaluation?</h2><div class="body"><p>Values are calculated only when they are requested.</p></div></article><article class="topic" id="q298"><h2><span class="num">298</span> What is generator expression?</h2><div class="body"><p>A compact way to create a generator using parentheses.</p>
+<p>Example:</p>
+<pre><code>numbers = (x * 2 for x in range(5))
+
+print(next(numbers))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>0</p></div></article><article class="topic" id="q299"><h2><span class="num">299</span> Practical: Generator function.</h2><div class="body"><pre><code>def numbers():
+    yield 10
+    yield 20
+    yield 30
+
+for value in numbers():
+    print(value)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>10<br>20<br>30</p>
+<p>--- Extra study notes ---</p></div></article><article class="topic" id="q300"><h2><span class="num">300</span> WHAT IS A GENERATOR</h2><div class="body"><p>A generator is a special type of iterator that<br>produces values one at a time.</p>
+<p>It uses the yield keyword.</p>
+<p>Advantages:</p>
+<pre><code>    - Memory efficient.
+    - Lazy evaluation.
+    - Useful for large datasets.
+    - Does not need to store all results at once.</code></pre></div></article><article class="topic" id="q301"><h2><span class="num">301</span> NORMAL FUNCTION VS GENERATOR</h2><div class="body"><p>Normal function:</p>
+<pre><code>    def numbers():
+        return [1, 2, 3]</code></pre>
+<p>Generator function:</p>
+<pre><code>    def numbers():
+        yield 1
+        yield 2
+        yield 3</code></pre></div></article><article class="topic" id="q302"><h2><span class="num">302</span> YIELD KEYWORD</h2><div class="body"><p>yield:</p>
+<pre><code>    Returns a value and pauses the function.</code></pre>
+<p>When the generator is requested again,<br>execution continues from where it paused.</p>
+<p>Example:</p>
+<pre><code>    def count():
+        yield 1
+        yield 2
+        yield 3
+
+    for value in count():
+        print(value)</code></pre>
+<p>Output:</p>
+<pre><code>    1
+    2
+    3</code></pre></div></article><article class="topic" id="q303"><h2><span class="num">303</span> NEXT FUNCTION</h2><div class="body"><pre><code>next() retrieves the next value from an iterator.
+
+    def numbers():
+        yield 10
+        yield 20
+        yield 30
+
+    gen = numbers()
+
+    print(next(gen))
+    print(next(gen))
+    print(next(gen))</code></pre>
+<p>Output:</p>
+<pre><code>    10
+    20
+    30</code></pre>
+<p>Calling <code>next()</code> again raises StopIteration.</p></div></article><article class="topic" id="q304"><h2><span class="num">304</span> GENERATOR EXPRESSION</h2><div class="body"><p>Similar to list comprehension,<br>but uses parentheses.</p>
+<p>List comprehension:</p>
+<pre><code>    squares = [x*x for x in range(5)]</code></pre>
+<p>Generator expression:</p>
+<pre><code>    squares = (x*x for x in range(5))</code></pre>
+<p>Difference:</p>
+<p>List:</p>
+<pre><code>    Stores all elements in memory.</code></pre>
+<p>Generator:</p>
+<pre><code>    Produces elements when requested.</code></pre></div></article><article class="topic" id="q305"><h2><span class="num">305</span> ITERATOR VS GENERATOR</h2><div class="body"><p>Iterator:</p>
+<pre><code>    Object that supports __iter__() and __next__().</code></pre>
+<p>Generator:</p>
+<pre><code>    Convenient way to create an iterator using yield.</code></pre>
+<p>Both:</p>
+<pre><code>    Support iteration.
+    Can be used in for loops.
+    Can raise StopIteration.</code></pre></div></article><article class="topic" id="q306"><h2><span class="num">306</span> SEND, THROW AND CLOSE</h2><div class="body"><p>Generator methods:</p>
+<pre><code>    next(gen):
+        Gets the next value.
+
+    gen.send(value):
+        Sends a value into a suspended generator.
+
+    gen.throw(exception):
+        Raises an exception inside the generator.
+
+    gen.close():
+        Closes the generator.</code></pre>
+<p>Advanced topic:</p>
+<pre><code>    Understand send(), throw() and close()
+    after learning basic yield and next().</code></pre></div></article><article class="topic" id="q307"><h2><span class="num">307</span> GENERATOR USE CASES</h2><div class="body"><ul><li>Reading large CSV files.</li></ul>
+<pre><code>    - Processing log files.
+    - Streaming API results.
+    - Processing records one by one.
+    - Memory-efficient pipelines.</code></pre></div></article><h1 class="stage" id="decorators">Topic 22: Decorators</h1><article class="topic" id="q308"><h2><span class="num">308</span> What is a decorator?</h2><div class="body"><p>A decorator is a function that modifies or extends<br>the behavior of another function without changing<br>its original source code.</p></div></article><article class="topic" id="q309"><h2><span class="num">309</span> Why do we use decorators?</h2><div class="body"><ul><li>Code reusability</li><li>Logging</li><li>Authentication</li><li>Timing functions</li><li>Validation</li><li>Adding functionality</li></ul></div></article><article class="topic" id="q310"><h2><span class="num">310</span> What is a wrapper function?</h2><div class="body"><p>An inner function that wraps another function<br>and adds extra behavior.</p></div></article><article class="topic" id="q311"><h2><span class="num">311</span> What is the @ symbol?</h2><div class="body"><p>It is the decorator syntax used to apply a decorator<br>to a function or class.</p></div></article><article class="topic" id="q312"><h2><span class="num">312</span> What are function decorators?</h2><div class="body"><p>Decorators that modify the behavior of functions.</p></div></article><article class="topic" id="q313"><h2><span class="num">313</span> What are nested decorators?</h2><div class="body"><p>Multiple decorators applied to the same function.</p></div></article><article class="topic" id="q314"><h2><span class="num">314</span> Can decorators accept arguments?</h2><div class="body"><p>Yes. A decorator factory can accept arguments and<br>return a decorator.</p></div></article><article class="topic" id="q315"><h2><span class="num">315</span> Practical: Simple decorator.</h2><div class="body"><pre><code>def my_decorator(func):
+
+    def wrapper():
+        print(&quot;Before function&quot;)
+
+        func()
+
+        print(&quot;After function&quot;)
+
+    return wrapper</code></pre>
+<p>@my_decorator</p>
+<pre><code>def greet():
+    print(&quot;Hello&quot;)
+
+greet()</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>Before function<br>Hello<br>After function</p></div></article><article class="topic" id="q316"><h2><span class="num">316</span> What is functools.wraps?</h2><div class="body"><p>A decorator from functools that preserves important<br>metadata of the original decorated function,<br>such as its name and docstring.</p>
+<p>--- Extra study notes ---</p></div></article><article class="topic" id="q317"><h2><span class="num">317</span> WHAT IS A DECORATOR</h2><div class="body"><p>A decorator is a function that modifies or extends<br>the behavior of another function without changing<br>its original source code.</p>
+<p>Decorators use the @ symbol.</p></div></article><article class="topic" id="q318"><h2><span class="num">318</span> FUNCTIONS ARE FIRST-CLASS OBJECTS</h2><div class="body"><p>In Python, functions can be:</p>
+<pre><code>    - Stored in variables.
+    - Passed as arguments.
+    - Returned from other functions.
+    - Stored in data structures.</code></pre>
+<p>Example:</p>
+<pre><code>    def greet():
+        print(&quot;Hello&quot;)
+
+    x = greet
+
+    x()</code></pre></div></article><article class="topic" id="q319"><h2><span class="num">319</span> FUNCTION INSIDE FUNCTION</h2><div class="body"><pre><code>def outer():
+        print(&quot;Outer function&quot;)
+
+        def inner():
+            print(&quot;Inner function&quot;)
+
+        inner()
+
+    outer()</code></pre></div></article><article class="topic" id="q320"><h2><span class="num">320</span> RETURNING A FUNCTION</h2><div class="body"><pre><code>def outer():
+        def inner():
+            print(&quot;Hello&quot;)
+
+        return inner
+
+    result = outer()
+
+    result()</code></pre></div></article><article class="topic" id="q321"><h2><span class="num">321</span> BASIC DECORATOR</h2><div class="body"><pre><code>def my_decorator(func):
+
+        def wrapper():
+            print(&quot;Before function&quot;)
+
+            func()
+
+            print(&quot;After function&quot;)
+
+        return wrapper
+
+    @my_decorator
+    def greet():
+        print(&quot;Hello&quot;)
+
+    greet()</code></pre>
+<p>Output:</p>
+<pre><code>    Before function
+    Hello
+    After function</code></pre>
+<p>Explanation:</p>
+<pre><code>    @my_decorator
+    is equivalent to:
+
+    greet = my_decorator(greet)</code></pre></div></article><article class="topic" id="q322"><h2><span class="num">322</span> DECORATOR WITH ARGUMENTS</h2><div class="body"><pre><code>def decorator(func):
+
+        def wrapper(*args, **kwargs):
+            print(&quot;Before&quot;)
+
+            result = func(*args, **kwargs)
+
+            print(&quot;After&quot;)
+
+            return result
+
+        return wrapper
+
+    @decorator
+    def add(a, b):
+        return a + b
+
+    print(add(10, 20))</code></pre>
+<p>Output:</p>
+<pre><code>    Before
+    After
+    30</code></pre>
+<p>*args:</p>
+<pre><code>    Accepts positional arguments.</code></pre>
+<p>**kwargs:</p>
+<pre><code>    Accepts keyword arguments.</code></pre></div></article><article class="topic" id="q323"><h2><span class="num">323</span> DECORATOR WITH PARAMETERS</h2><div class="body"><pre><code>def repeat(times):
+
+        def decorator(func):
+
+            def wrapper(*args, **kwargs):
+
+                for _ in range(times):
+                    func(*args, **kwargs)
+
+            return wrapper
+
+        return decorator
+
+    @repeat(3)
+    def greet():
+        print(&quot;Hello&quot;)
+
+    greet()</code></pre>
+<p>Output:</p>
+<pre><code>    Hello
+    Hello
+    Hello</code></pre></div></article><article class="topic" id="q324"><h2><span class="num">324</span> FUNCTOOLS WRAPS</h2><div class="body"><p>Use functools.wraps to preserve metadata<br>of the original function.</p>
+<pre><code>    from functools import wraps
+
+    def decorator(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return wrapper</code></pre></div></article><article class="topic" id="q325"><h2><span class="num">325</span> BUILT-IN DECORATORS</h2><div class="body"><p>@staticmethod</p>
+<pre><code>    @classmethod
+    @property</code></pre>
+<p>Other commonly used decorators:</p>
+<pre><code>    @functools.lru_cache()
+    @functools.cache
+    @functools.wraps</code></pre></div></article><article class="topic" id="q326"><h2><span class="num">326</span> PRACTICAL DECORATOR USE CASES</h2><div class="body"><ul><li>Logging</li></ul>
+<pre><code>    - Authentication
+    - Authorization
+    - Execution time measurement
+    - Caching
+    - Validation
+    - Retry logic
+    - Access control</code></pre>
+<p>Example: Execution time decorator</p>
+<pre><code>    import time
+    from functools import wraps
+
+    def timer(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+
+            start = time.perf_counter()
+
+            result = func(*args, **kwargs)
+
+            end = time.perf_counter()
+
+            print(&quot;Execution time:&quot;, end - start)
+
+            return result
+
+        return wrapper
+
+    @timer
+    def calculate():
+        return sum(range(100000))
+
+    calculate()</code></pre></div></article><h1 class="stage" id="important-difference-questions">Important Difference Questions</h1><article class="topic"><div class="body"><ol><li>List vs Tuple</li><li>Set vs Dictionary</li><li>Mutable vs Immutable</li><li>== vs is</li><li>/ vs //</li><li>and vs or</li><li>break vs continue vs pass</li><li>for vs while</li><li>append() vs extend()</li><li>remove() vs pop()</li><li>sort() vs sorted()</li><li>find() vs index()</li><li>split() vs join()</li><li>strip() vs replace()</li><li>get() vs dictionary square brackets</li><li>*args vs **kwargs</li><li>return vs print</li><li>return vs yield</li><li>map() vs filter()</li><li>map() vs reduce()</li><li>Iterable vs Iterator</li><li>Module vs Package</li><li>SyntaxError vs Exception</li><li>else vs finally</li><li>raise vs custom exception</li><li>read() vs readline()</li><li>write() vs writelines()</li><li>open() vs with open()</li><li>tell() vs seek()</li><li>Text file vs Binary file</li><li>Shallow copy vs Deep copy</li><li>List comprehension vs Generator expression</li><li>global vs nonlocal</li><li>type() vs isinstance()</li><li>Assignment vs Shallow copy</li></ol></div></article><h1 class="stage" id="important-output-based-questions">Important Output-Based Questions</h1><article class="topic" id="q327"><h2><span class="num">327</span> Output question 1</h2><div class="body"><pre><code>x = [1, 2, 3]
+y = x</code></pre>
+<p>y.append(4)</p>
+<pre><code>print(x)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[1, 2, 3, 4]</p></div></article><article class="topic" id="q328"><h2><span class="num">328</span> Output question 2</h2><div class="body"><pre><code>a = [10, 20]
+b = a.copy()</code></pre>
+<p>b.append(30)</p>
+<pre><code>print(a)
+print(b)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[10, 20]<br>[10, 20, 30]</p></div></article><article class="topic" id="q329"><h2><span class="num">329</span> Output question 3</h2><div class="body"><pre><code>print(bool([]))
+print(bool(&quot; &quot;))
+print(bool(0))
+print(bool(None))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>False<br>True<br>False<br>False</p></div></article><article class="topic" id="q330"><h2><span class="num">330</span> Output question 4</h2><div class="body"><pre><code>print(10 == 10.0)
+print(10 is 10.0)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>True<br>False</p></div></article><article class="topic" id="q331"><h2><span class="num">331</span> Output question 5</h2><div class="body"><pre><code>a = [1, 2, 3, 4, 5]
+
+print(a[::2])
+print(a[::-1])</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>[1, 3, 5]<br>[5, 4, 3, 2, 1]</p></div></article><article class="topic" id="q332"><h2><span class="num">332</span> Output question 6</h2><div class="body"><pre><code>for i in range(3):
+    print(i)
+else:
+    print(&quot;Completed&quot;)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>0<br>1<br>2<br>Completed</p></div></article><article class="topic" id="q333"><h2><span class="num">333</span> Output question 7</h2><div class="body"><pre><code>x = &quot;Python&quot;
+
+print(x[-1])
+print(x[-3:])
+print(x[::-1])</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>n<br>hon<br>nohtyP</p></div></article><article class="topic" id="q334"><h2><span class="num">334</span> Output question 8</h2><div class="body"><pre><code>a = {1, 2, 3}
+b = {2, 3, 4}
+
+print(a &amp; b)
+print(a | b)
+print(a - b)</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>{2, 3}<br>{1, 2, 3, 4}<br>{1}</p></div></article><article class="topic" id="q335"><h2><span class="num">335</span> Output question 9</h2><div class="body"><pre><code>data = {&quot;a&quot;: 1, &quot;b&quot;: 2}
+
+print(data.get(&quot;c&quot;))
+print(data.get(&quot;c&quot;, 0))</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>None<br>0</p></div></article><article class="topic" id="q336"><h2><span class="num">336</span> Output question 10</h2><div class="body"><pre><code>def test():
+    x = 10
+
+print(test())</code></pre>
+<p><strong>OUTPUT:</strong> </p>
+<p>None</p></div></article><h1 class="stage" id="important-practical-coding-questions">Important Practical Coding Questions</h1><article class="topic"><div class="body"><ol><li>Reverse a string.</li><li>Check whether a string is palindrome.</li><li>Count vowels and consonants.</li><li>Count characters in a string.</li><li>Find the frequency of each character.</li><li>Find the largest of three numbers.</li><li>Check even or odd.</li><li>Check prime number.</li><li>Print Fibonacci series.</li><li>Find factorial.</li><li>Reverse a number.</li><li>Check palindrome number.</li><li>Find sum of digits.</li><li>Find the maximum and minimum in a list.</li><li>Find the second-largest number.</li><li>Remove duplicates from a list.</li><li>Sort a list without sort().</li><li>Find common elements between two lists.</li><li>Find union and intersection of two sets.</li><li>Count word frequency using a dictionary.</li><li>Find the key with the maximum dictionary value.</li><li>Merge two dictionaries.</li><li>Swap two variables.</li><li>Create a calculator using functions.</li><li>Filter even numbers using filter().</li><li>Square numbers using map().</li><li>Find sum using reduce().</li><li>Use list comprehension to increase elements by 10.</li><li>Read a file and count the number of words.</li><li>Handle division by zero.</li><li>Create a custom exception.</li><li>Demonstrate shallow and deep copy.</li><li>Create an iterator.</li><li>Create a generator.</li><li>Create a simple decorator.</li></ol></div></article><h1 class="stage" id="important-modules-revision">Important Modules Revision</h1><article class="topic"><div class="body"><table><thead><tr><th>Module / Group</th><th>Functions</th></tr></thead><tbody><tr><td><strong>math</strong></td><td><code>sqrt()</code>, <code>factorial()</code>, <code>ceil()</code>, <code>floor()</code>, <code>pow()</code></td></tr><tr><td><strong>random</strong></td><td><code>random()</code>, <code>randint()</code>, <code>choice()</code>, <code>shuffle()</code></td></tr><tr><td><strong>os</strong></td><td><code>getcwd()</code>, <code>listdir()</code>, <code>mkdir()</code>, <code>remove()</code></td></tr><tr><td><strong>sys</strong></td><td><code>argv</code>, <code>path</code>, <code>version</code>, <code>exit()</code></td></tr><tr><td><strong>datetime</strong></td><td><code>datetime.now()</code>, <code>date.today()</code>, <code>strftime()</code>, <code>strptime()</code></td></tr><tr><td><strong>time</strong></td><td><code>sleep()</code>, <code>time()</code>, <code>ctime()</code></td></tr><tr><td><strong>json</strong></td><td><code>load()</code>, <code>loads()</code>, <code>dump()</code>, <code>dumps()</code></td></tr><tr><td><strong>re</strong></td><td><code>search()</code>, <code>match()</code>, <code>findall()</code>, <code>sub()</code>, <code>split()</code></td></tr><tr><td><strong>copy</strong></td><td><code>copy()</code>, <code>deepcopy()</code></td></tr><tr><td><strong>collections</strong></td><td><code>Counter</code>, <code>defaultdict</code>, <code>deque</code>, <code>namedtuple</code></td></tr><tr><td><strong>itertools</strong></td><td><code>count()</code>, <code>cycle()</code>, <code>repeat()</code>, <code>combinations()</code>, <code>permutations()</code></td></tr><tr><td><strong>functools</strong></td><td><code>reduce()</code>, <code>partial()</code>, <code>lru_cache()</code></td></tr></tbody></table></div></article><h1 class="stage" id="python-built-in-functions">Python Built-in Functions</h1><article class="topic"><div class="body"><table><thead><tr><th>Module / Group</th><th>Functions</th></tr></thead><tbody><tr><td><strong>TYPE AND CONVERSION</strong></td><td><code>type()</code>, <code>isinstance()</code>, <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>, <code>list()</code>, <code>tuple()</code>, <code>set()</code>, <code>dict()</code>, <code>complex()</code></td></tr><tr><td><strong>MATHEMATICAL</strong></td><td><code>abs()</code>, <code>round()</code>, <code>pow()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code></td></tr><tr><td><strong>SEQUENCE</strong></td><td><code>len()</code>, <code>range()</code>, <code>sorted()</code>, <code>reversed()</code>, <code>enumerate()</code>, <code>zip()</code></td></tr><tr><td><strong>LOGICAL</strong></td><td><code>all()</code>, <code>any()</code></td></tr><tr><td><strong>ITERATION</strong></td><td><code>iter()</code>, <code>next()</code>, <code>map()</code>, <code>filter()</code></td></tr><tr><td><strong>OTHER</strong></td><td><code>print()</code>, <code>input()</code>, <code>id()</code>, <code>hash()</code>, <code>help()</code>, <code>dir()</code>, <code>open()</code></td></tr></tbody></table></div></article><h1 class="stage" id="next-topic-object-oriented-programming-oop">Next Topic — Object-Oriented Programming (OOP)</h1><article class="topic"><div class="body"><ol><li>Class</li><li>Object</li><li>Constructor</li><li>self</li><li>Attributes and Methods</li><li>Instance, Class and Static Methods</li><li>Four Pillars of OOP</li><li>Inheritance</li><li>Encapsulation</li><li>Polymorphism</li><li>Abstraction</li><li>Access Modifiers</li><li>Method Overriding</li><li>Method Overloading</li><li>super()</li><li>Abstract Classes</li><li>File Handling and Context Managers</li></ol></div></article>
+</main>
+</div>
+</body>
+</html>

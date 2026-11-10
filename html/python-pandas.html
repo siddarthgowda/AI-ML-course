@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Pandas · Study Notes</title>
+<style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --panel: #202020;
+      --text: #e8e8e8;
+      --muted: #9a9a9a;
+      --line: #3a3a3a;
+      --accent: #7dcea0;
+      --code-bg: #141414;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 860px);
+      gap: 0;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 16px 40px;
+      border-right: 1px solid var(--line);
+      background: #161616;
+    }
+    nav h1 { font-size: 15px; margin: 0 0 4px; }
+    nav .sub { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+    nav a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12.5px;
+      padding: 3px 0;
+    }
+    nav a:hover { color: var(--accent); }
+    .toc-stage {
+      margin: 14px 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    main { padding: 28px 28px 80px; }
+    .intro {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 0 0 20px;
+    }
+    .intro h1 { margin: 0 0 8px; font-size: 22px; }
+    .intro p { margin: 0; color: var(--muted); }
+    h1.stage {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 12px;
+      padding-top: 8px;
+    }
+    article.topic {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px 14px;
+      margin: 0 0 12px;
+    }
+    article h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 650;
+    }
+    .num {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+    .body p { margin: 0 0 8px; }
+    .body p.label { margin-top: 10px; font-weight: 600; }
+    .body ul, .body ol { margin: 0 0 10px; padding-left: 20px; }
+    .body li { margin: 2px 0; }
+    .subhead {
+      margin: 22px 0 10px;
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      background: #2a2a2a;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      overflow: auto;
+      margin: 8px 0 0;
+    }
+    pre code { background: transparent; padding: 0; font-size: 13px; }
+    .qmeta { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .rf {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      font-size: 14px;
+    }
+    .rf div { border-bottom: 1px solid var(--line); padding: 4px 0; }
+    .rf .q { color: var(--muted); }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; height: auto; max-height: 40vh; }
+      .rf { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Pandas</h1>
+<p class="sub">Study notes + AIML connections</p>
+<p class="toc-stage">Part 1: Pandas Study Notes</p><a href="#part-01">Part 1: Pandas Study Notes</a><a href="#q1">Q1. WHAT IS PANDAS</a><a href="#q2">Q2. SERIES</a><a href="#q3">Q3. DATAFRAME</a><a href="#q4">Q4. CREATING DATAFRAMES</a><a href="#q5">Q5. READING DATA</a><a href="#q6">Q6. SAVING DATA</a><a href="#q7">Q7. VIEWING DATA</a><a href="#q8">Q8. SELECTING COLUMNS</a><a href="#q9">Q9. LOC AND ILOC</a><a href="#q10">Q10. FILTERING DATA</a><a href="#q11">Q11. ADDING AND UPDATING COLUMNS</a><a href="#q12">Q12. DELETING ROWS AND COLUMNS</a><a href="#q13">Q13. RENAMING</a><a href="#q14">Q14. SORTING</a><a href="#q15">Q15. MISSING VALUES</a><a href="#q16">Q16. APPLY, MAP AND APPLYMAP</a><a href="#q17">Q17. GROUPBY</a><a href="#q18">Q18. AGGREGATION</a><a href="#q19">Q19. CONCAT, MERGE AND JOIN</a><a href="#q20">Q20. PIVOT AND MELT</a><a href="#q21">Q21. STRING FUNCTIONS</a><a href="#q22">Q22. DATETIME FUNCTIONS</a><a href="#q23">Q23. TYPE CONVERSION</a><a href="#q24">Q24. INDEX MANAGEMENT</a><a href="#q25">Q25. CROSSTAB AND CUT</a><a href="#q26">Q26. PERFORMANCE AND MEMORY</a><a href="#q27">Q27. PANDAS MODULES AND RELATED TOOLS</a><p class="toc-stage">Part 2: Important Aiml Connections</p><a href="#part-02">Part 2: Important Aiml Connections</a><a href="#q100">Q100. NUMPY + PANDAS</a><a href="#q101">Q101. PANDAS + JSON</a><a href="#q102">Q102. NUMPY + MACHINE LEARNING</a><a href="#q103">Q103. PANDAS + MACHINE LEARNING</a><a href="#q104">Q104. DATA PREPROCESSING FLOW</a>
+</nav>
+<main>
+<div class="intro">
+<h1>Pandas / Classes — Interview Q&amp;A</h1>
+<p>Series, DataFrame, cleaning, groupby, merge, datetime, plus AIML data flow connections.</p>
+</div>
+<p class="qmeta">32 questions across 2 parts.</p>
+<h1 class="stage">Core Pandas</h1><h1 class="stage" id="part-01">Part 1: Pandas Study Notes</h1><article class="topic" id="q1"><h2><span class="num">Q1</span> WHAT IS PANDAS</h2><div class="body"><p>Pandas is a Python library used for data manipulation,</p>
+<p>data cleaning, and data analysis.</p>
+<p class="label">It is commonly used for:</p>
+<ul><li>CSV files</li><li>Excel files</li><li>JSON data</li><li>Data cleaning</li><li>Filtering and sorting</li><li>Grouping and aggregation</li><li>Data analysis</li><li>Preparing datasets for machine learning</li></ul>
+<p class="label">Import:</p>
+<pre><code>import pandas as pd</code></pre>
+<p class="label">Main data structures:</p>
+<ul><li>Series</li><li>DataFrame</li></ul></div></article><article class="topic" id="q2"><h2><span class="num">Q2</span> SERIES</h2><div class="body"><p>A Series is a one-dimensional labeled data structure.</p>
+<p class="label">Example:</p>
+<pre><code>import pandas as pd</code></pre>
+<pre><code>s = pd.Series([10, 20, 30, 40])</code></pre>
+<p class="label">Output:</p>
+<p>0    10</p>
+<p>1    20</p>
+<p>2    30</p>
+<p>3    40</p>
+<p class="label">Custom index:</p>
+<pre><code>s = pd.Series(
+        [90, 80, 70],
+        index=[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]
+    )</code></pre>
+<p class="label">Access:</p>
+<p>s[0]</p>
+<p>s[&quot;A&quot;]</p>
+<p class="label">Important properties:</p>
+<p>s.index</p>
+<p>s.values</p>
+<p>s.dtype</p>
+<p>s.shape</p>
+<p>s.size</p>
+<p>s.ndim</p>
+<p>s.name</p></div></article><article class="topic" id="q3"><h2><span class="num">Q3</span> DATAFRAME</h2><div class="body"><p>A DataFrame is a two-dimensional table containing</p>
+<p>rows and columns.</p>
+<p class="label">Example:</p>
+<p>data = {</p>
+<p>&quot;Name&quot;: [&quot;Amit&quot;, &quot;Ravi&quot;, &quot;John&quot;],</p>
+<p>&quot;Age&quot;: [25, 30, 28],</p>
+<p>&quot;Salary&quot;: [30000, 40000, 35000]</p>
+<p>}</p>
+<pre><code>df = pd.DataFrame(data)</code></pre>
+<p class="label">Output:</p>
+<p>Name  Age  Salary</p>
+<p>0  Amit   25   30000</p>
+<p>1  Ravi   30   40000</p>
+<p>2  John   28   35000</p>
+<p class="label">Important properties:</p>
+<p>df.shape</p>
+<p>df.size</p>
+<p>df.ndim</p>
+<p>df.columns</p>
+<p>df.index</p>
+<p>df.dtypes</p>
+<p>df.values</p>
+<p>df.T</p>
+<p>df.empty</p></div></article><article class="topic" id="q4"><h2><span class="num">Q4</span> CREATING DATAFRAMES</h2><div class="body"><p class="label">From dictionary:</p>
+<p>df = pd.DataFrame({</p>
+<p>&quot;Name&quot;: [&quot;A&quot;, &quot;B&quot;],</p>
+<p>&quot;Age&quot;: [20, 25]</p>
+<p>})</p>
+<p class="label">From list:</p>
+<p>df = pd.DataFrame([</p>
+<p>[&quot;A&quot;, 20],</p>
+<p>[&quot;B&quot;, 25]</p>
+<p>], columns=[&quot;Name&quot;, &quot;Age&quot;])</p>
+<p class="label">From NumPy array:</p>
+<pre><code>arr = np.array([[1, 2], [3, 4]])</code></pre>
+<pre><code>df = pd.DataFrame(
+        arr,
+        columns=[&quot;A&quot;, &quot;B&quot;]
+    )</code></pre>
+<p class="label">From list of dictionaries:</p>
+<p>df = pd.DataFrame([</p>
+<p>{&quot;Name&quot;: &quot;A&quot;, &quot;Age&quot;: 20},</p>
+<p>{&quot;Name&quot;: &quot;B&quot;, &quot;Age&quot;: 25}</p>
+<p>])</p></div></article><article class="topic" id="q5"><h2><span class="num">Q5</span> READING DATA</h2><div class="body"><p class="label">CSV:</p>
+<pre><code>df = pd.read_csv(&quot;data.csv&quot;)</code></pre>
+<p class="label">Excel:</p>
+<pre><code>df = pd.read_excel(&quot;data.xlsx&quot;)</code></pre>
+<p class="label">JSON:</p>
+<pre><code>df = pd.read_json(&quot;data.json&quot;)</code></pre>
+<p class="label">SQL:</p>
+<pre><code>df = pd.read_sql(query, connection)</code></pre>
+<p class="label">Other functions:</p>
+<p>pd.<code>read_table()</code></p>
+<p>pd.<code>read_html()</code></p>
+<p>pd.<code>read_parquet()</code></p>
+<p>pd.<code>read_pickle()</code></p>
+<p>pd.<code>read_xml()</code></p></div></article><article class="topic" id="q6"><h2><span class="num">Q6</span> SAVING DATA</h2><div class="body"><p class="label">CSV:</p>
+<p>df.to_csv(&quot;output.csv&quot;, index=False)</p>
+<p class="label">Excel:</p>
+<p>df.to_excel(&quot;output.xlsx&quot;, index=False)</p>
+<p class="label">JSON:</p>
+<p>df.to_json(&quot;output.json&quot;, orient=&quot;records&quot;)</p>
+<p class="label">Other:</p>
+<p>df.to_pickle(&quot;output.pkl&quot;)</p>
+<p>df.to_parquet(&quot;output.parquet&quot;)</p>
+<p>df.to_sql(&quot;table_name&quot;, connection)</p></div></article><article class="topic" id="q7"><h2><span class="num">Q7</span> VIEWING DATA</h2><div class="body"><p>df.<code>head()</code></p>
+<p>df.head(10)</p>
+<p>df.<code>tail()</code></p>
+<p>df.tail(10)</p>
+<p>df.sample(5)</p>
+<p>df.<code>info()</code></p>
+<p>df.<code>describe()</code></p>
+<p>df.shape</p>
+<p>df.columns</p>
+<p>df.dtypes</p>
+<p>df.index</p>
+<p>df.<code>memory_usage()</code></p>
+<p class="label">Purpose:</p>
+<p class="label">head:</p>
+<p>First five rows by default.</p>
+<p class="label">tail:</p>
+<p>Last five rows by default.</p>
+<p class="label">sample:</p>
+<p>Random rows.</p>
+<p class="label">info:</p>
+<p>Column information and data types.</p>
+<p class="label">describe:</p>
+<p>Statistical summary of numeric columns by default.</p></div></article><article class="topic" id="q8"><h2><span class="num">Q8</span> SELECTING COLUMNS</h2><div class="body"><p class="label">Select one column:</p>
+<p>df[&quot;Name&quot;]</p>
+<p class="label">Select multiple columns:</p>
+<p>df[[&quot;Name&quot;, &quot;Age&quot;]]</p>
+<p class="label">Select rows:</p>
+<p>df[0:3]</p>
+<p class="label">Select a column as a Series:</p>
+<p>df[&quot;Age&quot;]</p>
+<p class="label">Select a single-column DataFrame:</p>
+<p>df[[&quot;Age&quot;]]</p></div></article><article class="topic" id="q9"><h2><span class="num">Q9</span> LOC AND ILOC</h2><div class="body"><p class="label">loc:</p>
+<p>Label-based selection.</p>
+<p class="label">iloc:</p>
+<p>Integer-position-based selection.</p>
+<p class="label">Examples:</p>
+<p>df.loc[0]</p>
+<p>df.loc[0, &quot;Name&quot;]</p>
+<p>df.loc[:, &quot;Name&quot;]</p>
+<p>df.loc[0:2, [&quot;Name&quot;, &quot;Age&quot;]]</p>
+<p>df.iloc[0]</p>
+<p>df.iloc[0, 1]</p>
+<p>df.iloc[:, 0]</p>
+<p>df.iloc[0:2, 0:2]</p>
+<p class="label">Important:</p>
+<ul><li>loc slicing includes the ending label when applicable.</li><li>iloc slicing excludes the ending position.</li></ul></div></article><article class="topic" id="q10"><h2><span class="num">Q10</span> FILTERING DATA</h2><div class="body"><p class="label">Single condition:</p>
+<p>df[df[&quot;Age&quot;] &gt; 25]</p>
+<p class="label">Multiple conditions:</p>
+<p>df[</p>
+<p>(df[&quot;Age&quot;] &gt; 25) &amp;</p>
+<p>(df[&quot;Salary&quot;] &gt; 30000)</p>
+<p>]</p>
+<p class="label">OR condition:</p>
+<p>df[</p>
+<p>(df[&quot;Age&quot;] &lt; 25) |</p>
+<p>(df[&quot;Salary&quot;] &gt; 35000)</p>
+<p>]</p>
+<p class="label">NOT condition:</p>
+<p>df[~(df[&quot;Age&quot;] &gt; 25)]</p>
+<p class="label">isin:</p>
+<p>df[df[&quot;Name&quot;].isin([&quot;Amit&quot;, &quot;Ravi&quot;])]</p>
+<p class="label">between:</p>
+<p>df[df[&quot;Age&quot;].between(20, 30)]</p>
+<p class="label">query:</p>
+<p>df.query(&quot;Age &gt; 25&quot;)</p></div></article><article class="topic" id="q11"><h2><span class="num">Q11</span> ADDING AND UPDATING COLUMNS</h2><div class="body"><p class="label">Add a column:</p>
+<p>df[&quot;City&quot;] = [&quot;Bengaluru&quot;, &quot;Delhi&quot;, &quot;Mumbai&quot;]</p>
+<p class="label">Add calculated column:</p>
+<p>df[&quot;Bonus&quot;] = df[&quot;Salary&quot;] * 0.10</p>
+<p class="label">Update a column:</p>
+<p>df[&quot;Age&quot;] = df[&quot;Age&quot;] + 1</p>
+<p class="label">Using assign:</p>
+<pre><code>df = df.assign(
+        Bonus=df[&quot;Salary&quot;] * 0.10
+    )</code></pre>
+<p class="label">Using insert:</p>
+<p>df.insert(1, &quot;Department&quot;, [&quot;IT&quot;, &quot;HR&quot;, &quot;AI&quot;])</p></div></article><article class="topic" id="q12"><h2><span class="num">Q12</span> DELETING ROWS AND COLUMNS</h2><div class="body"><p class="label">Delete column:</p>
+<p>df.drop(columns=[&quot;Age&quot;])</p>
+<p class="label">Delete row:</p>
+<p>df.drop(index=0)</p>
+<p class="label">In-place modification:</p>
+<p>df.drop(columns=[&quot;Age&quot;], inplace=True)</p>
+<p class="label">Remove duplicates:</p>
+<p>df.<code>drop_duplicates()</code></p>
+<p class="label">Keep first duplicate:</p>
+<p>df.drop_duplicates(keep=&quot;first&quot;)</p>
+<p class="label">Keep last duplicate:</p>
+<p>df.drop_duplicates(keep=&quot;last&quot;)</p></div></article><article class="topic" id="q13"><h2><span class="num">Q13</span> RENAMING</h2><div class="body"><p class="label">Rename columns:</p>
+<p>df.rename(columns={</p>
+<p>&quot;Name&quot;: &quot;Employee_Name&quot;,</p>
+<p>&quot;Age&quot;: &quot;Employee_Age&quot;</p>
+<p>})</p>
+<p class="label">Rename index:</p>
+<p>df.rename(index={0: &quot;First&quot;})</p></div></article><article class="topic" id="q14"><h2><span class="num">Q14</span> SORTING</h2><div class="body"><p class="label">Sort by one column:</p>
+<p>df.sort_values(by=&quot;Age&quot;)</p>
+<p class="label">Descending:</p>
+<pre><code>df.sort_values(
+        by=&quot;Age&quot;,
+        ascending=False
+    )</code></pre>
+<p class="label">Sort by multiple columns:</p>
+<pre><code>df.sort_values(
+        by=[&quot;Age&quot;, &quot;Salary&quot;],
+        ascending=[True, False]
+    )</code></pre>
+<p class="label">Sort index:</p>
+<p>df.<code>sort_index()</code></p></div></article><article class="topic" id="q15"><h2><span class="num">Q15</span> MISSING VALUES</h2><div class="body"><p class="label">Missing values can appear as:</p>
+<p>NaN</p>
+<p>None</p>
+<p>NaT</p>
+<p class="label">Check missing values:</p>
+<p>df.<code>isnull()</code></p>
+<p>df.<code>isna()</code></p>
+<p>df.<code>notnull()</code></p>
+<p>df.<code>notna()</code></p>
+<p class="label">Count missing values:</p>
+<p>df.<code>isnull()</code>.<code>sum()</code></p>
+<p class="label">Remove missing rows:</p>
+<p>df.<code>dropna()</code></p>
+<p>Remove rows where all values are missing:</p>
+<p>df.dropna(how=&quot;all&quot;)</p>
+<p class="label">Fill missing values:</p>
+<p>df.fillna(0)</p>
+<p class="label">Fill one column:</p>
+<p>df[&quot;Age&quot;] = df[&quot;Age&quot;].fillna(</p>
+<p>df[&quot;Age&quot;].<code>mean()</code></p>
+<p>)</p>
+<p class="label">Other filling methods:</p>
+<p>df.<code>ffill()</code></p>
+<p>df.<code>bfill()</code></p>
+<p class="label">ffill:</p>
+<ul><li>Uses previous valid value.</li></ul>
+<p class="label">bfill:</p>
+<ul><li>Uses next valid value.</li></ul></div></article><article class="topic" id="q16"><h2><span class="num">Q16</span> APPLY, MAP AND APPLYMAP</h2><div class="body"><p class="label">map():</p>
+<ul><li>Used mainly on Series to transform values.</li></ul>
+<p>df[&quot;Name&quot;].map(str.upper)</p>
+<p class="label">apply():</p>
+<p>Applies a function to a Series or DataFrame axis.</p>
+<p>df[&quot;Salary&quot;].apply(lambda x: x * 2)</p>
+<p>df.apply(sum, axis=0)</p>
+<p class="label">applymap():</p>
+<p>Older DataFrame-wide element-wise function.</p>
+<p>Deprecated in modern Pandas.</p>
+<p>Prefer df.<code>map()</code> for element-wise DataFrame mapping</p>
+<p>in versions that support it.</p></div></article><article class="topic" id="q17"><h2><span class="num">Q17</span> GROUPBY</h2><div class="body"><p>Groupby is used to group records and calculate summaries.</p>
+<p class="label">Example:</p>
+<p>df.groupby(&quot;Department&quot;)[&quot;Salary&quot;].<code>mean()</code></p>
+<p class="label">Other operations:</p>
+<p>df.groupby(&quot;Department&quot;).<code>sum()</code></p>
+<p>df.groupby(&quot;Department&quot;).<code>count()</code></p>
+<p>df.groupby(&quot;Department&quot;).<code>max()</code></p>
+<p>df.groupby(&quot;Department&quot;).<code>min()</code></p>
+<p>df.groupby(&quot;Department&quot;).<code>size()</code></p>
+<p class="label">Multiple aggregations:</p>
+<p>df.groupby(&quot;Department&quot;).agg({</p>
+<p>&quot;Salary&quot;: [&quot;sum&quot;, &quot;mean&quot;, &quot;max&quot;],</p>
+<p>&quot;Age&quot;: [&quot;min&quot;, &quot;max&quot;]</p>
+<p>})</p></div></article><article class="topic" id="q18"><h2><span class="num">Q18</span> AGGREGATION</h2><div class="body"><p>df.<code>sum()</code></p>
+<p>df.mean(numeric_only=True)</p>
+<p>df.median(numeric_only=True)</p>
+<p>df.<code>min()</code></p>
+<p>df.<code>max()</code></p>
+<p>df.<code>count()</code></p>
+<p>df.std(numeric_only=True)</p>
+<p>df.var(numeric_only=True)</p>
+<p>df.<code>quantile()</code></p>
+<p>df.<code>nunique()</code></p>
+<p>df.<code>value_counts()</code></p>
+<p class="label">agg():</p>
+<p>df[&quot;Salary&quot;].agg([&quot;sum&quot;, &quot;mean&quot;, &quot;max&quot;])</p></div></article><article class="topic" id="q19"><h2><span class="num">Q19</span> CONCAT, MERGE AND JOIN</h2><div class="body"><p class="label">concat:</p>
+<p>Combines DataFrames along rows or columns.</p>
+<p>pd.concat([df1, df2], axis=0)</p>
+<p>pd.concat([df1, df2], axis=1)</p>
+<p class="label">merge:</p>
+<p>Combines DataFrames using common columns or keys.</p>
+<pre><code>pd.merge(
+        df1,
+        df2,
+        on=&quot;ID&quot;,
+        how=&quot;inner&quot;
+    )</code></pre>
+<p class="label">join:</p>
+<p>Commonly joins DataFrames using indexes.</p>
+<p>df1.join(df2)</p>
+<p class="label">Types of joins:</p>
+<p class="label">inner:</p>
+<p>Only matching records.</p>
+<p class="label">left:</p>
+<p>All left records and matching right records.</p>
+<p class="label">right:</p>
+<p>All right records and matching left records.</p>
+<p class="label">outer:</p>
+<p>All records from both sides.</p></div></article><article class="topic" id="q20"><h2><span class="num">Q20</span> PIVOT AND MELT</h2><div class="body"><p class="label">pivot_table:</p>
+<p>Creates summarized tables.</p>
+<pre><code>pd.pivot_table(
+        df,
+        values=&quot;Salary&quot;,
+        index=&quot;Department&quot;,
+        aggfunc=&quot;mean&quot;
+    )</code></pre>
+<p class="label">melt:</p>
+<p>Converts wide format into long format.</p>
+<pre><code>pd.melt(
+        df,
+        id_vars=[&quot;Name&quot;],
+        value_vars=[&quot;Age&quot;, &quot;Salary&quot;]
+    )</code></pre></div></article><article class="topic" id="q21"><h2><span class="num">Q21</span> STRING FUNCTIONS</h2><div class="body"><p>Pandas string functions use .str.</p>
+<p>df[&quot;Name&quot;].str.<code>lower()</code></p>
+<p>df[&quot;Name&quot;].str.<code>upper()</code></p>
+<p>df[&quot;Name&quot;].str.<code>title()</code></p>
+<p>df[&quot;Name&quot;].str.<code>strip()</code></p>
+<p>df[&quot;Name&quot;].str.replace(&quot;A&quot;, &quot;B&quot;)</p>
+<p>df[&quot;Name&quot;].str.contains(&quot;John&quot;)</p>
+<p>df[&quot;Name&quot;].str.startswith(&quot;A&quot;)</p>
+<p>df[&quot;Name&quot;].str.endswith(&quot;n&quot;)</p>
+<p>df[&quot;Name&quot;].str.<code>len()</code></p>
+<p>df[&quot;Name&quot;].str.<code>split()</code></p>
+<p>df[&quot;Name&quot;].str.extract(r&quot;(\d+)&quot;)</p>
+<p class="label">Example:</p>
+<p>df[df[&quot;Name&quot;].str.contains(&quot;A&quot;, na=False)]</p></div></article><article class="topic" id="q22"><h2><span class="num">Q22</span> DATETIME FUNCTIONS</h2><div class="body"><p class="label">Convert to datetime:</p>
+<p>df[&quot;Date&quot;] = pd.to_datetime(df[&quot;Date&quot;])</p>
+<p class="label">Extract:</p>
+<p>df[&quot;Date&quot;].dt.year</p>
+<p>df[&quot;Date&quot;].dt.month</p>
+<p>df[&quot;Date&quot;].dt.day</p>
+<p>df[&quot;Date&quot;].dt.hour</p>
+<p>df[&quot;Date&quot;].dt.minute</p>
+<p>df[&quot;Date&quot;].dt.<code>day_name()</code></p>
+<p>df[&quot;Date&quot;].dt.dayofweek</p>
+<p class="label">Date range:</p>
+<pre><code>pd.date_range(
+        start=&quot;2026-01-01&quot;,
+        periods=5,
+        freq=&quot;D&quot;
+    )</code></pre>
+<p class="label">Timedelta:</p>
+<p>pd.to_timedelta(&quot;5 days&quot;)</p></div></article><article class="topic" id="q23"><h2><span class="num">Q23</span> TYPE CONVERSION</h2><div class="body"><p>df.astype(&quot;int64&quot;)</p>
+<p>df.astype(&quot;float64&quot;)</p>
+<p>df.astype(&quot;str&quot;)</p>
+<p class="label">Safer numeric conversion:</p>
+<pre><code>pd.to_numeric(
+        df[&quot;Age&quot;],
+        errors=&quot;coerce&quot;
+    )</code></pre>
+<p class="label">Datetime conversion:</p>
+<pre><code>pd.to_datetime(
+        df[&quot;Date&quot;],
+        errors=&quot;coerce&quot;
+    )</code></pre>
+<pre><code>errors=&quot;coerce&quot;:
+    Invalid values become missing values.</code></pre></div></article><article class="topic" id="q24"><h2><span class="num">Q24</span> INDEX MANAGEMENT</h2><div class="body"><p>df.set_index(&quot;ID&quot;)</p>
+<p>df.<code>reset_index()</code></p>
+<p>df.<code>reindex()</code></p>
+<p>df.<code>sort_index()</code></p>
+<p>df.index</p>
+<p class="label">Set a column as index:</p>
+<p>df.set_index(&quot;Name&quot;, inplace=True)</p>
+<p class="label">Restore default index:</p>
+<p>df.reset_index(inplace=True)</p></div></article><article class="topic" id="q25"><h2><span class="num">Q25</span> CROSSTAB AND CUT</h2><div class="body"><p class="label">crosstab:</p>
+<p>Creates frequency tables.</p>
+<p>pd.crosstab(</p>
+<p>df[&quot;Gender&quot;],</p>
+<p>df[&quot;Department&quot;]</p>
+<p>)</p>
+<p class="label">cut:</p>
+<p>Divides continuous values into intervals.</p>
+<pre><code>pd.cut(
+        df[&quot;Age&quot;],
+        bins=[0, 18, 35, 60, 100],
+        labels=[&quot;Child&quot;, &quot;Young&quot;, &quot;Adult&quot;, &quot;Senior&quot;]
+    )</code></pre>
+<p class="label">qcut:</p>
+<p>Divides data into quantile-based groups.</p>
+<p>pd.qcut(df[&quot;Salary&quot;], q=4)</p></div></article><article class="topic" id="q26"><h2><span class="num">Q26</span> PERFORMANCE AND MEMORY</h2><div class="body"><p class="label">Important concepts:</p>
+<ul><li>Vectorization</li><li>Avoiding unnecessary loops</li><li>Efficient data types</li><li>Chunk-based reading</li><li>Memory optimization</li></ul>
+<p class="label">Examples:</p>
+<p>df.memory_usage(deep=True)</p>
+<pre><code>pd.read_csv(
+        &quot;large.csv&quot;,
+        chunksize=100000
+    )</code></pre>
+<p>df[&quot;Age&quot;] = df[&quot;Age&quot;].astype(&quot;int32&quot;)</p>
+<p class="label">Categorical data:</p>
+<p>df[&quot;Department&quot;] = df[&quot;Department&quot;].astype(&quot;category&quot;)</p></div></article><article class="topic" id="q27"><h2><span class="num">Q27</span> PANDAS MODULES AND RELATED TOOLS</h2><div class="body"><p>pandas</p>
+<p>Series</p>
+<p>DataFrame</p>
+<p>read_csv</p>
+<p>read_excel</p>
+<p>read_json</p>
+<p>concat</p>
+<p>merge</p>
+<p>pivot_table</p>
+<p>crosstab</p>
+<p>date_range</p>
+<p>to_datetime</p>
+<p class="label">Related libraries:</p>
+<p class="label">NumPy:</p>
+<p>Numerical calculations.</p>
+<p class="label">Matplotlib:</p>
+<p>Data visualization.</p>
+<p class="label">Seaborn:</p>
+<p>Statistical visualization.</p>
+<p class="label">Scikit-learn:</p>
+<p>Machine learning.</p>
+<p>============================================================</p></div></article><h1 class="stage" id="part-02">Part 2: Important Aiml Connections</h1><article class="topic" id="q100"><h2><span class="num">Q100</span> NUMPY + PANDAS</h2><div class="body"><p class="label">NumPy:</p>
+<p>Numerical arrays and calculations.</p>
+<p class="label">Pandas:</p>
+<p>Tabular data analysis.</p>
+<p class="label">Connection:</p>
+<p>Pandas uses NumPy extensively for its</p>
+<ul><li>underlying data operations.</li></ul></div></article><article class="topic" id="q101"><h2><span class="num">Q101</span> PANDAS + JSON</h2><div class="body"><p class="label">Pandas can read JSON directly:</p>
+<p>pd.read_json(&quot;data.json&quot;)</p>
+<p class="label">Pandas can export DataFrames to JSON:</p>
+<p>df.to_json(&quot;output.json&quot;, orient=&quot;records&quot;)</p></div></article><article class="topic" id="q102"><h2><span class="num">Q102</span> NUMPY + MACHINE LEARNING</h2><div class="body"><p class="label">NumPy is used for:</p>
+<ul><li>Feature arrays.</li><li>Matrix operations.</li><li>Numerical calculations.</li><li>Mathematical transformations.</li><li>Data preprocessing.</li></ul></div></article><article class="topic" id="q103"><h2><span class="num">Q103</span> PANDAS + MACHINE LEARNING</h2><div class="body"><p class="label">Pandas is used for:</p>
+<ul><li>Loading datasets.</li><li>Cleaning missing values.</li><li>Removing duplicates.</li><li>Feature selection.</li><li>Data transformation.</li><li>Exploratory data analysis.</li></ul></div></article><article class="topic" id="q104"><h2><span class="num">Q104</span> DATA PREPROCESSING FLOW</h2><div class="body"><p>Data Source</p>
+<p>|</p>
+<p>v</p>
+<p>CSV / Excel / JSON</p>
+<p>|</p>
+<p>v</p>
+<p>Pandas DataFrame</p>
+<p>|</p>
+<p>v</p>
+<p>Data Cleaning</p>
+<p>|</p>
+<p>v</p>
+<p>Missing Value Handling</p>
+<p>|</p>
+<p>v</p>
+<p>Duplicate Removal</p>
+<p>|</p>
+<p>v</p>
+<p>Feature Selection</p>
+<p>|</p>
+<p>v</p>
+<p>NumPy Arrays</p>
+<p>|</p>
+<p>v</p>
+<p>Machine Learning Model</p>
+<p>|</p>
+<p>v</p>
+<p>Prediction</p></div></article>
+</main>
+</div>
+</body>
+</html>

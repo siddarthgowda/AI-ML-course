@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Python OOPs · Interview Q&amp;A</title>
+<style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --panel: #202020;
+      --text: #e8e8e8;
+      --muted: #9a9a9a;
+      --line: #3a3a3a;
+      --accent: #7dcea0;
+      --code-bg: #141414;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 860px);
+      gap: 0;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 16px 40px;
+      border-right: 1px solid var(--line);
+      background: #161616;
+    }
+    nav h1 { font-size: 15px; margin: 0 0 4px; }
+    nav .sub { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+    nav a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12.5px;
+      padding: 3px 0;
+    }
+    nav a:hover { color: var(--accent); }
+    .toc-stage {
+      margin: 14px 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    main { padding: 28px 28px 80px; }
+    .intro {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 0 0 20px;
+    }
+    .intro h1 { margin: 0 0 8px; font-size: 22px; }
+    .intro p { margin: 0; color: var(--muted); }
+    h1.stage {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 12px;
+      padding-top: 8px;
+    }
+    article.topic {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px 14px;
+      margin: 0 0 12px;
+    }
+    article h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 650;
+    }
+    .num {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+    .body p { margin: 0 0 8px; }
+    .body p.label { margin-top: 10px; font-weight: 600; }
+    .body ul, .body ol { margin: 0 0 10px; padding-left: 20px; }
+    .body li { margin: 2px 0; }
+    .subhead {
+      margin: 22px 0 10px;
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      background: #2a2a2a;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      overflow: auto;
+      margin: 8px 0 0;
+    }
+    pre code { background: transparent; padding: 0; font-size: 13px; }
+    .qmeta { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .rf {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      font-size: 14px;
+    }
+    .rf div { border-bottom: 1px solid var(--line); padding: 4px 0; }
+    .rf .q { color: var(--muted); }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; height: auto; max-height: 40vh; }
+      .rf { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Python OOPs</h1>
+<p class="sub">Classes · interview Q&amp;A</p>
+<p class="toc-stage">Part 1: Introduction to OOPs</p><a href="#part-01">Part 1: Introduction to OOPs</a><a href="#q1">Q1. What is OOPs?</a><a href="#q2">Q2. What are the four pillars of OOPs?</a><a href="#q3">Q3. What are the advantages of OOPs?</a><a href="#q4">Q4. What is procedural programming?</a><a href="#q5">Q5. Difference between procedural programming and OOPs?</a><a href="#q6">Q6. Does Python support OOPs?</a><a href="#q7">Q7. Is Python fully object-oriented?</a><a href="#q8">Q8. Give a real-world example of OOPs.</a><p class="toc-stage">Part 2: Class and Object</p><a href="#part-02">Part 2: Class and Object</a><a href="#q9">Q9. What is a class?</a><a href="#q10">Q10. What is an object?</a><a href="#q11">Q11. Difference between class and object?</a><a href="#q12">Q12. How do you create a class?</a><a href="#q13">Q13. How do you create an object?</a><a href="#q14">Q14. Can we create multiple objects from one class?</a><a href="#q15">Q15. Can multiple objects have different values?</a><a href="#q16">Q16. What happens when an object is created?</a><a href="#q17">Q17. Can we create a class without an object?</a><a href="#q18">Q18. Can we create an object without a user-defined class?</a><a href="#q19">Q19. What is an instance?</a><a href="#q20">Q20. What is an attribute?</a><p class="toc-stage">Part 3: Variables in Classes</p><a href="#part-03">Part 3: Variables in Classes</a><a href="#q21">Q21. What are the types of variables in classes?</a><a href="#q22">Q22. What is an instance variable?</a><a href="#q23">Q23. What is a class variable?</a><a href="#q24">Q24. Difference between instance and class variables?</a><a href="#q25">Q25. What is a local variable?</a><a href="#q26">Q26. What is a global variable?</a><a href="#q27">Q27. What is variable shadowing?</a><a href="#q28">Q28. Can we modify a class variable using an object?</a><a href="#q29">Q29. How do we modify a class variable?</a><p class="toc-stage">Part 4: Self, Cls and Super()</p><a href="#part-04">Part 4: Self, Cls and Super()</a><a href="#q30">Q30. What is self?</a><a href="#q31">Q31. Is self a keyword?</a><a href="#q32">Q32. Can we use another name instead of self?</a><a href="#q33">Q33. What is cls?</a><a href="#q34">Q34. Difference between self and cls?</a><a href="#q35">Q35. What is super()?</a><a href="#q36">Q36. Can we use super() in multiple inheritance?</a><a href="#q37">Q37. What happens if self is missing?</a><p class="toc-stage">Part 5: Methods in Python</p><a href="#part-05">Part 5: Methods in Python</a><a href="#q38">Q38. What is a method?</a><a href="#q39">Q39. What are the three main types of methods?</a><a href="#q40">Q40. What is an instance method?</a><a href="#q41">Q41. What is a class method?</a><a href="#q42">Q42. What is a static method?</a><a href="#q43">Q43. Difference between three methods?</a><a href="#q44">Q44. Can we call static methods using objects?</a><a href="#q45">Q45. Can class methods access instance variables directly?</a><a href="#q46">Q46. Can we create multiple methods in one class?</a><a href="#q47">Q47. Can one method call another method?</a><p class="toc-stage">Part 6: Constructor and Destructor</p><a href="#part-06">Part 6: Constructor and Destructor</a><a href="#q48">Q48. What is a constructor?</a><a href="#q49">Q49. What is __init__()?</a><a href="#q50">Q50. What are the types of constructors?</a><a href="#q51">Q51. What is a default constructor?</a><a href="#q52">Q52. What is a parameterized constructor?</a><a href="#q53">Q53. Does Python support constructor overloading?</a><a href="#q54">Q54. Can we define multiple __init__ methods?</a><a href="#q55">Q55. What is a destructor?</a><a href="#q56">Q56. What is __del__()?</a><a href="#q57">Q57. Difference between constructor and destructor?</a><a href="#q58">Q58. Difference between del and __del__()?</a><a href="#q59">Q59. Is __del__() guaranteed to execute?</a><p class="toc-stage">Part 7: Four Pillars of OOPs</p><a href="#part-07">Part 7: Four Pillars of OOPs</a><a href="#q60">Q60. What are the four pillars?</a><a href="#q61">Q61. What is inheritance?</a><a href="#q62">Q62. What are the five types of inheritance?</a><a href="#q63">Q63. What is single inheritance?</a><a href="#q64">Q64. What is multiple inheritance?</a><a href="#q65">Q65. What is multilevel inheritance?</a><a href="#q66">Q66. What is hierarchical inheritance?</a><a href="#q67">Q67. What is hybrid inheritance?</a><a href="#q68">Q68. Difference between single and multiple inheritance?</a><a href="#q69">Q69. Difference between multilevel and hierarchical?</a><a href="#q70">Q70. What is method overriding?</a><a href="#q71">Q71. Why use method overriding?</a><a href="#q72">Q72. Can we override constructors?</a><a href="#q73">Q73. Does the parent constructor execute automatically
+if th…</a><a href="#q74">Q74. What is the diamond problem?</a><a href="#q75">Q75. What is MRO?</a><a href="#q76">Q76. How to check MRO?</a><a href="#q77">Q77. Difference between super() and directly calling parent?</a><a href="#q78">Q78. What is polymorphism?</a><a href="#q79">Q79. What are common forms of polymorphism?</a><a href="#q80">Q80. What is method overloading?</a><a href="#q81">Q81. How can we simulate method overloading?</a><a href="#q82">Q82. Difference between overloading and overriding?</a><a href="#q83">Q83. What is operator overloading?</a><a href="#q84">Q84. Give an example of operator overloading.</a><a href="#q85">Q85. What is duck typing?</a><a href="#q86">Q86. What is runtime polymorphism?</a><a href="#q87">Q87. What is compile-time polymorphism?</a><a href="#q88">Q88. What is encapsulation?</a><a href="#q89">Q89. Why use encapsulation?</a><a href="#q90">Q90. What are access modifiers in Python?</a><a href="#q91">Q91. What is a public variable?</a><a href="#q92">Q92. What is a protected variable?</a><a href="#q93">Q93. What is a private variable?</a><a href="#q94">Q94. Does Python support strict private access?</a><a href="#q95">Q95. What is name mangling?</a><a href="#q96">Q96. What is a getter?</a><a href="#q97">Q97. What is a setter?</a><a href="#q98">Q98. What is @property?</a><a href="#q99">Q99. Difference between public, protected and private?</a><a href="#q100">Q100. What is abstraction?</a><a href="#q101">Q101. Why use abstraction?</a><a href="#q102">Q102. What is an abstract class?</a><a href="#q103">Q103. What is an abstract method?</a><a href="#q104">Q104. Can we create an object of an abstract class?</a><a href="#q105">Q105. What is the abc module?</a><a href="#q106">Q106. What is ABC?</a><a href="#q107">Q107. What is @abstractmethod?</a><a href="#q108">Q108. Can abstract classes contain normal methods?</a><a href="#q109">Q109. Can abstract classes have constructors?</a><a href="#q110">Q110. Difference between abstraction and encapsulation?</a><p class="toc-stage">Part 8: Magic / Dunder Methods</p><a href="#part-08">Part 8: Magic / Dunder Methods</a><a href="#q111">Q111. What are magic methods?</a><a href="#q112">Q112. What does dunder mean?</a><a href="#q113">Q113. What is __str__()?</a><a href="#q114">Q114. What is __repr__()?</a><a href="#q115">Q115. Difference between __str__ and __repr__?</a><a href="#q116">Q116. What is __len__()?</a><a href="#q117">Q117. What is __add__()?</a><a href="#q118">Q118. What is __sub__()?</a><a href="#q119">Q119. What is __mul__()?</a><a href="#q120">Q120. What is __eq__()?</a><a href="#q121">Q121. What is __lt__()?</a><a href="#q122">Q122. What is __gt__()?</a><a href="#q123">Q123. What is __call__()?</a><a href="#q124">Q124. What is __iter__()?</a><a href="#q125">Q125. What is __next__()?</a><a href="#q126">Q126. What is __getitem__()?</a><a href="#q127">Q127. What is __setitem__()?</a><a href="#q128">Q128. Important dunder methods?</a><a href="#q129">Q129. Difference between __new__() and __init__()?</a><a href="#q130">Q130. Difference between == and is?</a><p class="toc-stage">Part 9: Class Relationships</p><a href="#part-09">Part 9: Class Relationships</a><a href="#q131">Q131. What is association?</a><a href="#q132">Q132. What is aggregation?</a><a href="#q133">Q133. What is composition?</a><a href="#q134">Q134. Difference between aggregation and composition?</a><a href="#q135">Q135. What is has-a relationship?</a><a href="#q136">Q136. What is is-a relationship?</a><a href="#q137">Q137. Difference between has-a and is-a?</a><a href="#q138">Q138. Difference between inheritance and composition?</a><p class="toc-stage">Part 10: Properties and Decorators</p><a href="#part-10">Part 10: Properties and Decorators</a><a href="#q139">Q139. What is a decorator?</a><a href="#q140">Q140. Important OOP decorators?</a><a href="#q141">Q141. What is @property?</a><a href="#q142">Q142. What is a property setter?</a><a href="#q143">Q143. What is a property deleter?</a><a href="#q144">Q144. Difference between method and property?</a><a href="#q145">Q145. Can we use multiple decorators?</a><a href="#q146">Q146. What is a custom decorator?</a><p class="toc-stage">Part 11: Shallow Copy and Deep Copy</p><a href="#part-11">Part 11: Shallow Copy and Deep Copy</a><a href="#q147">Q147. What is object copying?</a><a href="#q148">Q148. What are the types of copying?</a><a href="#q149">Q149. What is shallow copy?</a><a href="#q150">Q150. What is deep copy?</a><a href="#q151">Q151. Which module is used for copying?</a><a href="#q152">Q152. What is copy.copy()?</a><a href="#q153">Q153. What is copy.deepcopy()?</a><a href="#q154">Q154. Difference between shallow and deep copy?</a><a href="#q155">Q155. What happens when b = a?</a><a href="#q156">Q156. How to check whether two variables refer to same object…</a><a href="#q157">Q157. Does shallow copy work with nested lists?</a><a href="#q158">Q158. Can deep copy copy custom class objects?</a><p class="toc-stage">Part 12: Built-In Functions in OOPs</p><a href="#part-12">Part 12: Built-In Functions in OOPs</a><a href="#q159">Q159. What is type()?</a><a href="#q160">Q160. What is isinstance()?</a><a href="#q161">Q161. What is issubclass()?</a><a href="#q162">Q162. Difference between isinstance and issubclass?</a><a href="#q163">Q163. What is getattr()?</a><a href="#q164">Q164. What is setattr()?</a><a href="#q165">Q165. What is hasattr()?</a><a href="#q166">Q166. What is delattr()?</a><a href="#q167">Q167. What is dir()?</a><a href="#q168">Q168. What is vars()?</a><a href="#q169">Q169. What is id()?</a><a href="#q170">Q170. What is callable()?</a><a href="#q171">Q171. What is property()?</a><p class="toc-stage">Part 13: Important OOP Modules</p><a href="#part-13">Part 13: Important OOP Modules</a><a href="#q172">Q172. What is a module?</a><a href="#q173">Q173. Difference between module and package?</a><a href="#q174">Q174. Important OOP modules?</a><a href="#q175">Q175. What is abc?</a><a href="#q176">Q176. What is copy module?</a><a href="#q177">Q177. What is dataclasses?</a><a href="#q178">Q178. What is @dataclass?</a><a href="#q179">Q179. What is field()?</a><a href="#q180">Q180. What is asdict()?</a><a href="#q181">Q181. What is astuple()?</a><a href="#q182">Q182. What is replace()?</a><a href="#q183">Q183. What is fields()?</a><a href="#q184">Q184. What is enum?</a><a href="#q185">Q185. What is Enum?</a><a href="#q186">Q186. What is auto()?</a><a href="#q187">Q187. What is IntEnum?</a><a href="#q188">Q188. What is inspect?</a><a href="#q189">Q189. What is pickle?</a><a href="#q190">Q190. What is serialization?</a><a href="#q191">Q191. What is deserialization?</a><a href="#q192">Q192. What is pickle.dump()?</a><a href="#q193">Q193. What is pickle.load()?</a><a href="#q194">Q194. What is JSON?</a><a href="#q195">Q195. Difference between pickle and JSON?</a><a href="#q196">Q196. What is typing?</a><a href="#q197">Q197. What is collections?</a><a href="#q198">Q198. What is operator?</a><a href="#q199">Q199. What is functools?</a><p class="toc-stage">Part 14: Advanced OOP Concepts</p><a href="#part-14">Part 14: Advanced OOP Concepts</a><a href="#q200">Q200. What is a metaclass?</a><a href="#q201">Q201. What is the default metaclass?</a><a href="#q202">Q202. What is type used for?</a><a href="#q203">Q203. What is a descriptor?</a><a href="#q204">Q204. What are the types of descriptors?</a><a href="#q205">Q205. What is a data descriptor?</a><a href="#q206">Q206. What is a non-data descriptor?</a><a href="#q207">Q207. What is __slots__?</a><a href="#q208">Q208. What is dynamic attribute creation?</a><a href="#q209">Q209. What is dynamic class creation?</a><a href="#q210">Q210. What is a callable object?</a><a href="#q211">Q211. What is a context manager?</a><a href="#q212">Q212. Which methods create a class-based context manager?</a><a href="#q213">Q213. What is dependency injection?</a><a href="#q214">Q214. What is a design pattern?</a><a href="#q215">Q215. Common design patterns?</a><a href="#q216">Q216. What is Singleton?</a><a href="#q217">Q217. What is Factory?</a><a href="#q218">Q218. What is Observer?</a><a href="#q219">Q219. What is SOLID?</a><p class="toc-stage">Part 15: SOLID Principles</p><a href="#part-15">Part 15: SOLID Principles</a><a href="#q220">Q220. What is Single Responsibility Principle?</a><a href="#q221">Q221. What is Open/Closed Principle?</a><a href="#q222">Q222. What is Liskov Substitution Principle?</a><a href="#q223">Q223. What is Interface Segregation Principle?</a><a href="#q224">Q224. What is Dependency Inversion Principle?</a><p class="toc-stage">Part 16: Practical Coding Questions</p><a href="#part-16">Part 16: Practical Coding Questions</a><a href="#q225">Q225. Create a Student class.</a><a href="#q226">Q226. Create an Employee class.</a><a href="#q227">Q227. Calculate rectangle area using a class.</a><a href="#q228">Q228. Create a calculator using a class.</a><a href="#q229">Q229. Demonstrate single inheritance.</a><a href="#q230">Q230. Demonstrate multiple inheritance.</a><a href="#q231">Q231. Demonstrate method overriding.</a><a href="#q232">Q232. Demonstrate encapsulation.</a><a href="#q233">Q233. Demonstrate abstraction.</a><a href="#q234">Q234. Demonstrate polymorphism.</a><a href="#q235">Q235. Demonstrate class method.</a><a href="#q236">Q236. Demonstrate static method.</a><a href="#q237">Q237. Demonstrate super().</a><a href="#q238">Q238. Count objects created.</a><a href="#q239">Q239. Demonstrate __str__().</a><a href="#q240">Q240. Demonstrate operator overloading.</a><a href="#q241">Q241. Demonstrate composition.</a><a href="#q242">Q242. Demonstrate property setter.</a><a href="#q243">Q243. Demonstrate dataclass.</a><p class="toc-stage">Part 17: Output-Based Questions</p><a href="#part-17">Part 17: Output-Based Questions</a><a href="#q244">Q244. What is the output?
+
+class Student:
+    name = &quot;Rahul&quot;
+…</a><a href="#q245">Q245. What is the output?
+
+class Student:
+    name = &quot;Rahul&quot;
+…</a><a href="#q246">Q246. What is the output?
+
+class A:
+    def show(self):
+     …</a><a href="#q247">Q247. What is the output?
+
+class A:
+    def show(self):
+     …</a><a href="#q248">Q248. What is the output?
+
+class A:
+    def __init__(self):
+ …</a><a href="#q249">Q249. What is the output?
+
+class A:
+    def __init__(self):
+ …</a><a href="#q250">Q250. What is the output?
+
+class Student:
+    count = 0
+
+    …</a><a href="#q251">Q251. What is the output?
+
+class Student:
+    def display(sel…</a><a href="#q252">Q252. What is the output?
+
+class Student:
+    def __call__(se…</a><a href="#q253">Q253. What is the output?
+
+class A:
+    pass
+
+a = A()
+b = A()…</a><a href="#q254">Q254. What is the output?
+
+class A:
+    pass
+
+a = A()
+b = a
+
+…</a><a href="#q255">Q255. What is the output?
+
+class Parent:
+    def show(self):
+…</a><a href="#q256">Q256. What is the output?
+
+class A:
+    x = 10
+
+class B(A):
+ …</a><p class="toc-stage">Part 18: Error-Based Questions</p><a href="#part-18">Part 18: Error-Based Questions</a><a href="#q257">Q257. What is AttributeError?</a><a href="#q258">Q258. What is TypeError?</a><a href="#q259">Q259. What is NameError?</a><a href="#q260">Q260. What is RecursionError?</a><a href="#q261">Q261. What is NotImplementedError?</a><a href="#q262">Q262. What happens if we access an undefined attribute?</a><a href="#q263">Q263. What happens if we call a method without required argum…</a><a href="#q264">Q264. What happens if we instantiate an abstract class
+with u…</a><a href="#q265">Q265. What happens if we access a private-style attribute
+usi…</a><a href="#q266">Q266. What happens if super() is used incorrectly?</a><a href="#q267">Q267. What happens if we divide by zero?</a><a href="#q268">Q268. What happens if a method does not accept self
+but is ca…</a><a href="#q269">Q269. What happens if we assign an attribute not allowed
+by _…</a><a href="#q270">Q270. What happens if abstract methods are not implemented?</a><a href="#q271">Q271. Difference between NotImplemented and NotImplementedErr…</a><p class="toc-stage">Part 19: Scenario-Based Questions</p><a href="#part-19">Part 19: Scenario-Based Questions</a><a href="#q272">Q272. How would you design a banking system?</a><a href="#q273">Q273. How would you design employee management?</a><a href="#q274">Q274. How would you implement multiple payment methods?</a><a href="#q275">Q275. How do different classes execute different methods
+with…</a><a href="#q276">Q276. How would you hide salary information?</a><a href="#q277">Q277. How do you force child classes to implement a method?</a><a href="#q278">Q278. How do you reuse functionality from multiple parents?</a><a href="#q279">Q279. How do you modify parent method behavior?</a><a href="#q280">Q280. Which method is used when object data is not required?</a><a href="#q281">Q281. How do you create an alternative constructor?</a><a href="#q282">Q282. How do classes interact without inheritance?</a><a href="#q283">Q283. How do you validate an attribute whenever it changes?</a><a href="#q284">Q284. How do you copy a nested object independently?</a><a href="#q285">Q285. How do you save an object into a file?</a><a href="#q286">Q286. What if a class has too many responsibilities?</a><p class="toc-stage">Part 20: Tricky Interview Questions</p><a href="#part-20">Part 20: Tricky Interview Questions</a><a href="#q287">Q287. Is self mandatory?</a><a href="#q288">Q288. Can a class inherit from multiple classes?</a><a href="#q289">Q289. Can a class inherit from itself?</a><a href="#q290">Q290. Can we create an object without calling __init__()?</a><a href="#q291">Q291. Is __init__() compulsory?</a><a href="#q292">Q292. Can we define a class inside another class?</a><a href="#q293">Q293. Can we modify classes at runtime?</a><a href="#q294">Q294. Can we delete an object?</a><a href="#q295">Q295. What is garbage collection?</a><a href="#q296">Q296. Can static methods access class variables?</a><a href="#q297">Q297. Can instance methods access class variables?</a><a href="#q298">Q298. Can a child object access parent methods?</a><a href="#q299">Q299. Does Python support interfaces?</a><a href="#q300">Q300. What is Protocol?</a><a href="#q301">Q301. Difference between abstract class and normal class?</a><a href="#q302">Q302. Difference between __dict__ and __slots__?</a><a href="#q303">Q303. Difference between object and reference?</a><a href="#q304">Q304. What is the most important OOP concept?</a><p class="toc-stage">Part 21: Quick Revision</p><a href="#part-21">Part 21: Quick Revision</a><p class="toc-stage">Part 22: SOLID Principles Study Notes</p><a href="#part-22">Part 22: SOLID Principles Study Notes</a><a href="#q305">Q305. WHAT IS SOLID</a><a href="#q306">Q306. S - SINGLE RESPONSIBILITY PRINCIPLE</a><a href="#q307">Q307. O - OPEN/CLOSED PRINCIPLE</a><a href="#q308">Q308. L - LISKOV SUBSTITUTION PRINCIPLE</a><a href="#q309">Q309. I - INTERFACE SEGREGATION PRINCIPLE</a><a href="#q310">Q310. D - DEPENDENCY INVERSION PRINCIPLE</a><a href="#q311">Q311. SOLID SUMMARY</a><p class="toc-stage">Part 23: Metaclasses Study Notes</p><a href="#part-23">Part 23: Metaclasses Study Notes</a><a href="#q312">Q312. WHAT IS A METACLASS</a><a href="#q313">Q313. TYPE FUNCTION</a><a href="#q314">Q314. CUSTOM METACLASS</a><a href="#q315">Q315. METACLASS METHODS</a><a href="#q316">Q316. METACLASS VS CLASS</a>
+</nav>
+<main>
+<div class="intro">
+<h1>Python OOPs / Classes — Interview Q&amp;A</h1>
+<p>Complete set covering class/object, methods, constructors, four pillars, dunder methods, relationships, modules, SOLID, coding, outputs and revision.</p>
+</div>
+<p class="qmeta">316 questions across 23 parts.</p>
+<h1 class="stage">Core OOP</h1><h1 class="stage" id="part-01">Part 1: Introduction to OOPs</h1><article class="topic" id="q1"><h2><span class="num">Q1</span> What is OOPs?</h2><div class="body"><p>OOPs stands for Object-Oriented Programming.</p>
+<p>It is a programming approach that organizes code using</p>
+<p>classes and objects.</p></div></article><article class="topic" id="q2"><h2><span class="num">Q2</span> What are the four pillars of OOPs?</h2><div class="body"><ul><li>Inheritance</li><li>Polymorphism</li><li>Encapsulation</li><li>Abstraction</li></ul></div></article><article class="topic" id="q3"><h2><span class="num">Q3</span> What are the advantages of OOPs?</h2><div class="body"><ul><li>Code reusability</li><li>Data organization</li><li>Easy maintenance</li><li>Flexibility</li><li>Scalability</li><li>Encapsulation</li></ul></div></article><article class="topic" id="q4"><h2><span class="num">Q4</span> What is procedural programming?</h2><div class="body"><p>Procedural programming organizes code using functions</p>
+<p>and procedures.</p></div></article><article class="topic" id="q5"><h2><span class="num">Q5</span> Difference between procedural programming and OOPs?</h2><div class="body"><p>Procedural: Focuses on functions.</p>
+<p>OOPs: Focuses on classes and objects.</p></div></article><article class="topic" id="q6"><h2><span class="num">Q6</span> Does Python support OOPs?</h2><div class="body"><p>Yes. Python supports classes, objects, inheritance,</p>
+<p>polymorphism, encapsulation and abstraction.</p></div></article><article class="topic" id="q7"><h2><span class="num">Q7</span> Is Python fully object-oriented?</h2><div class="body"><p>Python is an object-oriented language, but it also</p>
+<p>supports procedural and functional programming.</p></div></article><article class="topic" id="q8"><h2><span class="num">Q8</span> Give a real-world example of OOPs.</h2><div class="body"><p>Class: Car</p>
+<p>Objects: BMW, Audi, Toyota</p>
+<p>Attributes: Color, model, speed</p>
+<p>Methods: Start, stop, accelerate.</p></div></article><h1 class="stage" id="part-02">Part 2: Class and Object</h1><article class="topic" id="q9"><h2><span class="num">Q9</span> What is a class?</h2><div class="body"><p>A class is a blueprint or template used to create objects.</p></div></article><article class="topic" id="q10"><h2><span class="num">Q10</span> What is an object?</h2><div class="body"><p>An object is an instance of a class.</p></div></article><article class="topic" id="q11"><h2><span class="num">Q11</span> Difference between class and object?</h2><div class="body"><p class="label">Class:</p>
+<ul><li>Blueprint.</li><li>Defines attributes and methods.</li><li>Created using class keyword.</li></ul>
+<p class="label">Object:</p>
+<ul><li>Instance of a class.</li><li>Has individual data.</li><li>Created by calling the class.</li></ul></div></article><article class="topic" id="q12"><h2><span class="num">Q12</span> How do you create a class?</h2><div class="body"><pre><code>class Student:
+    pass</code></pre></div></article><article class="topic" id="q13"><h2><span class="num">Q13</span> How do you create an object?</h2><div class="body"><pre><code>class Student:
+    pass</code></pre>
+<pre><code>s1 = Student()</code></pre></div></article><article class="topic" id="q14"><h2><span class="num">Q14</span> Can we create multiple objects from one class?</h2><div class="body"><p>Yes.</p>
+<pre><code>s1 = Student()
+s2 = Student()
+s3 = Student()</code></pre></div></article><article class="topic" id="q15"><h2><span class="num">Q15</span> Can multiple objects have different values?</h2><div class="body"><p>Yes. Each object can have different instance variables.</p></div></article><article class="topic" id="q16"><h2><span class="num">Q16</span> What happens when an object is created?</h2><div class="body"><p>Python creates an instance and calls <code>__init__</code>()</p>
+<p>if it is defined.</p></div></article><article class="topic" id="q17"><h2><span class="num">Q17</span> Can we create a class without an object?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q18"><h2><span class="num">Q18</span> Can we create an object without a user-defined class?</h2><div class="body"><p>Yes. Built-in classes such as int, str and list</p>
+<p>can create objects.</p></div></article><article class="topic" id="q19"><h2><span class="num">Q19</span> What is an instance?</h2><div class="body"><p>An individual object created from a class.</p></div></article><article class="topic" id="q20"><h2><span class="num">Q20</span> What is an attribute?</h2><div class="body"><p>A variable or property associated with an object or class.</p></div></article><h1 class="stage" id="part-03">Part 3: Variables in Classes</h1><article class="topic" id="q21"><h2><span class="num">Q21</span> What are the types of variables in classes?</h2><div class="body"><ul><li>Instance variable</li><li>Class variable</li><li>Local variable</li></ul>
+<p>Global variables can also be accessed according to scope rules.</p></div></article><article class="topic" id="q22"><h2><span class="num">Q22</span> What is an instance variable?</h2><div class="body"><p>A variable belonging to an individual object.</p>
+<p>Usually defined using self.</p>
+<pre><code>class Student:
+    def __init__(self, name):
+        self.name = name</code></pre>
+<pre><code>s1 = Student(&quot;Rahul&quot;)
+s2 = Student(&quot;John&quot;)</code></pre>
+<pre><code>print(s1.name)
+print(s2.name)</code></pre>
+<p class="label">Output:</p>
+<pre><code>Rahul
+John</code></pre></div></article><article class="topic" id="q23"><h2><span class="num">Q23</span> What is a class variable?</h2><div class="body"><p>A variable defined inside a class but outside</p>
+<p>instance methods. It is shared at class level.</p>
+<pre><code>class Student:
+    school = &quot;ABC&quot;</code></pre>
+<pre><code>print(Student.school)</code></pre></div></article><article class="topic" id="q24"><h2><span class="num">Q24</span> Difference between instance and class variables?</h2><div class="body"><p class="label">Instance variable:</p>
+<ul><li>Belongs to individual object.</li><li>Usually uses self.</li><li>Each object can have a different value.</li></ul>
+<p class="label">Class variable:</p>
+<ul><li>Belongs to the class.</li><li>Shared at class level.</li><li>Access using class name or object.</li></ul></div></article><article class="topic" id="q25"><h2><span class="num">Q25</span> What is a local variable?</h2><div class="body"><p>A variable declared inside a function or method.</p></div></article><article class="topic" id="q26"><h2><span class="num">Q26</span> What is a global variable?</h2><div class="body"><p>A variable declared outside functions and classes.</p></div></article><article class="topic" id="q27"><h2><span class="num">Q27</span> What is variable shadowing?</h2><div class="body"><p>When a variable in an inner scope has the same name</p>
+<p>as a variable in an outer scope.</p></div></article><article class="topic" id="q28"><h2><span class="num">Q28</span> Can we modify a class variable using an object?</h2><div class="body"><p>Yes, but assigning through an object normally creates</p>
+<p>an instance attribute instead of changing the class variable.</p></div></article><article class="topic" id="q29"><h2><span class="num">Q29</span> How do we modify a class variable?</h2><div class="body"><pre><code>class Student:
+    school = &quot;ABC&quot;</code></pre>
+<pre><code>Student.school = &quot;XYZ&quot;</code></pre></div></article><h1 class="stage" id="part-04">Part 4: Self, Cls and Super()</h1><article class="topic" id="q30"><h2><span class="num">Q30</span> What is self?</h2><div class="body"><p>self refers to the current object of the class.</p></div></article><article class="topic" id="q31"><h2><span class="num">Q31</span> Is self a keyword?</h2><div class="body"><p>No. It is a naming convention.</p></div></article><article class="topic" id="q32"><h2><span class="num">Q32</span> Can we use another name instead of self?</h2><div class="body"><p>Yes, but self is the standard convention.</p></div></article><article class="topic" id="q33"><h2><span class="num">Q33</span> What is cls?</h2><div class="body"><p>cls refers to the current class.</p></div></article><article class="topic" id="q34"><h2><span class="num">Q34</span> Difference between self and cls?</h2><div class="body"><p>self = Current object.</p>
+<p>cls = Current class.</p></div></article><article class="topic" id="q35"><h2><span class="num">Q35</span> What is super()?</h2><div class="body"><p><code>super()</code> is used to access the next class in MRO,</p>
+<p>commonly used to call parent class functionality.</p>
+<pre><code>class Parent:
+    def display(self):
+        print(&quot;Parent&quot;)</code></pre>
+<pre><code>class Child(Parent):
+    def display(self):
+        super().display()
+        print(&quot;Child&quot;)</code></pre>
+<pre><code>obj = Child()
+obj.display()</code></pre>
+<p class="label">Output:</p>
+<pre><code>Parent
+Child</code></pre></div></article><article class="topic" id="q36"><h2><span class="num">Q36</span> Can we use super() in multiple inheritance?</h2><div class="body"><p>Yes. It follows MRO.</p></div></article><article class="topic" id="q37"><h2><span class="num">Q37</span> What happens if self is missing?</h2><div class="body"><p>Calling the instance method normally through an object</p>
+<p>usually causes TypeError if the method does not accept</p>
+<p>the automatically passed object.</p></div></article><h1 class="stage" id="part-05">Part 5: Methods in Python</h1><article class="topic" id="q38"><h2><span class="num">Q38</span> What is a method?</h2><div class="body"><p>A function defined inside a class.</p></div></article><article class="topic" id="q39"><h2><span class="num">Q39</span> What are the three main types of methods?</h2><div class="body"><ul><li>Instance method</li><li>Class method</li><li>Static method</li></ul></div></article><article class="topic" id="q40"><h2><span class="num">Q40</span> What is an instance method?</h2><div class="body"><p>A method that works with instance data and uses self.</p></div></article><article class="topic" id="q41"><h2><span class="num">Q41</span> What is a class method?</h2><div class="body"><p>A method that works with class-level data and uses cls.</p>
+<p>It uses <code>@classmethod</code>.</p></div></article><article class="topic" id="q42"><h2><span class="num">Q42</span> What is a static method?</h2><div class="body"><p>A method that does not automatically receive self or cls.</p>
+<p>It uses <code>@staticmethod</code>.</p></div></article><article class="topic" id="q43"><h2><span class="num">Q43</span> Difference between three methods?</h2><div class="body"><p class="label">Instance method:</p>
+<ul><li>Uses self.</li><li>Accesses instance data.</li></ul>
+<p class="label">Class method:</p>
+<ul><li>Uses cls.</li><li>Accesses class data.</li></ul>
+<p class="label">Static method:</p>
+<ul><li>No automatic self or cls.</li><li>Used for utility operations.</li></ul></div></article><article class="topic" id="q44"><h2><span class="num">Q44</span> Can we call static methods using objects?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q45"><h2><span class="num">Q45</span> Can class methods access instance variables directly?</h2><div class="body"><p>No. They need an object to access instance data.</p></div></article><article class="topic" id="q46"><h2><span class="num">Q46</span> Can we create multiple methods in one class?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q47"><h2><span class="num">Q47</span> Can one method call another method?</h2><div class="body"><p>Yes, using self for instance methods.</p></div></article><h1 class="stage" id="part-06">Part 6: Constructor and Destructor</h1><article class="topic" id="q48"><h2><span class="num">Q48</span> What is a constructor?</h2><div class="body"><p>A special initialization mechanism used when an object</p>
+<p>is created.</p></div></article><article class="topic" id="q49"><h2><span class="num">Q49</span> What is __init__()?</h2><div class="body"><p>An initializer automatically called after object creation.</p>
+<pre><code>class Student:
+    def __init__(self):
+        print(&quot;Constructor called&quot;)</code></pre>
+<pre><code>s1 = Student()</code></pre></div></article><article class="topic" id="q50"><h2><span class="num">Q50</span> What are the types of constructors?</h2><div class="body"><ul><li>Non-parameterized constructor.</li><li>Parameterized constructor.</li></ul></div></article><article class="topic" id="q51"><h2><span class="num">Q51</span> What is a default constructor?</h2><div class="body"><p>A constructor that does not require additional</p>
+<p>user-defined arguments.</p></div></article><article class="topic" id="q52"><h2><span class="num">Q52</span> What is a parameterized constructor?</h2><div class="body"><p>A constructor that accepts arguments to initialize</p>
+<p>object attributes.</p>
+<pre><code>class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age</code></pre>
+<pre><code>s1 = Student(&quot;Rahul&quot;, 25)</code></pre></div></article><article class="topic" id="q53"><h2><span class="num">Q53</span> Does Python support constructor overloading?</h2><div class="body"><p>Not traditional constructor overloading.</p>
+<p>We can simulate it using default arguments, *args,</p>
+<p>or class methods.</p></div></article><article class="topic" id="q54"><h2><span class="num">Q54</span> Can we define multiple __init__ methods?</h2><div class="body"><p>No. The last definition replaces earlier definitions.</p></div></article><article class="topic" id="q55"><h2><span class="num">Q55</span> What is a destructor?</h2><div class="body"><p>A finalizer used for cleanup when an object is finalized.</p></div></article><article class="topic" id="q56"><h2><span class="num">Q56</span> What is __del__()?</h2><div class="body"><p>A special finalizer method.</p></div></article><article class="topic" id="q57"><h2><span class="num">Q57</span> Difference between constructor and destructor?</h2><div class="body"><p><code>__init__</code>() = Initializes an object.</p>
+<p><code>__del__</code>() = Performs finalization.</p></div></article><article class="topic" id="q58"><h2><span class="num">Q58</span> Difference between del and __del__()?</h2><div class="body"><pre><code>del = Deletes a reference or attribute.
+__del__() = Finalizer method.</code></pre></div></article><article class="topic" id="q59"><h2><span class="num">Q59</span> Is __del__() guaranteed to execute?</h2><div class="body"><p>No. Its execution timing is not guaranteed.</p>
+<p>Context managers are preferred for resource cleanup.</p></div></article><h1 class="stage">Four Pillars</h1><h1 class="stage" id="part-07">Part 7: Four Pillars of OOPs</h1><article class="topic" id="q60"><h2><span class="num">Q60</span> What are the four pillars?</h2><div class="body"><ul><li>Inheritance</li><li>Polymorphism</li><li>Encapsulation</li><li>Abstraction</li></ul></div></article><p class="subhead">Inheritance</p><article class="topic" id="q61"><h2><span class="num">Q61</span> What is inheritance?</h2><div class="body"><p>One class acquires attributes and methods from another</p>
+<p>class.</p></div></article><article class="topic" id="q62"><h2><span class="num">Q62</span> What are the five types of inheritance?</h2><div class="body"><ul><li>Single</li><li>Multiple</li><li>Multilevel</li><li>Hierarchical</li><li>Hybrid</li></ul></div></article><article class="topic" id="q63"><h2><span class="num">Q63</span> What is single inheritance?</h2><div class="body"><p>One child class inherits from one parent class.</p>
+<pre><code>class Parent:
+    def show(self):
+        print(&quot;Parent&quot;)</code></pre>
+<pre><code>class Child(Parent):
+    pass</code></pre>
+<pre><code>obj = Child()
+obj.show()</code></pre></div></article><article class="topic" id="q64"><h2><span class="num">Q64</span> What is multiple inheritance?</h2><div class="body"><p>One child class inherits from multiple parent classes.</p>
+<pre><code>class Father:
+    def show1(self):
+        print(&quot;Father&quot;)</code></pre>
+<pre><code>class Mother:
+    def show2(self):
+        print(&quot;Mother&quot;)</code></pre>
+<pre><code>class Child(Father, Mother):
+    pass</code></pre>
+<p>obj = <code>Child()</code></p>
+<p>obj.<code>show1()</code></p>
+<p>obj.<code>show2()</code></p></div></article><article class="topic" id="q65"><h2><span class="num">Q65</span> What is multilevel inheritance?</h2><div class="body"><p>Inheritance across multiple levels.</p>
+<pre><code>class A:
+    pass</code></pre>
+<pre><code>class B(A):
+    pass</code></pre>
+<pre><code>class C(B):
+    pass</code></pre></div></article><article class="topic" id="q66"><h2><span class="num">Q66</span> What is hierarchical inheritance?</h2><div class="body"><p>Multiple child classes inherit from one parent.</p>
+<pre><code>class Parent:
+    pass</code></pre>
+<pre><code>class Child1(Parent):
+    pass</code></pre>
+<pre><code>class Child2(Parent):
+    pass</code></pre></div></article><article class="topic" id="q67"><h2><span class="num">Q67</span> What is hybrid inheritance?</h2><div class="body"><p>Combination of two or more inheritance types.</p></div></article><article class="topic" id="q68"><h2><span class="num">Q68</span> Difference between single and multiple inheritance?</h2><div class="body"><pre><code>Single = One parent.
+Multiple = Multiple parents.</code></pre></div></article><article class="topic" id="q69"><h2><span class="num">Q69</span> Difference between multilevel and hierarchical?</h2><div class="body"><pre><code>Multilevel = Multiple inheritance levels.
+Hierarchical = Multiple children share one parent.</code></pre></div></article><article class="topic" id="q70"><h2><span class="num">Q70</span> What is method overriding?</h2><div class="body"><p>Child class provides its own implementation of an</p>
+<p>inherited method.</p></div></article><article class="topic" id="q71"><h2><span class="num">Q71</span> Why use method overriding?</h2><div class="body"><p>To customize parent class behavior.</p></div></article><article class="topic" id="q72"><h2><span class="num">Q72</span> Can we override constructors?</h2><div class="body"><p>Yes. A child class can define its own <code>__init__</code>().</p></div></article><article class="topic" id="q73"><h2><span class="num">Q73</span> Does the parent constructor execute automatically
+if the child defines its own constructor?</h2><div class="body"><p>No. Use <code>super()</code>.<code>__init__</code>() when required.</p></div></article><article class="topic" id="q74"><h2><span class="num">Q74</span> What is the diamond problem?</h2><div class="body"><p>A multiple inheritance situation where a class has</p>
+<p>multiple inheritance paths to a common parent.</p></div></article><article class="topic" id="q75"><h2><span class="num">Q75</span> What is MRO?</h2><div class="body"><p>Method Resolution Order determines the order in which</p>
+<p>Python searches classes for methods and attributes.</p></div></article><article class="topic" id="q76"><h2><span class="num">Q76</span> How to check MRO?</h2><div class="body"><pre><code>print(ClassName.mro())
+print(ClassName.__mro__)</code></pre></div></article><article class="topic" id="q77"><h2><span class="num">Q77</span> Difference between super() and directly calling parent?</h2><div class="body"><p><code>super()</code> follows MRO and supports cooperative</p>
+<p>multiple inheritance. Direct parent calls do not.</p></div></article><p class="subhead">Polymorphism</p><article class="topic" id="q78"><h2><span class="num">Q78</span> What is polymorphism?</h2><div class="body"><p>One interface or method name can have different</p>
+<p>behaviors depending on the object.</p></div></article><article class="topic" id="q79"><h2><span class="num">Q79</span> What are common forms of polymorphism?</h2><div class="body"><ul><li>Method overriding</li><li>Operator overloading</li><li>Method overloading simulation</li><li>Duck typing</li></ul></div></article><article class="topic" id="q80"><h2><span class="num">Q80</span> What is method overloading?</h2><div class="body"><p>Same method name with different parameter lists.</p>
+<p>Python does not directly support traditional overloading.</p></div></article><article class="topic" id="q81"><h2><span class="num">Q81</span> How can we simulate method overloading?</h2><div class="body"><p>Using default arguments, *args and **kwargs.</p></div></article><article class="topic" id="q82"><h2><span class="num">Q82</span> Difference between overloading and overriding?</h2><div class="body"><p>Overloading = Same name with different parameters.</p>
+<p>Overriding = Child redefines inherited method.</p></div></article><article class="topic" id="q83"><h2><span class="num">Q83</span> What is operator overloading?</h2><div class="body"><p>Giving special behavior to operators for custom objects.</p></div></article><article class="topic" id="q84"><h2><span class="num">Q84</span> Give an example of operator overloading.</h2><div class="body"><pre><code>class Number:
+    def __init__(self, value):
+        self.value = value</code></pre>
+<pre><code>def __add__(self, other):
+        return self.value + other.value</code></pre>
+<pre><code>n1 = Number(10)
+n2 = Number(20)</code></pre>
+<pre><code>print(n1 + n2)</code></pre>
+<p class="label">Output:</p>
+<pre><code>30</code></pre></div></article><article class="topic" id="q85"><h2><span class="num">Q85</span> What is duck typing?</h2><div class="body"><p>Python focuses on an object&#x27;s behavior rather than</p>
+<p>its actual class or type.</p></div></article><article class="topic" id="q86"><h2><span class="num">Q86</span> What is runtime polymorphism?</h2><div class="body"><p>Method behavior is determined at runtime based on</p>
+<p>the actual object.</p></div></article><article class="topic" id="q87"><h2><span class="num">Q87</span> What is compile-time polymorphism?</h2><div class="body"><p>Polymorphism resolved during compilation, such as</p>
+<p>traditional method overloading in Java.</p></div></article><p class="subhead">Encapsulation</p><article class="topic" id="q88"><h2><span class="num">Q88</span> What is encapsulation?</h2><div class="body"><p>Combining data and methods inside a class and</p>
+<p>controlling access to internal data.</p></div></article><article class="topic" id="q89"><h2><span class="num">Q89</span> Why use encapsulation?</h2><div class="body"><ul><li>Protect internal data from accidental changes.</li><li>Control data modification.</li><li>Improve code organization.</li><li>Maintain data consistency.</li></ul></div></article><article class="topic" id="q90"><h2><span class="num">Q90</span> What are access modifiers in Python?</h2><div class="body"><ul><li>Public</li><li>Protected</li><li>Private</li></ul></div></article><article class="topic" id="q91"><h2><span class="num">Q91</span> What is a public variable?</h2><div class="body"><p>Normally accessible from inside and outside the class.</p></div></article><article class="topic" id="q92"><h2><span class="num">Q92</span> What is a protected variable?</h2><div class="body"><p>Starts with a single underscore (_).</p>
+<p>It is a convention for internal or subclass use.</p></div></article><article class="topic" id="q93"><h2><span class="num">Q93</span> What is a private variable?</h2><div class="body"><p>Starts with double underscores (__).</p>
+<p>Python applies name mangling.</p></div></article><article class="topic" id="q94"><h2><span class="num">Q94</span> Does Python support strict private access?</h2><div class="body"><p>No. Python uses naming conventions and name mangling.</p></div></article><article class="topic" id="q95"><h2><span class="num">Q95</span> What is name mangling?</h2><div class="body"><p>Double-underscore attributes are renamed internally</p>
+<p>using the class name.</p>
+<p class="label">Example:</p>
+<ul><li>self.__salary</li></ul>
+<p class="label">Becomes approximately:</p>
+<ul><li>self._Student__salary</li></ul></div></article><article class="topic" id="q96"><h2><span class="num">Q96</span> What is a getter?</h2><div class="body"><p>A method used to retrieve an attribute value.</p></div></article><article class="topic" id="q97"><h2><span class="num">Q97</span> What is a setter?</h2><div class="body"><p>A method used to modify an attribute value.</p></div></article><article class="topic" id="q98"><h2><span class="num">Q98</span> What is @property?</h2><div class="body"><p>It allows us to access a method like an attribute.</p></div></article><article class="topic" id="q99"><h2><span class="num">Q99</span> Difference between public, protected and private?</h2><div class="body"><p>Public = name</p>
+<p>Protected = _name</p>
+<p>Private = __name</p></div></article><p class="subhead">Abstraction</p><article class="topic" id="q100"><h2><span class="num">Q100</span> What is abstraction?</h2><div class="body"><p>Hiding implementation details and exposing essential</p>
+<p>functionality.</p></div></article><article class="topic" id="q101"><h2><span class="num">Q101</span> Why use abstraction?</h2><div class="body"><p>To reduce complexity and define common interfaces.</p></div></article><article class="topic" id="q102"><h2><span class="num">Q102</span> What is an abstract class?</h2><div class="body"><p>A class that can define abstract methods which</p>
+<p>concrete subclasses must implement.</p></div></article><article class="topic" id="q103"><h2><span class="num">Q103</span> What is an abstract method?</h2><div class="body"><p>A method declared using <code>@abstractmethod</code>.</p></div></article><article class="topic" id="q104"><h2><span class="num">Q104</span> Can we create an object of an abstract class?</h2><div class="body"><p>Not while unresolved abstract methods remain.</p></div></article><article class="topic" id="q105"><h2><span class="num">Q105</span> What is the abc module?</h2><div class="body"><p>A built-in Python module for abstract base classes.</p></div></article><article class="topic" id="q106"><h2><span class="num">Q106</span> What is ABC?</h2><div class="body"><p>A helper base class for defining abstract classes.</p></div></article><article class="topic" id="q107"><h2><span class="num">Q107</span> What is @abstractmethod?</h2><div class="body"><p>A decorator used to declare abstract methods.</p></div></article><article class="topic" id="q108"><h2><span class="num">Q108</span> Can abstract classes contain normal methods?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q109"><h2><span class="num">Q109</span> Can abstract classes have constructors?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q110"><h2><span class="num">Q110</span> Difference between abstraction and encapsulation?</h2><div class="body"><p>Abstraction = Hides implementation details.</p>
+<p>Encapsulation = Bundles data and methods with controlled access.</p></div></article><h1 class="stage" id="part-08">Part 8: Magic / Dunder Methods</h1><article class="topic" id="q111"><h2><span class="num">Q111</span> What are magic methods?</h2><div class="body"><p>Special methods that define object behavior.</p></div></article><article class="topic" id="q112"><h2><span class="num">Q112</span> What does dunder mean?</h2><div class="body"><p>Double underscore.</p></div></article><article class="topic" id="q113"><h2><span class="num">Q113</span> What is __str__()?</h2><div class="body"><p>User-friendly string representation.</p></div></article><article class="topic" id="q114"><h2><span class="num">Q114</span> What is __repr__()?</h2><div class="body"><p>Developer-oriented object representation.</p></div></article><article class="topic" id="q115"><h2><span class="num">Q115</span> Difference between __str__ and __repr__?</h2><div class="body"><pre><code>__str__ = Readable representation.
+__repr__ = Unambiguous developer representation.</code></pre></div></article><article class="topic" id="q116"><h2><span class="num">Q116</span> What is __len__()?</h2><div class="body"><p>Defines behavior of <code>len()</code>.</p></div></article><article class="topic" id="q117"><h2><span class="num">Q117</span> What is __add__()?</h2><div class="body"><p>Defines + operator behavior.</p></div></article><article class="topic" id="q118"><h2><span class="num">Q118</span> What is __sub__()?</h2><div class="body"><p>Defines - operator behavior.</p></div></article><article class="topic" id="q119"><h2><span class="num">Q119</span> What is __mul__()?</h2><div class="body"><p>Defines * operator behavior.</p></div></article><article class="topic" id="q120"><h2><span class="num">Q120</span> What is __eq__()?</h2><div class="body"><pre><code>Defines == operator behavior.</code></pre></div></article><article class="topic" id="q121"><h2><span class="num">Q121</span> What is __lt__()?</h2><div class="body"><p>Defines &lt; operator behavior.</p></div></article><article class="topic" id="q122"><h2><span class="num">Q122</span> What is __gt__()?</h2><div class="body"><p>Defines &gt; operator behavior.</p></div></article><article class="topic" id="q123"><h2><span class="num">Q123</span> What is __call__()?</h2><div class="body"><p>Allows an object to be called like a function.</p></div></article><article class="topic" id="q124"><h2><span class="num">Q124</span> What is __iter__()?</h2><div class="body"><p>Returns an iterator.</p></div></article><article class="topic" id="q125"><h2><span class="num">Q125</span> What is __next__()?</h2><div class="body"><p>Returns the next iterator value.</p></div></article><article class="topic" id="q126"><h2><span class="num">Q126</span> What is __getitem__()?</h2><div class="body"><p>Handles item access using [].</p></div></article><article class="topic" id="q127"><h2><span class="num">Q127</span> What is __setitem__()?</h2><div class="body"><p>Handles item assignment using [].</p></div></article><article class="topic" id="q128"><h2><span class="num">Q128</span> Important dunder methods?</h2><div class="body"><p><code>__init__</code>()    - Initialize object</p>
+<p><code>__new__</code>()     - Create object</p>
+<p><code>__str__</code>()     - String representation</p>
+<p><code>__repr__</code>()    - Developer representation</p>
+<p><code>__len__</code>()     - Length</p>
+<p><code>__add__</code>()     - Addition</p>
+<p><code>__sub__</code>()     - Subtraction</p>
+<p><code>__mul__</code>()     - Multiplication</p>
+<p><code>__eq__</code>()      - Equality</p>
+<p><code>__call__</code>()    - Callable object</p>
+<p><code>__iter__</code>()    - Iterator</p>
+<p><code>__next__</code>()    - Next item</p>
+<p><code>__getitem__</code>() - Get item</p>
+<p><code>__setitem__</code>() - Set item</p>
+<p><code>__del__</code>()     - Finalizer</p>
+<p><code>__enter__</code>()   - Context manager entry</p>
+<p><code>__exit__</code>()    - Context manager exit</p></div></article><article class="topic" id="q129"><h2><span class="num">Q129</span> Difference between __new__() and __init__()?</h2><div class="body"><p><code>__new__</code>() = Creates and returns object.</p>
+<p><code>__init__</code>() = Initializes the object.</p></div></article><article class="topic" id="q130"><h2><span class="num">Q130</span> Difference between == and is?</h2><div class="body"><p>== checks value equality.</p>
+<p>is checks object identity.</p></div></article><h1 class="stage" id="part-09">Part 9: Class Relationships</h1><article class="topic" id="q131"><h2><span class="num">Q131</span> What is association?</h2><div class="body"><p>Relationship where two independent classes interact.</p></div></article><article class="topic" id="q132"><h2><span class="num">Q132</span> What is aggregation?</h2><div class="body"><p>Weak has-a relationship. Objects can exist independently.</p></div></article><article class="topic" id="q133"><h2><span class="num">Q133</span> What is composition?</h2><div class="body"><p>Strong has-a relationship involving ownership and</p>
+<p>lifecycle dependency.</p></div></article><article class="topic" id="q134"><h2><span class="num">Q134</span> Difference between aggregation and composition?</h2><div class="body"><p>Aggregation = Weak ownership.</p>
+<p>Composition = Strong ownership.</p></div></article><article class="topic" id="q135"><h2><span class="num">Q135</span> What is has-a relationship?</h2><div class="body"><p>One class contains or uses another class object.</p></div></article><article class="topic" id="q136"><h2><span class="num">Q136</span> What is is-a relationship?</h2><div class="body"><p>Inheritance relationship.</p></div></article><article class="topic" id="q137"><h2><span class="num">Q137</span> Difference between has-a and is-a?</h2><div class="body"><p>Has-a = Composition or aggregation.</p>
+<p>Is-a = Inheritance.</p></div></article><article class="topic" id="q138"><h2><span class="num">Q138</span> Difference between inheritance and composition?</h2><div class="body"><pre><code>Inheritance = Reuse through parent-child relationship.
+Composition = Reuse through contained objects.</code></pre></div></article><h1 class="stage" id="part-10">Part 10: Properties and Decorators</h1><article class="topic" id="q139"><h2><span class="num">Q139</span> What is a decorator?</h2><div class="body"><p>A function that modifies or extends another function&#x27;s</p>
+<p>or method&#x27;s behavior.</p></div></article><article class="topic" id="q140"><h2><span class="num">Q140</span> Important OOP decorators?</h2><div class="body"><ul><li><code>@classmethod</code></li><li><code>@staticmethod</code></li><li><code>@property</code></li><li><code>@abstractmethod</code></li><li>Custom decorators</li></ul></div></article><article class="topic" id="q141"><h2><span class="num">Q141</span> What is @property?</h2><div class="body"><p>Accesses a method like an attribute.</p></div></article><article class="topic" id="q142"><h2><span class="num">Q142</span> What is a property setter?</h2><div class="body"><p>Controls assignment to a property.</p></div></article><article class="topic" id="q143"><h2><span class="num">Q143</span> What is a property deleter?</h2><div class="body"><p>Controls deletion of a property.</p></div></article><article class="topic" id="q144"><h2><span class="num">Q144</span> Difference between method and property?</h2><div class="body"><pre><code>Method = Called with parentheses.
+Property = Accessed like an attribute.</code></pre></div></article><article class="topic" id="q145"><h2><span class="num">Q145</span> Can we use multiple decorators?</h2><div class="body"><p>Yes. Decorators can be stacked.</p></div></article><article class="topic" id="q146"><h2><span class="num">Q146</span> What is a custom decorator?</h2><div class="body"><p>A decorator created by the programmer.</p></div></article><h1 class="stage" id="part-11">Part 11: Shallow Copy and Deep Copy</h1><article class="topic" id="q147"><h2><span class="num">Q147</span> What is object copying?</h2><div class="body"><p>Creating another object based on an existing object.</p></div></article><article class="topic" id="q148"><h2><span class="num">Q148</span> What are the types of copying?</h2><div class="body"><ul><li>Assignment/reference sharing</li><li>Shallow copy</li><li>Deep copy</li></ul></div></article><article class="topic" id="q149"><h2><span class="num">Q149</span> What is shallow copy?</h2><div class="body"><p>Creates a new outer object but shares nested objects.</p></div></article><article class="topic" id="q150"><h2><span class="num">Q150</span> What is deep copy?</h2><div class="body"><p>Recursively copies nested objects.</p></div></article><article class="topic" id="q151"><h2><span class="num">Q151</span> Which module is used for copying?</h2><div class="body"><p>copy module.</p></div></article><article class="topic" id="q152"><h2><span class="num">Q152</span> What is copy.copy()?</h2><div class="body"><p>Creates shallow copy.</p></div></article><article class="topic" id="q153"><h2><span class="num">Q153</span> What is copy.deepcopy()?</h2><div class="body"><p>Creates deep copy.</p></div></article><article class="topic" id="q154"><h2><span class="num">Q154</span> Difference between shallow and deep copy?</h2><div class="body"><p>Shallow = New outer object, shared nested objects.</p>
+<p>Deep = New outer object and recursively copied nested objects.</p></div></article><article class="topic" id="q155"><h2><span class="num">Q155</span> What happens when b = a?</h2><div class="body"><p>Both variables refer to the same object.</p></div></article><article class="topic" id="q156"><h2><span class="num">Q156</span> How to check whether two variables refer to same object?</h2><div class="body"><p>Use is or compare <code>id()</code> values.</p></div></article><article class="topic" id="q157"><h2><span class="num">Q157</span> Does shallow copy work with nested lists?</h2><div class="body"><p>Yes, but nested objects remain shared.</p></div></article><article class="topic" id="q158"><h2><span class="num">Q158</span> Can deep copy copy custom class objects?</h2><div class="body"><p>Yes, subject to custom copying behavior.</p></div></article><h1 class="stage" id="part-12">Part 12: Built-In Functions in OOPs</h1><article class="topic" id="q159"><h2><span class="num">Q159</span> What is type()?</h2><div class="body"><p>Returns the type of an object.</p></div></article><article class="topic" id="q160"><h2><span class="num">Q160</span> What is isinstance()?</h2><div class="body"><p>Checks whether an object belongs to a class or subclass.</p></div></article><article class="topic" id="q161"><h2><span class="num">Q161</span> What is issubclass()?</h2><div class="body"><p>Checks whether a class inherits from another class.</p></div></article><article class="topic" id="q162"><h2><span class="num">Q162</span> Difference between isinstance and issubclass?</h2><div class="body"><p>isinstance = Checks object.</p>
+<p>issubclass = Checks class inheritance.</p></div></article><article class="topic" id="q163"><h2><span class="num">Q163</span> What is getattr()?</h2><div class="body"><p>Retrieves an attribute dynamically.</p></div></article><article class="topic" id="q164"><h2><span class="num">Q164</span> What is setattr()?</h2><div class="body"><p>Creates or modifies an attribute dynamically.</p></div></article><article class="topic" id="q165"><h2><span class="num">Q165</span> What is hasattr()?</h2><div class="body"><p>Checks whether an attribute exists.</p></div></article><article class="topic" id="q166"><h2><span class="num">Q166</span> What is delattr()?</h2><div class="body"><p>Deletes an attribute.</p></div></article><article class="topic" id="q167"><h2><span class="num">Q167</span> What is dir()?</h2><div class="body"><p>Lists available attribute names and methods.</p></div></article><article class="topic" id="q168"><h2><span class="num">Q168</span> What is vars()?</h2><div class="body"><p>Returns an object&#x27;s <code>__dict__</code> when available.</p></div></article><article class="topic" id="q169"><h2><span class="num">Q169</span> What is id()?</h2><div class="body"><p>Returns an object&#x27;s identity.</p></div></article><article class="topic" id="q170"><h2><span class="num">Q170</span> What is callable()?</h2><div class="body"><p>Checks whether an object can be called.</p></div></article><article class="topic" id="q171"><h2><span class="num">Q171</span> What is property()?</h2><div class="body"><p>Creates a property attribute.</p></div></article><h1 class="stage" id="part-13">Part 13: Important OOP Modules</h1><article class="topic" id="q172"><h2><span class="num">Q172</span> What is a module?</h2><div class="body"><p>A Python file containing reusable code.</p></div></article><article class="topic" id="q173"><h2><span class="num">Q173</span> Difference between module and package?</h2><div class="body"><p>Module = Single Python file.</p>
+<p>Package = Collection of related modules.</p></div></article><article class="topic" id="q174"><h2><span class="num">Q174</span> Important OOP modules?</h2><div class="body"><ul><li>abc</li><li>copy</li><li>dataclasses</li><li>enum</li><li>inspect</li><li>types</li><li>functools</li><li>collections</li><li>operator</li><li>pickle</li><li>json</li><li>typing</li></ul></div></article><p class="subhead">ABC Module</p><article class="topic" id="q175"><h2><span class="num">Q175</span> What is abc?</h2><div class="body"><p>Module for abstract base classes.</p>
+<p class="label">Important components:</p>
+<p>ABC</p>
+<p>ABCMeta</p>
+<ul><li>abstractmethod</li></ul></div></article><p class="subhead">Copy Module</p><article class="topic" id="q176"><h2><span class="num">Q176</span> What is copy module?</h2><div class="body"><p>Used for shallow and deep copying.</p>
+<p class="label">Functions:</p>
+<ul><li>copy.<code>copy()</code></li><li>copy.<code>deepcopy()</code></li></ul></div></article><p class="subhead">Dataclasses Module</p><article class="topic" id="q177"><h2><span class="num">Q177</span> What is dataclasses?</h2><div class="body"><p>Helps create data-holding classes with automatically</p>
+<p>generated methods.</p></div></article><article class="topic" id="q178"><h2><span class="num">Q178</span> What is @dataclass?</h2><div class="body"><p>Decorator that generates methods such as <code>__init__</code>()</p>
+<p>and <code>__repr__</code>().</p></div></article><article class="topic" id="q179"><h2><span class="num">Q179</span> What is field()?</h2><div class="body"><p>Customizes individual dataclass fields.</p></div></article><article class="topic" id="q180"><h2><span class="num">Q180</span> What is asdict()?</h2><div class="body"><p>Converts a dataclass instance into a dictionary.</p></div></article><article class="topic" id="q181"><h2><span class="num">Q181</span> What is astuple()?</h2><div class="body"><p>Converts a dataclass instance into a tuple.</p></div></article><article class="topic" id="q182"><h2><span class="num">Q182</span> What is replace()?</h2><div class="body"><p>Creates a dataclass instance with selected fields changed.</p></div></article><article class="topic" id="q183"><h2><span class="num">Q183</span> What is fields()?</h2><div class="body"><p>Returns field information for a dataclass.</p></div></article><p class="subhead">Enum Module</p><article class="topic" id="q184"><h2><span class="num">Q184</span> What is enum?</h2><div class="body"><p>Creates enumerations containing named constants.</p></div></article><article class="topic" id="q185"><h2><span class="num">Q185</span> What is Enum?</h2><div class="body"><p>Base class for creating enumeration types.</p></div></article><article class="topic" id="q186"><h2><span class="num">Q186</span> What is auto()?</h2><div class="body"><p>Automatically generates enumeration values.</p></div></article><article class="topic" id="q187"><h2><span class="num">Q187</span> What is IntEnum?</h2><div class="body"><p>Enumeration whose members are also integers.</p></div></article><p class="subhead">Inspect Module</p><article class="topic" id="q188"><h2><span class="num">Q188</span> What is inspect?</h2><div class="body"><p>Inspects classes, methods, functions and objects.</p>
+<p class="label">Important functions:</p>
+<ul><li>inspect.<code>isclass()</code></li><li>inspect.<code>isfunction()</code></li><li>inspect.<code>ismethod()</code></li><li>inspect.<code>signature()</code></li><li>inspect.<code>getmembers()</code></li></ul></div></article><p class="subhead">Pickle Module</p><article class="topic" id="q189"><h2><span class="num">Q189</span> What is pickle?</h2><div class="body"><p>Serializes and deserializes Python objects.</p></div></article><article class="topic" id="q190"><h2><span class="num">Q190</span> What is serialization?</h2><div class="body"><p>Converting objects into a storable or transferable form.</p></div></article><article class="topic" id="q191"><h2><span class="num">Q191</span> What is deserialization?</h2><div class="body"><p>Reconstructing objects from serialized data.</p></div></article><article class="topic" id="q192"><h2><span class="num">Q192</span> What is pickle.dump()?</h2><div class="body"><p>Writes serialized object to a file.</p></div></article><article class="topic" id="q193"><h2><span class="num">Q193</span> What is pickle.load()?</h2><div class="body"><p>Reads a serialized object from a file.</p>
+<p class="label">IMPORTANT:</p>
+<p>Never unpickle untrusted data.</p></div></article><p class="subhead">JSON Module</p><article class="topic" id="q194"><h2><span class="num">Q194</span> What is JSON?</h2><div class="body"><p>JavaScript Object Notation. A text-based data format.</p></div></article><article class="topic" id="q195"><h2><span class="num">Q195</span> Difference between pickle and JSON?</h2><div class="body"><p>Pickle = Python-specific object serialization.</p>
+<p>JSON = Language-independent data interchange format.</p></div></article><p class="subhead">Typing Module</p><article class="topic" id="q196"><h2><span class="num">Q196</span> What is typing?</h2><div class="body"><p>Provides type hints for variables, functions and classes.</p>
+<p class="label">Important:</p>
+<p>List</p>
+<p>Dict</p>
+<p>Tuple</p>
+<p>Set</p>
+<p>Optional</p>
+<p>Union</p>
+<p>Any</p>
+<p>Protocol</p></div></article><p class="subhead">Collections Module</p><article class="topic" id="q197"><h2><span class="num">Q197</span> What is collections?</h2><div class="body"><p>Provides specialized container data structures.</p>
+<p class="label">Important:</p>
+<p>Counter</p>
+<ul><li>defaultdict</li><li>deque</li><li>namedtuple</li></ul>
+<p>ChainMap</p></div></article><p class="subhead">Operator Module</p><article class="topic" id="q198"><h2><span class="num">Q198</span> What is operator?</h2><div class="body"><p>Provides functions corresponding to Python operators.</p>
+<p class="label">Important:</p>
+<ul><li><code>add()</code></li><li><code>sub()</code></li><li><code>mul()</code></li><li><code>eq()</code></li><li><code>lt()</code></li><li><code>gt()</code></li></ul></div></article><p class="subhead">Functools Module</p><article class="topic" id="q199"><h2><span class="num">Q199</span> What is functools?</h2><div class="body"><p>Provides reusable function and decorator utilities.</p>
+<p class="label">Important:</p>
+<ul><li><code>wraps()</code></li><li><code>lru_cache()</code></li><li><code>cache()</code></li><li><code>partial()</code></li><li><code>reduce()</code></li><li><code>singledispatch()</code></li></ul></div></article><h1 class="stage" id="part-14">Part 14: Advanced OOP Concepts</h1><article class="topic" id="q200"><h2><span class="num">Q200</span> What is a metaclass?</h2><div class="body"><p>A class whose instances are classes.</p></div></article><article class="topic" id="q201"><h2><span class="num">Q201</span> What is the default metaclass?</h2><div class="body"><p>type.</p></div></article><article class="topic" id="q202"><h2><span class="num">Q202</span> What is type used for?</h2><div class="body"><p>Identifying object types and dynamically creating classes.</p></div></article><article class="topic" id="q203"><h2><span class="num">Q203</span> What is a descriptor?</h2><div class="body"><p>An object that controls attribute access using special</p>
+<p>methods.</p></div></article><article class="topic" id="q204"><h2><span class="num">Q204</span> What are the types of descriptors?</h2><div class="body"><ul><li>Data descriptor</li><li>Non-data descriptor</li></ul></div></article><article class="topic" id="q205"><h2><span class="num">Q205</span> What is a data descriptor?</h2><div class="body"><p>Defines <code>__get__</code>() and at least one of <code>__set__</code>()</p>
+<p>or <code>__delete__</code>().</p></div></article><article class="topic" id="q206"><h2><span class="num">Q206</span> What is a non-data descriptor?</h2><div class="body"><p>Defines <code>__get__</code>() without <code>__set__</code>() or <code>__delete__</code>().</p></div></article><article class="topic" id="q207"><h2><span class="num">Q207</span> What is __slots__?</h2><div class="body"><p>Declares specific instance attributes and can prevent</p>
+<p>automatic creation of an instance <code>__dict__</code>.</p></div></article><article class="topic" id="q208"><h2><span class="num">Q208</span> What is dynamic attribute creation?</h2><div class="body"><p>Creating attributes at runtime.</p></div></article><article class="topic" id="q209"><h2><span class="num">Q209</span> What is dynamic class creation?</h2><div class="body"><p>Creating a class at runtime using mechanisms such as <code>type()</code>.</p></div></article><article class="topic" id="q210"><h2><span class="num">Q210</span> What is a callable object?</h2><div class="body"><p>An object implementing <code>__call__</code>().</p></div></article><article class="topic" id="q211"><h2><span class="num">Q211</span> What is a context manager?</h2><div class="body"><p>Manages resources and setup/cleanup operations.</p></div></article><article class="topic" id="q212"><h2><span class="num">Q212</span> Which methods create a class-based context manager?</h2><div class="body"><p><code>__enter__</code>()</p>
+<p><code>__exit__</code>()</p></div></article><article class="topic" id="q213"><h2><span class="num">Q213</span> What is dependency injection?</h2><div class="body"><p>Supplying required dependencies to an object from outside.</p></div></article><article class="topic" id="q214"><h2><span class="num">Q214</span> What is a design pattern?</h2><div class="body"><p>A reusable solution to a common software design problem.</p></div></article><article class="topic" id="q215"><h2><span class="num">Q215</span> Common design patterns?</h2><div class="body"><ul><li>Singleton</li><li>Factory</li><li>Observer</li><li>Strategy</li><li>Adapter</li><li>Builder</li><li>Decorator</li></ul></div></article><article class="topic" id="q216"><h2><span class="num">Q216</span> What is Singleton?</h2><div class="body"><p>A pattern intended to ensure one shared instance.</p></div></article><article class="topic" id="q217"><h2><span class="num">Q217</span> What is Factory?</h2><div class="body"><p>A pattern for creating objects without exposing</p>
+<p>all creation details.</p></div></article><article class="topic" id="q218"><h2><span class="num">Q218</span> What is Observer?</h2><div class="body"><p>A pattern where objects receive notifications</p>
+<p>when another object&#x27;s state changes.</p></div></article><article class="topic" id="q219"><h2><span class="num">Q219</span> What is SOLID?</h2><div class="body"><p>Five object-oriented design principles.</p>
+<p>S = Single Responsibility</p>
+<p>O = Open/Closed</p>
+<p>L = Liskov Substitution</p>
+<p>I = Interface Segregation</p>
+<p>D = Dependency Inversion</p></div></article><h1 class="stage" id="part-15">Part 15: SOLID Principles</h1><article class="topic" id="q220"><h2><span class="num">Q220</span> What is Single Responsibility Principle?</h2><div class="body"><p>A class should have one main responsibility and one</p>
+<p>reason to change.</p></div></article><article class="topic" id="q221"><h2><span class="num">Q221</span> What is Open/Closed Principle?</h2><div class="body"><p>Open for extension, closed for modification.</p></div></article><article class="topic" id="q222"><h2><span class="num">Q222</span> What is Liskov Substitution Principle?</h2><div class="body"><p>Subclasses should be usable in place of parent classes</p>
+<p>without breaking expected behavior.</p></div></article><article class="topic" id="q223"><h2><span class="num">Q223</span> What is Interface Segregation Principle?</h2><div class="body"><p>Classes should not be forced to depend on methods</p>
+<p>they do not need.</p></div></article><article class="topic" id="q224"><h2><span class="num">Q224</span> What is Dependency Inversion Principle?</h2><div class="body"><p>High-level modules should depend on abstractions</p>
+<p>rather than concrete implementations.</p></div></article><h1 class="stage">Practice</h1><h1 class="stage" id="part-16">Part 16: Practical Coding Questions</h1><article class="topic" id="q225"><h2><span class="num">Q225</span> Create a Student class.</h2><div class="body"><pre><code>class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age</code></pre>
+<pre><code>def display(self):
+        print(self.name, self.age)</code></pre>
+<pre><code>s1 = Student(&quot;Rahul&quot;, 25)
+s1.display()</code></pre></div></article><article class="topic" id="q226"><h2><span class="num">Q226</span> Create an Employee class.</h2><div class="body"><pre><code>class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary</code></pre>
+<pre><code>def display(self):
+        print(self.name, self.salary)</code></pre>
+<pre><code>e1 = Employee(&quot;Rahul&quot;, 30000)
+e1.display()</code></pre></div></article><article class="topic" id="q227"><h2><span class="num">Q227</span> Calculate rectangle area using a class.</h2><div class="body"><pre><code>class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width</code></pre>
+<pre><code>def area(self):
+        return self.length * self.width</code></pre>
+<pre><code>r1 = Rectangle(10, 5)
+print(r1.area())</code></pre>
+<p class="label">Output:</p>
+<pre><code>50</code></pre></div></article><article class="topic" id="q228"><h2><span class="num">Q228</span> Create a calculator using a class.</h2><div class="body"><pre><code>class Calculator:
+    def add(self, a, b):
+        return a + b</code></pre>
+<pre><code>def subtract(self, a, b):
+        return a - b</code></pre>
+<pre><code>def multiply(self, a, b):
+        return a * b</code></pre>
+<pre><code>def divide(self, a, b):
+        return a / b</code></pre>
+<pre><code>c = Calculator()</code></pre>
+<pre><code>print(c.add(10, 5))
+print(c.subtract(10, 5))
+print(c.multiply(10, 5))
+print(c.divide(10, 5))</code></pre></div></article><article class="topic" id="q229"><h2><span class="num">Q229</span> Demonstrate single inheritance.</h2><div class="body"><pre><code>class Parent:
+    def show(self):
+        print(&quot;Parent&quot;)</code></pre>
+<pre><code>class Child(Parent):
+    pass</code></pre>
+<pre><code>obj = Child()
+obj.show()</code></pre></div></article><article class="topic" id="q230"><h2><span class="num">Q230</span> Demonstrate multiple inheritance.</h2><div class="body"><pre><code>class Father:
+    def father(self):
+        print(&quot;Father&quot;)</code></pre>
+<pre><code>class Mother:
+    def mother(self):
+        print(&quot;Mother&quot;)</code></pre>
+<pre><code>class Child(Father, Mother):
+    pass</code></pre>
+<p>obj = <code>Child()</code></p>
+<p>obj.<code>father()</code></p>
+<p>obj.<code>mother()</code></p></div></article><article class="topic" id="q231"><h2><span class="num">Q231</span> Demonstrate method overriding.</h2><div class="body"><pre><code>class Animal:
+    def sound(self):
+        print(&quot;Animal sound&quot;)</code></pre>
+<pre><code>class Dog(Animal):
+    def sound(self):
+        print(&quot;Bark&quot;)</code></pre>
+<pre><code>obj = Dog()
+obj.sound()</code></pre></div></article><article class="topic" id="q232"><h2><span class="num">Q232</span> Demonstrate encapsulation.</h2><div class="body"><pre><code>class Bank:
+    def __init__(self, balance):
+        self.__balance = balance</code></pre>
+<pre><code>def get_balance(self):
+        return self.__balance</code></pre>
+<ul><li>def deposit(self, amount):</li></ul>
+<p class="label">if amount &gt; 0:</p>
+<ul><li>self.__balance += amount</li></ul>
+<pre><code>b = Bank(1000)
+b.deposit(500)</code></pre>
+<pre><code>print(b.get_balance())</code></pre>
+<p class="label">Output:</p>
+<pre><code>1500</code></pre></div></article><article class="topic" id="q233"><h2><span class="num">Q233</span> Demonstrate abstraction.</h2><div class="body"><pre><code>from abc import ABC, abstractmethod</code></pre>
+<pre><code>class Vehicle(ABC):
+    @abstractmethod
+    def start(self):
+        pass</code></pre>
+<pre><code>class Car(Vehicle):
+    def start(self):
+        print(&quot;Car started&quot;)</code></pre>
+<pre><code>c = Car()
+c.start()</code></pre></div></article><article class="topic" id="q234"><h2><span class="num">Q234</span> Demonstrate polymorphism.</h2><div class="body"><pre><code>class Dog:
+    def sound(self):
+        print(&quot;Bark&quot;)</code></pre>
+<pre><code>class Cat:
+    def sound(self):
+        print(&quot;Meow&quot;)</code></pre>
+<pre><code>animals = [Dog(), Cat()]</code></pre>
+<p class="label">for animal in animals:</p>
+<ul><li>animal.<code>sound()</code></li></ul></div></article><article class="topic" id="q235"><h2><span class="num">Q235</span> Demonstrate class method.</h2><div class="body"><pre><code>class Student:
+    school = &quot;ABC&quot;</code></pre>
+<pre><code>@classmethod
+    def change_school(cls, name):
+        cls.school = name</code></pre>
+<pre><code>Student.change_school(&quot;XYZ&quot;)
+print(Student.school)</code></pre></div></article><article class="topic" id="q236"><h2><span class="num">Q236</span> Demonstrate static method.</h2><div class="body"><pre><code>class Calculator:
+    @staticmethod
+    def add(a, b):
+        return a + b</code></pre>
+<pre><code>print(Calculator.add(10, 20))</code></pre></div></article><article class="topic" id="q237"><h2><span class="num">Q237</span> Demonstrate super().</h2><div class="body"><pre><code>class Parent:
+    def __init__(self):
+        print(&quot;Parent constructor&quot;)</code></pre>
+<pre><code>class Child(Parent):
+    def __init__(self):
+        super().__init__()
+        print(&quot;Child constructor&quot;)</code></pre>
+<pre><code>obj = Child()</code></pre>
+<p class="label">Output:</p>
+<pre><code>Parent constructor
+Child constructor</code></pre></div></article><article class="topic" id="q238"><h2><span class="num">Q238</span> Count objects created.</h2><div class="body"><pre><code>class Student:
+    count = 0</code></pre>
+<pre><code>def __init__(self):
+        Student.count += 1</code></pre>
+<pre><code>s1 = Student()
+s2 = Student()
+s3 = Student()</code></pre>
+<pre><code>print(Student.count)</code></pre>
+<p class="label">Output:</p>
+<pre><code>3</code></pre></div></article><article class="topic" id="q239"><h2><span class="num">Q239</span> Demonstrate __str__().</h2><div class="body"><pre><code>class Employee:
+    def __init__(self, name):
+        self.name = name</code></pre>
+<pre><code>def __str__(self):
+        return self.name</code></pre>
+<pre><code>e1 = Employee(&quot;Rahul&quot;)
+print(e1)</code></pre></div></article><article class="topic" id="q240"><h2><span class="num">Q240</span> Demonstrate operator overloading.</h2><div class="body"><pre><code>class Number:
+    def __init__(self, value):
+        self.value = value</code></pre>
+<pre><code>def __add__(self, other):
+        return Number(self.value + other.value)</code></pre>
+<pre><code>def __str__(self):
+        return str(self.value)</code></pre>
+<pre><code>n1 = Number(10)
+n2 = Number(20)</code></pre>
+<pre><code>print(n1 + n2)</code></pre></div></article><article class="topic" id="q241"><h2><span class="num">Q241</span> Demonstrate composition.</h2><div class="body"><pre><code>class Engine:
+    def start(self):
+        print(&quot;Engine started&quot;)</code></pre>
+<pre><code>class Car:
+    def __init__(self):
+        self.engine = Engine()</code></pre>
+<pre><code>def start(self):
+        self.engine.start()</code></pre>
+<pre><code>car = Car()
+car.start()</code></pre></div></article><article class="topic" id="q242"><h2><span class="num">Q242</span> Demonstrate property setter.</h2><div class="body"><pre><code>class Employee:
+    def __init__(self, salary):
+        self._salary = salary</code></pre>
+<pre><code>@property
+    def salary(self):
+        return self._salary</code></pre>
+<pre><code>@salary.setter
+    def salary(self, value):
+        if value &gt; 0:
+            self._salary = value
+        else:
+            print(&quot;Invalid salary&quot;)</code></pre>
+<pre><code>e1 = Employee(30000)
+e1.salary = 40000</code></pre>
+<pre><code>print(e1.salary)</code></pre></div></article><article class="topic" id="q243"><h2><span class="num">Q243</span> Demonstrate dataclass.</h2><div class="body"><pre><code>from dataclasses import dataclass</code></pre>
+<pre><code>@dataclass
+class Employee:
+    name: str
+    salary: int</code></pre>
+<pre><code>e1 = Employee(&quot;Rahul&quot;, 30000)</code></pre>
+<pre><code>print(e1)</code></pre></div></article><h1 class="stage" id="part-17">Part 17: Output-Based Questions</h1><article class="topic" id="q244"><h2><span class="num">Q244</span></h2><pre><code>What is the output?
+
+class Student:
+    name = &quot;Rahul&quot;
+
+s1 = Student()
+s2 = Student()
+
+print(s1.name)
+print(s2.name)</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>Rahul
+Rahul</code></pre></div></article><article class="topic" id="q245"><h2><span class="num">Q245</span></h2><pre><code>What is the output?
+
+class Student:
+    name = &quot;Rahul&quot;
+
+s1 = Student()
+s1.name = &quot;John&quot;
+
+print(s1.name)
+print(Student.name)</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>John
+Rahul</code></pre></div></article><article class="topic" id="q246"><h2><span class="num">Q246</span></h2><pre><code>What is the output?
+
+class A:
+    def show(self):
+        print(&quot;A&quot;)
+
+class B(A):
+    def show(self):
+        print(&quot;B&quot;)
+
+obj = B()
+obj.show()</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>B</code></pre></div></article><article class="topic" id="q247"><h2><span class="num">Q247</span></h2><pre><code>What is the output?
+
+class A:
+    def show(self):
+        print(&quot;A&quot;)
+
+class B(A):
+    pass
+
+obj = B()
+obj.show()</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>A</code></pre></div></article><article class="topic" id="q248"><h2><span class="num">Q248</span></h2><pre><code>What is the output?
+
+class A:
+    def __init__(self):
+        print(&quot;A&quot;)
+
+class B(A):
+    def __init__(self):
+        print(&quot;B&quot;)
+
+obj = B()</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>B</code></pre></div></article><article class="topic" id="q249"><h2><span class="num">Q249</span></h2><pre><code>What is the output?
+
+class A:
+    def __init__(self):
+        print(&quot;A&quot;)
+
+class B(A):
+    def __init__(self):
+        super().__init__()
+        print(&quot;B&quot;)
+
+obj = B()</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>A
+B</code></pre></div></article><article class="topic" id="q250"><h2><span class="num">Q250</span></h2><pre><code>What is the output?
+
+class Student:
+    count = 0
+
+    def __init__(self):
+        Student.count += 1
+
+s1 = Student()
+s2 = Student()
+
+print(Student.count)</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>2</code></pre></div></article><article class="topic" id="q251"><h2><span class="num">Q251</span></h2><pre><code>What is the output?
+
+class Student:
+    def display(self):
+        print(&quot;Hello&quot;)
+
+s1 = Student()
+print(callable(s1))</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>False</code></pre></div></article><article class="topic" id="q252"><h2><span class="num">Q252</span></h2><pre><code>What is the output?
+
+class Student:
+    def __call__(self):
+        print(&quot;Called&quot;)
+
+s1 = Student()
+
+print(callable(s1))
+s1()</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>True
+Called</code></pre></div></article><article class="topic" id="q253"><h2><span class="num">Q253</span></h2><pre><code>What is the output?
+
+class A:
+    pass
+
+a = A()
+b = A()
+
+print(a == b)
+print(a is b)</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>False
+False</code></pre></div></article><article class="topic" id="q254"><h2><span class="num">Q254</span></h2><pre><code>What is the output?
+
+class A:
+    pass
+
+a = A()
+b = a
+
+print(a is b)</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>True</code></pre></div></article><article class="topic" id="q255"><h2><span class="num">Q255</span></h2><pre><code>What is the output?
+
+class Parent:
+    def show(self):
+        print(&quot;Parent&quot;)
+
+class Child(Parent):
+    def display(self):
+        print(&quot;Child&quot;)
+
+obj = Child()
+obj.show()
+obj.display()</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>Parent
+Child</code></pre></div></article><article class="topic" id="q256"><h2><span class="num">Q256</span></h2><pre><code>What is the output?
+
+class A:
+    x = 10
+
+class B(A):
+    x = 20
+
+obj = B()
+
+print(obj.x)
+print(A.x)</code></pre><div class="body"><p class="label">Answer:</p>
+<pre><code>20
+10</code></pre></div></article><h1 class="stage" id="part-18">Part 18: Error-Based Questions</h1><article class="topic" id="q257"><h2><span class="num">Q257</span> What is AttributeError?</h2><div class="body"><p>Occurs when an attribute cannot be found.</p></div></article><article class="topic" id="q258"><h2><span class="num">Q258</span> What is TypeError?</h2><div class="body"><p>Occurs when an operation or function receives</p>
+<p>an inappropriate type or incorrect arguments.</p></div></article><article class="topic" id="q259"><h2><span class="num">Q259</span> What is NameError?</h2><div class="body"><p>Occurs when a variable name cannot be found.</p></div></article><article class="topic" id="q260"><h2><span class="num">Q260</span> What is RecursionError?</h2><div class="body"><p>Occurs when recursion exceeds maximum recursion depth.</p></div></article><article class="topic" id="q261"><h2><span class="num">Q261</span> What is NotImplementedError?</h2><div class="body"><p>Exception used to indicate an operation is not implemented.</p></div></article><article class="topic" id="q262"><h2><span class="num">Q262</span> What happens if we access an undefined attribute?</h2><div class="body"><p>AttributeError.</p></div></article><article class="topic" id="q263"><h2><span class="num">Q263</span> What happens if we call a method without required arguments?</h2><div class="body"><p>TypeError.</p></div></article><article class="topic" id="q264"><h2><span class="num">Q264</span> What happens if we instantiate an abstract class
+with unresolved abstract methods?</h2><div class="body"><p>TypeError.</p></div></article><article class="topic" id="q265"><h2><span class="num">Q265</span> What happens if we access a private-style attribute
+using its original name?</h2><div class="body"><p>Usually AttributeError.</p></div></article><article class="topic" id="q266"><h2><span class="num">Q266</span> What happens if super() is used incorrectly?</h2><div class="body"><p>It may raise TypeError, AttributeError or other errors.</p></div></article><article class="topic" id="q267"><h2><span class="num">Q267</span> What happens if we divide by zero?</h2><div class="body"><p>ZeroDivisionError.</p></div></article><article class="topic" id="q268"><h2><span class="num">Q268</span> What happens if a method does not accept self
+but is called through an object?</h2><div class="body"><p>Usually TypeError.</p></div></article><article class="topic" id="q269"><h2><span class="num">Q269</span> What happens if we assign an attribute not allowed
+by __slots__?</h2><div class="body"><p>AttributeError, if no other mechanism allows it.</p></div></article><article class="topic" id="q270"><h2><span class="num">Q270</span> What happens if abstract methods are not implemented?</h2><div class="body"><p>The child remains abstract and cannot be instantiated.</p></div></article><article class="topic" id="q271"><h2><span class="num">Q271</span> Difference between NotImplemented and NotImplementedError?</h2><div class="body"><pre><code>NotImplemented = Special value returned by certain
+operator methods.
+NotImplementedError = Exception.</code></pre></div></article><h1 class="stage" id="part-19">Part 19: Scenario-Based Questions</h1><article class="topic" id="q272"><h2><span class="num">Q272</span> How would you design a banking system?</h2><div class="body"><p>Create a BankAccount class with account number,</p>
+<p>balance, deposit, withdraw and check_balance methods.</p>
+<p>Use encapsulation to control balance access.</p></div></article><article class="topic" id="q273"><h2><span class="num">Q273</span> How would you design employee management?</h2><div class="body"><p>Create an Employee class with ID, name and salary.</p>
+<p>Use inheritance for different employee types.</p></div></article><article class="topic" id="q274"><h2><span class="num">Q274</span> How would you implement multiple payment methods?</h2><div class="body"><p>Use an abstract payment interface and separate</p>
+<p>UPI, card and net banking classes.</p></div></article><article class="topic" id="q275"><h2><span class="num">Q275</span> How do different classes execute different methods
+with the same name?</h2><div class="body"><p>Using polymorphism.</p></div></article><article class="topic" id="q276"><h2><span class="num">Q276</span> How would you hide salary information?</h2><div class="body"><p>Use encapsulation and controlled access through</p>
+<p>properties or methods.</p></div></article><article class="topic" id="q277"><h2><span class="num">Q277</span> How do you force child classes to implement a method?</h2><div class="body"><p>Use abstraction and <code>@abstractmethod</code>.</p></div></article><article class="topic" id="q278"><h2><span class="num">Q278</span> How do you reuse functionality from multiple parents?</h2><div class="body"><p>Multiple inheritance.</p></div></article><article class="topic" id="q279"><h2><span class="num">Q279</span> How do you modify parent method behavior?</h2><div class="body"><p>Method overriding.</p></div></article><article class="topic" id="q280"><h2><span class="num">Q280</span> Which method is used when object data is not required?</h2><div class="body"><p>Static method.</p></div></article><article class="topic" id="q281"><h2><span class="num">Q281</span> How do you create an alternative constructor?</h2><div class="body"><p>Use a class method as a factory method.</p></div></article><article class="topic" id="q282"><h2><span class="num">Q282</span> How do classes interact without inheritance?</h2><div class="body"><p>Association or composition.</p></div></article><article class="topic" id="q283"><h2><span class="num">Q283</span> How do you validate an attribute whenever it changes?</h2><div class="body"><p>Use <code>@property</code> and a setter.</p></div></article><article class="topic" id="q284"><h2><span class="num">Q284</span> How do you copy a nested object independently?</h2><div class="body"><p>copy.<code>deepcopy()</code>.</p></div></article><article class="topic" id="q285"><h2><span class="num">Q285</span> How do you save an object into a file?</h2><div class="body"><p>Use serialization such as JSON or pickle,</p>
+<p>depending on the object&#x27;s data and requirements.</p></div></article><article class="topic" id="q286"><h2><span class="num">Q286</span> What if a class has too many responsibilities?</h2><div class="body"><p>Apply Single Responsibility Principle.</p></div></article><h1 class="stage" id="part-20">Part 20: Tricky Interview Questions</h1><article class="topic" id="q287"><h2><span class="num">Q287</span> Is self mandatory?</h2><div class="body"><p>The name is not mandatory, but the instance method</p>
+<p>needs a parameter to receive the object.</p></div></article><article class="topic" id="q288"><h2><span class="num">Q288</span> Can a class inherit from multiple classes?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q289"><h2><span class="num">Q289</span> Can a class inherit from itself?</h2><div class="body"><p>No. Direct self-inheritance causes an error.</p></div></article><article class="topic" id="q290"><h2><span class="num">Q290</span> Can we create an object without calling __init__()?</h2><div class="body"><p>Yes, using object.<code>__new__</code>() or other creation mechanisms.</p>
+<p>The object may not have initialized attributes.</p></div></article><article class="topic" id="q291"><h2><span class="num">Q291</span> Is __init__() compulsory?</h2><div class="body"><p>No.</p></div></article><article class="topic" id="q292"><h2><span class="num">Q292</span> Can we define a class inside another class?</h2><div class="body"><p>Yes. It is called a nested class.</p></div></article><article class="topic" id="q293"><h2><span class="num">Q293</span> Can we modify classes at runtime?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q294"><h2><span class="num">Q294</span> Can we delete an object?</h2><div class="body"><p>We can delete references using del. Actual object</p>
+<p>finalization depends on garbage collection.</p></div></article><article class="topic" id="q295"><h2><span class="num">Q295</span> What is garbage collection?</h2><div class="body"><p>Process of reclaiming memory used by objects</p>
+<p>that are no longer needed.</p></div></article><article class="topic" id="q296"><h2><span class="num">Q296</span> Can static methods access class variables?</h2><div class="body"><p>Yes, by explicitly using the class name.</p></div></article><article class="topic" id="q297"><h2><span class="num">Q297</span> Can instance methods access class variables?</h2><div class="body"><p>Yes.</p></div></article><article class="topic" id="q298"><h2><span class="num">Q298</span> Can a child object access parent methods?</h2><div class="body"><p>Yes, if the methods are inherited and accessible.</p></div></article><article class="topic" id="q299"><h2><span class="num">Q299</span> Does Python support interfaces?</h2><div class="body"><p>Python has no separate interface keyword like Java.</p>
+<p>ABC and Protocol can provide similar functionality.</p></div></article><article class="topic" id="q300"><h2><span class="num">Q300</span> What is Protocol?</h2><div class="body"><p>Protocol defines a structural interface. Classes can</p>
+<p>satisfy its requirements without explicit inheritance.</p></div></article><article class="topic" id="q301"><h2><span class="num">Q301</span> Difference between abstract class and normal class?</h2><div class="body"><p>Abstract class = Cannot be instantiated while abstract</p>
+<p>methods remain unresolved.</p>
+<p>Normal class = Can generally be instantiated.</p></div></article><article class="topic" id="q302"><h2><span class="num">Q302</span> Difference between __dict__ and __slots__?</h2><div class="body"><p><code>__dict__</code> = Stores writable instance attributes.</p>
+<p><code>__slots__</code> = Declares specific instance attributes.</p></div></article><article class="topic" id="q303"><h2><span class="num">Q303</span> Difference between object and reference?</h2><div class="body"><pre><code>Object = Actual instance.
+Reference = A way to access the object.</code></pre></div></article><article class="topic" id="q304"><h2><span class="num">Q304</span> What is the most important OOP concept?</h2><div class="body"><p>All are important. Focus on the four pillars,</p>
+<p>classes, objects, methods, constructors and inheritance.</p></div></article><h1 class="stage">Revision</h1><h1 class="stage" id="part-21">Part 21: Quick Revision</h1><article class="topic"><div class="body"><div class="rf"><div><div>OOPs              = Object-Oriented Programming</div></div><div><div>Class             = Blueprint</div></div><div><div>Object            = Instance</div></div><div><div>Method            = Function inside a class</div></div><div><div>Attribute         = Variable associated with object/class</div></div><div><div>self              = Current object reference</div></div><div><div>cls               = Current class reference</div></div><div><div class="q">__init__()</div><div>Initializer</div></div><div><div class="q">__new__()</div><div>Object creation</div></div><div><div class="q">__del__()</div><div>Finalizer</div></div><div><div>Inheritance       = Reusing parent functionality</div></div><div><div>Polymorphism      = Different behavior through common interface</div></div><div><div>Encapsulation     = Bundling data and methods with controlled access</div></div><div><div>Abstraction       = Hiding implementation details</div></div><div><div>Overriding        = Redefining inherited method</div></div><div><div>Overloading       = Same name with different arguments/behavior</div></div><div><div class="q">super()</div><div>Next class in MRO</div></div><div><div>MRO               = Method Resolution Order</div></div><div><div><code>@staticmethod</code>     = Static method decorator</div></div><div><div><code>@classmethod</code>      = Class method decorator</div></div><div><div><code>@property</code>         = Property decorator</div></div><div><div class="q">Magic methods</div><div>Special object behavior methods</div></div><div><div>Composition       = Strong has-a relationship</div></div><div><div>Aggregation       = Weak has-a relationship</div></div><div><div>Association       = Relationship between objects</div></div><div><div>Metaclass         = Class that creates classes</div></div><div><div>Descriptor        = Controls attribute access</div></div><div><div><code>__slots__</code>         = Declares specific instance attributes</div></div><div><div class="q">Shallow copy</div><div>New outer object, shared nested references</div></div><div><div class="q">Deep copy</div><div>Recursively copies nested objects</div></div><div><div>ABC               = Abstract Base Class</div></div><div><div>SOLID             = Five object-oriented design principles</div></div><div><div class="q"></div><div>===========================================================</div></div></div></div></article><h1 class="stage" id="part-22">Part 22: SOLID Principles Study Notes</h1><article class="topic" id="q305"><h2><span class="num">Q305</span> WHAT IS SOLID</h2><div class="body"><p>SOLID is a set of five object-oriented design principles.</p>
+<p class="label">It helps create software that is:</p>
+<ul><li>Maintainable</li><li>Reusable</li><li>Flexible</li><li>Easy to test</li><li>Easy to extend</li></ul></div></article><article class="topic" id="q306"><h2><span class="num">Q306</span> S - SINGLE RESPONSIBILITY PRINCIPLE</h2><div class="body"><p>A class should have one main responsibility</p>
+<p>and one reason to change.</p>
+<p class="label">Bad design:</p>
+<p>One class handles database, email and reporting.</p>
+<p class="label">Better design:</p>
+<p>DatabaseManager</p>
+<p>EmailService</p>
+<p>ReportGenerator</p></div></article><article class="topic" id="q307"><h2><span class="num">Q307</span> O - OPEN/CLOSED PRINCIPLE</h2><div class="body"><p class="label">Software entities should be:</p>
+<p>Open for extension.</p>
+<p>Closed for modification.</p>
+<p class="label">Meaning:</p>
+<p>Add new functionality without constantly</p>
+<ul><li>changing existing tested code.</li></ul>
+<p class="label">Example:</p>
+<p>Use inheritance or composition to add</p>
+<ul><li>new payment methods.</li></ul></div></article><article class="topic" id="q308"><h2><span class="num">Q308</span> L - LISKOV SUBSTITUTION PRINCIPLE</h2><div class="body"><p>A child class should be usable wherever its</p>
+<p>parent class is expected without breaking</p>
+<p>the program&#x27;s expected behavior.</p>
+<p class="label">Meaning:</p>
+<p>Subclasses must correctly follow the</p>
+<ul><li>behavior promised by their base class.</li></ul></div></article><article class="topic" id="q309"><h2><span class="num">Q309</span> I - INTERFACE SEGREGATION PRINCIPLE</h2><div class="body"><p>A class should not be forced to implement</p>
+<p>methods it does not need.</p>
+<p class="label">Meaning:</p>
+<p>Prefer smaller, focused interfaces</p>
+<ul><li>instead of one large interface.</li></ul>
+<p class="label">Python:</p>
+<p>Use small abstract base classes or</p>
+<ul><li>protocols where appropriate.</li></ul></div></article><article class="topic" id="q310"><h2><span class="num">Q310</span> D - DEPENDENCY INVERSION PRINCIPLE</h2><div class="body"><p>High-level modules should depend on abstractions,</p>
+<p>not directly on low-level implementations.</p>
+<p class="label">Meaning:</p>
+<p>Depend on interfaces or abstractions</p>
+<ul><li>rather than tightly coupling classes.</li></ul>
+<p class="label">Python:</p>
+<p>Use abstract base classes, protocols,</p>
+<ul><li>dependency injection and composition.</li></ul></div></article><article class="topic" id="q311"><h2><span class="num">Q311</span> SOLID SUMMARY</h2><div class="body"><p class="label">S:</p>
+<ul><li>Single Responsibility.</li></ul>
+<p class="label">O:</p>
+<p>Open/Closed.</p>
+<p class="label">L:</p>
+<p>Liskov Substitution.</p>
+<p class="label">I:</p>
+<p>Interface Segregation.</p>
+<p class="label">D:</p>
+<p>Dependency Inversion.</p>
+<p>============================================================</p></div></article><h1 class="stage" id="part-23">Part 23: Metaclasses Study Notes</h1><article class="topic" id="q312"><h2><span class="num">Q312</span> WHAT IS A METACLASS</h2><div class="body"><p>A metaclass is a class whose instances are classes.</p>
+<p class="label">Normal relationship:</p>
+<p>Class creates objects.</p>
+<p class="label">Metaclass relationship:</p>
+<p>Metaclass creates classes.</p>
+<p class="label">In Python, the default metaclass is:</p>
+<p>type</p></div></article><article class="topic" id="q313"><h2><span class="num">Q313</span> TYPE FUNCTION</h2><div class="body"><p class="label">Check the type of an object:</p>
+<pre><code>x = 10</code></pre>
+<p>type(x)</p>
+<p class="label">Output:</p>
+<p>&lt;class &#x27;int&#x27;&gt;</p>
+<p class="label">Create a class dynamically:</p>
+<p>MyClass = type(</p>
+<p>&quot;MyClass&quot;,</p>
+<p>(),</p>
+<p>{&quot;x&quot;: 10}</p>
+<p>)</p>
+<pre><code>obj = MyClass()</code></pre>
+<pre><code>print(obj.x)</code></pre>
+<p class="label">Output:</p>
+<p>10</p></div></article><article class="topic" id="q314"><h2><span class="num">Q314</span> CUSTOM METACLASS</h2><div class="body"><pre><code>class MyMeta(type):
+        def __new__(mcs, name, bases, namespace):
+            print(&quot;Creating class:&quot;, name)</code></pre>
+<p>return <code>super()</code>.<code>__new__</code>(</p>
+<p>mcs,</p>
+<p>name,</p>
+<p>bases,</p>
+<p>namespace</p>
+<p>)</p>
+<pre><code>class MyClass(metaclass=MyMeta):
+        pass</code></pre>
+<p>When MyClass is created, the metaclass</p>
+<p>customizes the class creation process.</p></div></article><article class="topic" id="q315"><h2><span class="num">Q315</span> METACLASS METHODS</h2><div class="body"><p class="label">__new__():</p>
+<p>Creates the class object.</p>
+<p class="label">__init__():</p>
+<p>Initializes the class object.</p>
+<p class="label">__call__():</p>
+<p>Controls what happens when the class</p>
+<ul><li>is called to create an instance.</li></ul></div></article><article class="topic" id="q316"><h2><span class="num">Q316</span> METACLASS VS CLASS</h2><div class="body"><p class="label">Class:</p>
+<p>Creates objects.</p>
+<p class="label">Metaclass:</p>
+<p>Creates classes.</p>
+<p class="label">Normal class:</p>
+<ul><li>Defines object behavior.</li></ul>
+<p class="label">Metaclass:</p>
+<ul><li>Defines class creation behavior.</li></ul>
+<p class="label">Use cases:</p>
+<p>Frameworks, class validation, registration,</p>
+<ul><li>automatic class modification and ORMs.</li></ul></div></article>
+</main>
+</div>
+</body>
+</html>

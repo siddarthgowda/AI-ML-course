@@ -1,0 +1,2939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>File Handling · Interview Notes</title>
+<style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --panel: #202020;
+      --text: #e8e8e8;
+      --muted: #9a9a9a;
+      --line: #3a3a3a;
+      --accent: #7dcea0;
+      --code-bg: #141414;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 860px);
+      gap: 0;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 16px 40px;
+      border-right: 1px solid var(--line);
+      background: #161616;
+    }
+    nav h1 { font-size: 15px; margin: 0 0 4px; }
+    nav .sub { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+    nav a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12.5px;
+      padding: 3px 0;
+    }
+    nav a:hover { color: var(--accent); }
+    .toc-stage {
+      margin: 14px 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    main { padding: 28px 28px 80px; }
+    .intro {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 0 0 20px;
+    }
+    .intro h1 { margin: 0 0 8px; font-size: 22px; }
+    .intro p { margin: 0; color: var(--muted); }
+    h1.stage {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 12px;
+      padding-top: 8px;
+    }
+    article.topic {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px 14px;
+      margin: 0 0 12px;
+    }
+    article h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 650;
+    }
+    .num {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+    .body p { margin: 0 0 8px; }
+    .body p.label { margin-top: 10px; font-weight: 600; }
+    .body ul, .body ol { margin: 0 0 10px; padding-left: 20px; }
+    .body li { margin: 2px 0; }
+    .subhead {
+      margin: 22px 0 10px;
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      background: #2a2a2a;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      overflow: auto;
+      margin: 8px 0 0;
+    }
+    pre code { background: transparent; padding: 0; font-size: 13px; }
+    .qmeta { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .rf {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      font-size: 14px;
+    }
+    .rf div { border-bottom: 1px solid var(--line); padding: 4px 0; }
+    .rf .q { color: var(--muted); }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; height: auto; max-height: 40vh; }
+      .rf { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>File Handling</h1>
+<p class="sub">Complete interview notes</p>
+<p class="toc-stage">Part 1: Basic File Handling</p><a href="#part-01">Part 1: Basic File Handling</a><a href="#q1">Q1. What is file handling in Python?</a><a href="#q2">Q2. Why do we use file handling?</a><a href="#q3">Q3. What are the two main types of files?</a><a href="#q4">Q4. What is a text file?</a><a href="#q5">Q5. What is a binary file?</a><a href="#q6">Q6. Difference between text and binary files?</a><a href="#q7">Q7. What is open()?</a><a href="#q8">Q8. What are the arguments of open()?</a><a href="#q9">Q9. What is a file object?</a><a href="#q10">Q10. What is the default file opening mode?</a><a href="#q11">Q11. What happens if a file does not exist in read mode?</a><a href="#q12">Q12. Can Python create files automatically?</a><p class="toc-stage">Part 2: File Opening Modes</p><a href="#part-02">Part 2: File Opening Modes</a><a href="#q13">Q13. What are the different file opening modes?</a><a href="#q14">Q14. What is r mode?</a><a href="#q15">Q15. What is w mode?</a><a href="#q16">Q16. What is a mode?</a><a href="#q17">Q17. What is x mode?</a><a href="#q18">Q18. What is r+ mode?</a><a href="#q19">Q19. What is w+ mode?</a><a href="#q20">Q20. What is a+ mode?</a><a href="#q21">Q21. Difference between w and a?</a><a href="#q22">Q22. Difference between r and r+?</a><a href="#q23">Q23. Difference between w+ and a+?</a><a href="#q24">Q24. What is binary mode?</a><a href="#q25">Q25. Can read() be used with binary files?</a><a href="#q26">Q26. What happens if we open an existing file in x mode?</a><a href="#q27">Q27. Does append mode always write at the end?</a><p class="toc-stage">Part 3: Reading and Writing Methods</p><a href="#part-03">Part 3: Reading and Writing Methods</a><a href="#q28">Q28. What are the reading methods?</a><a href="#q29">Q29. What is read()?</a><a href="#q30">Q30. What is readline()?</a><a href="#q31">Q31. What is readlines()?</a><a href="#q32">Q32. Difference between read(), readline(), readlines()?</a><a href="#q33">Q33. What are the writing methods?</a><a href="#q34">Q34. What is write()?</a><a href="#q35">Q35. What is writelines()?</a><a href="#q36">Q36. Difference between write() and writelines()?</a><a href="#q37">Q37. Can write() directly write an integer?</a><a href="#q38">Q38. How do you write multiple lines?</a><a href="#q39">Q39. How do you read a file line by line?</a><a href="#q40">Q40. Which method is better for large files?</a><p class="toc-stage">Part 4: File Pointer</p><a href="#part-04">Part 4: File Pointer</a><a href="#q41">Q41. What is a file pointer?</a><a href="#q42">Q42. What is tell()?</a><a href="#q43">Q43. What is seek()?</a><a href="#q44">Q44. Difference between seek() and tell()?</a><a href="#q45">Q45. What does seek(0) do?</a><a href="#q46">Q46. What are the arguments of seek()?</a><a href="#q47">Q47. What is truncate()?</a><a href="#q48">Q48. Can we read the same file twice?</a><p class="toc-stage">Part 5: Context Manager</p><a href="#part-05">Part 5: Context Manager</a><a href="#q49">Q49. What is a context manager?</a><a href="#q50">Q50. What is with open()?</a><a href="#q51">Q51. Why do we use with open()?</a><a href="#q52">Q52. Difference between open() and with open()?</a><a href="#q53">Q53. What happens if an exception occurs inside with open()?</a><a href="#q54">Q54. What is __enter__()?</a><a href="#q55">Q55. What is __exit__()?</a><a href="#q56">Q56. Can we create our own context manager?</a><p class="toc-stage">Part 6: File Handling Exceptions</p><a href="#part-06">Part 6: File Handling Exceptions</a><a href="#q57">Q57. What is an exception?</a><a href="#q58">Q58. What are common file handling exceptions?</a><a href="#q59">Q59. What is FileNotFoundError?</a><a href="#q60">Q60. What is PermissionError?</a><a href="#q61">Q61. What is FileExistsError?</a><a href="#q62">Q62. What is UnicodeDecodeError?</a><a href="#q63">Q63. What is OSError?</a><a href="#q64">Q64. How do you handle file exceptions?</a><a href="#q65">Q65. Difference between try, except, else and finally?</a><p class="toc-stage">Part 7: File Attributes and Methods</p><a href="#part-07">Part 7: File Attributes and Methods</a><a href="#q66">Q66. What is close()?</a><a href="#q67">Q67. What is flush()?</a><a href="#q68">Q68. What is readable()?</a><a href="#q69">Q69. What is writable()?</a><a href="#q70">Q70. What is seekable()?</a><a href="#q71">Q71. What is fileno()?</a><a href="#q72">Q72. What is isatty()?</a><a href="#q73">Q73. What is closed?</a><a href="#q74">Q74. What is name?</a><a href="#q75">Q75. What is mode?</a><p class="toc-stage">Part 8: Os Module</p><a href="#part-08">Part 8: Os Module</a><a href="#q76">Q76. What is a module?</a><a href="#q77">Q77. What is the os module?</a><a href="#q78">Q78. Important functions in os module?</a><a href="#q79">Q79. What is os.getcwd()?</a><a href="#q80">Q80. What is os.chdir()?</a><a href="#q81">Q81. What is os.mkdir()?</a><a href="#q82">Q82. What is os.makedirs()?</a><a href="#q83">Q83. What is os.listdir()?</a><a href="#q84">Q84. What is os.remove()?</a><a href="#q85">Q85. What is os.rename()?</a><a href="#q86">Q86. What is os.rmdir()?</a><a href="#q87">Q87. What is os.path.exists()?</a><a href="#q88">Q88. Difference between os.path.isfile() and isdir()?</a><p class="toc-stage">Part 9: Shutil Module</p><a href="#part-09">Part 9: Shutil Module</a><a href="#q89">Q89. What is shutil?</a><a href="#q90">Q90. Important shutil functions?</a><a href="#q91">Q91. Difference between os and shutil?</a><a href="#q92">Q92. Difference between copy() and copy2()?</a><p class="toc-stage">Part 10: Pathlib Module</p><a href="#part-10">Part 10: Pathlib Module</a><a href="#q93">Q93. What is pathlib?</a><a href="#q94">Q94. Important pathlib methods?</a><a href="#q95">Q95. Difference between os and pathlib?</a><p class="toc-stage">Part 11: Tempfile and Io Modules</p><a href="#part-11">Part 11: Tempfile and Io Modules</a><a href="#q96">Q96. What is tempfile?</a><a href="#q97">Q97. What is io module?</a><a href="#q98">Q98. What is StringIO?</a><a href="#q99">Q99. What is BytesIO?</a><a href="#q100">Q100. Difference between StringIO and BytesIO?</a><p class="toc-stage">Part 12: Csv Module</p><a href="#part-12">Part 12: Csv Module</a><a href="#q101">Q101. What is CSV?</a><a href="#q102">Q102. Which module is used for CSV handling?</a><a href="#q103">Q103. What is csv.reader()?</a><a href="#q104">Q104. What is csv.writer()?</a><a href="#q105">Q105. What is csv.DictReader()?</a><a href="#q106">Q106. What is csv.DictWriter()?</a><a href="#q107">Q107. Difference between writerow() and writerows()?</a><a href="#q108">Q108. Why use newline=&quot;&quot;?</a><a href="#q109">Q109. How do you read a CSV file?</a><a href="#q110">Q110. How do you read CSV using dictionaries?</a><p class="toc-stage">Part 13: JSON Module</p><a href="#part-13">Part 13: JSON Module</a><a href="#q111">Q111. What is JSON?</a><a href="#q112">Q112. Which module is used for JSON?</a><a href="#q113">Q113. What is json.load()?</a><a href="#q114">Q114. What is json.dump()?</a><a href="#q115">Q115. What is json.loads()?</a><a href="#q116">Q116. What is json.dumps()?</a><a href="#q117">Q117. Difference between load() and loads()?</a><a href="#q118">Q118. Difference between dump() and dumps()?</a><a href="#q119">Q119. What is serialization?</a><a href="#q120">Q120. What is deserialization?</a><a href="#q121">Q121. Can JSON store Python dictionaries?</a><p class="toc-stage">Part 14: Pickle Module</p><a href="#part-14">Part 14: Pickle Module</a><a href="#q122">Q122. What is pickle?</a><a href="#q123">Q123. What is pickle.dump()?</a><a href="#q124">Q124. What is pickle.load()?</a><a href="#q125">Q125. What is pickle.dumps()?</a><a href="#q126">Q126. What is pickle.loads()?</a><a href="#q127">Q127. Difference between JSON and Pickle?</a><a href="#q128">Q128. Is pickle secure?</a><p class="toc-stage">Part 15: Encoding and Buffering</p><a href="#part-15">Part 15: Encoding and Buffering</a><a href="#q129">Q129. What is encoding?</a><a href="#q130">Q130. What is decoding?</a><a href="#q131">Q131. What is UTF-8?</a><a href="#q132">Q132. Different encoding types?</a><a href="#q133">Q133. What is buffering?</a><a href="#q134">Q134. Why is buffering used?</a><a href="#q135">Q135. Difference between text mode and binary mode?</a><a href="#q136">Q136. What is the encoding parameter?</a><p class="toc-stage">Part 16: Compression Modules</p><a href="#part-16">Part 16: Compression Modules</a><a href="#q137">Q137. What is zipfile?</a><a href="#q138">Q138. What is gzip?</a><a href="#q139">Q139. What is bz2?</a><a href="#q140">Q140. What is lzma?</a><a href="#q141">Q141. Difference between ZIP and GZIP?</a><p class="toc-stage">Part 17: Output-Based Questions</p><a href="#part-17">Part 17: Output-Based Questions</a><a href="#q142">Q142. What is the output?
+
+Assume data.txt contains &quot;Hello Py…</a><a href="#q143">Q143. What is the output?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+print…</a><a href="#q144">Q144. What is the output?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+print…</a><a href="#q145">Q145. What is the output?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+file.…</a><a href="#q146">Q146. What happens here?
+
+file = open(&quot;data.txt&quot;, &quot;w&quot;)
+file.w…</a><a href="#q147">Q147. What happens here?
+
+Assume file contains Hello.
+
+file =…</a><a href="#q148">Q148. What happens here?
+
+file = open(&quot;data.txt&quot;, &quot;x&quot;)</a><a href="#q149">Q149. What is the output?
+
+with open(&quot;data.txt&quot;, &quot;w&quot;) as file…</a><a href="#q150">Q150. What is the output?
+
+with open(&quot;data.txt&quot;, &quot;w&quot;) as file…</a><a href="#q151">Q151. What happens here?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+file.c…</a><a href="#q152">Q152. What is the output?
+
+Assume data.txt contains:
+
+Python
+…</a><p class="toc-stage">Part 18: Practical Coding Questions</p><a href="#part-18">Part 18: Practical Coding Questions</a><a href="#q153">Q153. Create a file.</a><a href="#q154">Q154. Read a file.</a><a href="#q155">Q155. Append content to a file.</a><a href="#q156">Q156. Count the number of lines.</a><a href="#q157">Q157. Count words in a file.</a><a href="#q158">Q158. Count characters in a file.</a><a href="#q159">Q159. Count vowels in a file.</a><a href="#q160">Q160. Count occurrences of a word.</a><a href="#q161">Q161. Copy content from one file to another.</a><a href="#q162">Q162. Copy a file using shutil.</a><a href="#q163">Q163. Rename a file.</a><a href="#q164">Q164. Delete a file.</a><a href="#q165">Q165. Check whether a file exists.</a><a href="#q166">Q166. Find the longest word.</a><a href="#q167">Q167. Reverse file content.</a><a href="#q168">Q168. Read file without loading everything into memory.</a><a href="#q169">Q169. Remove empty lines from a file.</a><a href="#q170">Q170. Find duplicate lines.</a><p class="toc-stage">Part 19: Advanced and Tricky Questions</p><a href="#part-19">Part 19: Advanced and Tricky Questions</a><a href="#q171">Q171. Difference between file and directory?</a><a href="#q172">Q172. What is an absolute path?</a><a href="#q173">Q173. What is a relative path?</a><a href="#q174">Q174. Difference between os.remove() and os.rmdir()?</a><a href="#q175">Q175. Difference between os.mkdir() and os.makedirs()?</a><a href="#q176">Q176. Can we open multiple files simultaneously?</a><a href="#q177">Q177. What is a file descriptor?</a><a href="#q178">Q178. Difference between flush() and close()?</a><a href="#q179">Q179. Difference between truncate() and remove()?</a><a href="#q180">Q180. Can we directly modify a specific line in a text file?</a><a href="#q181">Q181. How do you handle very large files?</a><a href="#q182">Q182. What is a newline character?</a><a href="#q183">Q183. Difference between \n and \r\n?</a><a href="#q184">Q184. What happens if a binary file is opened in text mode?</a><a href="#q185">Q185. Can we use seek() in binary files?</a><p class="toc-stage">Part 20: Scenario-Based Questions</p><a href="#part-20">Part 20: Scenario-Based Questions</a><a href="#q186">Q186. You have a file containing 10 lakh records.
+How will yo…</a><a href="#q187">Q187. You need to add records without deleting old data.
+Whic…</a><a href="#q188">Q188. You need to create a file only if it does not exist.
+Wh…</a><a href="#q189">Q189. Your program crashes while processing a file.
+How can y…</a><a href="#q190">Q190. You need to read an image file.
+Which mode will you use…</a><a href="#q191">Q191. You need to copy an entire folder.
+Which module will yo…</a><a href="#q192">Q192. You need to store Python dictionaries permanently.
+Whic…</a><a href="#q193">Q193. You receive a CSV file containing customer records.
+How…</a><a href="#q194">Q194. Your file contains special characters and reading
+produ…</a><a href="#q195">Q195. You want to check whether a path is a file or directory…</a><a href="#q196">Q196. You want to process a file but don&#x27;t know whether
+it ex…</a><a href="#q197">Q197. You want to save temporary processing data.
+Which modul…</a><a href="#q198">Q198. You need to compress multiple files into one archive.
+W…</a><p class="toc-stage">Part 21: Rapid-Fire Questions</p><a href="#part-21">Part 21: Rapid-Fire Questions</a><p class="toc-stage">Part 22: Most Important Interview Topics</p><a href="#part-22">Part 22: Most Important Interview Topics</a><p class="toc-stage">Part 23: JSON Study Notes</p><a href="#part-23">Part 23: JSON Study Notes</a><a href="#q199">Q199. WHAT IS JSON</a><a href="#q200">Q200. JSON DATA TYPES</a><a href="#q201">Q201. JSON OBJECT</a><a href="#q202">Q202. JSON ARRAY</a><a href="#q203">Q203. PYTHON JSON MODULE</a><a href="#q204">Q204. PYTHON TO JSON</a><a href="#q205">Q205. JSON TO PYTHON</a><a href="#q206">Q206. WRITING JSON FILE</a><a href="#q207">Q207. READING JSON FILE</a><a href="#q208">Q208. JSON FORMATTING</a><a href="#q209">Q209. JSON ENCODING AND DECODING</a><a href="#q210">Q210. JSON AND PYTHON TYPE MAPPING</a><a href="#q211">Q211. HANDLING NESTED JSON</a><a href="#q212">Q212. JSON ERROR HANDLING</a><a href="#q213">Q213. CUSTOM JSON ENCODER</a><a href="#q214">Q214. JSON IMPORTANT PARAMETERS</a><a href="#q215">Q215. JSON VS DICTIONARY</a><p class="toc-stage">Part 24: Pickle Study Notes</p><a href="#part-24">Part 24: Pickle Study Notes</a><a href="#q216">Q216. WHAT IS PICKLE</a><a href="#q217">Q217. PICKLE FUNCTIONS</a><a href="#q218">Q218. PICKLE EXAMPLE</a><a href="#q219">Q219. PICKLE VS JSON</a><a href="#q220">Q220. PICKLE IMPORTANT PARAMETERS</a><p class="toc-stage">Part 25: Pathlib Study Notes</p><a href="#part-25">Part 25: Pathlib Study Notes</a><a href="#q221">Q221. WHAT IS PATHLIB</a><a href="#q222">Q222. CREATING PATHS</a><a href="#q223">Q223. CHECKING FILES AND DIRECTORIES</a><a href="#q224">Q224. FILE OPERATIONS</a><a href="#q225">Q225. PATH INFORMATION</a><a href="#q226">Q226. SEARCHING FILES</a><a href="#q227">Q227. PATHLIB VS OS.PATH</a>
+</nav>
+<main>
+<div class="intro">
+<h1>File Handling / Classes — Interview Q&amp;A</h1>
+<p>Basics through modules (os, shutil, pathlib, csv, json, pickle), encoding, compression, coding, scenarios and rapid-fire.</p>
+</div>
+<p class="qmeta">227 questions across 25 parts.</p>
+<h1 class="stage">Core File Handling</h1><h1 class="stage" id="part-01">Part 1: Basic File Handling</h1><article class="topic" id="q1"><h2><span class="num">Q1</span> What is file handling in Python?</h2><div class="body"><p>File handling is the process of creating, opening,</p>
+<p>reading, writing, updating and deleting files using Python.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+notes = folder / &quot;students.txt&quot;
+
+notes.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
+print(notes.read_text())
+notes.unlink()
+print(&quot;deleted:&quot;, not notes.exists())</code></pre></div></article><article class="topic" id="q2"><h2><span class="num">Q2</span> Why do we use file handling?</h2><div class="body"><ul><li>To store data permanently.</li><li>To retrieve stored information.</li><li>To read and write files.</li><li>To manage external data.</li><li>To process large datasets.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/marks.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Math 80\nPython 95\n&quot;)
+print(&quot;saved, then read back:&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q3"><h2><span class="num">Q3</span> What are the two main types of files?</h2><div class="body"><ul><li>Text files</li><li>Binary files</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+text_file = folder / &quot;notes.txt&quot;
+binary_file = folder / &quot;pixels.bin&quot;
+text_file.write_text(&quot;Hello Python\n&quot;)
+binary_file.write_bytes(bytes([0, 255, 10, 20]))
+print(&quot;text :&quot;, text_file.read_text())
+print(&quot;bytes:&quot;, list(binary_file.read_bytes()))</code></pre></div></article><article class="topic" id="q4"><h2><span class="num">Q4</span> What is a text file?</h2><div class="body"><p>A text file stores data in human-readable character format.</p>
+<p class="label">Examples:</p>
+<p>.txt, .csv, .py, .json, .xml, .html</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/report.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Name,Score\nAmit,90\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q5"><h2><span class="num">Q5</span> What is a binary file?</h2><div class="body"><p>A binary file stores information in bytes and is not</p>
+<p>normally human-readable.</p>
+<p class="label">Examples:</p>
+<p>.jpg, .png, .mp3, .mp4, .pdf, .exe</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/photo.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(b&quot;\x89PNG\r\n\x1a\n&quot;)
+print(path.read_bytes())</code></pre></div></article><article class="topic" id="q6"><h2><span class="num">Q6</span> Difference between text and binary files?</h2><div class="body"><p class="label">Text File:</p>
+<ul><li>Stores characters.</li><li>Human-readable.</li><li>Uses text modes.</li><li>Example: .txt</li></ul>
+<p class="label">Binary File:</p>
+<ul><li>Stores bytes.</li><li>Not directly human-readable.</li><li>Uses binary modes.</li><li>Example: .jpg</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+text_file = folder / &quot;hello.txt&quot;
+binary_file = folder / &quot;hello.bin&quot;
+text_file.write_text(&quot;Hello&quot;)
+binary_file.write_bytes(b&quot;Hello&quot;)
+print(type(text_file.read_text()), text_file.read_text())
+print(type(binary_file.read_bytes()), binary_file.read_bytes())</code></pre></div></article><article class="topic" id="q7"><h2><span class="num">Q7</span> What is open()?</h2><div class="body"><p><code>open()</code> is a built-in Python function used to open files.</p>
+<pre><code>Syntax:
+file = open(&quot;data.txt&quot;, &quot;r&quot;)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+file = open(&quot;file_demo/open_demo.txt&quot;, &quot;w&quot;)
+file.write(&quot;opened with open()\n&quot;)
+file.close()
+file = open(&quot;file_demo/open_demo.txt&quot;, &quot;r&quot;)
+print(file.read())
+file.close()</code></pre></div></article><article class="topic" id="q8"><h2><span class="num">Q8</span> What are the arguments of open()?</h2><div class="body"><p>open(file, mode, buffering, encoding, errors, newline)</p>
+<ul><li>file: File name or path.</li><li>mode: Opening mode.</li><li>buffering: Buffering policy.</li><li>encoding: Character encoding.</li><li>errors: Encoding error handling.</li><li>newline: Newline handling.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+file = open(
+    &quot;file_demo/args.txt&quot;,
+    mode=&quot;w&quot;,
+    buffering=1,
+    encoding=&quot;utf-8&quot;,
+    errors=&quot;strict&quot;,
+    newline=&quot;\n&quot;,
+)
+file.write(&quot;name,city\nAmit,Bengaluru\n&quot;)
+file.close()
+print(Path(&quot;file_demo/args.txt&quot;).read_text(encoding=&quot;utf-8&quot;))</code></pre></div></article><article class="topic" id="q9"><h2><span class="num">Q9</span> What is a file object?</h2><div class="body"><p>A file object is an object returned by <code>open()</code>.</p>
+<p>It provides methods to read, write and manage files.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+file = open(&quot;file_demo/object.txt&quot;, &quot;w+&quot;)
+print(type(file).__name__)
+file.write(&quot;file object\n&quot;)
+file.seek(0)
+print(file.read())
+print(&quot;name:&quot;, file.name)
+print(&quot;mode:&quot;, file.mode)
+file.close()</code></pre></div></article><article class="topic" id="q10"><h2><span class="num">Q10</span> What is the default file opening mode?</h2><div class="body"><p>r (Read mode).</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/default_mode.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;already here\n&quot;)
+file = open(path)  # mode defaults to &quot;r&quot;
+print(&quot;mode:&quot;, file.mode)
+print(file.read())
+file.close()</code></pre></div></article><article class="topic" id="q11"><h2><span class="num">Q11</span> What happens if a file does not exist in read mode?</h2><div class="body"><p>FileNotFoundError occurs.</p>
+<p class="label">Example program:</p>
+<pre><code>try:
+    open(&quot;file_demo/missing_student.txt&quot;, &quot;r&quot;)
+except FileNotFoundError as error:
+    print(type(error).__name__)
+    print(error)</code></pre></div></article><article class="topic" id="q12"><h2><span class="num">Q12</span> Can Python create files automatically?</h2><div class="body"><p>Yes. Using w, a or x mode.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+Path(&quot;file_demo/auto_new.txt&quot;).unlink(missing_ok=True)
+file = open(&quot;file_demo/auto_new.txt&quot;, &quot;w&quot;)
+file.write(&quot;created because mode is w\n&quot;)
+file.close()
+print(Path(&quot;file_demo/auto_new.txt&quot;).read_text())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-02">Part 2: File Opening Modes</h1><article class="topic" id="q13"><h2><span class="num">Q13</span> What are the different file opening modes?</h2><div class="body"><pre><code>r   = Read
+w   = Write
+a   = Append
+x   = Exclusive creation
+r+  = Read and Write
+w+  = Write and Read
+a+  = Append and Read</code></pre>
+<pre><code>rb  = Read Binary
+wb  = Write Binary
+ab  = Append Binary</code></pre>
+<p>rb+ = Read and Write Binary</p>
+<p>wb+ = Write and Read Binary</p>
+<p>ab+ = Append and Read Binary</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+path = folder / &quot;modes.txt&quot;
+path.write_text(&quot;old\n&quot;)
+
+with path.open(&quot;r&quot;) as file:
+    print(&quot;r :&quot;, file.read().strip())
+with path.open(&quot;a&quot;) as file:
+    file.write(&quot;added\n&quot;)
+print(&quot;after a:&quot;, path.read_text().replace(&quot;\n&quot;, &quot; | &quot;))
+with path.open(&quot;w&quot;) as file:
+    file.write(&quot;replaced\n&quot;)
+print(&quot;after w:&quot;, path.read_text().strip())</code></pre></div></article><article class="topic" id="q14"><h2><span class="num">Q14</span> What is r mode?</h2><div class="body"><ul><li>Opens an existing file for reading.</li><li>File must exist.</li><li>Does not modify existing content.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/read_only.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\n&quot;)
+with path.open(&quot;r&quot;) as file:
+    print(file.read())</code></pre></div></article><article class="topic" id="q15"><h2><span class="num">Q15</span> What is w mode?</h2><div class="body"><ul><li>Opens file for writing.</li><li>Creates file if it does not exist.</li><li>Deletes existing content if file already exists.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/write_mode.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\n&quot;)
+with path.open(&quot;w&quot;) as file:
+    file.write(&quot;Mary\nTom\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q16"><h2><span class="num">Q16</span> What is a mode?</h2><div class="body"><ul><li>Opens file for appending.</li><li>Adds new content at the end.</li><li>Creates file if it does not exist.</li><li>Preserves existing content.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/append_mode.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python\n&quot;)
+with path.open(&quot;a&quot;) as file:
+    file.write(&quot;Good morning\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q17"><h2><span class="num">Q17</span> What is x mode?</h2><div class="body"><ul><li>Creates a new file.</li><li>Raises FileExistsError if file already exists.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/exclusive.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.unlink(missing_ok=True)
+with path.open(&quot;x&quot;) as file:
+    file.write(&quot;created only once\n&quot;)
+print(&quot;first:&quot;, path.read_text().strip())
+try:
+    path.open(&quot;x&quot;).close()
+except FileExistsError as error:
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q18"><h2><span class="num">Q18</span> What is r+ mode?</h2><div class="body"><ul><li>Allows reading and writing.</li><li>File must exist.</li><li>Does not immediately delete existing content.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/read_write.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+with path.open(&quot;r+&quot;) as file:
+    print(&quot;before:&quot;, file.read())
+    file.seek(0)
+    file.write(&quot;Hi!!!&quot;)
+print(&quot;after :&quot;, path.read_text())</code></pre></div></article><article class="topic" id="q19"><h2><span class="num">Q19</span> What is w+ mode?</h2><div class="body"><ul><li>Allows reading and writing.</li><li>Creates file if necessary.</li><li>Deletes existing content when opened.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/write_plus.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;old content&quot;)
+with path.open(&quot;w+&quot;) as file:
+    file.write(&quot;new content&quot;)
+    file.seek(0)
+    print(file.read())</code></pre></div></article><article class="topic" id="q20"><h2><span class="num">Q20</span> What is a+ mode?</h2><div class="body"><ul><li>Allows reading and appending.</li><li>Creates file if necessary.</li><li>Preserves existing content.</li><li>Writing happens at the end.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/append_plus.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+with path.open(&quot;a+&quot;) as file:
+    file.write(&quot; Python&quot;)
+    file.seek(0)
+    print(file.read())</code></pre></div></article><article class="topic" id="q21"><h2><span class="num">Q21</span> Difference between w and a?</h2><div class="body"><pre><code>w = Overwrites existing content.
+a = Adds content at the end.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+write_file = folder / &quot;w_vs_a_w.txt&quot;
+append_file = folder / &quot;w_vs_a_a.txt&quot;
+write_file.write_text(&quot;Rahul\n&quot;)
+append_file.write_text(&quot;Rahul\n&quot;)
+with write_file.open(&quot;w&quot;) as file:
+    file.write(&quot;Amit\n&quot;)
+with append_file.open(&quot;a&quot;) as file:
+    file.write(&quot;Amit\n&quot;)
+print(&quot;w:&quot;, write_file.read_text().replace(&quot;\n&quot;, &quot; &quot;))
+print(&quot;a:&quot;, append_file.read_text().replace(&quot;\n&quot;, &quot; &quot;))</code></pre></div></article><article class="topic" id="q22"><h2><span class="num">Q22</span> Difference between r and r+?</h2><div class="body"><pre><code>r = Read only.
+r+ = Read and write.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/r_vs_rplus.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+with path.open(&quot;r&quot;) as file:
+    print(&quot;r can read:&quot;, file.read())
+with path.open(&quot;r+&quot;) as file:
+    print(&quot;r+ can read:&quot;, file.read())
+    file.seek(0)
+    file.write(&quot;HELLO&quot;)
+print(&quot;r+ also wrote:&quot;, path.read_text())</code></pre></div></article><article class="topic" id="q23"><h2><span class="num">Q23</span> Difference between w+ and a+?</h2><div class="body"><p>w+ = Deletes old content.</p>
+<p>a+ = Preserves old content and appends new content.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+w_plus = folder / &quot;wplus.txt&quot;
+a_plus = folder / &quot;aplus.txt&quot;
+w_plus.write_text(&quot;keep me?\n&quot;)
+a_plus.write_text(&quot;keep me\n&quot;)
+with w_plus.open(&quot;w+&quot;) as file:
+    file.write(&quot;fresh\n&quot;)
+with a_plus.open(&quot;a+&quot;) as file:
+    file.write(&quot;plus more\n&quot;)
+print(&quot;w+:&quot;, w_plus.read_text().strip())
+print(&quot;a+:&quot;, a_plus.read_text().replace(&quot;\n&quot;, &quot; | &quot;))</code></pre></div></article><article class="topic" id="q24"><h2><span class="num">Q24</span> What is binary mode?</h2><div class="body"><p>Binary mode reads and writes data as bytes.</p>
+<pre><code>Example:
+file = open(&quot;image.jpg&quot;, &quot;rb&quot;)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/image.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(b&quot;\x00\x01\x02\xff&quot;)
+with path.open(&quot;rb&quot;) as file:
+    data = file.read()
+print(data)
+print(list(data))</code></pre></div></article><article class="topic" id="q25"><h2><span class="num">Q25</span> Can read() be used with binary files?</h2><div class="body"><p>Yes. It returns bytes instead of strings.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/sample.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(b&quot;Python&quot;)
+with path.open(&quot;rb&quot;) as file:
+    print(file.read())
+    file.seek(0)
+    print(file.read(3))</code></pre></div></article><article class="topic" id="q26"><h2><span class="num">Q26</span> What happens if we open an existing file in x mode?</h2><div class="body"><p>FileExistsError occurs.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/exists_x.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;already saved\n&quot;)
+try:
+    open(path, &quot;x&quot;)
+except FileExistsError as error:
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q27"><h2><span class="num">Q27</span> Does append mode always write at the end?</h2><div class="body"><p>Yes. Append mode writes at the end even if <code>seek()</code></p>
+<p>moves the file pointer elsewhere.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/append_seek.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+with path.open(&quot;a+&quot;) as file:
+    file.seek(0)
+    file.write(&quot;!&quot;)
+print(path.read_text())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-03">Part 3: Reading and Writing Methods</h1><article class="topic" id="q28"><h2><span class="num">Q28</span> What are the reading methods?</h2><div class="body"><ul><li><code>read()</code></li><li><code>readline()</code></li><li><code>readlines()</code></li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/readers.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
+with path.open() as file:
+    print(&quot;read()     :&quot;, repr(file.read()))
+with path.open() as file:
+    print(&quot;readline() :&quot;, repr(file.readline()))
+with path.open() as file:
+    print(&quot;readlines():&quot;, file.readlines())</code></pre></div></article><article class="topic" id="q29"><h2><span class="num">Q29</span> What is read()?</h2><div class="body"><p>Reads the entire file or a specified number of</p>
+<p>characters/bytes.</p>
+<p class="label">Example:</p>
+<ul><li>file.<code>read()</code></li><li>file.read(5)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/read_method.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Python&quot;)
+with path.open() as file:
+    print(file.read(2))
+    print(file.read())</code></pre></div></article><article class="topic" id="q30"><h2><span class="num">Q30</span> What is readline()?</h2><div class="body"><p>Reads one line at a time.</p>
+<p class="label">Example:</p>
+<ul><li>file.<code>readline()</code></li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/readline_method.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
+with path.open() as file:
+    print(repr(file.readline()))
+    print(repr(file.readline()))</code></pre></div></article><article class="topic" id="q31"><h2><span class="num">Q31</span> What is readlines()?</h2><div class="body"><p>Reads all remaining lines and returns a list of strings.</p>
+<p class="label">Example:</p>
+<ul><li>file.<code>readlines()</code></li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/readlines_method.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
+with path.open() as file:
+    rows = file.readlines()
+print(rows)
+print(len(rows))</code></pre></div></article><article class="topic" id="q32"><h2><span class="num">Q32</span> Difference between read(), readline(), readlines()?</h2><div class="body"><p><code>read()</code>      = Returns entire content as a string.</p>
+<p><code>readline()</code>  = Returns one line as a string.</p>
+<p><code>readlines()</code> = Returns remaining lines as a list.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/three_reads.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Py\nth\non\n&quot;)
+with path.open() as file:
+    print(&quot;read     &quot;, repr(file.read()))
+with path.open() as file:
+    print(&quot;readline &quot;, repr(file.readline()))
+with path.open() as file:
+    print(&quot;readlines&quot;, file.readlines())</code></pre></div></article><article class="topic" id="q33"><h2><span class="num">Q33</span> What are the writing methods?</h2><div class="body"><ul><li><code>write()</code></li><li><code>writelines()</code></li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/writers.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    file.write(&quot;Rahul\n&quot;)
+    file.writelines([&quot;Priya\n&quot;, &quot;Amit\n&quot;])
+print(path.read_text())</code></pre></div></article><article class="topic" id="q34"><h2><span class="num">Q34</span> What is write()?</h2><div class="body"><p>Writes a string into a file and returns the number</p>
+<p>of characters written in text mode.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/write_method.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    count = file.write(&quot;Hello Python\n&quot;)
+print(&quot;characters written:&quot;, count)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q35"><h2><span class="num">Q35</span> What is writelines()?</h2><div class="body"><p>Writes multiple strings from an iterable into a file.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/writelines_method.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+names = [&quot;Rahul\n&quot;, &quot;Priya\n&quot;, &quot;Amit\n&quot;]
+with path.open(&quot;w&quot;) as file:
+    file.writelines(names)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q36"><h2><span class="num">Q36</span> Difference between write() and writelines()?</h2><div class="body"><p><code>write()</code> = Writes one string.</p>
+<p><code>writelines()</code> = Writes multiple strings.</p>
+<p>Neither automatically adds newline characters.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+one = folder / &quot;one_write.txt&quot;
+many = folder / &quot;many_writes.txt&quot;
+with one.open(&quot;w&quot;) as file:
+    file.write(&quot;Rahul\n&quot;)
+with many.open(&quot;w&quot;) as file:
+    file.writelines([&quot;Rahul\n&quot;, &quot;Priya\n&quot;])
+print(one.read_text())
+print(many.read_text())</code></pre></div></article><article class="topic" id="q37"><h2><span class="num">Q37</span> Can write() directly write an integer?</h2><div class="body"><p>No. Convert it into a string using <code>str()</code>.</p>
+<p class="label">Example:</p>
+<ul><li>file.write(str(100))</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/score.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+score = 95
+with path.open(&quot;w&quot;) as file:
+    try:
+        file.write(score)
+    except TypeError as error:
+        print(type(error).__name__)
+    file.write(str(score) + &quot;\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q38"><h2><span class="num">Q38</span> How do you write multiple lines?</h2><div class="body"><p class="label">with open(&quot;data.txt&quot;, &quot;w&quot;) as file:</p>
+<ul><li>file.write(&quot;Python\n&quot;)</li><li>file.write(&quot;Java\n&quot;)</li><li>file.write(&quot;SQL\n&quot;)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/many_lines.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+lines = [&quot;Python\n&quot;, &quot;NumPy\n&quot;, &quot;Pandas\n&quot;]
+with path.open(&quot;w&quot;) as file:
+    file.writelines(lines)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q39"><h2><span class="num">Q39</span> How do you read a file line by line?</h2><div class="body"><p class="label">with open(&quot;data.txt&quot;, &quot;r&quot;) as file:</p>
+<p class="label">for line in file:</p>
+<ul><li>print(line.<code>strip()</code>)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/line_by_line.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
+with path.open() as file:
+    for line in file:
+        print(line.strip())</code></pre></div></article><article class="topic" id="q40"><h2><span class="num">Q40</span> Which method is better for large files?</h2><div class="body"><p>Reading line by line is generally more memory-efficient</p>
+<p>than loading the complete file using <code>read()</code> or <code>readlines()</code>.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/large_style.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;\n&quot;.join(f&quot;record {n}&quot; for n in range(1, 6)) + &quot;\n&quot;)
+total = 0
+with path.open() as file:
+    for line in file:
+        total += 1
+print(&quot;lines processed one by one:&quot;, total)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-04">Part 4: File Pointer</h1><article class="topic" id="q41"><h2><span class="num">Q41</span> What is a file pointer?</h2><div class="body"><p>A file pointer represents the current position in a file</p>
+<p>where the next read or write operation occurs.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/pointer.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;PYTHON&quot;)
+with path.open() as file:
+    print(&quot;start&quot;, file.tell())
+    print(file.read(2))
+    print(&quot;after two characters&quot;, file.tell())</code></pre></div></article><article class="topic" id="q42"><h2><span class="num">Q42</span> What is tell()?</h2><div class="body"><p>Returns the current file pointer position.</p>
+<p class="label">Example:</p>
+<ul><li>file.<code>tell()</code></li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/tell_demo.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+with path.open() as file:
+    file.read(2)
+    print(file.tell())</code></pre></div></article><article class="topic" id="q43"><h2><span class="num">Q43</span> What is seek()?</h2><div class="body"><p>Moves the file pointer to a specified position.</p>
+<p class="label">Example:</p>
+<ul><li>file.seek(0)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/seek_demo.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+with path.open() as file:
+    file.read(6)
+    file.seek(0)
+    print(file.read(5))</code></pre></div></article><article class="topic" id="q44"><h2><span class="num">Q44</span> Difference between seek() and tell()?</h2><div class="body"><p><code>tell()</code> = Returns current position.</p>
+<p><code>seek()</code> = Changes current position.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/seek_tell.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;ABCDEF&quot;)
+with path.open() as file:
+    file.read(3)
+    print(&quot;tell:&quot;, file.tell())
+    file.seek(0)
+    print(&quot;after seek:&quot;, file.read(1))</code></pre></div></article><article class="topic" id="q45"><h2><span class="num">Q45</span> What does seek(0) do?</h2><div class="body"><p>Moves the file pointer to the beginning.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/seek_zero.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+with path.open() as file:
+    print(&quot;first :&quot;, file.read())
+    file.seek(0)
+    print(&quot;second:&quot;, file.read())</code></pre></div></article><article class="topic" id="q46"><h2><span class="num">Q46</span> What are the arguments of seek()?</h2><div class="body"><p>file.seek(offset, whence)</p>
+<p class="label">whence:</p>
+<p>0 = Beginning of file.</p>
+<p>1 = Current position.</p>
+<p>2 = End of file.</p>
+<p>Note: Arbitrary relative seeking is restricted in text mode.</p>
+<p>Binary mode supports byte-based relative seeking.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/seek_args.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(b&quot;ABCDEFGH&quot;)
+with path.open(&quot;rb&quot;) as file:
+    file.seek(2, 0)
+    print(&quot;from start :&quot;, file.read(1))
+    file.seek(1, 1)
+    print(&quot;from current:&quot;, file.read(1))
+    file.seek(-1, 2)
+    print(&quot;from end   :&quot;, file.read(1))</code></pre></div></article><article class="topic" id="q47"><h2><span class="num">Q47</span> What is truncate()?</h2><div class="body"><p>Reduces the file size to a specified number of bytes.</p>
+<p>If no size is provided, it truncates at the current position.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/truncate_demo.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+with path.open(&quot;r+&quot;) as file:
+    file.truncate(5)
+print(repr(path.read_text()))</code></pre></div></article><article class="topic" id="q48"><h2><span class="num">Q48</span> Can we read the same file twice?</h2><div class="body"><p>Yes. Use seek(0) to move the pointer to the beginning.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/read_twice.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+with path.open() as file:
+    print(&quot;first :&quot;, repr(file.read()))
+    print(&quot;second:&quot;, repr(file.read()))
+    file.seek(0)
+    print(&quot;after seek:&quot;, file.read())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-05">Part 5: Context Manager</h1><article class="topic" id="q49"><h2><span class="num">Q49</span> What is a context manager?</h2><div class="body"><p>A context manager manages resources automatically,</p>
+<p>such as opening and closing files.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/context.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    file.write(&quot;closed automatically\n&quot;)
+print(&quot;closed after with:&quot;, file.closed)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q50"><h2><span class="num">Q50</span> What is with open()?</h2><div class="body"><p>Opens a file using a context manager and automatically</p>
+<p>closes it after the block finishes.</p>
+<p class="label">Example:</p>
+<pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    print(file.read())</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/with_open.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with open(path, &quot;w&quot;) as file:
+    file.write(&quot;Hello Python\n&quot;)
+with open(path, &quot;r&quot;) as file:
+    print(file.read())</code></pre></div></article><article class="topic" id="q51"><h2><span class="num">Q51</span> Why do we use with open()?</h2><div class="body"><ul><li>Automatically closes the file.</li><li>Prevents resource leaks.</li><li>Handles exceptions safely.</li><li>Makes code cleaner.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/why_with.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    file.write(&quot;safe close\n&quot;)
+print(&quot;no need to call close(); closed =&quot;, file.closed)</code></pre></div></article><article class="topic" id="q52"><h2><span class="num">Q52</span> Difference between open() and with open()?</h2><div class="body"><p><code>open()</code> = Manual closing is required.</p>
+<p>with <code>open()</code> = Automatic closing.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+manual = open(&quot;file_demo/manual.txt&quot;, &quot;w&quot;)
+manual.write(&quot;remember to close\n&quot;)
+manual.close()
+print(&quot;manual closed:&quot;, manual.closed)
+
+with open(&quot;file_demo/auto.txt&quot;, &quot;w&quot;) as auto:
+    auto.write(&quot;closes itself\n&quot;)
+print(&quot;with closed:&quot;, auto.closed)</code></pre></div></article><article class="topic" id="q53"><h2><span class="num">Q53</span> What happens if an exception occurs inside with open()?</h2><div class="body"><p>Python automatically closes the file when the</p>
+<p>with block exits.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/crash.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+try:
+    with path.open(&quot;w&quot;) as file:
+        file.write(&quot;partial\n&quot;)
+        raise RuntimeError(&quot;stopped while writing&quot;)
+except RuntimeError as error:
+    print(error)
+print(&quot;file still closed:&quot;, file.closed)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q54"><h2><span class="num">Q54</span> What is __enter__()?</h2><div class="body"><p>Called when entering the with block.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+class Demo:
+    def __enter__(self):
+        print(&quot;enter&quot;)
+        return &quot;resource&quot;
+
+    def __exit__(self, exc_type, exc, tb):
+        print(&quot;exit&quot;)
+        return False
+
+with Demo() as value:
+    print(&quot;inside&quot;, value)</code></pre></div></article><article class="topic" id="q55"><h2><span class="num">Q55</span> What is __exit__()?</h2><div class="body"><p>Called when leaving the with block.</p>
+<p>It is responsible for cleanup.</p>
+<p class="label">Example program:</p>
+<pre><code>class Guard:
+    def __enter__(self):
+        self.file = open(&quot;file_demo/exit_demo.txt&quot;, &quot;w&quot;)
+        return self.file
+
+    def __exit__(self, exc_type, exc, tb):
+        self.file.close()
+        print(&quot;exit closed the file:&quot;, self.file.closed)
+        return False
+
+from pathlib import Path
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with Guard() as file:
+    file.write(&quot;hello from custom exit\n&quot;)</code></pre></div></article><article class="topic" id="q56"><h2><span class="num">Q56</span> Can we create our own context manager?</h2><div class="body"><p>Yes. Using a class with <code>__enter__</code>() and <code>__exit__</code>()</p>
+<p>or using contextlib.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+class open_demo:
+    def __init__(self, path, mode):
+        self.path = path
+        self.mode = mode
+
+    def __enter__(self):
+        self.file = open(self.path, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc, tb):
+        self.file.close()
+        return False
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open_demo(&quot;file_demo/own_cm.txt&quot;, &quot;w&quot;) as file:
+    file.write(&quot;custom context manager\n&quot;)
+print(Path(&quot;file_demo/own_cm.txt&quot;).read_text())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-06">Part 6: File Handling Exceptions</h1><article class="topic" id="q57"><h2><span class="num">Q57</span> What is an exception?</h2><div class="body"><p>An exception is a runtime error that interrupts</p>
+<p>normal program execution.</p>
+<p class="label">Example program:</p>
+<pre><code>try:
+    open(&quot;file_demo/no_such_file.txt&quot;, &quot;r&quot;)
+except FileNotFoundError as error:
+    print(&quot;caught&quot;, type(error).__name__)</code></pre></div></article><article class="topic" id="q58"><h2><span class="num">Q58</span> What are common file handling exceptions?</h2><div class="body"><pre><code>FileNotFoundError = File does not exist.
+FileExistsError = File already exists.
+PermissionError = Access denied.
+IsADirectoryError = Expected file but received directory.
+NotADirectoryError = Expected directory but received file.
+UnicodeDecodeError = Decoding failed.
+UnicodeEncodeError = Encoding failed.
+OSError = Operating system error.
+ValueError = Invalid operation, such as using closed file.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+try:
+    open(folder / &quot;missing.txt&quot;)
+except OSError as error:
+    print(&quot;FileNotFoundError -&gt;&quot;, type(error).__name__)
+taken = folder / &quot;taken.txt&quot;
+taken.write_text(&quot;x&quot;)
+try:
+    open(taken, &quot;x&quot;)
+except OSError as error:
+    print(&quot;FileExistsError -&gt;&quot;, type(error).__name__)</code></pre></div></article><article class="topic" id="q59"><h2><span class="num">Q59</span> What is FileNotFoundError?</h2><div class="body"><p>Occurs when trying to open a file that does not exist.</p>
+<p class="label">Example program:</p>
+<pre><code>try:
+    open(&quot;file_demo/absent.txt&quot;, &quot;r&quot;)
+except FileNotFoundError as error:
+    print(type(error).__name__, &quot;:&quot;, error)</code></pre></div></article><article class="topic" id="q60"><h2><span class="num">Q60</span> What is PermissionError?</h2><div class="body"><p>Occurs when we do not have sufficient permission</p>
+<p>to access or modify a file.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/locked.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;secret\n&quot;)
+os.chmod(path, 0)
+try:
+    open(path, &quot;r&quot;)
+except PermissionError as error:
+    print(type(error).__name__)
+finally:
+    os.chmod(path, 0o644)</code></pre></div></article><article class="topic" id="q61"><h2><span class="num">Q61</span> What is FileExistsError?</h2><div class="body"><p>Occurs when creating a file using x mode</p>
+<p>but the file already exists.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/only_once.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;exists\n&quot;)
+try:
+    open(path, &quot;x&quot;)
+except FileExistsError as error:
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q62"><h2><span class="num">Q62</span> What is UnicodeDecodeError?</h2><div class="body"><p>Occurs when Python cannot decode bytes into text</p>
+<p>using the specified encoding.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/latin.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(&quot;café&quot;.encode(&quot;latin-1&quot;))
+try:
+    path.read_text(encoding=&quot;ascii&quot;)
+except UnicodeDecodeError as error:
+    print(type(error).__name__)
+print(path.read_text(encoding=&quot;latin-1&quot;))</code></pre></div></article><article class="topic" id="q63"><h2><span class="num">Q63</span> What is OSError?</h2><div class="body"><p>A general operating-system-related exception</p>
+<p>that can occur during file and directory operations.</p>
+<p class="label">Example program:</p>
+<pre><code>try:
+    open(&quot;file_demo/does_not_exist.txt&quot;, &quot;r&quot;)
+except OSError as error:
+    print(type(error).__name__, &quot;is an&quot;, OSError.__name__)</code></pre></div></article><article class="topic" id="q64"><h2><span class="num">Q64</span> How do you handle file exceptions?</h2><div class="body"><p class="label">try:</p>
+<p class="label">with open(&quot;data.txt&quot;, &quot;r&quot;) as file:</p>
+<ul><li>print(file.<code>read()</code>)</li></ul>
+<pre><code>except FileNotFoundError:
+    print(&quot;File not found&quot;)</code></pre>
+<pre><code>except PermissionError:
+    print(&quot;Permission denied&quot;)</code></pre>
+<pre><code>except Exception as e:
+    print(&quot;Error:&quot;, e)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/handled.txt&quot;)
+try:
+    with path.open() as file:
+        print(file.read())
+except FileNotFoundError:
+    path.parent.mkdir(exist_ok=True)
+    path.write_text(&quot;created after the error\n&quot;)
+    print(path.read_text())</code></pre></div></article><article class="topic" id="q65"><h2><span class="num">Q65</span> Difference between try, except, else and finally?</h2><div class="body"><pre><code>try = Contains risky code.
+except = Handles exceptions.
+else = Executes when no exception occurs.
+finally = Executes whether an exception occurs or not.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/try_flow.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;ok\n&quot;)
+try:
+    text = path.read_text()
+except FileNotFoundError:
+    print(&quot;except&quot;)
+else:
+    print(&quot;else:&quot;, text.strip())
+finally:
+    print(&quot;finally: cleanup always runs&quot;)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-07">Part 7: File Attributes and Methods</h1><article class="topic" id="q66"><h2><span class="num">Q66</span> What is close()?</h2><div class="body"><p>Closes an opened file and releases associated resources.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+file = open(&quot;file_demo/close_me.txt&quot;, &quot;w&quot;)
+file.write(&quot;done\n&quot;)
+print(&quot;before:&quot;, file.closed)
+file.close()
+print(&quot;after:&quot;, file.closed)</code></pre></div></article><article class="topic" id="q67"><h2><span class="num">Q67</span> What is flush()?</h2><div class="body"><p>Forces buffered data to be written to the file.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/flush_me.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+file = path.open(&quot;w&quot;)
+file.write(&quot;visible after flush&quot;)
+file.flush()
+print(path.read_text())
+file.close()</code></pre></div></article><article class="topic" id="q68"><h2><span class="num">Q68</span> What is readable()?</h2><div class="body"><p>Checks whether the file supports reading.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/readable.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;hi\n&quot;)
+with path.open(&quot;r&quot;) as file:
+    print(&quot;r readable:&quot;, file.readable())
+with path.open(&quot;w&quot;) as file:
+    print(&quot;w readable:&quot;, file.readable())</code></pre></div></article><article class="topic" id="q69"><h2><span class="num">Q69</span> What is writable()?</h2><div class="body"><p>Checks whether the file supports writing.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/writable.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;hi\n&quot;)
+with path.open(&quot;r&quot;) as file:
+    print(&quot;r writable:&quot;, file.writable())
+with path.open(&quot;a&quot;) as file:
+    print(&quot;a writable:&quot;, file.writable())</code></pre></div></article><article class="topic" id="q70"><h2><span class="num">Q70</span> What is seekable()?</h2><div class="body"><p>Checks whether the file supports changing pointer position.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/seekable.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;seek me\n&quot;)
+with path.open() as file:
+    print(&quot;disk file seekable:&quot;, file.seekable())</code></pre></div></article><article class="topic" id="q71"><h2><span class="num">Q71</span> What is fileno()?</h2><div class="body"><p>Returns the underlying file descriptor.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open(&quot;file_demo/fd.txt&quot;, &quot;w&quot;) as file:
+    print(&quot;file descriptor:&quot;, file.fileno())</code></pre></div></article><article class="topic" id="q72"><h2><span class="num">Q72</span> What is isatty()?</h2><div class="body"><p>Checks whether the file is connected to a terminal.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open(&quot;file_demo/tty.txt&quot;, &quot;w&quot;) as file:
+    print(&quot;regular file isatty:&quot;, file.isatty())</code></pre></div></article><article class="topic" id="q73"><h2><span class="num">Q73</span> What is closed?</h2><div class="body"><p>Returns True if the file is closed.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+file = open(&quot;file_demo/closed_flag.txt&quot;, &quot;w&quot;)
+print(file.closed)
+file.close()
+print(file.closed)</code></pre></div></article><article class="topic" id="q74"><h2><span class="num">Q74</span> What is name?</h2><div class="body"><p>Returns the file name or path.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open(&quot;file_demo/name_attr.txt&quot;, &quot;w&quot;) as file:
+    print(file.name)</code></pre></div></article><article class="topic" id="q75"><h2><span class="num">Q75</span> What is mode?</h2><div class="body"><p>Returns the opening mode of the file.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/mode_attr.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;x&quot;)
+with path.open(&quot;r&quot;) as file:
+    print(file.mode)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage">Modules</h1><h1 class="stage" id="part-08">Part 8: Os Module</h1><article class="topic" id="q76"><h2><span class="num">Q76</span> What is a module?</h2><div class="body"><p>A module is a Python file containing reusable</p>
+<p>functions, classes and variables.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+
+print(&quot;module file:&quot;, os.__file__)
+print(&quot;getcwd is a function:&quot;, callable(os.getcwd))</code></pre></div></article><article class="topic" id="q77"><h2><span class="num">Q77</span> What is the os module?</h2><div class="body"><p>The os module provides functions to interact with</p>
+<p>the operating system, files and directories.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/os_demo&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+(folder / &quot;note.txt&quot;).write_text(&quot;hi\n&quot;)
+print(os.listdir(folder))</code></pre></div></article><article class="topic" id="q78"><h2><span class="num">Q78</span> Important functions in os module?</h2><div class="body"><p>os.<code>getcwd()</code>       = Get current working directory.</p>
+<p>os.<code>chdir()</code>        = Change current directory.</p>
+<p>os.<code>mkdir()</code>        = Create directory.</p>
+<p>os.<code>makedirs()</code>     = Create nested directories.</p>
+<p>os.<code>listdir()</code>      = List files and folders.</p>
+<p>os.<code>remove()</code>       = Delete file.</p>
+<p>os.<code>rename()</code>       = Rename file.</p>
+<p>os.<code>rmdir()</code>        = Remove empty directory.</p>
+<p>os.path.<code>exists()</code>  = Check path existence.</p>
+<p>os.path.<code>isfile()</code>  = Check whether path is a file.</p>
+<p>os.path.<code>isdir()</code>   = Check whether path is directory.</p>
+<p>os.path.<code>join()</code>    = Join paths.</p>
+<p>os.path.<code>getsize()</code> = Get file size.</p>
+<p class="label">Example:</p>
+<pre><code>import os</code></pre>
+<pre><code>print(os.getcwd())
+print(os.listdir())</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/os_tour&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+note = folder / &quot;a.txt&quot;
+note.write_text(&quot;hi\n&quot;)
+print(&quot;exists&quot;, os.path.exists(note))
+print(&quot;isfile&quot;, os.path.isfile(note))
+print(&quot;size&quot;, os.path.getsize(note))
+print(&quot;names&quot;, os.listdir(folder))</code></pre></div></article><article class="topic" id="q79"><h2><span class="num">Q79</span> What is os.getcwd()?</h2><div class="body"><p>Returns the current working directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+
+print(os.getcwd())</code></pre></div></article><article class="topic" id="q80"><h2><span class="num">Q80</span> What is os.chdir()?</h2><div class="body"><p>Changes the current working directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/chdir_demo&quot;).resolve()
+folder.mkdir(parents=True, exist_ok=True)
+previous = os.getcwd()
+try:
+    os.chdir(folder)
+    print(os.getcwd())
+finally:
+    os.chdir(previous)</code></pre></div></article><article class="topic" id="q81"><h2><span class="num">Q81</span> What is os.mkdir()?</h2><div class="body"><p>Creates one directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+target = Path(&quot;file_demo/one_dir&quot;)
+target.parent.mkdir(exist_ok=True)
+if target.exists():
+    target.rmdir()
+os.mkdir(target)
+print(target.is_dir())</code></pre></div></article><article class="topic" id="q82"><h2><span class="num">Q82</span> What is os.makedirs()?</h2><div class="body"><p>Creates nested directories.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+import shutil
+from pathlib import Path
+
+target = Path(&quot;file_demo/nested/a/b&quot;)
+if target.exists():
+    shutil.rmtree(Path(&quot;file_demo/nested&quot;))
+os.makedirs(target)
+print(target.is_dir())</code></pre></div></article><article class="topic" id="q83"><h2><span class="num">Q83</span> What is os.listdir()?</h2><div class="body"><p>Returns the names of files and directories</p>
+<p>inside a specified directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/listing&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+(folder / &quot;a.txt&quot;).write_text(&quot;a&quot;)
+(folder / &quot;b.txt&quot;).write_text(&quot;b&quot;)
+print(sorted(os.listdir(folder)))</code></pre></div></article><article class="topic" id="q84"><h2><span class="num">Q84</span> What is os.remove()?</h2><div class="body"><p>Deletes a file.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/delete_me.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;bye\n&quot;)
+os.remove(path)
+print(&quot;still there:&quot;, path.exists())</code></pre></div></article><article class="topic" id="q85"><h2><span class="num">Q85</span> What is os.rename()?</h2><div class="body"><p>Renames a file or directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+old = folder / &quot;old_name.txt&quot;
+new = folder / &quot;new_name.txt&quot;
+new.unlink(missing_ok=True)
+old.write_text(&quot;renamed\n&quot;)
+os.rename(old, new)
+print(new.read_text().strip(), &quot;old exists:&quot;, old.exists())</code></pre></div></article><article class="topic" id="q86"><h2><span class="num">Q86</span> What is os.rmdir()?</h2><div class="body"><p>Deletes an empty directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/empty_dir&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+os.rmdir(folder)
+print(&quot;removed:&quot;, not folder.exists())</code></pre></div></article><article class="topic" id="q87"><h2><span class="num">Q87</span> What is os.path.exists()?</h2><div class="body"><p>Checks whether a file or directory exists.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/exists_check.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;yes\n&quot;)
+print(os.path.exists(path))
+print(os.path.exists(&quot;file_demo/nope.txt&quot;))</code></pre></div></article><article class="topic" id="q88"><h2><span class="num">Q88</span> Difference between os.path.isfile() and isdir()?</h2><div class="body"><p><code>isfile()</code> = Checks whether path is a file.</p>
+<p><code>isdir()</code> = Checks whether path is a directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/kind&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+path = folder / &quot;note.txt&quot;
+path.write_text(&quot;x&quot;)
+print(&quot;file&quot;, os.path.isfile(path), &quot;dir&quot;, os.path.isdir(path))
+print(&quot;file&quot;, os.path.isfile(folder), &quot;dir&quot;, os.path.isdir(folder))</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-09">Part 9: Shutil Module</h1><article class="topic" id="q89"><h2><span class="num">Q89</span> What is shutil?</h2><div class="body"><p>shutil is a Python module used for high-level</p>
+<p>file and directory operations.</p>
+<p class="label">Example program:</p>
+<pre><code>import shutil
+from pathlib import Path
+
+src = Path(&quot;file_demo/src_copy.txt&quot;)
+dst = Path(&quot;file_demo/dst_copy.txt&quot;)
+src.parent.mkdir(exist_ok=True)
+src.write_text(&quot;copied by shutil\n&quot;)
+shutil.copy(src, dst)
+print(dst.read_text())</code></pre></div></article><article class="topic" id="q90"><h2><span class="num">Q90</span> Important shutil functions?</h2><div class="body"><p>shutil.<code>copy()</code>      = Copy file.</p>
+<p>shutil.<code>copy2()</code>     = Copy file with metadata.</p>
+<p>shutil.<code>move()</code>      = Move file.</p>
+<p>shutil.<code>copytree()</code>  = Copy directory.</p>
+<p>shutil.<code>rmtree()</code>    = Delete directory and contents.</p>
+<p>shutil.<code>disk_usage()</code> = Check disk usage.</p>
+<p class="label">Example program:</p>
+<pre><code>import shutil
+from pathlib import Path
+
+root = Path(&quot;file_demo/shutil_tour&quot;)
+if root.exists():
+    shutil.rmtree(root)
+(root / &quot;inner&quot;).mkdir(parents=True)
+(root / &quot;inner&quot; / &quot;a.txt&quot;).write_text(&quot;A&quot;)
+shutil.copy(root / &quot;inner&quot; / &quot;a.txt&quot;, root / &quot;a_copy.txt&quot;)
+shutil.copytree(root / &quot;inner&quot;, root / &quot;inner_copy&quot;)
+print(sorted(p.name for p in root.rglob(&quot;*&quot;)))
+shutil.rmtree(root / &quot;inner_copy&quot;)
+print(&quot;disk&quot;, shutil.disk_usage(root).total &gt; 0)</code></pre></div></article><article class="topic" id="q91"><h2><span class="num">Q91</span> Difference between os and shutil?</h2><div class="body"><pre><code>os = Operating system and basic file/directory operations.
+shutil = High-level copying, moving and deleting operations.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import os
+import shutil
+from pathlib import Path
+
+folder = Path(&quot;file_demo/os_vs_shutil&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+src = folder / &quot;a.txt&quot;
+src.write_text(&quot;data\n&quot;)
+print(&quot;os lists:&quot;, os.listdir(folder))
+shutil.copy(src, folder / &quot;b.txt&quot;)
+print(&quot;shutil copied:&quot;, (folder / &quot;b.txt&quot;).read_text().strip())</code></pre></div></article><article class="topic" id="q92"><h2><span class="num">Q92</span> Difference between copy() and copy2()?</h2><div class="body"><p><code>copy()</code> = Copies file content and permission mode.</p>
+<p><code>copy2()</code> = Also attempts to preserve metadata.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+import shutil
+from pathlib import Path
+
+folder = Path(&quot;file_demo/copy_meta&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+src = folder / &quot;original.txt&quot;
+src.write_text(&quot;meta\n&quot;)
+os.chmod(src, 0o640)
+plain = shutil.copy(src, folder / &quot;plain.txt&quot;)
+full = shutil.copy2(src, folder / &quot;full.txt&quot;)
+print(&quot;copy mode &quot;, oct(os.stat(plain).st_mode &amp; 0o777))
+print(&quot;copy2 mode&quot;, oct(os.stat(full).st_mode &amp; 0o777))</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-10">Part 10: Pathlib Module</h1><article class="topic" id="q93"><h2><span class="num">Q93</span> What is pathlib?</h2><div class="body"><p>pathlib provides an object-oriented way to</p>
+<p>work with file and directory paths.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/pathlib_intro.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;path object\n&quot;)
+print(path.name, path.suffix, path.exists())</code></pre></div></article><article class="topic" id="q94"><h2><span class="num">Q94</span> Important pathlib methods?</h2><div class="body"><p><code>Path()</code>        = Create path object.</p>
+<p><code>exists()</code>      = Check existence.</p>
+<p><code>is_file()</code>     = Check file.</p>
+<p><code>is_dir()</code>      = Check directory.</p>
+<p><code>mkdir()</code>       = Create directory.</p>
+<p><code>unlink()</code>      = Delete file.</p>
+<p><code>rmdir()</code>       = Remove empty directory.</p>
+<p><code>rename()</code>      = Rename path.</p>
+<p><code>read_text()</code>   = Read text.</p>
+<p><code>write_text()</code>  = Write text.</p>
+<p><code>read_bytes()</code>  = Read binary.</p>
+<p><code>write_bytes()</code> = Write binary.</p>
+<p><code>iterdir()</code>     = List directory contents.</p>
+<p><code>glob()</code>        = Find matching paths.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo/path_methods&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+path = folder / &quot;notes.txt&quot;
+path.write_text(&quot;hello pathlib\n&quot;)
+print(path.read_text().strip())
+print(&quot;is_file&quot;, path.is_file())
+for child in folder.iterdir():
+    print(child.name)</code></pre></div></article><article class="topic" id="q95"><h2><span class="num">Q95</span> Difference between os and pathlib?</h2><div class="body"><pre><code>os = Provides operating-system functions.
+pathlib = Provides object-oriented path handling.</code></pre>
+<p class="label">Example:</p>
+<pre><code>from pathlib import Path</code></pre>
+<pre><code>path = Path(&quot;data.txt&quot;)</code></pre>
+<pre><code>print(path.exists())
+print(path.is_file())</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/both.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;x&quot;)
+print(&quot;os.path&quot;, os.path.isfile(path))
+print(&quot;pathlib&quot;, path.is_file())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-11">Part 11: Tempfile and Io Modules</h1><article class="topic" id="q96"><h2><span class="num">Q96</span> What is tempfile?</h2><div class="body"><p>A module used to create temporary files and directories.</p>
+<p class="label">Important functions:</p>
+<p>tempfile.<code>TemporaryFile()</code></p>
+<p>tempfile.<code>NamedTemporaryFile()</code></p>
+<p>tempfile.<code>TemporaryDirectory()</code></p>
+<p>tempfile.<code>mkstemp()</code></p>
+<p>tempfile.<code>mkdtemp()</code></p>
+<p class="label">Example program:</p>
+<pre><code>import tempfile
+
+with tempfile.TemporaryDirectory() as folder:
+    path = tempfile.NamedTemporaryFile(&quot;w&quot;, dir=folder, delete=False)
+    path.write(&quot;temp data\n&quot;)
+    path.close()
+    print(open(path.name).read().strip())</code></pre></div></article><article class="topic" id="q97"><h2><span class="num">Q97</span> What is io module?</h2><div class="body"><p>Provides tools for handling input/output streams</p>
+<p>and in-memory files.</p>
+<p class="label">Example program:</p>
+<pre><code>from io import StringIO
+
+stream = StringIO()
+stream.write(&quot;in memory\n&quot;)
+stream.seek(0)
+print(stream.read())</code></pre></div></article><article class="topic" id="q98"><h2><span class="num">Q98</span> What is StringIO?</h2><div class="body"><p>StringIO creates an in-memory text stream.</p>
+<p class="label">Example program:</p>
+<pre><code>from io import StringIO
+
+file = StringIO()
+file.write(&quot;Hello Python&quot;)
+file.seek(0)
+print(file.read())</code></pre></div></article><article class="topic" id="q99"><h2><span class="num">Q99</span> What is BytesIO?</h2><div class="body"><p>BytesIO creates an in-memory binary stream.</p>
+<p class="label">Example program:</p>
+<pre><code>from io import BytesIO
+
+file = BytesIO()
+file.write(b&quot;Hello&quot;)
+file.seek(0)
+print(file.read())</code></pre></div></article><article class="topic" id="q100"><h2><span class="num">Q100</span> Difference between StringIO and BytesIO?</h2><div class="body"><pre><code>StringIO = Works with strings.
+BytesIO = Works with bytes.</code></pre>
+<p class="label">Example:</p>
+<pre><code>from io import StringIO, BytesIO</code></pre>
+<pre><code>text_file = StringIO()
+text_file.write(&quot;Hello Python&quot;)</code></pre>
+<pre><code>binary_file = BytesIO()
+binary_file.write(b&quot;Hello&quot;)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from io import BytesIO, StringIO
+
+text = StringIO(&quot;Hello&quot;)
+binary = BytesIO(b&quot;Hello&quot;)
+text.seek(0)
+binary.seek(0)
+print(text.read(), binary.read())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-12">Part 12: Csv Module</h1><article class="topic" id="q101"><h2><span class="num">Q101</span> What is CSV?</h2><div class="body"><p>CSV stands for Comma-Separated Values.</p>
+<p>It stores tabular data in rows and columns.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/people.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;name,city\nAmit,Bengaluru\nNeha,Pune\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q102"><h2><span class="num">Q102</span> Which module is used for CSV handling?</h2><div class="body"><p>csv module.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/module.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;, newline=&quot;&quot;) as file:
+    csv.writer(file).writerow([&quot;name&quot;, &quot;score&quot;])
+print(&quot;imported csv and wrote&quot;, path.name)</code></pre></div></article><article class="topic" id="q103"><h2><span class="num">Q103</span> What is csv.reader()?</h2><div class="body"><p>Reads CSV rows as lists.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/reader.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;name,score\nAmit,90\nNeha,85\n&quot;)
+with path.open(newline=&quot;&quot;) as file:
+    for row in csv.reader(file):
+        print(row)</code></pre></div></article><article class="topic" id="q104"><h2><span class="num">Q104</span> What is csv.writer()?</h2><div class="body"><p>Writes data into CSV files.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/writer.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;, newline=&quot;&quot;) as file:
+    writer = csv.writer(file)
+    writer.writerow([&quot;name&quot;, &quot;score&quot;])
+    writer.writerow([&quot;Amit&quot;, 90])
+print(path.read_text())</code></pre></div></article><article class="topic" id="q105"><h2><span class="num">Q105</span> What is csv.DictReader()?</h2><div class="body"><p>Reads CSV rows as dictionaries using column headers</p>
+<p>as dictionary keys.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/dict_reader.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;name,city\nAmit,Bengaluru\nNeha,Pune\n&quot;)
+with path.open(newline=&quot;&quot;) as file:
+    for row in csv.DictReader(file):
+        print(row[&quot;name&quot;], row[&quot;city&quot;])</code></pre></div></article><article class="topic" id="q106"><h2><span class="num">Q106</span> What is csv.DictWriter()?</h2><div class="body"><p>Writes dictionary data into CSV files.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/dict_writer.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;, newline=&quot;&quot;) as file:
+    writer = csv.DictWriter(file, fieldnames=[&quot;name&quot;, &quot;score&quot;])
+    writer.writeheader()
+    writer.writerow({&quot;name&quot;: &quot;Amit&quot;, &quot;score&quot;: 90})
+print(path.read_text())</code></pre></div></article><article class="topic" id="q107"><h2><span class="num">Q107</span> Difference between writerow() and writerows()?</h2><div class="body"><p><code>writerow()</code> = Writes one row.</p>
+<p><code>writerows()</code> = Writes multiple rows.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/rows.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;, newline=&quot;&quot;) as file:
+    writer = csv.writer(file)
+    writer.writerow([&quot;one&quot;])
+    writer.writerows([[&quot;two&quot;], [&quot;three&quot;]])
+print(path.read_text())</code></pre></div></article><article class="topic" id="q108"><h2><span class="num">Q108</span> Why use newline=&quot;&quot;?</h2><div class="body"><p>Prevents unwanted extra blank lines in CSV files,</p>
+<p>especially on Windows.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/newline.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;, newline=&quot;&quot;) as file:
+    writer = csv.writer(file)
+    writer.writerows([[&quot;name&quot;], [&quot;Amit&quot;], [&quot;Neha&quot;]])
+print(repr(path.read_text()))</code></pre></div></article><article class="topic" id="q109"><h2><span class="num">Q109</span> How do you read a CSV file?</h2><div class="body"><pre><code>import csv</code></pre>
+<pre><code>with open(&quot;data.csv&quot;, &quot;r&quot;, newline=&quot;&quot;) as file:
+    reader = csv.reader(file)</code></pre>
+<pre><code>for row in reader:
+        print(row)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/read_csv.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;name,score\nAmit,90\nNeha,85\n&quot;)
+with path.open(newline=&quot;&quot;) as file:
+    for row in csv.reader(file):
+        print(row)</code></pre></div></article><article class="topic" id="q110"><h2><span class="num">Q110</span> How do you read CSV using dictionaries?</h2><div class="body"><pre><code>import csv</code></pre>
+<pre><code>with open(&quot;data.csv&quot;, &quot;r&quot;, newline=&quot;&quot;) as file:
+    reader = csv.DictReader(file)</code></pre>
+<pre><code>for row in reader:
+        print(row)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/customers.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;name,city\nAmit,Bengaluru\n&quot;)
+with path.open(newline=&quot;&quot;) as file:
+    for row in csv.DictReader(file):
+        print(dict(row))</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-13">Part 13: JSON Module</h1><article class="topic" id="q111"><h2><span class="num">Q111</span> What is JSON?</h2><div class="body"><p>JSON stands for JavaScript Object Notation.</p>
+<p>It is a lightweight data-interchange format.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+text = &#x27;{&quot;name&quot;: &quot;Amit&quot;, &quot;active&quot;: true, &quot;city&quot;: null}&#x27;
+print(json.loads(text))</code></pre></div></article><article class="topic" id="q112"><h2><span class="num">Q112</span> Which module is used for JSON?</h2><div class="body"><p>json module.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+print(json.dumps({&quot;name&quot;: &quot;Amit&quot;, &quot;score&quot;: 90}))</code></pre></div></article><article class="topic" id="q113"><h2><span class="num">Q113</span> What is json.load()?</h2><div class="body"><p>Reads JSON data from a file and converts it</p>
+<p>into a Python object.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/load.json&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&#x27;{&quot;name&quot;: &quot;Amit&quot;, &quot;score&quot;: 90}\n&#x27;)
+with path.open() as file:
+    data = json.load(file)
+print(data[&quot;name&quot;], data[&quot;score&quot;])</code></pre></div></article><article class="topic" id="q114"><h2><span class="num">Q114</span> What is json.dump()?</h2><div class="body"><p>Writes a Python object into a JSON file.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/dump.json&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    json.dump({&quot;name&quot;: &quot;Amit&quot;, &quot;score&quot;: 90}, file, indent=2)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q115"><h2><span class="num">Q115</span> What is json.loads()?</h2><div class="body"><p>Converts a JSON string into a Python object.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = json.loads(&#x27;{&quot;name&quot;: &quot;Amit&quot;, &quot;skills&quot;: [&quot;Python&quot;, &quot;SQL&quot;]}&#x27;)
+print(data[&quot;skills&quot;])</code></pre></div></article><article class="topic" id="q116"><h2><span class="num">Q116</span> What is json.dumps()?</h2><div class="body"><p>Converts a Python object into a JSON string.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+text = json.dumps({&quot;name&quot;: &quot;Amit&quot;, &quot;active&quot;: True, &quot;city&quot;: None})
+print(text)</code></pre></div></article><article class="topic" id="q117"><h2><span class="num">Q117</span> Difference between load() and loads()?</h2><div class="body"><p><code>load()</code> = Reads JSON from a file-like object.</p>
+<p><code>loads()</code> = Reads JSON from a string.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/load_vs_loads.json&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&#x27;{&quot;n&quot;: 1}&#x27;)
+with path.open() as file:
+    from_file = json.load(file)
+from_text = json.loads(&#x27;{&quot;n&quot;: 1}&#x27;)
+print(from_file, from_text)</code></pre></div></article><article class="topic" id="q118"><h2><span class="num">Q118</span> Difference between dump() and dumps()?</h2><div class="body"><p><code>dump()</code> = Writes JSON into a file-like object.</p>
+<p><code>dumps()</code> = Returns JSON as a string.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/dump_vs_dumps.json&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    json.dump({&quot;n&quot;: 1}, file)
+print(&quot;dump wrote:&quot;, path.read_text())
+print(&quot;dumps returned:&quot;, json.dumps({&quot;n&quot;: 1}))</code></pre></div></article><article class="topic" id="q119"><h2><span class="num">Q119</span> What is serialization?</h2><div class="body"><p>Converting a Python object into a format</p>
+<p>that can be stored or transferred.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+payload = json.dumps({&quot;name&quot;: &quot;Amit&quot;, &quot;score&quot;: 90})
+print(payload)
+print(type(payload).__name__)</code></pre></div></article><article class="topic" id="q120"><h2><span class="num">Q120</span> What is deserialization?</h2><div class="body"><p>Converting stored data back into a Python object.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+original = &#x27;{&quot;name&quot;: &quot;Amit&quot;}&#x27;
+restored = json.loads(original)
+print(restored[&quot;name&quot;], type(restored).__name__)</code></pre></div></article><article class="topic" id="q121"><h2><span class="num">Q121</span> Can JSON store Python dictionaries?</h2><div class="body"><p>Yes, if their contents are JSON-compatible.</p>
+<p class="label">Example:</p>
+<pre><code>import json</code></pre>
+<pre><code>data = {
+    &quot;name&quot;: &quot;John&quot;,
+    &quot;age&quot;: 25
+}</code></pre>
+<p class="label">with open(&quot;data.json&quot;, &quot;w&quot;) as file:</p>
+<ul><li>json.dump(data, file, indent=4)</li></ul>
+<pre><code>with open(&quot;data.json&quot;, &quot;r&quot;) as file:
+    result = json.load(file)</code></pre>
+<pre><code>print(result)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/student.json&quot;)
+path.parent.mkdir(exist_ok=True)
+student = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25, &quot;skills&quot;: [&quot;Python&quot;]}
+path.write_text(json.dumps(student, indent=2))
+print(json.loads(path.read_text())[&quot;skills&quot;])</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-14">Part 14: Pickle Module</h1><article class="topic" id="q122"><h2><span class="num">Q122</span> What is pickle?</h2><div class="body"><p>Pickle is a Python module used to serialize</p>
+<p>and deserialize Python objects.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+
+blob = pickle.dumps({&quot;name&quot;: &quot;John&quot;, &quot;scores&quot;: [90, 80]})
+print(type(blob).__name__, pickle.loads(blob))</code></pre></div></article><article class="topic" id="q123"><h2><span class="num">Q123</span> What is pickle.dump()?</h2><div class="body"><p>Serializes a Python object and writes it to a file.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+from pathlib import Path
+
+path = Path(&quot;file_demo/student.pkl&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;wb&quot;) as file:
+    pickle.dump({&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}, file)
+print(&quot;bytes&quot;, path.stat().st_size)</code></pre></div></article><article class="topic" id="q124"><h2><span class="num">Q124</span> What is pickle.load()?</h2><div class="body"><p>Reads serialized data and reconstructs the object.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+from pathlib import Path
+
+path = Path(&quot;file_demo/load.pkl&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;wb&quot;) as file:
+    pickle.dump([&quot;Python&quot;, &quot;SQL&quot;], file)
+with path.open(&quot;rb&quot;) as file:
+    print(pickle.load(file))</code></pre></div></article><article class="topic" id="q125"><h2><span class="num">Q125</span> What is pickle.dumps()?</h2><div class="body"><p>Converts a Python object into bytes.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+
+blob = pickle.dumps({&quot;city&quot;: &quot;Bengaluru&quot;})
+print(blob[:10], &quot;...&quot;, len(blob), &quot;bytes&quot;)</code></pre></div></article><article class="topic" id="q126"><h2><span class="num">Q126</span> What is pickle.loads()?</h2><div class="body"><p>Converts bytes back into a Python object.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+
+blob = pickle.dumps({&quot;city&quot;: &quot;Bengaluru&quot;})
+print(pickle.loads(blob))</code></pre></div></article><article class="topic" id="q127"><h2><span class="num">Q127</span> Difference between JSON and Pickle?</h2><div class="body"><p class="label">JSON:</p>
+<ul><li>Language-independent.</li><li>Human-readable.</li><li>Supports limited data types.</li><li>Useful for APIs and data exchange.</li></ul>
+<p class="label">Pickle:</p>
+<ul><li>Python-specific.</li><li>Binary serialization.</li><li>Supports many Python objects.</li><li>Useful for Python object storage.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>import json
+import pickle
+
+data = {&quot;name&quot;: &quot;Amit&quot;, &quot;active&quot;: True}
+print(&quot;json  &quot;, json.dumps(data))
+print(&quot;pickle&quot;, pickle.dumps(data)[:12])</code></pre></div></article><article class="topic" id="q128"><h2><span class="num">Q128</span> Is pickle secure?</h2><div class="body"><p>No. Loading pickle files from untrusted sources</p>
+<p>can execute malicious code.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+
+trusted = pickle.dumps({&quot;ok&quot;: True})
+print(&quot;only load data you created:&quot;, pickle.loads(trusted))
+print(&quot;never pickle.loads() a file from the internet&quot;)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-15">Part 15: Encoding and Buffering</h1><article class="topic" id="q129"><h2><span class="num">Q129</span> What is encoding?</h2><div class="body"><p>Encoding converts characters into bytes.</p>
+<p class="label">Example program:</p>
+<pre><code>text = &quot;café&quot;
+blob = text.encode(&quot;utf-8&quot;)
+print(blob)</code></pre></div></article><article class="topic" id="q130"><h2><span class="num">Q130</span> What is decoding?</h2><div class="body"><p>Decoding converts bytes into characters.</p>
+<p class="label">Example program:</p>
+<pre><code>blob = &quot;café&quot;.encode(&quot;utf-8&quot;)
+print(blob.decode(&quot;utf-8&quot;))</code></pre></div></article><article class="topic" id="q131"><h2><span class="num">Q131</span> What is UTF-8?</h2><div class="body"><p>UTF-8 is a widely used character encoding</p>
+<p>that supports many languages.</p>
+<p class="label">Example program:</p>
+<pre><code>for encoding in (&quot;utf-8&quot;, &quot;utf-16&quot;, &quot;ascii&quot;, &quot;latin-1&quot;):
+    print(encoding, &quot;Hi&quot;.encode(encoding))</code></pre></div></article><article class="topic" id="q132"><h2><span class="num">Q132</span> Different encoding types?</h2><div class="body"><ul><li>UTF-8</li><li>UTF-16</li><li>ASCII</li><li>Latin-1</li></ul>
+<p class="label">Example program:</p>
+<pre><code>print(&quot;utf-8 &quot;, &quot;Amit&quot;.encode(&quot;utf-8&quot;))
+print(&quot;utf-16&quot;, &quot;Amit&quot;.encode(&quot;utf-16&quot;))
+print(&quot;ascii &quot;, &quot;Amit&quot;.encode(&quot;ascii&quot;))
+print(&quot;latin1&quot;, &quot;Amit&quot;.encode(&quot;latin-1&quot;))</code></pre></div></article><article class="topic" id="q133"><h2><span class="num">Q133</span> What is buffering?</h2><div class="body"><p>Buffering temporarily stores data in memory</p>
+<p>before transferring it to the underlying file.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/buffer.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+file = path.open(&quot;w&quot;, buffering=1)
+file.write(&quot;line\n&quot;)
+file.flush()
+print(&quot;flushed early:&quot;, path.read_text().strip())
+file.close()</code></pre></div></article><article class="topic" id="q134"><h2><span class="num">Q134</span> Why is buffering used?</h2><div class="body"><p>Improves performance by reducing direct</p>
+<p>input/output operations.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/buffer_why.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;, buffering=8192) as file:
+    for n in range(3):
+        file.write(f&quot;row {n}\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q135"><h2><span class="num">Q135</span> Difference between text mode and binary mode?</h2><div class="body"><p>Text mode = Reads and writes strings with encoding.</p>
+<p>Binary mode = Reads and writes bytes without text decoding.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/text_vs_bin.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hi\n&quot;)
+print(path.read_text(), type(path.read_text()).__name__)
+print(path.read_bytes(), type(path.read_bytes()).__name__)</code></pre></div></article><article class="topic" id="q136"><h2><span class="num">Q136</span> What is the encoding parameter?</h2><div class="body"><p>Specifies how Python converts characters into bytes</p>
+<p>and bytes into characters.</p>
+<p class="label">Example:</p>
+<pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+    print(file.read())</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/encoding_param.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;café\n&quot;, encoding=&quot;utf-8&quot;)
+print(path.read_text(encoding=&quot;utf-8&quot;))</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-16">Part 16: Compression Modules</h1><article class="topic" id="q137"><h2><span class="num">Q137</span> What is zipfile?</h2><div class="body"><p>Used to create, read and extract ZIP archives.</p>
+<p class="label">Example program:</p>
+<pre><code>import zipfile
+from pathlib import Path
+
+folder = Path(&quot;file_demo/zip_demo&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+(folder / &quot;a.txt&quot;).write_text(&quot;alpha\n&quot;)
+(folder / &quot;b.txt&quot;).write_text(&quot;beta\n&quot;)
+archive = folder / &quot;notes.zip&quot;
+with zipfile.ZipFile(archive, &quot;w&quot;) as zipped:
+    zipped.write(folder / &quot;a.txt&quot;, &quot;a.txt&quot;)
+    zipped.write(folder / &quot;b.txt&quot;, &quot;b.txt&quot;)
+with zipfile.ZipFile(archive) as zipped:
+    print(zipped.namelist())
+    print(zipped.read(&quot;a.txt&quot;).decode())</code></pre></div></article><article class="topic" id="q138"><h2><span class="num">Q138</span> What is gzip?</h2><div class="body"><p>Used for GZIP compression and decompression.</p>
+<p class="label">Example program:</p>
+<pre><code>import gzip
+from pathlib import Path
+
+path = Path(&quot;file_demo/notes.txt.gz&quot;)
+path.parent.mkdir(exist_ok=True)
+with gzip.open(path, &quot;wt&quot;) as file:
+    file.write(&quot;Hello gzip\n&quot;)
+with gzip.open(path, &quot;rt&quot;) as file:
+    print(file.read())</code></pre></div></article><article class="topic" id="q139"><h2><span class="num">Q139</span> What is bz2?</h2><div class="body"><p>Used for BZIP2 compression and decompression.</p>
+<p class="label">Example program:</p>
+<pre><code>import bz2
+from pathlib import Path
+
+path = Path(&quot;file_demo/notes.txt.bz2&quot;)
+path.parent.mkdir(exist_ok=True)
+with bz2.open(path, &quot;wt&quot;) as file:
+    file.write(&quot;Hello bz2\n&quot;)
+with bz2.open(path, &quot;rt&quot;) as file:
+    print(file.read())</code></pre></div></article><article class="topic" id="q140"><h2><span class="num">Q140</span> What is lzma?</h2><div class="body"><p>Used for LZMA compression and decompression.</p>
+<p class="label">Example program:</p>
+<pre><code>import lzma
+from pathlib import Path
+
+path = Path(&quot;file_demo/notes.txt.xz&quot;)
+path.parent.mkdir(exist_ok=True)
+with lzma.open(path, &quot;wt&quot;) as file:
+    file.write(&quot;Hello lzma\n&quot;)
+with lzma.open(path, &quot;rt&quot;) as file:
+    print(file.read())</code></pre></div></article><article class="topic" id="q141"><h2><span class="num">Q141</span> Difference between ZIP and GZIP?</h2><div class="body"><pre><code>ZIP = Can store multiple files and directories.
+GZIP = Generally compresses one file stream.
+TAR + GZIP = Common way to archive multiple files.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import gzip
+import zipfile
+from pathlib import Path
+
+folder = Path(&quot;file_demo/zip_vs_gzip&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+(folder / &quot;one.txt&quot;).write_text(&quot;one\n&quot;)
+(folder / &quot;two.txt&quot;).write_text(&quot;two\n&quot;)
+with zipfile.ZipFile(folder / &quot;both.zip&quot;, &quot;w&quot;) as zipped:
+    zipped.write(folder / &quot;one.txt&quot;, &quot;one.txt&quot;)
+    zipped.write(folder / &quot;two.txt&quot;, &quot;two.txt&quot;)
+with gzip.open(folder / &quot;one.txt.gz&quot;, &quot;wt&quot;) as file:
+    file.write((folder / &quot;one.txt&quot;).read_text())
+print(&quot;zip has&quot;, zipfile.ZipFile(folder / &quot;both.zip&quot;).namelist())
+print(&quot;gzip has one stream&quot;)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage">Practice</h1><h1 class="stage" id="part-17">Part 17: Output-Based Questions</h1><article class="topic" id="q142"><h2><span class="num">Q142</span> What is the output?
+
+Assume data.txt contains &quot;Hello Python&quot;.
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+print(file.read(5))
+file.close()</h2><div class="body"><p>Hello</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+file = path.open()
+print(file.read(5))
+file.close()</code></pre></div></article><article class="topic" id="q143"><h2><span class="num">Q143</span></h2><pre><code>What is the output?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+print(file.read())
+print(file.read())
+file.close()</code></pre><div class="body"><p>Hello Python</p>
+<p>[Second read returns an empty string.]</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data143.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+file = path.open()
+print(repr(file.read()))
+print(repr(file.read()))
+file.close()</code></pre></div></article><article class="topic" id="q144"><h2><span class="num">Q144</span></h2><pre><code>What is the output?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+print(file.read(5))
+print(file.tell())
+file.close()</code></pre><div class="body"><p>Hello</p>
+<p>5</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data144.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+file = path.open()
+print(file.read(5))
+print(file.tell())
+file.close()</code></pre></div></article><article class="topic" id="q145"><h2><span class="num">Q145</span> What is the output?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+file.read(5)
+file.seek(0)
+print(file.read(5))
+file.close()</h2><div class="body"><p>Hello</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data145.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+file = path.open()
+file.read(5)
+file.seek(0)
+print(file.read(5))
+file.close()</code></pre></div></article><article class="topic" id="q146"><h2><span class="num">Q146</span> What happens here?
+
+file = open(&quot;data.txt&quot;, &quot;w&quot;)
+file.write(&quot;Python&quot;)
+file.close()</h2><div class="body"><p>Existing content is deleted and replaced with Python.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data146.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+file = path.open(&quot;w&quot;)
+file.write(&quot;Python&quot;)
+file.close()
+print(path.read_text())</code></pre></div></article><article class="topic" id="q147"><h2><span class="num">Q147</span> What happens here?
+
+Assume file contains Hello.
+
+file = open(&quot;data.txt&quot;, &quot;a&quot;)
+file.write(&quot; Python&quot;)
+file.close()</h2><div class="body"><p>Hello Python</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data147.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+file = path.open(&quot;a&quot;)
+file.write(&quot; Python&quot;)
+file.close()
+print(path.read_text())</code></pre></div></article><article class="topic" id="q148"><h2><span class="num">Q148</span></h2><pre><code>What happens here?
+
+file = open(&quot;data.txt&quot;, &quot;x&quot;)</code></pre><div class="body"><p>Creates a new file.</p>
+<p>If the file already exists, FileExistsError occurs.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data148.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.unlink(missing_ok=True)
+file = path.open(&quot;x&quot;)
+file.write(&quot;new&quot;)
+file.close()
+print(&quot;created&quot;, path.exists())
+try:
+    path.open(&quot;x&quot;)
+except FileExistsError as error:
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q149"><h2><span class="num">Q149</span> What is the output?
+
+with open(&quot;data.txt&quot;, &quot;w&quot;) as file:
+    file.write(&quot;Python&quot;)
+
+print(file.closed)</h2><div class="body"><p>True</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open(&quot;file_demo/data149.txt&quot;, &quot;w&quot;) as file:
+    file.write(&quot;Python&quot;)
+print(file.closed)</code></pre></div></article><article class="topic" id="q150"><h2><span class="num">Q150</span></h2><pre><code>What is the output?
+
+with open(&quot;data.txt&quot;, &quot;w&quot;) as file:
+    print(file.writable())
+    print(file.readable())</code></pre><div class="body"><p>True</p>
+<p>False</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open(&quot;file_demo/data150.txt&quot;, &quot;w&quot;) as file:
+    print(file.writable())
+    print(file.readable())</code></pre></div></article><article class="topic" id="q151"><h2><span class="num">Q151</span></h2><pre><code>What happens here?
+
+file = open(&quot;data.txt&quot;, &quot;r&quot;)
+file.close()
+print(file.read())</code></pre><div class="body"><p>ValueError occurs because the file is closed.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+file = open(&quot;file_demo/data151.txt&quot;, &quot;w&quot;)
+file.close()
+try:
+    print(file.read())
+except ValueError as error:
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q152"><h2><span class="num">Q152</span> What is the output?
+
+Assume data.txt contains:
+
+Python
+Java
+SQL
+
+with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    print(file.readline())
+    print(file.readline())</h2><div class="body"><p>Python</p>
+<p>Java</p>
+<p>Note: <code>readline()</code> retains the newline character,</p>
+<p>and <code>print()</code> adds another newline.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/data152.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Python\nJava\nSQL\n&quot;)
+with path.open() as file:
+    print(repr(file.readline()))
+    print(repr(file.readline()))</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-18">Part 18: Practical Coding Questions</h1><article class="topic" id="q153"><h2><span class="num">Q153</span> Create a file.</h2><div class="body"><p class="label">with open(&quot;data.txt&quot;, &quot;w&quot;) as file:</p>
+<ul><li>file.write(&quot;Hello Python&quot;)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/created.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+with path.open(&quot;w&quot;) as file:
+    file.write(&quot;Hello Python&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q154"><h2><span class="num">Q154</span> Read a file.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    print(file.read())</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/to_read.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+with path.open() as file:
+    print(file.read())</code></pre></div></article><article class="topic" id="q155"><h2><span class="num">Q155</span> Append content to a file.</h2><div class="body"><p class="label">with open(&quot;data.txt&quot;, &quot;a&quot;) as file:</p>
+<ul><li>file.write(&quot;\nWelcome Python&quot;)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/to_append.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+with path.open(&quot;a&quot;) as file:
+    file.write(&quot;\nWelcome Python&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q156"><h2><span class="num">Q156</span> Count the number of lines.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    lines = file.readlines()</code></pre>
+<pre><code>print(len(lines))</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/lines.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;one\ntwo\nthree\n&quot;)
+with path.open() as file:
+    lines = file.readlines()
+print(len(lines))</code></pre></div></article><article class="topic" id="q157"><h2><span class="num">Q157</span> Count words in a file.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    content = file.read()</code></pre>
+<pre><code>words = content.split()</code></pre>
+<pre><code>print(len(words))</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/words.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python world&quot;)
+words = path.read_text().split()
+print(len(words))</code></pre></div></article><article class="topic" id="q158"><h2><span class="num">Q158</span> Count characters in a file.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    content = file.read()</code></pre>
+<pre><code>print(len(content))</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/chars.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello&quot;)
+print(len(path.read_text()))</code></pre></div></article><article class="topic" id="q159"><h2><span class="num">Q159</span> Count vowels in a file.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    content = file.read().lower()</code></pre>
+<pre><code>count = 0</code></pre>
+<p class="label">for char in content:</p>
+<p class="label">if char in &quot;aeiou&quot;:</p>
+<ul><li>count += 1</li></ul>
+<pre><code>print(count)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/vowels.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Hello Python&quot;)
+count = sum(1 for char in path.read_text().lower() if char in &quot;aeiou&quot;)
+print(count)</code></pre></div></article><article class="topic" id="q160"><h2><span class="num">Q160</span> Count occurrences of a word.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    content = file.read()</code></pre>
+<pre><code>print(content.count(&quot;Python&quot;))</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/word_count.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Python and python&quot;)
+print(path.read_text().lower().count(&quot;python&quot;))</code></pre></div></article><article class="topic" id="q161"><h2><span class="num">Q161</span> Copy content from one file to another.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as source:
+    content = source.read()</code></pre>
+<p>with open(&quot;copy.txt&quot;, &quot;w&quot;) as destination:</p>
+<p>destination.write(content)</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+source = folder / &quot;source.txt&quot;
+target = folder / &quot;copy_of_source.txt&quot;
+source.write_text(&quot;copy this text&quot;)
+target.write_text(source.read_text())
+print(target.read_text())</code></pre></div></article><article class="topic" id="q162"><h2><span class="num">Q162</span> Copy a file using shutil.</h2><div class="body"><pre><code>import shutil</code></pre>
+<p>shutil.copy(&quot;data.txt&quot;, &quot;copy.txt&quot;)</p>
+<p class="label">Example program:</p>
+<pre><code>import shutil
+from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+source = folder / &quot;shutil_src.txt&quot;
+source.write_text(&quot;shutil copy&quot;)
+shutil.copy(source, folder / &quot;shutil_dst.txt&quot;)
+print((folder / &quot;shutil_dst.txt&quot;).read_text())</code></pre></div></article><article class="topic" id="q163"><h2><span class="num">Q163</span> Rename a file.</h2><div class="body"><pre><code>import os</code></pre>
+<p>os.rename(&quot;old.txt&quot;, &quot;new.txt&quot;)</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+old = folder / &quot;before.txt&quot;
+new = folder / &quot;after.txt&quot;
+new.unlink(missing_ok=True)
+old.write_text(&quot;renamed file&quot;)
+os.rename(old, new)
+print(new.read_text(), old.exists())</code></pre></div></article><article class="topic" id="q164"><h2><span class="num">Q164</span> Delete a file.</h2><div class="body"><pre><code>import os</code></pre>
+<p>os.remove(&quot;data.txt&quot;)</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/remove_this.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;gone soon&quot;)
+os.remove(path)
+print(path.exists())</code></pre></div></article><article class="topic" id="q165"><h2><span class="num">Q165</span> Check whether a file exists.</h2><div class="body"><pre><code>import os</code></pre>
+<pre><code>if os.path.exists(&quot;data.txt&quot;):
+    print(&quot;File exists&quot;)
+else:
+    print(&quot;File does not exist&quot;)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/maybe.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;here&quot;)
+if os.path.exists(path):
+    print(&quot;File exists&quot;)
+else:
+    print(&quot;File does not exist&quot;)</code></pre></div></article><article class="topic" id="q166"><h2><span class="num">Q166</span> Find the longest word.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    words = file.read().split()</code></pre>
+<pre><code>longest = max(words, key=len)</code></pre>
+<pre><code>print(longest)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/longest.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;I like Python programming&quot;)
+words = path.read_text().split()
+print(max(words, key=len))</code></pre></div></article><article class="topic" id="q167"><h2><span class="num">Q167</span> Reverse file content.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    content = file.read()</code></pre>
+<pre><code>reversed_content = content[::-1]</code></pre>
+<p class="label">with open(&quot;reverse.txt&quot;, &quot;w&quot;) as file:</p>
+<ul><li>file.write(reversed_content)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+source = folder / &quot;forward.txt&quot;
+source.write_text(&quot;Python&quot;)
+(folder / &quot;reversed.txt&quot;).write_text(source.read_text()[::-1])
+print((folder / &quot;reversed.txt&quot;).read_text())</code></pre></div></article><article class="topic" id="q168"><h2><span class="num">Q168</span> Read file without loading everything into memory.</h2><div class="body"><p class="label">with open(&quot;data.txt&quot;, &quot;r&quot;) as file:</p>
+<p class="label">for line in file:</p>
+<ul><li>print(line.<code>strip()</code>)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/stream.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;one\ntwo\nthree\n&quot;)
+with path.open() as file:
+    for line in file:
+        print(line.strip())</code></pre></div></article><article class="topic" id="q169"><h2><span class="num">Q169</span> Remove empty lines from a file.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    lines = file.readlines()</code></pre>
+<p class="label">with open(&quot;data.txt&quot;, &quot;w&quot;) as file:</p>
+<p class="label">for line in lines:</p>
+<p class="label">if line.strip():</p>
+<ul><li>file.write(line)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/blanks.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Amit\n\nNeha\n\n&quot;)
+kept = [line for line in path.read_text().splitlines(True) if line.strip()]
+path.write_text(&quot;&quot;.join(kept))
+print(repr(path.read_text()))</code></pre></div></article><article class="topic" id="q170"><h2><span class="num">Q170</span> Find duplicate lines.</h2><div class="body"><pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as file:
+    lines = file.readlines()</code></pre>
+<pre><code>seen = set()</code></pre>
+<p class="label">for line in lines:</p>
+<p class="label">if line in seen:</p>
+<ul><li>print(&quot;Duplicate:&quot;, line.<code>strip()</code>)</li></ul>
+<p class="label">else:</p>
+<ul><li>seen.add(line)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/dupes.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Amit\nNeha\nAmit\n&quot;)
+seen = set()
+for line in path.read_text().splitlines():
+    if line in seen:
+        print(&quot;Duplicate:&quot;, line)
+    else:
+        seen.add(line)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-19">Part 19: Advanced and Tricky Questions</h1><article class="topic" id="q171"><h2><span class="num">Q171</span> Difference between file and directory?</h2><div class="body"><pre><code>File = Stores information.
+Directory = Stores and organizes files and folders.</code></pre>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo/box&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+note = folder / &quot;note.txt&quot;
+note.write_text(&quot;stored in a file\n&quot;)
+print(&quot;directory&quot;, folder.is_dir(), folder)
+print(&quot;file     &quot;, note.is_file(), note.read_text().strip())</code></pre></div></article><article class="topic" id="q172"><h2><span class="num">Q172</span> What is an absolute path?</h2><div class="body"><p>Complete file path starting from root directory.</p>
+<p class="label">Example:</p>
+<p>/Users/john/Documents/data.txt</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/abs_demo.txt&quot;).resolve()
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;absolute\n&quot;)
+print(path)
+print(path.is_absolute())</code></pre></div></article><article class="topic" id="q173"><h2><span class="num">Q173</span> What is a relative path?</h2><div class="body"><p>File path relative to current working directory.</p>
+<p class="label">Example:</p>
+<p>Documents/data.txt</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+print(Path(&quot;file_demo&quot;) / &quot;notes.txt&quot;)
+print((Path(&quot;file_demo&quot;) / &quot;notes.txt&quot;).is_absolute())</code></pre></div></article><article class="topic" id="q174"><h2><span class="num">Q174</span> Difference between os.remove() and os.rmdir()?</h2><div class="body"><p>os.<code>remove()</code> = Deletes a file.</p>
+<p>os.<code>rmdir()</code> = Deletes an empty directory.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/remove_vs_rmdir&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+note = folder / &quot;note.txt&quot;
+note.write_text(&quot;x&quot;)
+os.remove(note)
+os.rmdir(folder)
+print(&quot;file and empty directory removed&quot;, not folder.exists())</code></pre></div></article><article class="topic" id="q175"><h2><span class="num">Q175</span> Difference between os.mkdir() and os.makedirs()?</h2><div class="body"><p>os.<code>mkdir()</code> = Creates one directory.</p>
+<p>os.<code>makedirs()</code> = Creates nested directories.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+import shutil
+from pathlib import Path
+
+single = Path(&quot;file_demo/just_one&quot;)
+nested = Path(&quot;file_demo/a/b/c&quot;)
+single.parent.mkdir(exist_ok=True)
+if single.exists():
+    single.rmdir()
+os.mkdir(single)
+if nested.exists():
+    shutil.rmtree(Path(&quot;file_demo/a&quot;))
+os.makedirs(nested)
+print(single.is_dir(), nested.is_dir())</code></pre></div></article><article class="topic" id="q176"><h2><span class="num">Q176</span> Can we open multiple files simultaneously?</h2><div class="body"><p>Yes.</p>
+<p class="label">Example:</p>
+<ul><li>with open(&quot;a.txt&quot;, &quot;r&quot;) as file1, \</li></ul>
+<p class="label">open(&quot;b.txt&quot;, &quot;w&quot;) as file2:</p>
+<p>file2.write(file1.<code>read()</code>)</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+(folder / &quot;left.txt&quot;).write_text(&quot;from left&quot;)
+with (folder / &quot;left.txt&quot;).open() as source, (folder / &quot;right.txt&quot;).open(&quot;w&quot;) as target:
+    target.write(source.read())
+print((folder / &quot;right.txt&quot;).read_text())</code></pre></div></article><article class="topic" id="q177"><h2><span class="num">Q177</span> What is a file descriptor?</h2><div class="body"><p>An integer used by the operating system to identify</p>
+<p>an open file or resource.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+Path(&quot;file_demo&quot;).mkdir(exist_ok=True)
+with open(&quot;file_demo/descriptor.txt&quot;, &quot;w&quot;) as file:
+    print(file.fileno())</code></pre></div></article><article class="topic" id="q178"><h2><span class="num">Q178</span> Difference between flush() and close()?</h2><div class="body"><p><code>flush()</code> = Writes buffered data without closing.</p>
+<p><code>close()</code> = Flushes and closes the file.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/flush_vs_close.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+file = path.open(&quot;w&quot;)
+file.write(&quot;saved&quot;)
+file.flush()
+print(&quot;after flush, still open:&quot;, path.read_text(), &quot;closed&quot;, file.closed)
+file.close()
+print(&quot;after close:&quot;, file.closed)</code></pre></div></article><article class="topic" id="q179"><h2><span class="num">Q179</span> Difference between truncate() and remove()?</h2><div class="body"><p><code>truncate()</code> = Removes file content after a position.</p>
+<p><code>remove()</code> = Deletes the file itself.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo&quot;)
+folder.mkdir(exist_ok=True)
+trimmed = folder / &quot;trimmed.txt&quot;
+trimmed.write_text(&quot;Hello Python&quot;)
+with trimmed.open(&quot;r+&quot;) as file:
+    file.truncate(5)
+removed = folder / &quot;removed.txt&quot;
+removed.write_text(&quot;bye&quot;)
+removed.unlink()
+print(repr(trimmed.read_text()), removed.exists())</code></pre></div></article><article class="topic" id="q180"><h2><span class="num">Q180</span> Can we directly modify a specific line in a text file?</h2><div class="body"><p>Usually, read the file, modify the required content</p>
+<p>and rewrite it. Arbitrary in-place insertion is not directly</p>
+<p>supported by ordinary text file operations.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/edit_line.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Rahul\nPriya\nAmit\n&quot;)
+lines = path.read_text().splitlines()
+lines[1] = &quot;Neha&quot;
+path.write_text(&quot;\n&quot;.join(lines) + &quot;\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q181"><h2><span class="num">Q181</span> How do you handle very large files?</h2><div class="body"><ul><li>Read line by line.</li><li>Use buffering.</li><li>Process in chunks.</li><li>Avoid loading everything into memory.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/big_style.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;&quot;.join(f&quot;row {n}\n&quot; for n in range(1000)))
+count = 0
+with path.open() as file:
+    for _ in file:
+        count += 1
+print(count)</code></pre></div></article><article class="topic" id="q182"><h2><span class="num">Q182</span> What is a newline character?</h2><div class="body"><p>\n represents a line break.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/newline.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;first\nsecond\n&quot;)
+print(path.read_bytes())</code></pre></div></article><article class="topic" id="q183"><h2><span class="num">Q183</span> Difference between \n and \r\n?</h2><div class="body"><p>\n = Line feed.</p>
+<p>\r\n = Carriage return followed by line feed.</p>
+<p class="label">Example program:</p>
+<pre><code>print(repr(&quot;\n&quot;))
+print(repr(&quot;\r\n&quot;))
+print(&quot;same text on two lines:&quot; + &quot;\n&quot; + &quot;next&quot;)</code></pre></div></article><article class="topic" id="q184"><h2><span class="num">Q184</span> What happens if a binary file is opened in text mode?</h2><div class="body"><p>Python may raise UnicodeDecodeError if its bytes</p>
+<p>cannot be decoded using the selected encoding.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/not_text.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(bytes([0xFF, 0xFE, 0x00, 0x80]))
+try:
+    path.read_text(encoding=&quot;utf-8&quot;)
+except UnicodeDecodeError as error:
+    print(type(error).__name__)</code></pre></div></article><article class="topic" id="q185"><h2><span class="num">Q185</span> Can we use seek() in binary files?</h2><div class="body"><p>Yes. It moves the pointer to a specific byte position.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/seek_bin.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(b&quot;ABCDEF&quot;)
+with path.open(&quot;rb&quot;) as file:
+    file.seek(3)
+    print(file.read())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-20">Part 20: Scenario-Based Questions</h1><article class="topic" id="q186"><h2><span class="num">Q186</span> You have a file containing 10 lakh records.
+How will you read it efficiently?</h2><div class="body"><p>Read line by line or in chunks instead of loading</p>
+<p>the complete file into memory.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/lakh_style.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;&quot;.join(f&quot;id,{n}\n&quot; for n in range(1, 21)))
+total = 0
+with path.open() as file:
+    next(file)
+    for line in file:
+        total += int(line.split(&quot;,&quot;)[1])
+print(total)</code></pre></div></article><article class="topic" id="q187"><h2><span class="num">Q187</span> You need to add records without deleting old data.
+Which mode will you use?</h2><div class="body"><p>Append mode (a).</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/records.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;Amit\n&quot;)
+with path.open(&quot;a&quot;) as file:
+    file.write(&quot;Neha\n&quot;)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q188"><h2><span class="num">Q188</span> You need to create a file only if it does not exist.
+Which mode will you use?</h2><div class="body"><p>Exclusive creation mode (x).</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/only_new.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.unlink(missing_ok=True)
+with path.open(&quot;x&quot;) as file:
+    file.write(&quot;first writer wins\n&quot;)
+print(path.read_text().strip())</code></pre></div></article><article class="topic" id="q189"><h2><span class="num">Q189</span> Your program crashes while processing a file.
+How can you ensure it gets closed?</h2><div class="body"><p>Use with <code>open()</code> because it automatically closes</p>
+<p>the file when the block exits.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/crash_safe.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+try:
+    with path.open(&quot;w&quot;) as file:
+        file.write(&quot;started\n&quot;)
+        raise ValueError(&quot;boom&quot;)
+except ValueError:
+    print(&quot;closed anyway:&quot;, file.closed)</code></pre></div></article><article class="topic" id="q190"><h2><span class="num">Q190</span> You need to read an image file.
+Which mode will you use?</h2><div class="body"><p>rb (Read Binary).</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/picture.bin&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(b&quot;\x89PNG\r\nfake&quot;)
+with path.open(&quot;rb&quot;) as file:
+    header = file.read(4)
+print(header)</code></pre></div></article><article class="topic" id="q191"><h2><span class="num">Q191</span> You need to copy an entire folder.
+Which module will you use?</h2><div class="body"><p>shutil.<code>copytree()</code>.</p>
+<p class="label">Example program:</p>
+<pre><code>import shutil
+from pathlib import Path
+
+src = Path(&quot;file_demo/project&quot;)
+dst = Path(&quot;file_demo/project_copy&quot;)
+if dst.exists():
+    shutil.rmtree(dst)
+(src / &quot;data&quot;).mkdir(parents=True, exist_ok=True)
+(src / &quot;data&quot; / &quot;a.txt&quot;).write_text(&quot;folder copy&quot;)
+shutil.copytree(src, dst)
+print((dst / &quot;data&quot; / &quot;a.txt&quot;).read_text())</code></pre></div></article><article class="topic" id="q192"><h2><span class="num">Q192</span> You need to store Python dictionaries permanently.
+Which format will you use?</h2><div class="body"><p>JSON for JSON-compatible data or Pickle for</p>
+<p>Python-specific object serialization.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/permanent.json&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(json.dumps({&quot;name&quot;: &quot;Amit&quot;, &quot;score&quot;: 90}, indent=2))
+print(json.loads(path.read_text()))</code></pre></div></article><article class="topic" id="q193"><h2><span class="num">Q193</span> You receive a CSV file containing customer records.
+How will you read it?</h2><div class="body"><p>Use csv.<code>reader()</code> or csv.<code>DictReader()</code>.</p>
+<p class="label">Example program:</p>
+<pre><code>import csv
+from pathlib import Path
+
+path = Path(&quot;file_demo/customers193.csv&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;name,city\nAmit,Bengaluru\nNeha,Pune\n&quot;)
+with path.open(newline=&quot;&quot;) as file:
+    for row in csv.DictReader(file):
+        print(row[&quot;name&quot;], &quot;from&quot;, row[&quot;city&quot;])</code></pre></div></article><article class="topic" id="q194"><h2><span class="num">Q194</span> Your file contains special characters and reading
+produces UnicodeDecodeError. What will you do?</h2><div class="body"><p>Identify the actual encoding and open the file</p>
+<p>using the correct encoding parameter.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/special.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_bytes(&quot;café\n&quot;.encode(&quot;utf-8&quot;))
+try:
+    path.read_text(encoding=&quot;ascii&quot;)
+except UnicodeDecodeError:
+    print(path.read_text(encoding=&quot;utf-8&quot;))</code></pre></div></article><article class="topic" id="q195"><h2><span class="num">Q195</span> You want to check whether a path is a file or directory.
+What will you use?</h2><div class="body"><pre><code>import os</code></pre>
+<pre><code>print(os.path.isfile(&quot;data.txt&quot;))
+print(os.path.isdir(&quot;Documents&quot;))</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+folder = Path(&quot;file_demo/check_kind&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+note = folder / &quot;note.txt&quot;
+note.write_text(&quot;x&quot;)
+print(&quot;file&quot;, os.path.isfile(note), &quot;dir&quot;, os.path.isdir(folder))</code></pre></div></article><article class="topic" id="q196"><h2><span class="num">Q196</span> You want to process a file but don&#x27;t know whether
+it exists. What will you do?</h2><div class="body"><p>Check using os.path.<code>exists()</code> or Path.<code>exists()</code></p>
+<p>and handle FileNotFoundError.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;file_demo/maybe_missing.txt&quot;)
+if path.exists():
+    print(path.read_text())
+else:
+    print(&quot;create it or skip it; it is not there yet&quot;)</code></pre></div></article><article class="topic" id="q197"><h2><span class="num">Q197</span> You want to save temporary processing data.
+Which module will you use?</h2><div class="body"><p>tempfile.</p>
+<p class="label">Example program:</p>
+<pre><code>import tempfile
+from pathlib import Path
+
+with tempfile.TemporaryDirectory() as folder:
+    path = Path(folder) / &quot;scratch.txt&quot;
+    path.write_text(&quot;temporary\n&quot;)
+    print(path.read_text().strip())
+print(&quot;directory removed after the with block&quot;)</code></pre></div></article><article class="topic" id="q198"><h2><span class="num">Q198</span> You need to compress multiple files into one archive.
+Which module will you use?</h2><div class="body"><p>zipfile.</p>
+<p class="label">Example program:</p>
+<pre><code>import zipfile
+from pathlib import Path
+
+folder = Path(&quot;file_demo/pack&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+(folder / &quot;a.txt&quot;).write_text(&quot;A&quot;)
+(folder / &quot;b.txt&quot;).write_text(&quot;B&quot;)
+archive = folder / &quot;pack.zip&quot;
+with zipfile.ZipFile(archive, &quot;w&quot;) as zipped:
+    zipped.write(folder / &quot;a.txt&quot;, &quot;a.txt&quot;)
+    zipped.write(folder / &quot;b.txt&quot;, &quot;b.txt&quot;)
+print(zipfile.ZipFile(archive).namelist())</code></pre>
+<p>============================================================</p></div></article><h1 class="stage">Revision</h1><h1 class="stage" id="part-21">Part 21: Rapid-Fire Questions</h1><article class="topic"><div class="body"><div class="rf"><div><div class="q"></div><div>===========================================================</div></div><div><div class="q">Default file mode?</div><div>r</div></div><div><div class="q">Create a file?</div><div>x or w</div></div><div><div class="q">Read entire file?</div><div><code>read()</code></div></div><div><div class="q">Read one line?</div><div><code>readline()</code></div></div><div><div class="q">Read lines as list?</div><div><code>readlines()</code></div></div><div><div class="q">Write a string?</div><div><code>write()</code></div></div><div><div class="q">Write multiple strings?</div><div><code>writelines()</code></div></div><div><div class="q">Current pointer position?</div><div><code>tell()</code></div></div><div><div class="q">Move file pointer?</div><div><code>seek()</code></div></div><div><div class="q">Close a file?</div><div><code>close()</code></div></div><div><div class="q">Automatically close?</div><div>with <code>open()</code></div></div><div><div class="q">Read image?</div><div>rb</div></div><div><div class="q">Write binary?</div><div>wb</div></div><div><div class="q">Add content?</div><div>a</div></div><div><div class="q">Delete file?</div><div>os.<code>remove()</code></div></div><div><div class="q">Rename file?</div><div>os.<code>rename()</code></div></div><div><div class="q">Copy file?</div><div>shutil.<code>copy()</code></div></div><div><div class="q">Move file?</div><div>shutil.<code>move()</code></div></div><div><div class="q">Check path?</div><div>os.path.<code>exists()</code></div></div><div><div class="q">CSV module?</div><div>csv</div></div><div><div class="q">JSON module?</div><div>json</div></div><div><div class="q">Object serialization?</div><div>pickle</div></div><div><div class="q">Temporary files?</div><div>tempfile</div></div><div><div class="q">In-memory text?</div><div>StringIO</div></div><div><div class="q">In-memory bytes?</div><div>BytesIO</div></div><div><div class="q">Path management?</div><div>pathlib</div></div><div><div class="q">Compression?</div><div>zipfile, gzip, bz2, lzma</div></div><div><div class="q">File missing error?</div><div>FileNotFoundError</div></div><div><div class="q">Existing file error?</div><div>FileExistsError</div></div><div><div class="q">Access denied?</div><div>PermissionError</div></div><div><div class="q"></div><div>===========================================================</div></div></div></div></article><h1 class="stage" id="part-22">Part 22: Most Important Interview Topics</h1><article class="topic"><div class="body"><p>============================================================</p>
+<p class="label">HIGH PRIORITY - MUST PREPARE:</p>
+<ol><li>What is file handling?</li><li>Types of files.</li><li>All file opening modes.</li><li>Difference between r, w and a.</li><li>Difference between r+, w+ and a+.</li><li><code>read()</code>, <code>readline()</code>, <code>readlines()</code>.</li><li><code>write()</code> and <code>writelines()</code>.</li><li>File pointer.</li><li><code>seek()</code> and <code>tell()</code>.</li><li>Context manager.</li><li><code>open()</code> vs with <code>open()</code>.</li><li>File handling exceptions.</li><li>try, except, else and finally.</li><li>os module and its functions.</li><li>shutil module.</li><li>pathlib module.</li><li>CSV module.</li><li>JSON module.</li><li><code>load()</code>, <code>loads()</code>, <code>dump()</code>, <code>dumps()</code>.</li><li>Serialization and deserialization.</li><li>Pickle module.</li><li>Text vs binary files.</li><li>Encoding and decoding.</li><li>Buffering.</li><li>Reading large files efficiently.</li><li>File copy, move, rename and delete.</li><li>Output-based questions.</li><li>Practical file handling programs.</li></ol></div></article><h1 class="stage" id="part-23">Part 23: JSON Study Notes</h1><article class="topic" id="q199"><h2><span class="num">Q199</span> WHAT IS JSON</h2><div class="body"><p>JSON stands for JavaScript Object Notation.</p>
+<p>It is a lightweight data-interchange format.</p>
+<p class="label">It is used to exchange data between:</p>
+<ul><li>Applications</li><li>APIs</li><li>Web servers</li><li>Python programs</li><li>Databases</li></ul>
+<p>JSON is text-based and language-independent.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+print(json.dumps({&quot;name&quot;: &quot;Amit&quot;, &quot;active&quot;: True, &quot;city&quot;: None}))</code></pre></div></article><article class="topic" id="q200"><h2><span class="num">Q200</span> JSON DATA TYPES</h2><div class="body"><p class="label">JSON supports:</p>
+<p>String</p>
+<p>Number</p>
+<p>Boolean</p>
+<p>Null</p>
+<p>Object</p>
+<p>Array</p>
+<p class="label">Example:</p>
+<p>{</p>
+<p>&quot;name&quot;: &quot;John&quot;,</p>
+<p>&quot;age&quot;: 25,</p>
+<p>&quot;salary&quot;: 30000,</p>
+<p>&quot;active&quot;: true,</p>
+<p>&quot;address&quot;: null,</p>
+<p>&quot;skills&quot;: [&quot;Python&quot;, &quot;SQL&quot;],</p>
+<p>&quot;employee&quot;: {</p>
+<p>&quot;department&quot;: &quot;IT&quot;</p>
+<p>}</p>
+<p>}</p>
+<p class="label">Important:</p>
+<p class="label">JSON uses:</p>
+<ul><li>true</li><li>false</li><li>null</li></ul>
+<p class="label">Python uses:</p>
+<p>True</p>
+<p>False</p>
+<p>None</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+sample = {
+    &quot;name&quot;: &quot;John&quot;,
+    &quot;age&quot;: 25,
+    &quot;salary&quot;: 30000,
+    &quot;active&quot;: True,
+    &quot;address&quot;: None,
+    &quot;skills&quot;: [&quot;Python&quot;, &quot;SQL&quot;],
+}
+print(json.dumps(sample, indent=2))</code></pre></div></article><article class="topic" id="q201"><h2><span class="num">Q201</span> JSON OBJECT</h2><div class="body"><p>A JSON object contains key-value pairs.</p>
+<p>{</p>
+<p>&quot;name&quot;: &quot;Amit&quot;,</p>
+<p>&quot;age&quot;: 25</p>
+<p>}</p>
+<p>Keys must be strings.</p>
+<p class="label">JSON object:</p>
+<p>Similar to Python dictionary.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+obj = json.loads(&#x27;{&quot;name&quot;: &quot;Amit&quot;, &quot;age&quot;: 25}&#x27;)
+print(obj[&quot;name&quot;], obj[&quot;age&quot;])</code></pre></div></article><article class="topic" id="q202"><h2><span class="num">Q202</span> JSON ARRAY</h2><div class="body"><p>A JSON array is an ordered collection of values.</p>
+<p>{</p>
+<p>&quot;skills&quot;: [</p>
+<p>&quot;Python&quot;,</p>
+<p>&quot;NumPy&quot;,</p>
+<p>&quot;Pandas&quot;</p>
+<p>]</p>
+<p>}</p>
+<p class="label">JSON array:</p>
+<p>Similar to Python list.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = json.loads(&#x27;{&quot;skills&quot;: [&quot;Python&quot;, &quot;NumPy&quot;, &quot;Pandas&quot;]}&#x27;)
+print(data[&quot;skills&quot;][0])</code></pre></div></article><article class="topic" id="q203"><h2><span class="num">Q203</span> PYTHON JSON MODULE</h2><div class="body"><p class="label">Import:</p>
+<pre><code>import json</code></pre>
+<p class="label">Important functions:</p>
+<p>json.<code>load()</code></p>
+<p>json.<code>loads()</code></p>
+<p>json.<code>dump()</code></p>
+<p>json.<code>dumps()</code></p>
+<p class="label">Difference:</p>
+<p class="label">load:</p>
+<p>Reads JSON from a file.</p>
+<p class="label">loads:</p>
+<p>Reads JSON from a string.</p>
+<p class="label">dump:</p>
+<p>Writes JSON into a file.</p>
+<p class="label">dumps:</p>
+<p>Converts Python data into a JSON string.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+data = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}
+print(json.dumps(data))
+path = Path(&quot;file_demo/mod.json&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(json.dumps(data))
+print(json.loads(path.read_text())[&quot;name&quot;])</code></pre></div></article><article class="topic" id="q204"><h2><span class="num">Q204</span> PYTHON TO JSON</h2><div class="body"><pre><code>import json</code></pre>
+<p>data = {</p>
+<p>&quot;name&quot;: &quot;John&quot;,</p>
+<p>&quot;age&quot;: 25,</p>
+<p>&quot;active&quot;: True</p>
+<p>}</p>
+<pre><code>json_data = json.dumps(data)</code></pre>
+<pre><code>print(json_data)</code></pre>
+<p class="label">Output:</p>
+<p>{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25, &quot;active&quot;: true}</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25, &quot;active&quot;: True}
+print(json.dumps(data))</code></pre></div></article><article class="topic" id="q205"><h2><span class="num">Q205</span> JSON TO PYTHON</h2><div class="body"><pre><code>json_data = &#x27;{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}&#x27;</code></pre>
+<pre><code>data = json.loads(json_data)</code></pre>
+<pre><code>print(data[&quot;name&quot;])</code></pre>
+<p class="label">Output:</p>
+<p>John</p>
+<p class="label">Result:</p>
+<p>JSON object becomes Python dictionary.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = json.loads(&#x27;{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}&#x27;)
+print(data[&quot;name&quot;])</code></pre></div></article><article class="topic" id="q206"><h2><span class="num">Q206</span> WRITING JSON FILE</h2><div class="body"><pre><code>data = {
+        &quot;name&quot;: &quot;John&quot;,
+        &quot;age&quot;: 25
+    }</code></pre>
+<p class="label">with open(&quot;data.json&quot;, &quot;w&quot;) as file:</p>
+<ul><li>json.dump(data, file, indent=4)</li></ul>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/write_json.json&quot;)
+path.parent.mkdir(exist_ok=True)
+data = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}
+with path.open(&quot;w&quot;) as file:
+    json.dump(data, file, indent=4)
+print(path.read_text())</code></pre></div></article><article class="topic" id="q207"><h2><span class="num">Q207</span> READING JSON FILE</h2><div class="body"><pre><code>with open(&quot;data.json&quot;, &quot;r&quot;) as file:
+        data = json.load(file)</code></pre>
+<pre><code>print(data)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import json
+from pathlib import Path
+
+path = Path(&quot;file_demo/read_json.json&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&#x27;{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}&#x27;)
+with path.open() as file:
+    data = json.load(file)
+print(data)</code></pre></div></article><article class="topic" id="q208"><h2><span class="num">Q208</span> JSON FORMATTING</h2><div class="body"><p>json.dumps(data, indent=4)</p>
+<p>Makes output readable.</p>
+<p>json.dumps(data, sort_keys=True)</p>
+<p>Sorts keys.</p>
+<p>json.dumps(data, separators=(&quot;,&quot;, &quot;:&quot;))</p>
+<p>Removes unnecessary spaces.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = {&quot;b&quot;: 1, &quot;a&quot;: 2}
+print(json.dumps(data, indent=4))
+print(json.dumps(data, sort_keys=True))
+print(json.dumps(data, separators=(&quot;,&quot;, &quot;:&quot;)))</code></pre></div></article><article class="topic" id="q209"><h2><span class="num">Q209</span> JSON ENCODING AND DECODING</h2><div class="body"><p class="label">Encoding:</p>
+<ul><li>Python object -&gt; JSON representation.</li></ul>
+<p class="label">Decoding:</p>
+<p>JSON representation -&gt; Python object.</p>
+<p class="label">Example:</p>
+<p>json.dumps(data)   # Encoding</p>
+<p>json.loads(text)   # Decoding</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+text = json.dumps({&quot;name&quot;: &quot;John&quot;})
+print(text)
+print(json.loads(text))</code></pre></div></article><article class="topic" id="q210"><h2><span class="num">Q210</span> JSON AND PYTHON TYPE MAPPING</h2><div class="body"><p>Python dict    -&gt; JSON object</p>
+<p>Python list    -&gt; JSON array</p>
+<p>Python str     -&gt; JSON string</p>
+<p>Python int     -&gt; JSON number</p>
+<p>Python float   -&gt; JSON number</p>
+<p>Python True    -&gt; JSON true</p>
+<p>Python False   -&gt; JSON false</p>
+<p>Python None    -&gt; JSON null</p>
+<p class="label">JSON array can decode to:</p>
+<ul><li>Python list.</li></ul>
+<p class="label">JSON object can decode to:</p>
+<ul><li>Python dict.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = {&quot;ok&quot;: True, &quot;n&quot;: None, &quot;tags&quot;: [&quot;a&quot;, &quot;b&quot;]}
+print(json.dumps(data))
+print(json.loads(json.dumps(data)))</code></pre></div></article><article class="topic" id="q211"><h2><span class="num">Q211</span> HANDLING NESTED JSON</h2><div class="body"><p class="label">Example:</p>
+<p>data = {</p>
+<p>&quot;employee&quot;: {</p>
+<p>&quot;name&quot;: &quot;Amit&quot;,</p>
+<p>&quot;details&quot;: {</p>
+<p>&quot;age&quot;: 25,</p>
+<p>&quot;city&quot;: &quot;Bengaluru&quot;</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p class="label">Access:</p>
+<p>data[&quot;employee&quot;][&quot;name&quot;]</p>
+<p>data[&quot;employee&quot;][&quot;details&quot;][&quot;city&quot;]</p>
+<p class="label">Example program:</p>
+<pre><code>data = {
+    &quot;employee&quot;: {
+        &quot;name&quot;: &quot;Amit&quot;,
+        &quot;details&quot;: {&quot;age&quot;: 25, &quot;city&quot;: &quot;Bengaluru&quot;},
+    }
+}
+print(data[&quot;employee&quot;][&quot;name&quot;])
+print(data[&quot;employee&quot;][&quot;details&quot;][&quot;city&quot;])</code></pre></div></article><article class="topic" id="q212"><h2><span class="num">Q212</span> JSON ERROR HANDLING</h2><div class="body"><p class="label">Common exception:</p>
+<p>json.JSONDecodeError</p>
+<p class="label">Example:</p>
+<pre><code>import json</code></pre>
+<pre><code>try:
+        data = json.loads(&#x27;{&quot;name&quot;: &quot;John&quot;&#x27;)
+    except json.JSONDecodeError as e:
+        print(&quot;Invalid JSON:&quot;, e)</code></pre>
+<p class="label">Other possible errors:</p>
+<p>FileNotFoundError</p>
+<p>PermissionError</p>
+<p>TypeError</p>
+<p>UnicodeDecodeError</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+try:
+    json.loads(&#x27;{&quot;name&quot;: &quot;John&quot;&#x27;)
+except json.JSONDecodeError as error:
+    print(&quot;Invalid JSON:&quot;, error.msg)</code></pre></div></article><article class="topic" id="q213"><h2><span class="num">Q213</span> CUSTOM JSON ENCODER</h2><div class="body"><p>JSON cannot directly serialize every Python object.</p>
+<p class="label">Example:</p>
+<pre><code>import json
+    from datetime import datetime</code></pre>
+<pre><code>data = {
+        &quot;date&quot;: datetime.now()
+    }</code></pre>
+<pre><code>json.dumps(
+        data,
+        default=str
+    )</code></pre>
+<p class="label">Custom encoder:</p>
+<pre><code>class MyEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj, datetime):
+                return obj.isoformat()</code></pre>
+<p>return <code>super()</code>.default(obj)</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+from datetime import datetime
+
+class MyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
+
+data = {&quot;date&quot;: datetime(2026, 11, 5, 9, 0, 0)}
+print(json.dumps(data, cls=MyEncoder))</code></pre></div></article><article class="topic" id="q214"><h2><span class="num">Q214</span> JSON IMPORTANT PARAMETERS</h2><div class="body"><p class="label">indent:</p>
+<p>Controls formatting.</p>
+<p class="label">sort_keys:</p>
+<p>Sorts dictionary keys.</p>
+<p class="label">ensure_ascii:</p>
+<p>Controls non-ASCII output.</p>
+<p class="label">separators:</p>
+<p>Controls separators.</p>
+<p class="label">default:</p>
+<p>Handles unsupported Python objects.</p>
+<p class="label">cls:</p>
+<p>Custom encoder class.</p>
+<p class="label">object_hook:</p>
+<p>Converts decoded dictionaries.</p>
+<p class="label">parse_float:</p>
+<p>Custom float parser.</p>
+<p class="label">parse_int:</p>
+<p>Custom integer parser.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+data = {&quot;b&quot;: 1, &quot;a&quot;: &quot;café&quot;}
+print(json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False))</code></pre></div></article><article class="topic" id="q215"><h2><span class="num">Q215</span> JSON VS DICTIONARY</h2><div class="body"><p class="label">JSON:</p>
+<p>Text-based data format.</p>
+<p class="label">Dictionary:</p>
+<ul><li>Python data structure.</li></ul>
+<p class="label">JSON:</p>
+<ul><li>Used for exchanging and storing data.</li></ul>
+<p class="label">Dictionary:</p>
+<ul><li>Used inside Python programs.</li></ul>
+<p class="label">Example program:</p>
+<pre><code>import json
+
+record = {&quot;name&quot;: &quot;Amit&quot;}
+as_text = json.dumps(record)
+print(type(record).__name__, record)
+print(type(as_text).__name__, as_text)</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-24">Part 24: Pickle Study Notes</h1><article class="topic" id="q216"><h2><span class="num">Q216</span> WHAT IS PICKLE</h2><div class="body"><p>Pickle is a Python module used to serialize and</p>
+<p>deserialize Python objects.</p>
+<p class="label">Serialization:</p>
+<ul><li>Python object -&gt; Byte stream.</li></ul>
+<p class="label">Deserialization:</p>
+<p>Byte stream -&gt; Python object.</p>
+<p class="label">Import:</p>
+<pre><code>import pickle</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+
+blob = pickle.dumps({&quot;name&quot;: &quot;John&quot;})
+print(pickle.loads(blob))</code></pre></div></article><article class="topic" id="q217"><h2><span class="num">Q217</span> PICKLE FUNCTIONS</h2><div class="body"><p>pickle.<code>dump()</code></p>
+<p>Writes an object into a binary file.</p>
+<p>pickle.<code>dumps()</code></p>
+<p>Converts object into bytes.</p>
+<p>pickle.<code>load()</code></p>
+<p>Reads object from a binary file.</p>
+<p>pickle.<code>loads()</code></p>
+<p>Converts bytes into a Python object.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+from pathlib import Path
+
+path = Path(&quot;file_demo/funcs.pkl&quot;)
+path.parent.mkdir(exist_ok=True)
+blob = pickle.dumps([1, 2, 3])
+path.write_bytes(pickle.dumps([1, 2, 3]))
+print(pickle.loads(blob))
+print(pickle.loads(path.read_bytes()))</code></pre></div></article><article class="topic" id="q218"><h2><span class="num">Q218</span> PICKLE EXAMPLE</h2><div class="body"><pre><code>import pickle</code></pre>
+<pre><code>data = {
+        &quot;name&quot;: &quot;John&quot;,
+        &quot;age&quot;: 25
+    }</code></pre>
+<p class="label">with open(&quot;data.pkl&quot;, &quot;wb&quot;) as file:</p>
+<ul><li>pickle.dump(data, file)</li></ul>
+<p class="label">Read:</p>
+<pre><code>with open(&quot;data.pkl&quot;, &quot;rb&quot;) as file:
+        result = pickle.load(file)</code></pre>
+<pre><code>print(result)</code></pre>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+from pathlib import Path
+
+path = Path(&quot;file_demo/person.pkl&quot;)
+path.parent.mkdir(exist_ok=True)
+data = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}
+with path.open(&quot;wb&quot;) as file:
+    pickle.dump(data, file)
+with path.open(&quot;rb&quot;) as file:
+    print(pickle.load(file))</code></pre></div></article><article class="topic" id="q219"><h2><span class="num">Q219</span> PICKLE VS JSON</h2><div class="body"><p class="label">Pickle:</p>
+<ul><li>Python-specific.</li><li>Supports many Python objects.</li></ul>
+<p>Binary format.</p>
+<p>Not safe for untrusted files.</p>
+<p class="label">JSON:</p>
+<ul><li>Language-independent.</li><li>Supports limited standard data types.</li></ul>
+<p>Text format.</p>
+<p>Suitable for APIs.</p>
+<p class="label">IMPORTANT SECURITY:</p>
+<p>Never unpickle untrusted or unknown files.</p>
+<p>Malicious pickle data can execute arbitrary code.</p>
+<p class="label">Example program:</p>
+<pre><code>import json
+import pickle
+
+data = {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 25}
+print(json.dumps(data))
+print(pickle.loads(pickle.dumps(data)))</code></pre></div></article><article class="topic" id="q220"><h2><span class="num">Q220</span> PICKLE IMPORTANT PARAMETERS</h2><div class="body"><p class="label">protocol:</p>
+<p>Serialization protocol version.</p>
+<p class="label">pickle.HIGHEST_PROTOCOL:</p>
+<p>Highest protocol supported by current Python.</p>
+<p class="label">fix_imports:</p>
+<p>Compatibility behavior for older Python versions.</p>
+<p class="label">Example program:</p>
+<pre><code>import pickle
+
+blob = pickle.dumps({&quot;name&quot;: &quot;John&quot;}, protocol=pickle.HIGHEST_PROTOCOL)
+print(&quot;protocol bytes&quot;, blob[0:2])
+print(pickle.loads(blob))</code></pre>
+<p>============================================================</p></div></article><h1 class="stage" id="part-25">Part 25: Pathlib Study Notes</h1><article class="topic" id="q221"><h2><span class="num">Q221</span> WHAT IS PATHLIB</h2><div class="body"><p>Pathlib is a Python module used to work with file</p>
+<p>and directory paths.</p>
+<p class="label">Import:</p>
+<pre><code>from pathlib import Path</code></pre>
+<p>It provides an object-oriented way to manage paths.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+print(Path(&quot;file_demo/notes.txt&quot;))
+print(Path.cwd().name)</code></pre></div></article><article class="topic" id="q222"><h2><span class="num">Q222</span> CREATING PATHS</h2><div class="body"><pre><code>path = Path(&quot;data.txt&quot;)</code></pre>
+<p class="label">Absolute path:</p>
+<pre><code>path = Path(&quot;/Users/user/Documents/data.txt&quot;)</code></pre>
+<p class="label">Current directory:</p>
+<p>Path.<code>cwd()</code></p>
+<p class="label">Home directory:</p>
+<p>Path.<code>home()</code></p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+print(Path(&quot;file_demo/data.txt&quot;))
+print(Path(&quot;file_demo/data.txt&quot;).resolve())
+print(Path.cwd())
+print(Path.home())</code></pre></div></article><article class="topic" id="q223"><h2><span class="num">Q223</span> CHECKING FILES AND DIRECTORIES</h2><div class="body"><p>path.<code>exists()</code></p>
+<p>path.<code>is_file()</code></p>
+<p>path.<code>is_dir()</code></p>
+<p>path.<code>is_absolute()</code></p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo/checks&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+path = folder / &quot;a.txt&quot;
+path.write_text(&quot;x&quot;)
+print(path.exists(), path.is_file(), path.is_dir(), path.is_absolute())
+print(folder.is_dir())</code></pre></div></article><article class="topic" id="q224"><h2><span class="num">Q224</span> FILE OPERATIONS</h2><div class="body"><p class="label">Read:</p>
+<p>path.<code>read_text()</code></p>
+<p class="label">Write:</p>
+<p>path.write_text(&quot;Hello Python&quot;)</p>
+<p class="label">Read binary:</p>
+<p>path.<code>read_bytes()</code></p>
+<p class="label">Write binary:</p>
+<p>path.write_bytes(b&quot;Hello&quot;)</p>
+<p class="label">Create directory:</p>
+<p>Path(&quot;new_folder&quot;).mkdir(exist_ok=True)</p>
+<p class="label">Create nested directories:</p>
+<pre><code>Path(&quot;a/b/c&quot;).mkdir(
+        parents=True,
+        exist_ok=True
+    )</code></pre>
+<p class="label">Delete empty directory:</p>
+<p>Path(&quot;new_folder&quot;).<code>rmdir()</code></p>
+<p class="label">Delete file:</p>
+<p>Path(&quot;data.txt&quot;).<code>unlink()</code></p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo/ops&quot;)
+folder.mkdir(parents=True, exist_ok=True)
+path = folder / &quot;note.txt&quot;
+path.write_text(&quot;Hello Python&quot;)
+print(path.read_text())
+path.write_bytes(b&quot;Hello&quot;)
+print(path.read_bytes())
+nested = folder / &quot;a&quot; / &quot;b&quot;
+nested.mkdir(parents=True, exist_ok=True)
+print(nested.is_dir())</code></pre></div></article><article class="topic" id="q225"><h2><span class="num">Q225</span> PATH INFORMATION</h2><div class="body"><p>path.name</p>
+<p>path.stem</p>
+<p>path.suffix</p>
+<p>path.parent</p>
+<p>path.parts</p>
+<p class="label">Example:</p>
+<pre><code>path = Path(&quot;folder/data.csv&quot;)</code></pre>
+<p>path.name     -&gt; data.csv</p>
+<p>path.stem     -&gt; data</p>
+<p>path.suffix   -&gt; .csv</p>
+<p>path.parent   -&gt; folder</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+path = Path(&quot;folder/data.csv&quot;)
+print(path.name)
+print(path.stem)
+print(path.suffix)
+print(path.parent)
+print(path.parts)</code></pre></div></article><article class="topic" id="q226"><h2><span class="num">Q226</span> SEARCHING FILES</h2><div class="body"><p>Path(&quot;.&quot;).glob(&quot;*.csv&quot;)</p>
+<p>Path(&quot;.&quot;).rglob(&quot;*.csv&quot;)</p>
+<p class="label">glob:</p>
+<p>Searches matching paths in a directory.</p>
+<p class="label">rglob:</p>
+<p>Searches recursively through subdirectories.</p>
+<p class="label">Example program:</p>
+<pre><code>from pathlib import Path
+
+folder = Path(&quot;file_demo/search&quot;)
+(folder / &quot;sub&quot;).mkdir(parents=True, exist_ok=True)
+(folder / &quot;a.csv&quot;).write_text(&quot;a&quot;)
+(folder / &quot;b.txt&quot;).write_text(&quot;b&quot;)
+(folder / &quot;sub&quot; / &quot;c.csv&quot;).write_text(&quot;c&quot;)
+print(sorted(p.name for p in folder.glob(&quot;*.csv&quot;)))
+print(sorted(p.name for p in folder.rglob(&quot;*.csv&quot;)))</code></pre></div></article><article class="topic" id="q227"><h2><span class="num">Q227</span> PATHLIB VS OS.PATH</h2><div class="body"><p class="label">Pathlib:</p>
+<p>Object-oriented.</p>
+<ul><li>Uses Path objects.</li></ul>
+<p>Easy to read.</p>
+<p class="label">os.path:</p>
+<p>Function-based.</p>
+<ul><li>Uses strings or path-like objects.</li></ul>
+<p>Useful for existing code and OS operations.</p>
+<p class="label">Example program:</p>
+<pre><code>import os
+from pathlib import Path
+
+path = Path(&quot;file_demo/compare.txt&quot;)
+path.parent.mkdir(exist_ok=True)
+path.write_text(&quot;x&quot;)
+print(path.suffix)
+print(os.path.splitext(path)[1])</code></pre></div></article>
+</main>
+</div>
+</body>
+</html>

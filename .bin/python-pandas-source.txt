@@ -1,0 +1,788 @@
+PART 1: PANDAS STUDY NOTES
+------------------------------------------------------------
+
+Q1. WHAT IS PANDAS
+Ans:
+Pandas is a Python library used for data manipulation,
+data cleaning, and data analysis.
+
+It is commonly used for:
+    - CSV files
+    - Excel files
+    - JSON data
+    - Data cleaning
+    - Filtering and sorting
+    - Grouping and aggregation
+    - Data analysis
+    - Preparing datasets for machine learning
+
+Import:
+
+    import pandas as pd
+
+Main data structures:
+
+    1. Series
+    2. DataFrame
+
+Q2. SERIES
+Ans:
+A Series is a one-dimensional labeled data structure.
+
+Example:
+
+    import pandas as pd
+
+    s = pd.Series([10, 20, 30, 40])
+
+Output:
+
+    0    10
+    1    20
+    2    30
+    3    40
+
+Custom index:
+
+    s = pd.Series(
+        [90, 80, 70],
+        index=["A", "B", "C"]
+    )
+
+Access:
+
+    s[0]
+    s["A"]
+
+Important properties:
+
+    s.index
+    s.values
+    s.dtype
+    s.shape
+    s.size
+    s.ndim
+    s.name
+
+Q3. DATAFRAME
+Ans:
+A DataFrame is a two-dimensional table containing
+rows and columns.
+
+Example:
+
+    data = {
+        "Name": ["Amit", "Ravi", "John"],
+        "Age": [25, 30, 28],
+        "Salary": [30000, 40000, 35000]
+    }
+
+    df = pd.DataFrame(data)
+
+Output:
+
+       Name  Age  Salary
+    0  Amit   25   30000
+    1  Ravi   30   40000
+    2  John   28   35000
+
+Important properties:
+
+    df.shape
+    df.size
+    df.ndim
+    df.columns
+    df.index
+    df.dtypes
+    df.values
+    df.T
+    df.empty
+
+Q4. CREATING DATAFRAMES
+Ans:
+From dictionary:
+
+    df = pd.DataFrame({
+        "Name": ["A", "B"],
+        "Age": [20, 25]
+    })
+
+From list:
+
+    df = pd.DataFrame([
+        ["A", 20],
+        ["B", 25]
+    ], columns=["Name", "Age"])
+
+From NumPy array:
+
+    arr = np.array([[1, 2], [3, 4]])
+
+    df = pd.DataFrame(
+        arr,
+        columns=["A", "B"]
+    )
+
+From list of dictionaries:
+
+    df = pd.DataFrame([
+        {"Name": "A", "Age": 20},
+        {"Name": "B", "Age": 25}
+    ])
+
+Q5. READING DATA
+Ans:
+CSV:
+
+    df = pd.read_csv("data.csv")
+
+Excel:
+
+    df = pd.read_excel("data.xlsx")
+
+JSON:
+
+    df = pd.read_json("data.json")
+
+SQL:
+
+    df = pd.read_sql(query, connection)
+
+Other functions:
+
+    pd.read_table()
+    pd.read_html()
+    pd.read_parquet()
+    pd.read_pickle()
+    pd.read_xml()
+
+Q6. SAVING DATA
+Ans:
+CSV:
+
+    df.to_csv("output.csv", index=False)
+
+Excel:
+
+    df.to_excel("output.xlsx", index=False)
+
+JSON:
+
+    df.to_json("output.json", orient="records")
+
+Other:
+
+    df.to_pickle("output.pkl")
+    df.to_parquet("output.parquet")
+    df.to_sql("table_name", connection)
+
+Q7. VIEWING DATA
+Ans:
+df.head()
+    df.head(10)
+    df.tail()
+    df.tail(10)
+    df.sample(5)
+    df.info()
+    df.describe()
+    df.shape
+    df.columns
+    df.dtypes
+    df.index
+    df.memory_usage()
+
+Purpose:
+
+head:
+    First five rows by default.
+
+tail:
+    Last five rows by default.
+
+sample:
+    Random rows.
+
+info:
+    Column information and data types.
+
+describe:
+    Statistical summary of numeric columns by default.
+
+Q8. SELECTING COLUMNS
+Ans:
+Select one column:
+
+    df["Name"]
+
+Select multiple columns:
+
+    df[["Name", "Age"]]
+
+Select rows:
+
+    df[0:3]
+
+Select a column as a Series:
+
+    df["Age"]
+
+Select a single-column DataFrame:
+
+    df[["Age"]]
+
+Q9. LOC AND ILOC
+Ans:
+loc:
+    Label-based selection.
+
+iloc:
+    Integer-position-based selection.
+
+Examples:
+
+    df.loc[0]
+    df.loc[0, "Name"]
+    df.loc[:, "Name"]
+    df.loc[0:2, ["Name", "Age"]]
+
+    df.iloc[0]
+    df.iloc[0, 1]
+    df.iloc[:, 0]
+    df.iloc[0:2, 0:2]
+
+Important:
+    loc slicing includes the ending label when applicable.
+    iloc slicing excludes the ending position.
+
+Q10. FILTERING DATA
+Ans:
+Single condition:
+
+    df[df["Age"] > 25]
+
+Multiple conditions:
+
+    df[
+        (df["Age"] > 25) &
+        (df["Salary"] > 30000)
+    ]
+
+OR condition:
+
+    df[
+        (df["Age"] < 25) |
+        (df["Salary"] > 35000)
+    ]
+
+NOT condition:
+
+    df[~(df["Age"] > 25)]
+
+isin:
+
+    df[df["Name"].isin(["Amit", "Ravi"])]
+
+between:
+
+    df[df["Age"].between(20, 30)]
+
+query:
+
+    df.query("Age > 25")
+
+Q11. ADDING AND UPDATING COLUMNS
+Ans:
+Add a column:
+
+    df["City"] = ["Bengaluru", "Delhi", "Mumbai"]
+
+Add calculated column:
+
+    df["Bonus"] = df["Salary"] * 0.10
+
+Update a column:
+
+    df["Age"] = df["Age"] + 1
+
+Using assign:
+
+    df = df.assign(
+        Bonus=df["Salary"] * 0.10
+    )
+
+Using insert:
+
+    df.insert(1, "Department", ["IT", "HR", "AI"])
+
+Q12. DELETING ROWS AND COLUMNS
+Ans:
+Delete column:
+
+    df.drop(columns=["Age"])
+
+Delete row:
+
+    df.drop(index=0)
+
+In-place modification:
+
+    df.drop(columns=["Age"], inplace=True)
+
+Remove duplicates:
+
+    df.drop_duplicates()
+
+Keep first duplicate:
+
+    df.drop_duplicates(keep="first")
+
+Keep last duplicate:
+
+    df.drop_duplicates(keep="last")
+
+Q13. RENAMING
+Ans:
+Rename columns:
+
+    df.rename(columns={
+        "Name": "Employee_Name",
+        "Age": "Employee_Age"
+    })
+
+Rename index:
+
+    df.rename(index={0: "First"})
+
+Q14. SORTING
+Ans:
+Sort by one column:
+
+    df.sort_values(by="Age")
+
+Descending:
+
+    df.sort_values(
+        by="Age",
+        ascending=False
+    )
+
+Sort by multiple columns:
+
+    df.sort_values(
+        by=["Age", "Salary"],
+        ascending=[True, False]
+    )
+
+Sort index:
+
+    df.sort_index()
+
+Q15. MISSING VALUES
+Ans:
+Missing values can appear as:
+    NaN
+    None
+    NaT
+
+Check missing values:
+
+    df.isnull()
+    df.isna()
+    df.notnull()
+    df.notna()
+
+Count missing values:
+
+    df.isnull().sum()
+
+Remove missing rows:
+
+    df.dropna()
+
+Remove rows where all values are missing:
+
+    df.dropna(how="all")
+
+Fill missing values:
+
+    df.fillna(0)
+
+Fill one column:
+
+    df["Age"] = df["Age"].fillna(
+        df["Age"].mean()
+    )
+
+Other filling methods:
+
+    df.ffill()
+    df.bfill()
+
+ffill:
+    Uses previous valid value.
+
+bfill:
+    Uses next valid value.
+
+Q16. APPLY, MAP AND APPLYMAP
+Ans:
+map():
+    Used mainly on Series to transform values.
+
+    df["Name"].map(str.upper)
+
+apply():
+    Applies a function to a Series or DataFrame axis.
+
+    df["Salary"].apply(lambda x: x * 2)
+
+    df.apply(sum, axis=0)
+
+applymap():
+    Older DataFrame-wide element-wise function.
+    Deprecated in modern Pandas.
+
+    Prefer df.map() for element-wise DataFrame mapping
+    in versions that support it.
+
+Q17. GROUPBY
+Ans:
+Groupby is used to group records and calculate summaries.
+
+Example:
+
+    df.groupby("Department")["Salary"].mean()
+
+Other operations:
+
+    df.groupby("Department").sum()
+    df.groupby("Department").count()
+    df.groupby("Department").max()
+    df.groupby("Department").min()
+    df.groupby("Department").size()
+
+Multiple aggregations:
+
+    df.groupby("Department").agg({
+        "Salary": ["sum", "mean", "max"],
+        "Age": ["min", "max"]
+    })
+
+Q18. AGGREGATION
+Ans:
+df.sum()
+    df.mean(numeric_only=True)
+    df.median(numeric_only=True)
+    df.min()
+    df.max()
+    df.count()
+    df.std(numeric_only=True)
+    df.var(numeric_only=True)
+    df.quantile()
+    df.nunique()
+    df.value_counts()
+
+agg():
+
+    df["Salary"].agg(["sum", "mean", "max"])
+
+Q19. CONCAT, MERGE AND JOIN
+Ans:
+concat:
+    Combines DataFrames along rows or columns.
+
+    pd.concat([df1, df2], axis=0)
+
+    pd.concat([df1, df2], axis=1)
+
+merge:
+    Combines DataFrames using common columns or keys.
+
+    pd.merge(
+        df1,
+        df2,
+        on="ID",
+        how="inner"
+    )
+
+join:
+    Commonly joins DataFrames using indexes.
+
+    df1.join(df2)
+
+Types of joins:
+
+    inner:
+        Only matching records.
+
+    left:
+        All left records and matching right records.
+
+    right:
+        All right records and matching left records.
+
+    outer:
+        All records from both sides.
+
+Q20. PIVOT AND MELT
+Ans:
+pivot_table:
+    Creates summarized tables.
+
+    pd.pivot_table(
+        df,
+        values="Salary",
+        index="Department",
+        aggfunc="mean"
+    )
+
+melt:
+    Converts wide format into long format.
+
+    pd.melt(
+        df,
+        id_vars=["Name"],
+        value_vars=["Age", "Salary"]
+    )
+
+Q21. STRING FUNCTIONS
+Ans:
+Pandas string functions use .str.
+
+    df["Name"].str.lower()
+    df["Name"].str.upper()
+    df["Name"].str.title()
+    df["Name"].str.strip()
+    df["Name"].str.replace("A", "B")
+    df["Name"].str.contains("John")
+    df["Name"].str.startswith("A")
+    df["Name"].str.endswith("n")
+    df["Name"].str.len()
+    df["Name"].str.split()
+    df["Name"].str.extract(r"(\d+)")
+
+Example:
+
+    df[df["Name"].str.contains("A", na=False)]
+
+Q22. DATETIME FUNCTIONS
+Ans:
+Convert to datetime:
+
+    df["Date"] = pd.to_datetime(df["Date"])
+
+Extract:
+
+    df["Date"].dt.year
+    df["Date"].dt.month
+    df["Date"].dt.day
+    df["Date"].dt.hour
+    df["Date"].dt.minute
+    df["Date"].dt.day_name()
+    df["Date"].dt.dayofweek
+
+Date range:
+
+    pd.date_range(
+        start="2026-01-01",
+        periods=5,
+        freq="D"
+    )
+
+Timedelta:
+
+    pd.to_timedelta("5 days")
+
+Q23. TYPE CONVERSION
+Ans:
+df.astype("int64")
+    df.astype("float64")
+    df.astype("str")
+
+Safer numeric conversion:
+
+    pd.to_numeric(
+        df["Age"],
+        errors="coerce"
+    )
+
+Datetime conversion:
+
+    pd.to_datetime(
+        df["Date"],
+        errors="coerce"
+    )
+
+errors="coerce":
+    Invalid values become missing values.
+
+Q24. INDEX MANAGEMENT
+Ans:
+df.set_index("ID")
+    df.reset_index()
+    df.reindex()
+    df.sort_index()
+    df.index
+
+Set a column as index:
+
+    df.set_index("Name", inplace=True)
+
+Restore default index:
+
+    df.reset_index(inplace=True)
+
+Q25. CROSSTAB AND CUT
+Ans:
+crosstab:
+    Creates frequency tables.
+
+    pd.crosstab(
+        df["Gender"],
+        df["Department"]
+    )
+
+cut:
+    Divides continuous values into intervals.
+
+    pd.cut(
+        df["Age"],
+        bins=[0, 18, 35, 60, 100],
+        labels=["Child", "Young", "Adult", "Senior"]
+    )
+
+qcut:
+    Divides data into quantile-based groups.
+
+    pd.qcut(df["Salary"], q=4)
+
+Q26. PERFORMANCE AND MEMORY
+Ans:
+Important concepts:
+
+    - Vectorization
+    - Avoiding unnecessary loops
+    - Efficient data types
+    - Chunk-based reading
+    - Memory optimization
+
+Examples:
+
+    df.memory_usage(deep=True)
+
+    pd.read_csv(
+        "large.csv",
+        chunksize=100000
+    )
+
+    df["Age"] = df["Age"].astype("int32")
+
+Categorical data:
+
+    df["Department"] = df["Department"].astype("category")
+
+Q27. PANDAS MODULES AND RELATED TOOLS
+Ans:
+pandas
+        Series
+        DataFrame
+        read_csv
+        read_excel
+        read_json
+        concat
+        merge
+        pivot_table
+        crosstab
+        date_range
+        to_datetime
+
+Related libraries:
+
+    NumPy:
+        Numerical calculations.
+
+    Matplotlib:
+        Data visualization.
+
+    Seaborn:
+        Statistical visualization.
+
+    Scikit-learn:
+        Machine learning.
+
+============================================================
+PART 2: IMPORTANT AIML CONNECTIONS
+------------------------------------------------------------
+
+Q100. NUMPY + PANDAS
+Ans:
+NumPy:
+    Numerical arrays and calculations.
+
+Pandas:
+    Tabular data analysis.
+
+Connection:
+    Pandas uses NumPy extensively for its
+    underlying data operations.
+
+Q101. PANDAS + JSON
+Ans:
+Pandas can read JSON directly:
+
+    pd.read_json("data.json")
+
+Pandas can export DataFrames to JSON:
+
+    df.to_json("output.json", orient="records")
+
+Q102. NUMPY + MACHINE LEARNING
+Ans:
+NumPy is used for:
+    - Feature arrays.
+    - Matrix operations.
+    - Numerical calculations.
+    - Mathematical transformations.
+    - Data preprocessing.
+
+Q103. PANDAS + MACHINE LEARNING
+Ans:
+Pandas is used for:
+    - Loading datasets.
+    - Cleaning missing values.
+    - Removing duplicates.
+    - Feature selection.
+    - Data transformation.
+    - Exploratory data analysis.
+
+Q104. DATA PREPROCESSING FLOW
+Ans:
+Data Source
+        |
+        v
+    CSV / Excel / JSON
+        |
+        v
+    Pandas DataFrame
+        |
+        v
+    Data Cleaning
+        |
+        v
+    Missing Value Handling
+        |
+        v
+    Duplicate Removal
+        |
+        v
+    Feature Selection
+        |
+        v
+    NumPy Arrays
+        |
+        v
+    Machine Learning Model
+        |
+        v
+    Prediction
+

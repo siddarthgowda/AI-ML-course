@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>AIML Python Notes</title><style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --panel: #202020;
+      --text: #e8e8e8;
+      --muted: #9a9a9a;
+      --line: #3a3a3a;
+      --accent: #7dcea0;
+      --code-bg: #141414;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 820px);
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 16px 40px;
+      border-right: 1px solid var(--line);
+      background: #161616;
+    }
+    nav h1 {
+      font-size: 15px;
+      margin: 0 0 4px;
+    }
+    nav .sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 0 16px;
+    }
+    nav a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 4px 0;
+    }
+    nav a:hover { color: var(--accent); }
+    .toc-stage {
+      margin: 14px 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    main { padding: 28px 28px 80px; }
+    h1.stage {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 12px;
+      padding-top: 8px;
+    }
+    article.topic {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px 16px;
+      margin: 0 0 16px;
+    }
+    article h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 650;
+    }
+    .num {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+    .body p { margin: 0 0 8px; }
+    .body p.label { margin-top: 10px; }
+    .body ul, .body ol { margin: 0 0 10px; padding-left: 20px; }
+    .body li { margin: 2px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      background: #2a2a2a;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      overflow: auto;
+      margin: 10px 0 0;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; height: auto; max-height: 40vh; }
+    }
+    @media print {
+      nav { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      article.topic { break-inside: avoid; }
+    }
+  </style></head>
+<body><div class="layout"><nav><h1>AIML Python Notes</h1>
+<p class="sub">Days 1–6 plus important concepts. Definitions and examples.</p>
+<p class="toc-stage">1 Basics</p><a href="#t1">1. print</a><a href="#t2">2. Comments</a><a href="#t3">3. Variables</a><a href="#t4">4. Data types</a><a href="#t5">5. int</a><a href="#t6">6. float</a><a href="#t7">7. str</a><a href="#t8">8. bool</a><a href="#t9">9. Operators</a><a href="#t10">10. Arithmetic operators</a><a href="#t11">11. Comparison operators</a><a href="#t12">12. = and ==</a><a href="#t13">13. Logical operators</a><a href="#t14">14. User input</a><a href="#t15">15. Type conversion</a><a href="#t16">16. Conditional statements</a><a href="#t17">17. if</a><a href="#t18">18. elif</a><a href="#t19">19. else</a><a href="#t20">20. Loops</a><a href="#t21">21. for and range</a><a href="#t22">22. while loop</a><a href="#t23">23. break</a><a href="#t24">24. continue</a><p class="toc-stage">2 Collections</p><a href="#t25">25. Strings</a><a href="#t26">26. Indexing</a><a href="#t27">27. Slicing</a><a href="#t28">28. String methods</a><a href="#t29">29. Lists</a><a href="#t30">30. append</a><a href="#t31">31. insert</a><a href="#t32">32. extend</a><a href="#t33">33. remove</a><a href="#t34">34. pop</a><a href="#t35">35. sort and sorted</a><a href="#t36">36. Tuples</a><a href="#t37">37. Tuple immutability</a><a href="#t38">38. Tuple unpacking</a><a href="#t39">39. Sets</a><a href="#t40">40. Unique values</a><a href="#t41">41. Set operators</a><p class="toc-stage">3 Dictionaries</p><a href="#t42">42. Dictionary</a><a href="#t43">43. Create a dictionary</a><a href="#t44">44. Access a value</a><a href="#t45">45. Add and update</a><a href="#t46">46. remove</a><a href="#t47">47. Unique keys</a><a href="#t48">48. Value types</a><a href="#t49">49. in operator</a><a href="#t50">50. keys()</a><a href="#t51">51. values()</a><a href="#t52">52. items()</a><a href="#t53">53. get()</a><a href="#t54">54. update() and copy()</a><a href="#t55">55. Loop a dictionary</a><a href="#t56">56. Nested dictionaries and lists</a><a href="#t57">57. Dictionary properties</a><a href="#t58">58. Day 3 QA (from test.ipynb)</a><p class="toc-stage">4 Functions</p><a href="#t59">59. Functions</a><a href="#t60">60. Function syntax</a><a href="#t61">61. Types of functions</a><a href="#t62">62. Built-in functions</a><a href="#t63">63. User-defined functions</a><a href="#t64">64. Recursive functions</a><a href="#t65">65. Define vs call</a><a href="#t66">66. Parameters vs arguments</a><a href="#t67">67. print vs return</a><a href="#t68">68. Conditions inside functions</a><a href="#t69">69. Voting eligibility</a><a href="#t70">70. Average marks</a><a href="#t71">71. Positional arguments</a><a href="#t72">72. Keyword arguments</a><a href="#t73">73. Default arguments</a><a href="#t74">74. Local and global variables</a><a href="#t75">75. Function inside a function</a><a href="#t76">76. Search a name in a list</a><a href="#t77">77. Split a big task</a><a href="#t78">78. Employee bonus</a><a href="#t79">79. Interview revision</a><a href="#t80">80. Even or odd</a><p class="toc-stage">5 Day 5</p><a href="#t81">81. *args and **kwargs</a><a href="#t82">82. *args</a><a href="#t83">83. **kwargs</a><a href="#t84">84. *args + **kwargs</a><a href="#t85">85. Lambda functions</a><a href="#t86">86. List comprehension</a><a href="#t87">87. Set comprehension</a><a href="#t88">88. Dictionary comprehension</a><a href="#t89">89. map(), filter(), sorted()</a><a href="#t90">90. map</a><a href="#t91">91. filter</a><a href="#t92">92. sorted</a><a href="#t93">93. zip</a><a href="#t94">94. min() and max()</a><a href="#t95">95. enumerate</a><a href="#t96">96. Important differences</a><a href="#t97">97. Quick revision</a><p class="toc-stage">6 Important</p><a href="#t98">98. Important concepts</a><a href="#t99">99. Iterable</a><a href="#t100">100. Shallow copy</a><a href="#t101">101. Deep copy</a><a href="#t102">102. Exception</a><a href="#t103">103. How to iterate through a dictionary</a><a href="#t104">104. pop() and discard()</a><a href="#t105">105. String formatting</a><a href="#t106">106. Type casting</a><a href="#t107">107. Dynamic typing</a><a href="#t108">108. frozenset</a><a href="#t109">109. Quick revision</a><p class="toc-stage">7 Day 6 OOP</p><a href="#t110">110. Class</a><a href="#t111">111. OOP</a><a href="#t112">112. Object</a><a href="#t113">113. Attributes</a><a href="#t114">114. __init__()</a><a href="#t115">115. self</a><a href="#t116">116. Methods</a><a href="#t117">117. Inheritance</a><a href="#t118">118. Multiple inheritance</a><a href="#t119">119. Day 6 differences</a><a href="#t120">120. Day 6 interview</a><a href="#t121">121. Day 6 revision</a><a href="#t122">122. Exception handling</a><a href="#t123">123. Modules</a></nav><main><h1 class="stage">1 Basics</h1><article class="topic" id="t1"><h2><span class="num">1</span> print</h2><div class="body"><p><strong>Definition:</strong> <code>print()</code> is a built-in Python function used to display text, numbers, variables, and other values on the screen.</p></div><pre><code>print(&quot;good morning&quot;)
+print(&quot;hello    AI&quot;)
+print(25)
+print(&quot;Score:&quot;, 95)</code></pre></article><article class="topic" id="t2"><h2><span class="num">2</span> Comments</h2><div class="body"><p><strong>Definition:</strong> A comment is text written in the code to explain what the program does. Python ignores comments beginning with <code>#</code> when executing the program.</p></div><pre><code># this line is not executed
+print(&quot;hello&quot;)</code></pre></article><article class="topic" id="t3"><h2><span class="num">3</span> Variables</h2><div class="body"><p><strong>Definition:</strong> A variable is a name that refers to a value or object in a program. You can assign a value to a variable and use that name later.</p>
+<p>### Naming rules</p>
+<ul>
+<li>Must start with a letter or <code>_</code>. Cannot start with a number.</li>
+<li>Cannot contain spaces.</li>
+<li>Can contain letters, numbers, and underscores.</li>
+<li>Python keywords such as <code>if</code>, <code>else</code>, and <code>for</code> cannot be used as names.</li>
+<li>Python is case-sensitive, so <code>age</code> and <code>Age</code> are different names.</li>
+</ul>
+<p><code>print</code> is a built-in function, not a keyword. Avoid using <code>print</code> as a variable name because it hides the built-in function.</p></div><pre><code>a = 12
+b = &quot;AI&quot;
+age = 15
+age = 20
+print(a)
+print(b)
+print(age)</code></pre></article><article class="topic" id="t4"><h2><span class="num">4</span> Data types</h2><div class="body"><p><strong>Definition:</strong> A data type identifies the kind of value an object represents and determines which operations can be performed on it.</p>
+<table><thead><tr><th>Type</th><th>Definition</th><th>Example</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td>Whole numbers without a decimal point</td><td><code>10</code>, <code>-5</code>, <code>0</code></td></tr>
+<tr><td><code>float</code></td><td>Numbers with a decimal component</td><td><code>3.5</code>, <code>10.0</code></td></tr>
+<tr><td><code>str</code></td><td>A sequence of text characters</td><td><code>&quot;Hello&quot;</code>, <code>&quot;123&quot;</code></td></tr>
+<tr><td><code>bool</code></td><td>One of two truth values: <code>True</code> or <code>False</code></td><td><code>True</code></td></tr>
+<tr><td><code>list</code></td><td>Ordered, changeable collection of items</td><td><code>[10, 20, 30]</code></td></tr>
+<tr><td><code>tuple</code></td><td>Ordered collection whose elements cannot be reassigned</td><td><code>(10, 20, 30)</code></td></tr>
+<tr><td><code>set</code></td><td>Collection of unique, hashable elements</td><td><code>{10, 20, 30}</code></td></tr>
+<tr><td><code>dict</code></td><td>Data stored as key-value pairs</td><td><code>{&quot;name&quot;: &quot;Rahul&quot;}</code></td></tr>
+</tbody></table>
+<p><code>type()</code> is a built-in function that returns the type of an object.</p></div><pre><code>a = 12
+b = &quot;A&quot;
+c = &quot;1234&quot;
+d = 3.5
+e = False
+
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))
+print(type(e))</code></pre></article><article class="topic" id="t5"><h2><span class="num">5</span> int</h2><div class="body"><p><strong>Definition:</strong> <code>int</code> represents whole numbers without a decimal point. Example: <code>10</code>, <code>-5</code>, <code>0</code>.</p></div><pre><code>age = 12
+print(age)
+print(type(age))</code></pre></article><article class="topic" id="t6"><h2><span class="num">6</span> float</h2><div class="body"><p><strong>Definition:</strong> <code>float</code> represents numbers with a fractional or decimal component. Example: <code>3.5</code>, <code>10.0</code>.</p></div><pre><code>price = 3.5
+print(price)
+print(type(price))</code></pre></article><article class="topic" id="t7"><h2><span class="num">7</span> str</h2><div class="body"><p><strong>Definition:</strong> <code>str</code> represents a sequence of text characters. Example: <code>&quot;Hello&quot;</code>, <code>&quot;123&quot;</code>. Quotes make it a string even if the text looks like a number.</p></div><pre><code>name = &quot;1234&quot;
+print(name)
+print(type(name))</code></pre></article><article class="topic" id="t8"><h2><span class="num">8</span> bool</h2><div class="body"><p><strong>Definition:</strong> <code>bool</code> represents one of two truth values: <code>True</code> or <code>False</code>. Write them with a capital first letter.</p></div><pre><code>flag = False
+print(flag)
+print(type(flag))</code></pre></article><article class="topic" id="t9"><h2><span class="num">9</span> Operators</h2><div class="body"><p><strong>Definition:</strong> An operator is a symbol or keyword that performs an operation on one or more values.</p>
+<table><thead><tr><th>Kind</th><th>Operators</th></tr></thead><tbody>
+<tr><td>Arithmetic</td><td><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> <code>//</code> <code>**</code></td></tr>
+<tr><td>Comparison</td><td><code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code> <code>==</code> <code>!=</code></td></tr>
+<tr><td>Assignment</td><td><code>=</code> assigns a value</td></tr>
+<tr><td>Logical</td><td><code>and</code> <code>or</code> <code>not</code></td></tr>
+</tbody></table></div><pre><code>a = 12
+b = 67
+print(a + b)
+print(a == 12)
+print(a &gt; 20 or b &gt; 20)</code></pre></article><article class="topic" id="t10"><h2><span class="num">10</span> Arithmetic operators</h2><div class="body"><p><strong>Definition:</strong> Arithmetic operators perform mathematical calculations.</p>
+<table><thead><tr><th>Operator</th><th>Definition</th><th>Example</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>+</code></td><td>Addition</td><td><code>10 + 5</code></td><td><code>15</code></td></tr>
+<tr><td><code>-</code></td><td>Subtraction</td><td><code>10 - 5</code></td><td><code>5</code></td></tr>
+<tr><td><code>*</code></td><td>Multiplication</td><td><code>10 * 5</code></td><td><code>50</code></td></tr>
+<tr><td><code>/</code></td><td>Division</td><td><code>10 / 2</code></td><td><code>5.0</code></td></tr>
+<tr><td><code>%</code></td><td>Modulus; remainder</td><td><code>10 % 3</code></td><td><code>1</code></td></tr>
+<tr><td><code>//</code></td><td>Floor division; rounds the quotient down</td><td><code>7 // 2</code></td><td><code>3</code></td></tr>
+<tr><td><code>**</code></td><td>Exponentiation; raises a number to a power</td><td><code>2 ** 3</code></td><td><code>8</code></td></tr>
+</tbody></table></div><pre><code>print(10 + 5)
+print(10 - 5)
+print(10 * 5)
+print(10 / 2)
+print(10 % 3)
+print(7 // 2)
+print(2 ** 3)</code></pre></article><article class="topic" id="t11"><h2><span class="num">11</span> Comparison operators</h2><div class="body"><p><strong>Definition:</strong> Comparison operators compare two values and return a Boolean result, either <code>True</code> or <code>False</code>.</p>
+<table><thead><tr><th>Operator</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>&gt;</code></td><td>Greater than</td></tr>
+<tr><td><code>&lt;</code></td><td>Less than</td></tr>
+<tr><td><code>&gt;=</code></td><td>Greater than or equal to</td></tr>
+<tr><td><code>&lt;=</code></td><td>Less than or equal to</td></tr>
+<tr><td><code>==</code></td><td>Equal to</td></tr>
+<tr><td><code>!=</code></td><td>Not equal to</td></tr>
+</tbody></table>
+<p><code>=</code> assigns a value. <code>==</code> checks whether two values are equal.</p></div><pre><code>a = 12
+b = 67
+print(a &gt;= b)
+print(a == b)
+print(a == 12)</code></pre></article><article class="topic" id="t12"><h2><span class="num">12</span> = and ==</h2><div class="body"><p><strong>Definition:</strong> The assignment operator <code>=</code> assigns a value to a variable or name.</p>
+<table><thead><tr><th>Operator</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>=</code></td><td>Assigns a value</td></tr>
+<tr><td><code>==</code></td><td>Checks whether two values are equal</td></tr>
+</tbody></table></div><pre><code>a = 12
+print(a)
+print(a == 12)
+print(a == 5)</code></pre></article><article class="topic" id="t13"><h2><span class="num">13</span> Logical operators</h2><div class="body"><p><strong>Definition:</strong> Logical operators combine or modify conditions and produce Boolean results.</p>
+<table><thead><tr><th>Operator</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>and</code></td><td><code>True</code> when both conditions are true</td></tr>
+<tr><td><code>or</code></td><td><code>True</code> when at least one condition is true</td></tr>
+<tr><td><code>not</code></td><td>Reverses a Boolean value</td></tr>
+</tbody></table></div><pre><code>age = 25
+print(age &gt; 18 and age &lt; 60)
+print(age &lt; 18 or age &gt; 20)
+print(not True)</code></pre></article><article class="topic" id="t14"><h2><span class="num">14</span> User input</h2><div class="body"><p><strong>Definition:</strong> <code>input()</code> is a built-in function that pauses program execution, displays an optional prompt, and reads the user&#x27;s input as a string.</p>
+<p>Wrap it in <code>int()</code> or <code>float()</code> when you need a number.</p></div><pre><code># name = input(&quot;Enter your name: &quot;)
+# age = int(input(&quot;Enter your age: &quot;))
+# probability = float(input(&quot;Enter the probability: &quot;))
+
+name = &quot;Mary&quot;
+age = 15
+probability = 65.0
+
+print(&quot;Good morning&quot;, name)
+print(&quot;Your age is&quot;, age)
+print(probability)</code></pre></article><article class="topic" id="t15"><h2><span class="num">15</span> Type conversion</h2><div class="body"><p><strong>Definition:</strong> Type casting is the process of converting a value from one data type to another data type.</p>
+<p>Python provides built-in functions to perform type casting.</p>
+<table><thead><tr><th>Function</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>int()</code></td><td>Converts a compatible value into an integer</td></tr>
+<tr><td><code>float()</code></td><td>Converts a compatible value into a float</td></tr>
+<tr><td><code>str()</code></td><td>Converts a value into a string</td></tr>
+<tr><td><code>bool()</code></td><td>Converts a value into a Boolean</td></tr>
+<tr><td><code>list()</code></td><td>Converts an iterable into a list</td></tr>
+<tr><td><code>tuple()</code></td><td>Converts an iterable into a tuple</td></tr>
+<tr><td><code>set()</code></td><td>Converts an iterable into a set</td></tr>
+</tbody></table>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>Type casting changes the data type of a value</li>
+<li>Some conversions are not possible</li>
+<li><code>int(&quot;hello&quot;)</code> raises a <code>ValueError</code></li>
+<li><code>float(&quot;10.5&quot;)</code> converts the string into a float</li>
+</ul></div><pre><code>number = &quot;100&quot;
+result = int(number)
+print(result)
+print(type(result))
+
+number = 10
+result = float(number)
+print(result)
+print(type(result))
+
+number = 100
+result = str(number)
+print(result)
+print(type(result))
+
+numbers = [10, 20, 30]
+result = tuple(numbers)
+print(result)</code></pre></article><article class="topic" id="t16"><h2><span class="num">16</span> Conditional statements</h2><div class="body"><p><strong>Definition:</strong> Conditional statements allow a program to make decisions and execute different blocks of code depending on whether conditions are true or false. Python uses indentation to identify which statements belong to each block.</p>
+<table><thead><tr><th>Keyword</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>if</code></td><td>Executes a block when its condition is <code>True</code></td></tr>
+<tr><td><code>elif</code></td><td>Checks another condition when earlier ones were false</td></tr>
+<tr><td><code>else</code></td><td>Runs when none of the preceding conditions was true</td></tr>
+</tbody></table></div><pre><code>age = 18
+# age = int(input(&quot;Enter your age: &quot;))
+
+if age &gt;= 18:
+    print(&quot;You are eligible to vote&quot;)
+else:
+    print(&quot;You are not eligible&quot;)</code></pre></article><article class="topic" id="t17"><h2><span class="num">17</span> if</h2><div class="body"><p><strong>Definition:</strong> <code>if</code> executes a block of code when its condition evaluates to <code>True</code>. The condition ends with <code>:</code>. The next line is indented.</p></div><pre><code>age = 18
+if age &gt;= 18:
+    print(&quot;You are eligible to vote&quot;)</code></pre></article><article class="topic" id="t18"><h2><span class="num">18</span> elif</h2><div class="body"><p><strong>Definition:</strong> <code>elif</code>, meaning “else if,” checks another condition when the preceding <code>if</code> or <code>elif</code> conditions were false.</p></div><pre><code>grade = &quot;A&quot;
+if grade == &quot;A&quot; or grade == &quot;a&quot;:
+    print(&quot;Excellent&quot;)
+elif grade == &quot;B&quot; or grade == &quot;b&quot;:
+    print(&quot;Very good&quot;)
+elif grade == &quot;C&quot; or grade == &quot;c&quot;:
+    print(&quot;Good&quot;)
+else:
+    print(&quot;Invalid grade&quot;)</code></pre></article><article class="topic" id="t19"><h2><span class="num">19</span> else</h2><div class="body"><p><strong>Definition:</strong> <code>else</code> executes a block when none of the preceding conditions in the same conditional chain was true. It lines up with <code>if</code> and has no condition.</p></div><pre><code>n = 43
+if n % 2 == 0:
+    print(n, &quot;is even&quot;)
+else:
+    print(n, &quot;is odd&quot;)</code></pre></article><article class="topic" id="t20"><h2><span class="num">20</span> Loops</h2><div class="body"><p><strong>Definition:</strong> A loop repeatedly executes a block of code, either by iterating over a sequence or by continuing while a condition remains true.</p>
+<table><thead><tr><th>Loop</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>for</code></td><td>Iterates over the items of an iterable, such as a list, string, tuple, or <code>range</code></td></tr>
+<tr><td><code>while</code></td><td>Repeats as long as its condition is <code>True</code></td></tr>
+</tbody></table></div><pre><code>for i in range(5):
+    print(&quot;good morning&quot;)
+
+a = 5
+while a &gt;= 0:
+    print(a)
+    a = a - 1</code></pre></article><article class="topic" id="t21"><h2><span class="num">21</span> for and range</h2><div class="body"><p><strong>Definition:</strong> A <code>for</code> loop iterates over the items of an iterable, such as a list, string, tuple, or <code>range</code>.</p>
+<p><strong><code>range()</code></strong> produces a sequence of integers. The stop value is excluded.</p>
+<table><thead><tr><th>Call</th><th>Produces</th></tr></thead><tbody>
+<tr><td><code>range(5)</code></td><td><code>0, 1, 2, 3, 4</code></td></tr>
+<tr><td><code>range(1, 5)</code></td><td><code>1, 2, 3, 4</code></td></tr>
+<tr><td><code>range(1, 10, 2)</code></td><td><code>1, 3, 5, 7, 9</code></td></tr>
+</tbody></table></div><pre><code>for i in range(5):
+    print(i)
+
+for i in range(1, 11):
+    print(i)
+
+for i in range(1, 11, 2):
+    print(i)
+
+for i in range(10, 0, -1):
+    print(i)</code></pre></article><article class="topic" id="t22"><h2><span class="num">22</span> while loop</h2><div class="body"><p><strong>Definition:</strong> A <code>while</code> loop repeatedly executes a block as long as its condition evaluates to <code>True</code>. It can run indefinitely if the stopping condition never becomes false.</p></div><pre><code>a = 5
+while a &gt;= 0:
+    print(a)
+    a = a - 1</code></pre></article><article class="topic" id="t23"><h2><span class="num">23</span> break</h2><div class="body"><p><strong>Definition:</strong> <code>break</code> immediately terminates the nearest enclosing loop.</p></div><pre><code>for i in range(1, 11):
+    if i == 6:
+        break
+    print(i)</code></pre></article><article class="topic" id="t24"><h2><span class="num">24</span> continue</h2><div class="body"><p><strong>Definition:</strong> <code>continue</code> skips the remaining statements in the current loop iteration and proceeds to the next iteration.</p></div><pre><code>for i in range(1, 11):
+    if i == 6:
+        continue
+    print(i)</code></pre></article><h1 class="stage">2 Collections</h1><article class="topic" id="t25"><h2><span class="num">25</span> Strings</h2><div class="body"><p><strong>Definition:</strong> A string (<code>str</code>) is an immutable sequence of characters used to represent text. Strings can be written using single, double, or triple quotes.</p>
+<p>Strings are immutable: individual characters cannot be changed directly after the string is created.</p></div><pre><code>name = &quot;Python&quot;
+print(name[0])
+print(name[1])
+print(name[-1])
+print(name[-2])</code></pre></article><article class="topic" id="t26"><h2><span class="num">26</span> Indexing</h2><div class="body"><p><strong>Definition:</strong> Indexing accesses an individual character or item in a sequence by its position.</p>
+<ul>
+<li>Positive indexing starts at <code>0</code> from the left.</li>
+<li>Negative indexing starts at <code>-1</code> from the right.</li>
+<li>An invalid index raises <code>IndexError</code>.</li>
+</ul></div><pre><code>name = &quot;Python&quot;
+print(name[0])
+print(name[1])
+print(name[-1])
+print(name[-2])</code></pre></article><article class="topic" id="t27"><h2><span class="num">27</span> Slicing</h2><div class="body"><p><strong>Definition:</strong> Slicing extracts a portion of a sequence using <code>sequence[start:stop:step]</code>.</p>
+<p>The stop position is excluded. An empty start means the beginning. An empty stop means the end. <code>[::-1]</code> reverses the sequence.</p></div><pre><code>name = &quot;Python&quot;
+print(name[0:3])
+print(name[:5])
+print(name[2:])
+
+my_string = &quot;have a nice day&quot;
+print(my_string[7:11])
+print(my_string[::2])
+print(my_string[::-1])</code></pre></article><article class="topic" id="t28"><h2><span class="num">28</span> String methods</h2><div class="body"><p><strong>Definition:</strong> String methods are built-in operations called on string objects to inspect or transform text. Because strings are immutable, methods that transform a string return a new string rather than modifying the original.</p>
+<table><thead><tr><th>Method</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>lower()</code></td><td>Returns a lowercase version</td></tr>
+<tr><td><code>upper()</code></td><td>Returns an uppercase version</td></tr>
+<tr><td><code>strip()</code></td><td>Removes leading and trailing whitespace</td></tr>
+<tr><td><code>split()</code></td><td>Splits a string into a list of substrings</td></tr>
+<tr><td><code>join()</code></td><td>Joins strings using this string as a separator</td></tr>
+<tr><td><code>replace()</code></td><td>Returns a string with specified text replaced</td></tr>
+<tr><td><code>find()</code></td><td>Index of the first occurrence, or <code>-1</code> if not found</td></tr>
+<tr><td><code>count()</code></td><td>Counts non-overlapping occurrences</td></tr>
+<tr><td><code>startswith()</code></td><td>Checks whether the string begins with a prefix</td></tr>
+<tr><td><code>endswith()</code></td><td>Checks whether the string ends with a suffix</td></tr>
+</tbody></table></div><pre><code>s = &quot;  Have a Nice Day  &quot;
+print(s.lower())
+print(s.upper())
+print(s.strip())
+print(&quot;have  a   nice day&quot;.split())
+print(s.strip().replace(&quot;Nice&quot;, &quot;Wonderful&quot;))
+
+grade = &quot;A&quot;
+print(grade.lower() == &quot;a&quot;)
+
+words = [&quot;python&quot;, &quot;is&quot;, &quot;easy&quot;]
+print(&quot; &quot;.join(words))
+print(&quot;-&quot;.join(words))
+
+text = &quot;I am learning programming&quot;
+print(text.find(&quot;pro&quot;))
+print(text.count(&quot;a&quot;))
+print(text.startswith(&quot;I&quot;))
+print(text.endswith(&quot;ing&quot;))</code></pre></article><article class="topic" id="t29"><h2><span class="num">29</span> Lists</h2><div class="body"><p><strong>Definition:</strong> A list is an ordered, mutable collection that can store multiple items, including duplicate values and items of different data types.</p>
+<table><thead><tr><th>Property</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Ordered</td><td>Items keep their sequence</td></tr>
+<tr><td>Mutable</td><td>Items can be added, removed, or changed</td></tr>
+<tr><td>Duplicates allowed</td><td>The same value can appear more than once</td></tr>
+<tr><td>Indexing and slicing</td><td>Supported</td></tr>
+</tbody></table></div><pre><code>score = [78, 91, 45, 89, 80]
+print(type(score))
+print(score[0])
+print(score[-1])
+print(score[2:5])
+
+score[1] = 90
+print(score)
+
+mix = [&quot;Asha&quot;, 21, 3.5, True]
+print(mix)</code></pre></article><article class="topic" id="t30"><h2><span class="num">30</span> append</h2><div class="body"><p><strong>Definition:</strong> <code>append()</code> adds one item to the end of a list.</p></div><pre><code>score = [78, 90, 88, 95]
+score.append(74)
+print(score)</code></pre></article><article class="topic" id="t31"><h2><span class="num">31</span> insert</h2><div class="body"><p><strong>Definition:</strong> <code>insert(index, value)</code> inserts an item at a specified position. Existing items at that position and after it shift to the right.</p></div><pre><code>score = [78, 90, 88, 95]
+score.insert(1, 88)
+print(score)</code></pre></article><article class="topic" id="t32"><h2><span class="num">32</span> extend</h2><div class="body"><p><strong>Definition:</strong> <code>extend()</code> adds each item from an iterable to the end of a list.</p>
+<p><code>append([30, 40])</code> adds the entire list as one item. <code>extend([30, 40])</code> adds its two elements separately.</p></div><pre><code>score = [78, 90, 88, 95]
+a = [10, 20, 30]
+score.extend(a)
+print(score)</code></pre></article><article class="topic" id="t33"><h2><span class="num">33</span> remove</h2><div class="body"><p><strong>Definition:</strong> <code>remove(value)</code> removes the first occurrence of the specified value from a list.</p></div><pre><code>score = [78, 90, 88, 95, 74]
+score.remove(88)
+print(score)
+print(score.pop(0))
+print(score)</code></pre></article><article class="topic" id="t34"><h2><span class="num">34</span> pop</h2><div class="body"><p><strong>Definition:</strong> <code>pop(index)</code> removes and returns the item at the specified index. If the index is omitted, it removes and returns the last item.</p></div><pre><code>score = [78, 90, 88, 95, 74]
+print(score.pop(4))
+print(score.pop())
+print(score)</code></pre></article><article class="topic" id="t35"><h2><span class="num">35</span> sort and sorted</h2><div class="body"><p><strong>Definition:</strong> <code>list.sort()</code> sorts a list in place and returns <code>None</code>. <code>sorted(iterable)</code> returns a new sorted list without changing the original.</p>
+<table><thead><tr><th>Function or method</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>len()</code></td><td>Number of items</td></tr>
+<tr><td><code>max()</code> / <code>min()</code></td><td>Largest / smallest item</td></tr>
+<tr><td><code>sum()</code></td><td>Adds numerical items</td></tr>
+<tr><td><code>reverse()</code></td><td>Reverses the list in place</td></tr>
+</tbody></table></div><pre><code>score = [78, 90, 88, 95, 10, 20, 30]
+print(len(score))
+print(max(score))
+print(min(score))
+print(sum(score))
+
+nums = [34, 56, 21]
+print(sorted(nums))
+print(nums)
+
+nums.sort()
+print(nums)
+
+score.reverse()
+print(score)</code></pre></article><article class="topic" id="t36"><h2><span class="num">36</span> Tuples</h2><div class="body"><p><strong>Definition:</strong> A tuple is an ordered collection of items that cannot be reassigned, added, or removed through the tuple itself after creation.</p>
+<table><thead><tr><th>Property</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Ordered</td><td>Items keep their position</td></tr>
+<tr><td>Indexing and slicing</td><td>Supported</td></tr>
+<tr><td>Duplicates allowed</td><td>Yes</td></tr>
+<tr><td>Immutable</td><td>Elements cannot be reassigned</td></tr>
+</tbody></table>
+<p>A tuple can still contain a mutable object, such as a list, whose contents may change.</p></div><pre><code>a = (1, 2, 3, 4)
+print(type(a))
+print(a[0])
+print(a[1:3])
+
+plain = 1, 2, 3, 4
+print(type(plain))
+
+try:
+    a[1] = 20
+except TypeError as error:
+    print(error)</code></pre></article><article class="topic" id="t37"><h2><span class="num">37</span> Tuple immutability</h2><div class="body"><p><strong>Definition:</strong> Immutability means that an object&#x27;s contents cannot be changed through that object after creation. For a tuple, its element references cannot be reassigned. <code>values[0] = 100</code> raises <code>TypeError</code>.</p></div><pre><code>a = (1, 2, 3, 4)
+print(type(a))
+print(a[0])
+print(a[1:3])
+
+plain = 1, 2, 3, 4
+print(type(plain))
+
+try:
+    a[1] = 20
+except TypeError as error:
+    print(error)</code></pre></article><article class="topic" id="t38"><h2><span class="num">38</span> Tuple unpacking</h2><div class="body"><p><strong>Definition:</strong> Tuple packing groups multiple values into a single tuple. Tuple unpacking assigns the elements to separate variables. The number of names must match the number of items.</p>
+<p><code>list()</code> and <code>tuple()</code> convert suitable iterables into lists and tuples.</p></div><pre><code>p1 = (&quot;Mary&quot;, 23, &quot;developer&quot;)
+name, age, role = p1
+print(name)
+print(age)
+print(role)
+
+a = 12
+b = 45
+c = 78
+t2 = (a, b, c)
+print(t2)
+
+l1 = [10, 20, 30]
+t1 = tuple(l1)
+l2 = list(t1)
+print(t1)
+print(l2)
+
+for i in t1:
+    print(i + 10)</code></pre></article><article class="topic" id="t39"><h2><span class="num">39</span> Sets</h2><div class="body"><p><strong>Definition:</strong> A set is a mutable collection of unique, hashable elements. It does not provide positional indexing or slicing.</p>
+<table><thead><tr><th>Property</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Unique</td><td>Duplicate elements are eliminated</td></tr>
+<tr><td>Hashable elements</td><td>Required</td></tr>
+<tr><td>Mutable</td><td>You can add and remove items</td></tr>
+<tr><td>Not indexed</td><td>No indexing or slicing</td></tr>
+</tbody></table>
+<p>Use <code>set()</code> to create an empty set. <code>{}</code> creates an empty dictionary.</p></div><pre><code>skills = [&quot;Python&quot;, &quot;SQL&quot;, &quot;Power BI&quot;, &quot;Python&quot;, &quot;SQL&quot;]
+unique_skills = set(skills)
+print(unique_skills)
+
+names = {&quot;Python&quot;, &quot;python&quot;, &quot;SQL&quot;}
+print(names)
+
+unique_skills.add(&quot;nlp&quot;)
+print(unique_skills)
+unique_skills.remove(&quot;Python&quot;)
+print(unique_skills)
+
+try:
+    print(unique_skills[0])
+except TypeError as error:
+    print(error)</code></pre></article><article class="topic" id="t40"><h2><span class="num">40</span> Unique values</h2><div class="body"><p><strong>Definition:</strong> Unique values occur only once in a collection of distinct values. A set automatically removes duplicates according to Python&#x27;s equality and hashing rules.</p></div><pre><code>skills = [&quot;Python&quot;, &quot;SQL&quot;, &quot;Power BI&quot;, &quot;Python&quot;, &quot;SQL&quot;]
+unique_skills = set(skills)
+print(unique_skills)
+
+names = {&quot;Python&quot;, &quot;python&quot;, &quot;SQL&quot;}
+print(names)
+
+unique_skills.add(&quot;nlp&quot;)
+print(unique_skills)
+unique_skills.remove(&quot;Python&quot;)
+print(unique_skills)
+
+try:
+    print(unique_skills[0])
+except TypeError as error:
+    print(error)</code></pre></article><article class="topic" id="t41"><h2><span class="num">41</span> Set operators</h2><div class="body"><p><strong>Definition:</strong> Set operators perform mathematical operations on sets.</p>
+<table><thead><tr><th>Operator</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>&amp;</code></td><td>Intersection: elements common to both sets</td></tr>
+<tr><td>`\</td><td>`</td><td>Union: all distinct elements from both sets</td></tr>
+<tr><td><code>-</code></td><td>Difference: elements in the first set but not the second</td></tr>
+<tr><td><code>^</code></td><td>Symmetric difference: elements in either set, but not both</td></tr>
+</tbody></table></div><pre><code>skills1 = {&quot;Python&quot;, &quot;SQL&quot;, &quot;NLP&quot;}
+skills2 = {&quot;Python&quot;, &quot;ML&quot;, &quot;pandas&quot;}
+
+print(skills1 &amp; skills2)
+print(skills1 | skills2)
+print(skills1 - skills2)
+
+print(skills1 and skills2)
+print(skills1 or skills2)
+
+letters = {&quot;b&quot;, &quot;a&quot;, &quot;c&quot;}
+print(sorted(letters))</code></pre></article><h1 class="stage">3 Dictionaries</h1><article class="topic" id="t42"><h2><span class="num">42</span> Dictionary</h2><div class="body"><p><strong>Definition:</strong> A dictionary is a mutable mapping that stores data as key-value pairs. Each key identifies the value associated with it.</p>
+<table><thead><tr><th>Property</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Key-value pairs</td><td>The key is the label</td></tr>
+<tr><td>Unique keys</td><td>A key appears once</td></tr>
+<tr><td>Hashable keys</td><td>Required</td></tr>
+<tr><td>Values</td><td>Any data type</td></tr>
+<tr><td>Mutable</td><td>Add, update, and delete</td></tr>
+<tr><td>Access</td><td>By key, not by positional index</td></tr>
+</tbody></table></div><pre><code>employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 24,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;salary&quot;: 1000
+}
+print(employee)
+print(employee[&quot;name&quot;])
+print(employee[&quot;age&quot;])
+
+try:
+    print(employee[&quot;email&quot;])
+except KeyError as error:
+    print(&quot;KeyError:&quot;, error)
+
+repeat = {&quot;name&quot;: &quot;Rahul&quot;, &quot;name&quot;: &quot;Priya&quot;}
+print(repeat)
+
+codes = {1: &quot;Python&quot;, 2: &quot;SQL&quot;}
+print(codes[1])</code></pre></article><article class="topic" id="t43"><h2><span class="num">43</span> Create a dictionary</h2><div class="body"><p><strong>Definition:</strong> A dictionary is commonly created using curly braces <code>{ }</code> with each key and value separated by a colon.</p></div><pre><code>employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 24,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;salary&quot;: 1000
+}
+print(employee)
+print(type(employee))</code></pre></article><article class="topic" id="t44"><h2><span class="num">44</span> Access a value</h2><div class="body"><p><strong>Definition:</strong> Dictionary access retrieves a value using its key. If the key is missing, square-bracket access raises <code>KeyError</code>.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 24}
+print(employee[&quot;name&quot;])
+print(employee.get(&quot;email&quot;, &quot;not found&quot;))</code></pre></article><article class="topic" id="t45"><h2><span class="num">45</span> Add and update</h2><div class="body"><p><strong>Definition:</strong> Assigning a value to a new dictionary key adds a pair. Assigning to an existing key replaces its value.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 24, &quot;salary&quot;: 1000}
+employee[&quot;city&quot;] = &quot;Mumbai&quot;
+print(employee)
+employee[&quot;salary&quot;] = 2000
+print(employee[&quot;salary&quot;])</code></pre></article><article class="topic" id="t46"><h2><span class="num">46</span> remove</h2><div class="body"><p><strong>Definition:</strong> <code>pop(key)</code> removes a specified key and returns its value. It raises <code>KeyError</code> if the key is absent and no default is provided. <code>del</code> deletes a specified entry, or removes a name binding when used on a variable.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 24, &quot;salary&quot;: 1000, &quot;city&quot;: &quot;Mumbai&quot;}
+print(employee.pop(&quot;city&quot;))
+del employee[&quot;age&quot;]
+print(employee)</code></pre></article><article class="topic" id="t47"><h2><span class="num">47</span> Unique keys</h2><div class="body"><p><strong>Definition:</strong> Keys must be unique. If the same key is written twice, the later value replaces the earlier one. Keys must be hashable. A list cannot be a key.</p></div><pre><code>data = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 25, &quot;name&quot;: &quot;Amit&quot;}
+print(data)</code></pre></article><article class="topic" id="t48"><h2><span class="num">48</span> Value types</h2><div class="body"><p><strong>Definition:</strong> Values can be of any data type. A nested value keeps the rules of its own type: a list can be indexed; a set cannot.</p></div><pre><code>employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;skills&quot;: [&quot;Python&quot;, &quot;SQL&quot;, &quot;ML&quot;]
+}
+print(employee[&quot;skills&quot;])
+print(employee[&quot;skills&quot;][0])
+
+employee[&quot;skills&quot;].append(&quot;Deep Learning&quot;)
+print(employee[&quot;skills&quot;])
+
+employee2 = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;skills&quot;: {&quot;Python&quot;, &quot;SQL&quot;, &quot;Python&quot;}
+}
+print(employee2[&quot;skills&quot;])
+try:
+    print(employee2[&quot;skills&quot;][0])
+except TypeError as error:
+    print(error)</code></pre></article><article class="topic" id="t49"><h2><span class="num">49</span> in operator</h2><div class="body"><p><strong>Definition:</strong> When used with a dictionary, <code>in</code> checks whether a specified key exists. To check values, use <code>in</code> with <code>employee.values()</code>.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 24}
+print(&quot;name&quot; in employee)
+print(&quot;salary&quot; in employee)</code></pre></article><article class="topic" id="t50"><h2><span class="num">50</span> keys()</h2><div class="body"><p><strong>Definition:</strong> <code>keys()</code> returns a dictionary view containing its keys. A <code>for</code> loop over the dictionary also walks the keys.</p></div><pre><code>employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 24,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;salary&quot;: 1000
+}
+print(list(employee.keys()))
+print(list(employee.values()))
+print(list(employee.items()))
+
+print(employee.get(&quot;name&quot;))
+print(employee.get(&quot;email&quot;, &quot;not found&quot;))
+
+employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 24,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;salary&quot;: 1000
+}
+
+print(&quot;--- keys ---&quot;)
+for i in employee:
+    print(i)
+
+print(&quot;--- values ---&quot;)
+for i in employee.values():
+    print(i)
+
+print(&quot;--- pairs ---&quot;)
+for k, v in employee.items():
+    print(k, v)</code></pre></article><article class="topic" id="t51"><h2><span class="num">51</span> values()</h2><div class="body"><p><strong>Definition:</strong> <code>values()</code> returns a dictionary view containing the dictionary&#x27;s values.</p></div><pre><code>marks = {&quot;Python&quot;: 85, &quot;SQL&quot;: 92, &quot;ML&quot;: 88}
+print(list(marks.values()))</code></pre></article><article class="topic" id="t52"><h2><span class="num">52</span> items()</h2><div class="body"><p><strong>Definition:</strong> <code>items()</code> returns a dictionary view containing key-value pairs, with each pair represented as a tuple.</p></div><pre><code>employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 24,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;salary&quot;: 1000
+}
+
+print(&quot;--- keys ---&quot;)
+for i in employee:
+    print(i)
+
+print(&quot;--- values ---&quot;)
+for i in employee.values():
+    print(i)
+
+print(&quot;--- pairs ---&quot;)
+for k, v in employee.items():
+    print(k, v)</code></pre></article><article class="topic" id="t53"><h2><span class="num">53</span> get()</h2><div class="body"><p><strong>Definition:</strong> <code>get(key, default)</code> returns the value associated with a key, or a default value if the key is absent. If no default is supplied, a missing key returns <code>None</code>.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;}
+print(employee.get(&quot;name&quot;))
+print(employee.get(&quot;email&quot;, &quot;not found&quot;))</code></pre></article><article class="topic" id="t54"><h2><span class="num">54</span> update() and copy()</h2><div class="body"><p><strong>Definition:</strong> <code>update()</code> adds pairs from another mapping or replaces values of existing keys. <code>copy()</code> creates a shallow copy. Nested mutable objects are not copied recursively.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 24}
+employee.update({&quot;city&quot;: &quot;Bengaluru&quot;, &quot;age&quot;: 26})
+backup = employee.copy()
+print(employee)
+print(backup)</code></pre></article><article class="topic" id="t55"><h2><span class="num">55</span> Loop a dictionary</h2><div class="body"><p><strong>Definition:</strong> Dictionary iteration means accessing dictionary keys, values or key-value pairs one by one using a loop.</p>
+<p>A dictionary stores data in key-value pairs.</p>
+<table><thead><tr><th>Method</th><th>What it walks</th></tr></thead><tbody>
+<tr><td><code>for key in student</code></td><td>Keys. Using a dictionary directly in a for loop gives its keys</td></tr>
+<tr><td><code>student.values()</code></td><td>Values</td></tr>
+<tr><td><code>student.items()</code></td><td>Key-value pairs</td></tr>
+<tr><td><code>student.keys()</code></td><td>Keys</td></tr>
+</tbody></table>
+<p><strong>Important dictionary methods:</strong></p>
+<ul>
+<li><code>keys()</code> returns all dictionary keys</li>
+<li><code>values()</code> returns all dictionary values</li>
+<li><code>items()</code> returns key-value pairs</li>
+</ul></div><pre><code>student = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 22,
+    &quot;course&quot;: &quot;Python&quot;
+}
+
+for key in student:
+    print(key)
+
+for value in student.values():
+    print(value)
+
+for key, value in student.items():
+    print(key, &quot;:&quot;, value)
+
+for key in student.keys():
+    print(key)</code></pre></article><article class="topic" id="t56"><h2><span class="num">56</span> Nested dictionaries and lists</h2><div class="body"><p><strong>Definition:</strong> A nested dictionary is a dictionary whose value contains another dictionary. This structure is useful for representing related or hierarchical data.</p></div><pre><code>employee = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;department&quot;: &quot;AI&quot;,
+    &quot;skills&quot;: [&quot;Python&quot;, &quot;SQL&quot;, &quot;ML&quot;]
+}
+print(employee[&quot;skills&quot;])
+print(employee[&quot;skills&quot;][0])
+
+employee[&quot;skills&quot;].append(&quot;Deep Learning&quot;)
+print(employee[&quot;skills&quot;])
+
+employee2 = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;skills&quot;: {&quot;Python&quot;, &quot;SQL&quot;, &quot;Python&quot;}
+}
+print(employee2[&quot;skills&quot;])
+try:
+    print(employee2[&quot;skills&quot;][0])
+except TypeError as error:
+    print(error)
+
+employees = [
+    {&quot;name&quot;: &quot;Rahul&quot;, &quot;department&quot;: &quot;AI&quot;, &quot;salary&quot;: 2000},
+    {&quot;name&quot;: &quot;Priya&quot;, &quot;department&quot;: &quot;Data&quot;, &quot;salary&quot;: 3000},
+    {&quot;name&quot;: &quot;Sumit&quot;, &quot;department&quot;: &quot;IT&quot;, &quot;salary&quot;: 1000}
+]
+
+print(employees[0])
+print(employees[0][&quot;name&quot;])
+print(employees[0][&quot;name&quot;][0])
+
+print(&quot;--- every name ---&quot;)
+for i in employees:
+    print(i[&quot;name&quot;])
+
+print(&quot;--- salary greater than 1500 ---&quot;)
+for i in employees:
+    if i[&quot;salary&quot;] &gt; 1500:
+        print(i[&quot;name&quot;])
+
+print(&quot;--- department of Priya ---&quot;)
+for i in employees:
+    if i[&quot;name&quot;] == &quot;Priya&quot;:
+        print(i[&quot;department&quot;])
+
+student = {
+    &quot;name&quot;: &quot;April&quot;,
+    &quot;course&quot;: &quot;AIML&quot;,
+    &quot;marks&quot;: {
+        &quot;Python&quot;: 85,
+        &quot;SQL&quot;: 70,
+        &quot;ML&quot;: 88
+    }
+}
+
+print(student[&quot;name&quot;])
+print(student[&quot;marks&quot;][&quot;ML&quot;])
+
+student[&quot;marks&quot;][&quot;SQL&quot;] = 92
+student[&quot;marks&quot;][&quot;Deep Learning&quot;] = 88
+print(student[&quot;marks&quot;])
+
+print(&quot;--- subjects above 90 ---&quot;)
+for subject, marks in student[&quot;marks&quot;].items():
+    if marks &gt; 90:
+        print(subject)
+
+average = sum(student[&quot;marks&quot;].values()) / len(student[&quot;marks&quot;])
+print(average)</code></pre></article><article class="topic" id="t57"><h2><span class="num">57</span> Dictionary properties</h2><div class="body"><p><strong>Definition:</strong> A dictionary stores unique hashable keys mapped to values. It is mutable. Values are accessed by key, not by positional index.</p></div><pre><code>employee = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 24}
+print(type(employee))
+print(&quot;name&quot; in employee)
+print(list(employee.keys()))</code></pre></article><article class="topic" id="t58"><h2><span class="num">58</span> Day 3 QA (from test.ipynb)</h2><div class="body"><p>Answer in the code cell below. For questions 1–7, write the answer as a comment. For questions 8–10, write the program.</p>
+<ol>
+<li><code>text = &quot;Python&quot;</code>. What does <code>text[2]</code> print? What happens on <code>text[8]</code>?</li>
+</ol>
+<ol>
+<li><code>numbers = [10, 20, 30]</code>, then <code>numbers.append(40)</code>, then <code>numbers[0] = 100</code>. What is <code>numbers</code>?</li>
+</ol>
+<ol>
+<li>Which of list, tuple, and set keep duplicates? Which one lets you replace an item by index?</li>
+</ol>
+<ol>
+<li><code>employee[&quot;email&quot;]</code> was never stored. What error do you get? What does <code>employee.get(&quot;email&quot;, &quot;not found&quot;)</code> return?</li>
+</ol>
+<ol>
+<li>What is the difference between <code>employee.pop(&quot;city&quot;)</code> and <code>del employee[&quot;city&quot;]</code>?</li>
+</ol>
+<ol>
+<li><code>for i in employee</code> prints keys or values?</li>
+</ol>
+<ol>
+<li><code>employees[0][&quot;name&quot;]</code> is <code>&quot;Rahul&quot;</code>. What is <code>employees[0][&quot;name&quot;][0]</code>?</li>
+</ol>
+<ol>
+<li>From this list, print the name of each employee whose salary is greater than <code>1500</code>.</li>
+</ol>
+<p>```python</p>
+<p>employees = [</p>
+<p>{&quot;name&quot;: &quot;Rahul&quot;, &quot;salary&quot;: 2000},</p>
+<p>{&quot;name&quot;: &quot;Priya&quot;, &quot;salary&quot;: 3000},</p>
+<p>{&quot;name&quot;: &quot;Sumit&quot;, &quot;salary&quot;: 1000}</p>
+<p>]</p>
+<p>```</p>
+<ol>
+<li><code>student[&quot;marks&quot;][&quot;SQL&quot;]</code> is <code>70</code>. Change it to <code>92</code>, then print the marks dictionary.</li>
+</ol>
+<ol>
+<li>Marks are <code>{&quot;Python&quot;: 85, &quot;SQL&quot;: 92, &quot;ML&quot;: 88}</code>. Write the average.</li>
+</ol></div></article><h1 class="stage">4 Functions</h1><article class="topic" id="t59"><h2><span class="num">59</span> Functions</h2><div class="body"><p><strong>Definition:</strong> A function is a reusable block of code designed to perform a specific task.</p>
+<p>Instead of writing the same code multiple times, we can write it once inside a function and call it whenever required.</p>
+<table><thead><tr><th>Type</th><th>Definition</th><th>Example</th></tr></thead><tbody>
+<tr><td>Built-in</td><td>Provided by Python, available without <code>def</code></td><td><code>print()</code>, <code>len()</code>, <code>sum()</code>, <code>type()</code>, <code>min()</code>, <code>max()</code></td></tr>
+<tr><td>User-defined</td><td>Created by a programmer with <code>def</code></td><td><code>def greet():</code></td></tr>
+<tr><td>Lambda</td><td>Small anonymous function; body is one expression</td><td><code>lambda number: number * 2</code></td></tr>
+<tr><td>Recursive</td><td>Calls itself; needs a base case to stop</td><td><code>countdown(n)</code></td></tr>
+</tbody></table></div><pre><code>def greet():
+    print(&quot;Hello, how are you?&quot;)
+
+greet()
+greet()</code></pre></article><article class="topic" id="t60"><h2><span class="num">60</span> Function syntax</h2><div class="body"><p><strong>Definition:</strong> <code>def</code> is a Python keyword used to define a function. The function body is indented under the definition. Defining a function does not execute its body immediately.</p>
+<p>Wrong indentation causes <code>IndentationError</code>.</p></div><pre><code>def add():
+    print(10 + 20)
+
+add()</code></pre></article><article class="topic" id="t61"><h2><span class="num">61</span> Types of functions</h2><div class="body"><p><strong>Definition:</strong> These are the main kinds of functions.</p>
+<table><thead><tr><th>Type</th><th>Definition</th></tr></thead><tbody>
+<tr><td>Built-in</td><td>Provided by Python without defining them yourself</td></tr>
+<tr><td>User-defined</td><td>Created by a programmer with <code>def</code></td></tr>
+<tr><td>Lambda</td><td>Small anonymous function created with <code>lambda</code>. Body is a single expression</td></tr>
+<tr><td>Recursive</td><td>A function that calls itself, directly or indirectly. Needs a base case to stop</td></tr>
+</tbody></table></div><pre><code>print(len([10, 20, 30]))
+print(sum([10, 20, 30]))
+
+def multiply(a, b):
+    return a * b
+
+print(multiply(4, 5))
+
+square = lambda x: x * x
+print(square(5))
+
+def countdown(number):
+    if number == 0:
+        print(&quot;Done&quot;)
+    else:
+        print(number)
+        countdown(number - 1)
+
+countdown(3)</code></pre></article><article class="topic" id="t62"><h2><span class="num">62</span> Built-in functions</h2><div class="body"><p><strong>Definition:</strong> Built-in functions are functions provided by Python and available without defining them yourself or importing a module. Examples: <code>print()</code>, <code>len()</code>, <code>sum()</code>, <code>type()</code>, <code>min()</code>, <code>max()</code>.</p></div><pre><code>print(&quot;Hello&quot;)
+print(len([10, 20, 30]))
+print(sum([10, 20, 30]))
+print(max([10, 20, 30]))
+print(min([10, 20, 30]))
+print(type(100))</code></pre></article><article class="topic" id="t63"><h2><span class="num">63</span> User-defined functions</h2><div class="body"><p><strong>Definition:</strong> A user-defined function is a function created by a programmer to perform a particular task.</p></div><pre><code>def multiply(a, b):
+    return a * b
+
+print(multiply(4, 5))</code></pre></article><article class="topic" id="t64"><h2><span class="num">64</span> Recursive functions</h2><div class="body"><p><strong>Definition:</strong> A recursive function is a function that calls itself, directly or indirectly, to solve a problem. A recursive solution normally needs a base case to stop further calls.</p></div><pre><code>def countdown(number):
+    if number == 0:
+        print(&quot;Done&quot;)
+    else:
+        print(number)
+        countdown(number - 1)
+
+countdown(3)</code></pre></article><article class="topic" id="t65"><h2><span class="num">65</span> Define vs call</h2><div class="body"><p><strong>Interview answer:</strong> Defining a function means writing its logic. Calling a function means executing that logic.</p>
+<table><thead><tr><th>Action</th><th>What happens</th></tr></thead><tbody>
+<tr><td><code>def hello():</code></td><td>Only defines. Nothing prints yet</td></tr>
+<tr><td><code>hello()</code></td><td>Runs the body</td></tr>
+</tbody></table>
+<p>You can call the same function many times.</p></div><pre><code>def greet():
+    print(&quot;Hello, how are you?&quot;)
+
+print(&quot;defined, not called yet&quot;)
+greet()</code></pre></article><article class="topic" id="t66"><h2><span class="num">66</span> Parameters vs arguments</h2><div class="body"><p><strong>Interview answer:</strong> A parameter is a variable in the function definition. An argument is the actual value supplied when calling the function.</p>
+<p>In <code>greet(name)</code>, <code>name</code> is the parameter. In <code>greet(&quot;Ravi&quot;)</code>, <code>&quot;Ravi&quot;</code> is the argument.</p>
+<p>The number of arguments must match the required parameters unless a default is used.</p></div><pre><code>def greet_one(name):
+    print(&quot;Hello, how are you?&quot;, name)
+
+greet_one(&quot;Mary&quot;)
+greet_one(&quot;John&quot;)
+
+def calculate(a, b):
+    print(&quot;addition&quot;, a + b)
+    print(&quot;subtraction&quot;, a - b)
+    print(&quot;multiplication&quot;, a * b)
+    print(&quot;division&quot;, a / b)
+
+calculate(70, 21)</code></pre></article><article class="topic" id="t67"><h2><span class="num">67</span> print vs return</h2><div class="body"><p><strong>Interview answer:</strong> <code>print()</code> displays a value on the screen. <code>return</code> sends a value back to the caller.</p>
+<table><thead><tr><th><code>print()</code></th><th><code>return</code></th></tr></thead><tbody>
+<tr><td>Displays a value</td><td>Sends a value back to the caller</td></tr>
+<tr><td>Useful for messages and debugging</td><td>Useful for calculations and further processing</td></tr>
+</tbody></table>
+<p>Use <code>print()</code> when you want to display something. Use <code>return</code> when you want a result for later use.</p>
+<p>If a function has no <code>return</code>, Python returns <code>None</code>.</p></div><pre><code>def add1(a, b, c):
+    return a + b + c
+
+print(add1(5, 6, 7))
+print(add1(5, 6, 7) * 10)
+
+result = add1(1, 2, 3)
+print(result)</code></pre></article><article class="topic" id="t68"><h2><span class="num">68</span> Conditions inside functions</h2><div class="body"><p><strong>Definition:</strong> Conditions inside a function let the function choose which statements to execute based on the supplied values.</p></div><pre><code>def result(score):
+    if score &gt; 80:
+        print(&quot;Excellent&quot;)
+    elif 60 &lt; score &lt;= 80:
+        print(&quot;Very good&quot;)
+    else:
+        print(&quot;Better luck next time&quot;)
+
+result(45)
+result(89)</code></pre></article><article class="topic" id="t69"><h2><span class="num">69</span> Voting eligibility</h2><div class="body"><p><strong>Definition:</strong> A function can check a condition and return or print a decision. Class rule: age <code>&gt;= 18</code> is eligible to vote.</p></div><pre><code>def vote(age):
+    if age &gt;= 18:
+        print(&quot;can vote&quot;)
+    else:
+        print(&quot;you cannot vote&quot;)
+
+vote(23)
+vote(16)</code></pre></article><article class="topic" id="t70"><h2><span class="num">70</span> Average marks</h2><div class="body"><p><strong>Definition:</strong> An average, or arithmetic mean, is the sum of numerical values divided by the number of values. An empty list needs a separate check to avoid division by zero.</p></div><pre><code>def average(marks):
+    total = sum(marks)
+    average = total / len(marks)
+    return average
+
+print(average([80, 90, 70, 60]))</code></pre></article><article class="topic" id="t71"><h2><span class="num">71</span> Positional arguments</h2><div class="body"><p><strong>Interview answer:</strong> Positional arguments are matched to parameters according to their order in the function call.</p>
+<p>The first argument fills the first parameter. Order matters.</p>
+<p><code>employee(&quot;IT&quot;, &quot;Ravi&quot;)</code> puts <code>&quot;IT&quot;</code> in <code>name</code> if <code>name</code> is first.</p></div><pre><code>def intro(name, age):
+    print(&quot;Hello&quot;, name)
+    print(&quot;Your age is&quot;, age)
+
+intro(&quot;Rahul&quot;, 12)
+intro(12, &quot;Rahul&quot;)</code></pre></article><article class="topic" id="t72"><h2><span class="num">72</span> Keyword arguments</h2><div class="body"><p><strong>Interview answer:</strong> Keyword arguments are passed using parameter names, so Python matches values by name.</p>
+<p>Order can change. You cannot put a positional argument after a keyword argument.</p>
+<table><thead><tr><th>Positional</th><th>Keyword</th></tr></thead><tbody>
+<tr><td>Matched by position</td><td>Matched by parameter name</td></tr>
+<tr><td>Order matters</td><td>Order can change</td></tr>
+<tr><td><code>add(10, 20)</code></td><td><code>add(a=10, b=20)</code></td></tr>
+</tbody></table></div><pre><code>def intro(name, age):
+    print(&quot;Hello&quot;, name)
+    print(&quot;Your age is&quot;, age)
+
+intro(age=12, name=&quot;Rahul&quot;)
+
+def employee(department, salary):
+    print(&quot;You belong to&quot;, department)
+    print(&quot;Your salary is&quot;, salary)
+
+employee(salary=40000, department=&quot;IT&quot;)</code></pre></article><article class="topic" id="t73"><h2><span class="num">73</span> Default arguments</h2><div class="body"><p><strong>Interview answer:</strong> A default argument is a value used when the caller does not provide a value for that parameter.</p>
+<p>If you pass a value, Python uses yours. If you skip it, Python uses the default.</p>
+<p>Required parameters must come before default parameters. If a default exists and you pass a different value, the value you passed is used.</p></div><pre><code>def greet_two(name, message=&quot;welcome&quot;):
+    print(message, name)
+
+greet_two(&quot;Rahul&quot;)
+greet_two(&quot;Rahul&quot;, &quot;Good morning&quot;)</code></pre></article><article class="topic" id="t74"><h2><span class="num">74</span> Local and global variables</h2><div class="body"><p><strong>Local variable:</strong> A name bound within a function&#x27;s local scope. It can normally be accessed within that function, not directly from outside it.</p>
+<p><strong>Global variable:</strong> A name defined at module level. Functions can generally read that name. Prefer parameters and return values because they make functions easier to understand and test.</p></div><pre><code>def demo():
+    x = 10
+    print(&quot;inside&quot;, x)
+
+demo()
+
+x = 100
+
+def demo2():
+    print(&quot;inside&quot;, x)
+
+demo2()
+print(&quot;outside&quot;, x)</code></pre></article><article class="topic" id="t75"><h2><span class="num">75</span> Function inside a function</h2><div class="body"><p><strong>Definition:</strong> A function can call another function to reuse its functionality. The called function can return a value to the calling function.</p>
+<p><code>add(2, 3)</code> runs first and returns <code>5</code>; then <code>double(5)</code> returns <code>10</code>.</p></div><pre><code>def add(a, b):
+    return a + b
+
+def double(n):
+    return n * 2
+
+print(add(5, 6))
+print(double(8))
+print(double(add(2, 3)))
+
+def total(x):
+    return sum(x)
+
+def average(x):
+    return total(x) / len(x)
+
+print(average([10, 20, 30]))</code></pre></article><article class="topic" id="t76"><h2><span class="num">76</span> Search a name in a list</h2><div class="body"><p><strong>Definition:</strong> A search function checks a collection for a specified value and returns a result indicating whether the value was found.</p></div><pre><code>students = [&quot;Alex&quot;, &quot;Mary&quot;, &quot;John&quot;, &quot;Priyam&quot;]
+
+def find_name(students, name):
+    for i in students:
+        if i == name:
+            return True
+    return False
+
+print(find_name(students, &quot;Mary&quot;))
+print(find_name(students, &quot;Monica&quot;))</code></pre></article><article class="topic" id="t77"><h2><span class="num">77</span> Split a big task</h2><div class="body"><p><strong>Definition:</strong> Decomposing a program means dividing a large task into smaller functions, each responsible for a clear part of the work. This improves readability, reuse, testing, and maintenance.</p></div><pre><code>def get_input():
+    return {&quot;name&quot;: &quot;Rahul&quot;, &quot;marks&quot;: [80, 90, 70]}
+
+def calculate_marks(marks):
+    return sum(marks) / len(marks)
+
+def check_result(average):
+    if average &gt;= 60:
+        return &quot;pass&quot;
+    return &quot;fail&quot;
+
+def process_student():
+    student = get_input()
+    avg = calculate_marks(student[&quot;marks&quot;])
+    print(student[&quot;name&quot;], avg, check_result(avg))
+
+process_student()</code></pre></article><article class="topic" id="t78"><h2><span class="num">78</span> Employee bonus</h2><div class="body"><p><strong>Definition:</strong> Walk a list of dictionaries. Check experience. Bonus is 10% of salary when experience is <code>&gt;= 3</code>, else 5%.</p>
+<p>This uses dictionaries, a loop, a condition, and a function together.</p></div><pre><code>employees = [
+    {&quot;name&quot;: &quot;Rahul&quot;, &quot;experience&quot;: 3, &quot;salary&quot;: 2000},
+    {&quot;name&quot;: &quot;Amit&quot;, &quot;experience&quot;: 2, &quot;salary&quot;: 2000},
+    {&quot;name&quot;: &quot;Mary&quot;, &quot;experience&quot;: 4, &quot;salary&quot;: 4000},
+]
+
+def calculate_bonus(employee):
+    for i in employee:
+        if i[&quot;experience&quot;] &gt;= 3:
+            bonus = 0.10 * i[&quot;salary&quot;]
+        else:
+            bonus = 0.05 * i[&quot;salary&quot;]
+        print(&quot;The bonus of&quot;, i[&quot;name&quot;], &quot;is&quot;, bonus)
+
+calculate_bonus(employees)</code></pre></article><article class="topic" id="t79"><h2><span class="num">79</span> Interview revision</h2><div class="body"><p><strong>Q1. What is a function?</strong></p>
+<p>A function is a reusable block of code designed to perform a specific task.</p>
+<p><strong>Q2. Define vs call?</strong></p>
+<p>Defining means writing the function&#x27;s logic. Calling means executing that logic.</p>
+<p><strong>Q3. Parameter vs argument?</strong></p>
+<p>A parameter is a variable in the definition. An argument is the actual value supplied when calling.</p>
+<p><strong>Q4. Positional arguments?</strong></p>
+<p>Matched to parameters by order in the call. Order matters.</p>
+<p><strong>Q5. Keyword arguments?</strong></p>
+<p>Passed using parameter names. Python matches by name.</p>
+<p><strong>Q6. Default argument?</strong></p>
+<p>Used when the caller does not provide that value. If you pass a different value, yours is used.</p>
+<p><strong>Q7. <code>print()</code> vs <code>return</code>?</strong></p>
+<p><code>print()</code> displays a value. <code>return</code> sends a value back to the caller.</p>
+<p><strong>Q8. Local variable?</strong></p>
+<p>Created inside a function. Normally accessible only there.</p>
+<p><strong>Q9. Global variable?</strong></p>
+<p>Defined outside functions. Functions can generally read it.</p>
+<p><strong>Q10. Can one function call another?</strong></p>
+<p>Yes. It can use the returned value.</p>
+<p><strong>Q11. No <code>return</code> statement?</strong></p>
+<p>Python returns <code>None</code>.</p>
+<p><strong>Q12. Why use functions?</strong></p>
+<p>Avoid repeated code, improve readability, support reuse, and make programs easier to test.</p></div><pre><code>def greet_two(name, message=&quot;welcome&quot;):
+    print(message, name)
+
+greet_two(&quot;Rahul&quot;)
+greet_two(&quot;Rahul&quot;, &quot;Good morning&quot;)</code></pre></article><article class="topic" id="t80"><h2><span class="num">80</span> Even or odd</h2><div class="body"><p><strong>Definition:</strong> An even integer is divisible by 2 with a remainder of <code>0</code>. An odd integer leaves a remainder of <code>1</code> when divided by <code>2</code>.</p></div><pre><code>def even_odd(n):
+    if n % 2 == 0:
+        print(n, &quot;is even&quot;)
+    else:
+        print(n, &quot;is odd&quot;)
+
+even_odd(10)
+even_odd(7)</code></pre></article><h1 class="stage">5 Day 5</h1><article class="topic" id="t81"><h2><span class="num">81</span> *args and **kwargs</h2><div class="body"><p><strong>Definition:</strong> Day 5 covers functions that can accept a variable number of arguments, plus lambda.</p>
+<table><thead><tr><th>Topic</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>*args</code></td><td>Accepts any number of positional arguments. Stores them in a tuple</td></tr>
+<tr><td><code>**kwargs</code></td><td>Accepts any number of keyword arguments. Stores them in a dictionary</td></tr>
+<tr><td>Combining both</td><td><code>*args</code> must come before <code>**kwargs</code>. Positional first, then keyword</td></tr>
+<tr><td>Lambda</td><td>Small anonymous function. One expression. Result is returned automatically</td></tr>
+</tbody></table></div><pre><code>def display(*args):
+    print(args)
+
+display(10, 20, 30, 40)
+
+def student_details(**kwargs):
+    print(kwargs)
+
+student_details(name=&quot;Rahul&quot;, age=22, course=&quot;Python&quot;)
+
+square = lambda x: x * x
+print(square(5))</code></pre></article><article class="topic" id="t82"><h2><span class="num">82</span> *args</h2><div class="body"><p><strong>Definition:</strong> <code>*args</code> allows a function to accept any number of positional arguments without specifying the exact number of arguments in advance.</p>
+<p>Python collects all the positional arguments passed to <code>*args</code> and stores them inside a tuple.</p>
+<p>Syntax: <code>def function_name(*args):</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>*args</code> accepts multiple positional arguments</li>
+<li>Arguments are stored in a tuple</li>
+<li>The name <code>args</code> is not compulsory. The <code>*</code> symbol is important</li>
+<li>You can use a different name, such as <code>*numbers</code> or <code>*values</code></li>
+</ul></div><pre><code>def display(*args):
+    print(args)
+
+display(10, 20, 30, 40)
+
+def calculate_sum(*numbers):
+    total = sum(numbers)
+    print(&quot;Total:&quot;, total)
+
+calculate_sum(10, 20, 30)
+calculate_sum(5, 10, 15, 20)</code></pre></article><article class="topic" id="t83"><h2><span class="num">83</span> **kwargs</h2><div class="body"><p><strong>Definition:</strong> <code>**kwargs</code> allows a function to accept any number of keyword arguments without specifying the exact number of arguments in advance.</p>
+<p>Python collects all the keyword arguments and stores them inside a dictionary in the form of key-value pairs.</p>
+<p>Syntax: <code>def function_name(**kwargs):</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>**kwargs</code> accepts multiple keyword arguments</li>
+<li>Arguments are stored in a dictionary</li>
+<li>Each argument has a key and a value</li>
+<li>The name <code>kwargs</code> is not compulsory. The <code>**</code> symbol is important</li>
+</ul></div><pre><code>def student_details(**kwargs):
+    print(kwargs)
+
+student_details(name=&quot;Rahul&quot;, age=22, course=&quot;Python&quot;)
+
+def employee(**details):
+    for key, value in details.items():
+        print(key, &quot;:&quot;, value)
+
+employee(name=&quot;Rahul&quot;, salary=30000, department=&quot;IT&quot;)</code></pre></article><article class="topic" id="t84"><h2><span class="num">84</span> *args + **kwargs</h2><div class="body"><p><strong>Definition:</strong> We can use <code>*args</code> and <code>**kwargs</code> together in a function when we want to accept both multiple positional arguments and multiple keyword arguments.</p>
+<p><code>*args</code> collects positional arguments into a tuple. <code>**kwargs</code> collects keyword arguments into a dictionary.</p>
+<p>Syntax: <code>def function_name(*args, **kwargs):</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>*args</code> must come before <code>**kwargs</code> in the function definition</li>
+<li>Positional arguments are collected in a tuple</li>
+<li>Keyword arguments are collected in a dictionary</li>
+<li>You can use both in the same function</li>
+</ul></div><pre><code>def student(*subjects, **details):
+    print(&quot;Subjects:&quot;, subjects)
+    print(&quot;Details:&quot;, details)
+
+student(&quot;Python&quot;, &quot;SQL&quot;, name=&quot;Rahul&quot;, age=22)</code></pre></article><article class="topic" id="t85"><h2><span class="num">85</span> Lambda functions</h2><div class="body"><p><strong>Definition:</strong> A lambda function is a small anonymous function created using the <code>lambda</code> keyword.</p>
+<p>It can accept any number of arguments but contains only one expression. The expression is evaluated and its result is automatically returned.</p>
+<p>Syntax: <code>lambda arguments: expression</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>Lambda functions are anonymous functions</li>
+<li>They are created using the <code>lambda</code> keyword</li>
+<li>They can accept multiple arguments</li>
+<li>They contain only one expression</li>
+<li>The result of the expression is returned automatically</li>
+<li>They are commonly used with <code>map()</code>, <code>filter()</code>, and <code>sorted()</code></li>
+</ul></div><pre><code>square = lambda x: x * x
+print(square(5))
+
+add = lambda a, b: a + b
+print(add(10, 20))
+
+subtract = lambda a, b: a - b
+print(subtract(20, 10))
+
+add_ten = lambda x: x + 10
+print(add_ten(5))</code></pre></article><article class="topic" id="t86"><h2><span class="num">86</span> List comprehension</h2><div class="body"><p><strong>Definition:</strong> List comprehension is a shorter and more readable way to create a new list from an existing iterable.</p>
+<p>It allows us to apply an expression to each element and optionally include a condition to select specific elements.</p>
+<p>Syntax: <code>new_list = [expression for item in iterable]</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>List comprehension creates a new list</li>
+<li>It can apply an expression to every element</li>
+<li>It can include conditions using <code>if</code></li>
+<li>It can use if-else to choose between two expressions</li>
+<li>It makes code shorter than writing a normal for loop</li>
+</ul></div><pre><code>numbers = [1, 2, 3, 4, 5]
+squares = [i * i for i in numbers]
+print(squares)
+
+new_list = [i + 10 for i in numbers]
+print(new_list)
+
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = [i for i in numbers if i % 2 == 0]
+print(even_numbers)
+
+result = [i + 10 if i &gt; 3 else i for i in numbers]
+print(result)</code></pre></article><article class="topic" id="t87"><h2><span class="num">87</span> Set comprehension</h2><div class="body"><p><strong>Definition:</strong> Set comprehension is a shorter way to create a set from an existing iterable.</p>
+<p>It allows us to apply an expression to each element and optionally use conditions to select elements.</p>
+<p>Syntax: <code>new_set = {expression for item in iterable}</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>Set comprehension creates a new set</li>
+<li>Curly brackets <code>{ }</code> are used</li>
+<li>Sets do not store duplicate values</li>
+<li>Sets are unordered collections</li>
+<li>Conditions can be used to filter elements</li>
+</ul></div><pre><code>numbers = [1, 2, 3, 4, 5]
+squares = {i * i for i in numbers}
+print(squares)
+
+numbers = [1, 2, 2, 3, 3, 4, 5]
+unique_numbers = {i for i in numbers}
+print(unique_numbers)
+
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = {i for i in numbers if i % 2 == 0]
+print(even_numbers)</code></pre></article><article class="topic" id="t88"><h2><span class="num">88</span> Dictionary comprehension</h2><div class="body"><p><strong>Definition:</strong> Dictionary comprehension is a shorter way to create a dictionary from an existing iterable.</p>
+<p>It allows us to create key-value pairs using an expression and optionally apply conditions.</p>
+<p>Syntax: <code>new_dict = {key: value for item in iterable}</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>Dictionary comprehension creates a dictionary</li>
+<li>Curly brackets <code>{ }</code> are used</li>
+<li>Key-value pairs are separated using a colon <code>:</code></li>
+<li>Each key must be unique</li>
+<li>Conditions can be used to filter elements</li>
+</ul></div><pre><code>numbers = [1, 2, 3, 4, 5]
+squares = {i: i * i for i in numbers}
+print(squares)
+
+names = [&quot;Rahul&quot;, &quot;Amit&quot;, &quot;Priya&quot;]
+name_lengths = {name: len(name) for name in names}
+print(name_lengths)
+
+numbers = [1, 2, 3, 4, 5, 6]
+even_squares = {i: i * i for i in numbers if i % 2 == 0}
+print(even_squares)</code></pre></article><article class="topic" id="t89"><h2><span class="num">89</span> map(), filter(), sorted()</h2><div class="body"><p><strong>Definition:</strong> These built-in functions are often used with lambda.</p>
+<table><thead><tr><th>Function</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>map()</code></td><td>Applies a function to every element. Transforms data</td></tr>
+<tr><td><code>filter()</code></td><td>Selects elements based on a condition</td></tr>
+<tr><td><code>sorted()</code></td><td>Returns a new list in sorted order</td></tr>
+<tr><td><code>zip()</code></td><td>Combines corresponding elements from multiple iterables</td></tr>
+<tr><td><code>min()</code> / <code>max()</code></td><td>Smallest and largest values</td></tr>
+<tr><td><code>enumerate()</code></td><td>Index and value while iterating</td></tr>
+</tbody></table>
+<p><code>map()</code> and <code>filter()</code> return an iterator. Use <code>list()</code> to see the values. They do not modify the original iterable.</p></div><pre><code>numbers = [1, 2, 3, 4, 5]
+print(list(map(lambda x: x * 2, numbers)))
+print(list(filter(lambda x: x % 2 == 0, numbers)))
+print(sorted([50, 10, 40, 20, 30]))</code></pre></article><article class="topic" id="t90"><h2><span class="num">90</span> map</h2><div class="body"><p><strong>Definition:</strong> The <code>map()</code> function applies a given function to every element of an iterable and returns a map iterator containing the results.</p>
+<p>It is mainly used when we want to transform or modify every element in a collection.</p>
+<p>Syntax: <code>map(function, iterable)</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>map()</code> applies a function to every element</li>
+<li>It is used for transforming data</li>
+<li>It returns a map iterator, not a list</li>
+<li>Use <code>list()</code> to convert the result into a list</li>
+<li>It does not modify the original iterable</li>
+</ul></div><pre><code>numbers = [1, 2, 3, 4, 5]
+result = list(map(lambda x: x * 2, numbers))
+print(result)
+
+numbers = [10, 20, 30, 40]
+result = list(map(lambda x: x + 10, numbers))
+print(result)
+
+names = [&quot;rahul&quot;, &quot;amit&quot;, &quot;priya&quot;]
+result = list(map(lambda name: name.upper(), names))
+print(result)</code></pre></article><article class="topic" id="t91"><h2><span class="num">91</span> filter</h2><div class="body"><p><strong>Definition:</strong> The <code>filter()</code> function selects elements from an iterable based on a condition.</p>
+<p>It applies a function to each element and keeps only those elements for which the function returns <code>True</code>.</p>
+<p>Syntax: <code>filter(function, iterable)</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>filter()</code> selects elements based on a condition</li>
+<li>It keeps elements for which the function returns <code>True</code></li>
+<li>It returns a filter iterator, not a list</li>
+<li>Use <code>list()</code> to convert the result into a list</li>
+<li>It does not modify the original iterable</li>
+</ul></div><pre><code>numbers = [1, 2, 3, 4, 5, 6]
+result = list(filter(lambda x: x % 2 == 0, numbers))
+print(result)
+
+numbers = [5, 10, 15, 20, 25]
+result = list(filter(lambda x: x &gt; 10, numbers))
+print(result)
+
+marks = [35, 45, 55, 65, 75]
+result = list(filter(lambda x: x &gt; 50, marks))
+print(result)</code></pre></article><article class="topic" id="t92"><h2><span class="num">92</span> sorted</h2><div class="body"><p><strong>Definition:</strong> The <code>sorted()</code> function returns a new list containing the elements of an iterable arranged in a specific order.</p>
+<p>By default, it sorts elements in ascending order. Use <code>reverse=True</code> to sort in descending order.</p>
+<p>Syntax: <code>sorted(iterable)</code> or <code>sorted(iterable, reverse=True)</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>sorted()</code> arranges elements in order</li>
+<li>By default, it sorts in ascending order</li>
+<li><code>reverse=True</code> sorts in descending order</li>
+<li>It returns a new list</li>
+<li>It does not modify the original iterable</li>
+</ul></div><pre><code>numbers = [50, 10, 40, 20, 30]
+print(sorted(numbers))
+print(sorted(numbers, reverse=True))
+
+names = [&quot;Priya&quot;, &quot;Amit&quot;, &quot;Rahul&quot;]
+print(sorted(names))</code></pre></article><article class="topic" id="t93"><h2><span class="num">93</span> zip</h2><div class="body"><p><strong>Definition:</strong> The <code>zip()</code> function combines elements from two or more iterables by matching elements at the same position.</p>
+<p>It returns a zip iterator containing tuples of corresponding elements.</p>
+<p>Syntax: <code>zip(iterable1, iterable2)</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>zip()</code> combines multiple iterables</li>
+<li>It matches elements based on their positions</li>
+<li>It returns a zip iterator</li>
+<li>Use <code>list()</code> to view the result as a list</li>
+<li>It stops when the shortest iterable is exhausted</li>
+</ul></div><pre><code>names = [&quot;Rahul&quot;, &quot;Amit&quot;, &quot;Priya&quot;]
+marks = [85, 90, 95]
+print(list(zip(names, marks)))
+
+names = [&quot;Rahul&quot;, &quot;Amit&quot;]
+ages = [22, 25]
+cities = [&quot;Bengaluru&quot;, &quot;Mumbai&quot;]
+print(list(zip(names, ages, cities)))</code></pre></article><article class="topic" id="t94"><h2><span class="num">94</span> min() and max()</h2><div class="body"><p><strong>Definition of min():</strong> The <code>min()</code> function returns the smallest element from a collection or the smallest among the given arguments.</p>
+<p><strong>Definition of max():</strong> The <code>max()</code> function returns the largest element from a collection or the largest among the given arguments.</p>
+<p>Syntax: <code>min(iterable)</code> and <code>max(iterable)</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>min()</code> returns the smallest value</li>
+<li><code>max()</code> returns the largest value</li>
+<li>Both functions work with comparable values</li>
+<li>They can accept an iterable or multiple arguments</li>
+</ul></div><pre><code>numbers = [10, 50, 20, 80, 30]
+print(&quot;Minimum:&quot;, min(numbers))
+print(&quot;Maximum:&quot;, max(numbers))
+
+print(min(10, 20, 5, 40))
+print(max(10, 20, 5, 40))
+
+marks = [45, 78, 90, 65, 88]
+print(&quot;Lowest marks:&quot;, min(marks))
+print(&quot;Highest marks:&quot;, max(marks))</code></pre></article><article class="topic" id="t95"><h2><span class="num">95</span> enumerate</h2><div class="body"><p><strong>Definition:</strong> The <code>enumerate()</code> function adds a counter (index) to an iterable and returns an enumerate iterator containing index-value pairs.</p>
+<p>It is useful when we want to access both the index and the value while iterating through a collection.</p>
+<p>Syntax: <code>enumerate(iterable, start=0)</code></p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>enumerate()</code> provides both index and value</li>
+<li>The default starting index is <code>0</code></li>
+<li>We can change the starting index using <code>start=1</code> or another value</li>
+<li>It returns an enumerate iterator</li>
+<li>It is commonly used with for loops</li>
+</ul></div><pre><code>names = [&quot;Rahul&quot;, &quot;Amit&quot;, &quot;Priya&quot;]
+for index, name in enumerate(names):
+    print(index, name)
+
+for index, name in enumerate(names, start=1):
+    print(index, name)
+
+numbers = [10, 20, 30, 40]
+for index, value in enumerate(numbers):
+    print(&quot;Index:&quot;, index, &quot;Value:&quot;, value)</code></pre></article><article class="topic" id="t96"><h2><span class="num">96</span> Important differences</h2><div class="body"><table><thead><tr><th>Topic</th><th>Difference</th></tr></thead><tbody>
+<tr><td><code>*args</code></td><td>Positional arguments, stored in a tuple, one asterisk <code>*</code></td></tr>
+<tr><td><code>**kwargs</code></td><td>Keyword arguments, stored in a dictionary, two asterisks <code>**</code></td></tr>
+<tr><td>List comprehension</td><td>Creates a list with <code>[]</code>. Keeps order. Allows duplicates</td></tr>
+<tr><td>Set comprehension</td><td>Creates a set with <code>{ }</code>. No duplicates. No guaranteed order</td></tr>
+<tr><td>Dictionary comprehension</td><td>Creates a dictionary. Key-value pairs. Keys must be unique</td></tr>
+<tr><td><code>map()</code></td><td>Transforms every element</td></tr>
+<tr><td><code>filter()</code></td><td>Selects elements based on a condition</td></tr>
+<tr><td><code>sorted()</code></td><td>Returns all elements in sorted order as a new list</td></tr>
+<tr><td><code>min()</code></td><td>Returns only the smallest element</td></tr>
+<tr><td><code>max()</code></td><td>Returns only the largest element</td></tr>
+<tr><td><code>zip()</code></td><td>Combines corresponding elements from multiple iterables</td></tr>
+<tr><td><code>enumerate()</code></td><td>Provides the index and value of elements from an iterable</td></tr>
+</tbody></table></div></article><article class="topic" id="t97"><h2><span class="num">97</span> Quick revision</h2><div class="body"><table><thead><tr><th>Topic</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>*args</code></td><td>Accepts multiple positional arguments</td></tr>
+<tr><td><code>**kwargs</code></td><td>Accepts multiple keyword arguments</td></tr>
+<tr><td>Lambda</td><td>Creates a small anonymous function</td></tr>
+<tr><td>List comprehension</td><td>Creates a new list</td></tr>
+<tr><td>Set comprehension</td><td>Creates a new set</td></tr>
+<tr><td>Dict comprehension</td><td>Creates a new dictionary</td></tr>
+<tr><td><code>map()</code></td><td>Transforms every element</td></tr>
+<tr><td><code>filter()</code></td><td>Selects elements based on a condition</td></tr>
+<tr><td><code>sorted()</code></td><td>Sorts elements</td></tr>
+<tr><td><code>zip()</code></td><td>Combines corresponding elements</td></tr>
+<tr><td><code>min()</code></td><td>Finds the smallest value</td></tr>
+<tr><td><code>max()</code></td><td>Finds the largest value</td></tr>
+<tr><td><code>enumerate()</code></td><td>Provides index and value</td></tr>
+</tbody></table></div></article><h1 class="stage">6 Important</h1><article class="topic" id="t98"><h2><span class="num">98</span> Important concepts</h2><div class="body"><p><strong>Definition:</strong> These are extra Python concepts used with collections, types, and errors.</p>
+<table><thead><tr><th>Topic</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Iterable</td><td>An object we can loop over</td></tr>
+<tr><td>Shallow copy</td><td>New outer object, nested objects are shared</td></tr>
+<tr><td>Deep copy</td><td>Nested objects are copied too</td></tr>
+<tr><td>Exception</td><td>An error during execution</td></tr>
+<tr><td>Dictionary loop</td><td>Keys, values, or <code>items()</code></td></tr>
+<tr><td><code>pop()</code> / <code>discard()</code></td><td>Remove from a collection</td></tr>
+<tr><td>String format</td><td>Insert values into a string</td></tr>
+<tr><td>Type casting</td><td>Convert one type into another</td></tr>
+<tr><td>Dynamic typing</td><td>Type is decided at runtime</td></tr>
+<tr><td><code>frozenset</code></td><td>Immutable set</td></tr>
+</tbody></table></div></article><article class="topic" id="t99"><h2><span class="num">99</span> Iterable</h2><div class="body"><p><strong>Definition:</strong> An iterable is an object in Python that contains multiple elements or can produce elements one at a time.</p>
+<p>An iterable allows us to access its elements one by one using a for loop.</p>
+<p>Examples of iterables: list, tuple, set, string, dictionary, range.</p>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>An iterable can be used in a for loop</li>
+<li>Lists, tuples, sets, strings and dictionaries are iterables</li>
+<li>An iterator is an object that produces values one at a time</li>
+<li>We can create an iterator from an iterable using <code>iter()</code></li>
+</ul></div><pre><code>numbers = [10, 20, 30, 40]
+for num in numbers:
+    print(num)
+
+name = &quot;Python&quot;
+for char in name:
+    print(char)</code></pre></article><article class="topic" id="t100"><h2><span class="num">100</span> Shallow copy</h2><div class="body"><p><strong>Definition:</strong> A shallow copy creates a new outer object but does not create copies of nested objects inside it.</p>
+<p>The original object and the copied object share references to the same nested objects.</p>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>A new outer list is created</li>
+<li>The inner lists are shared between both objects</li>
+<li>Changing a nested list through the copy also affects the original list</li>
+</ul>
+<p>Uses <code>copy.copy()</code>.</p></div><pre><code>import copy
+
+original = [[10, 20], [30, 40]]
+copied = copy.copy(original)
+copied[0][0] = 100
+
+print(&quot;Original:&quot;, original)
+print(&quot;Copied:&quot;, copied)</code></pre></article><article class="topic" id="t101"><h2><span class="num">101</span> Deep copy</h2><div class="body"><p><strong>Definition:</strong> A deep copy creates a completely independent copy of an object, including the nested objects inside it.</p>
+<p>Changes made to nested objects in the copied object do not affect the original object.</p>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>A new outer list is created</li>
+<li>New copies of nested lists are also created</li>
+<li>Changes to nested objects in the copy do not affect the original object</li>
+</ul>
+<p>Uses <code>copy.deepcopy()</code>.</p></div><pre><code>import copy
+
+original = [[10, 20], [30, 40]]
+copied = copy.deepcopy(original)
+copied[0][0] = 100
+
+print(&quot;Original:&quot;, original)
+print(&quot;Copied:&quot;, copied)</code></pre></article><article class="topic" id="t102"><h2><span class="num">102</span> Exception</h2><div class="body"><p><strong>Definition:</strong> Exception handling is a mechanism in Python used to handle runtime exceptions so that a program can respond to errors instead of terminating unexpectedly.</p>
+<p><strong>Why:</strong> handle runtime exceptions, prevent unexpected termination, show meaningful messages, make programs more reliable.</p>
+<table><thead><tr><th>Keyword</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>try</code></td><td>Code that may cause an exception</td></tr>
+<tr><td><code>except</code></td><td>Code to handle the exception</td></tr>
+</tbody></table>
+<table><thead><tr><th>Exception</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>ValueError</code></td><td>Correct type, invalid value</td></tr>
+<tr><td><code>TypeError</code></td><td>Operation on inappropriate type</td></tr>
+<tr><td><code>ZeroDivisionError</code></td><td>Division by zero</td></tr>
+<tr><td><code>KeyError</code></td><td>Dictionary key not found</td></tr>
+<tr><td><code>IndexError</code></td><td>Index outside valid range</td></tr>
+<tr><td><code>NameError</code></td><td>Name not defined</td></tr>
+<tr><td><code>FileNotFoundError</code></td><td>File does not exist</td></tr>
+</tbody></table>
+<p><strong>Note:</strong> <code>SyntaxError</code> generally cannot be caught by a normal try-except; fix it before running.</p></div><pre><code>try:
+    num = int(&quot;ABC&quot;)
+    print(num)
+except ValueError:
+    print(&quot;Please enter a valid integer.&quot;)
+
+try:
+    print(10 / 0)
+except ZeroDivisionError:
+    print(&quot;Cannot divide by zero.&quot;)
+
+student = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 20, &quot;course&quot;: &quot;Python&quot;}
+try:
+    print(student[&quot;salary&quot;])
+except KeyError as e:
+    print(&quot;Key does not exist:&quot;, e)
+
+numbers = [10, 20, 30]
+try:
+    print(numbers[5])
+except IndexError:
+    print(&quot;Index is out of range.&quot;)
+
+try:
+    result = 10 + &quot;Python&quot;
+except TypeError:
+    print(&quot;Cannot add an integer and a string.&quot;)
+
+try:
+    a, b = 10, 0
+    print(a / b)
+except ValueError:
+    print(&quot;Please enter numbers only.&quot;)
+except ZeroDivisionError:
+    print(&quot;Cannot divide by zero.&quot;)</code></pre></article><article class="topic" id="t103"><h2><span class="num">103</span> How to iterate through a dictionary</h2><div class="body"><p><strong>Definition:</strong> Dictionary iteration means accessing dictionary keys, values or key-value pairs one by one using a loop.</p>
+<p>A dictionary stores data in key-value pairs.</p>
+<table><thead><tr><th>Method</th><th>What it walks</th></tr></thead><tbody>
+<tr><td><code>for key in student</code></td><td>Keys. Using a dictionary directly in a for loop gives its keys</td></tr>
+<tr><td><code>student.values()</code></td><td>Values</td></tr>
+<tr><td><code>student.items()</code></td><td>Key-value pairs</td></tr>
+<tr><td><code>student.keys()</code></td><td>Keys</td></tr>
+</tbody></table>
+<p><strong>Important dictionary methods:</strong></p>
+<ul>
+<li><code>keys()</code> returns all dictionary keys</li>
+<li><code>values()</code> returns all dictionary values</li>
+<li><code>items()</code> returns key-value pairs</li>
+</ul></div><pre><code>student = {
+    &quot;name&quot;: &quot;Rahul&quot;,
+    &quot;age&quot;: 22,
+    &quot;course&quot;: &quot;Python&quot;
+}
+
+for key in student:
+    print(key)
+
+for value in student.values():
+    print(value)
+
+for key, value in student.items():
+    print(key, &quot;:&quot;, value)
+
+for key in student.keys():
+    print(key)</code></pre></article><article class="topic" id="t104"><h2><span class="num">104</span> pop() and discard()</h2><div class="body"><p><strong>Definition of pop():</strong> The <code>pop()</code> method removes an element from a collection and returns the removed element. In a dictionary, <code>pop()</code> removes the specified key and returns its corresponding value.</p>
+<p><strong>Definition of discard():</strong> The <code>discard()</code> method removes a specified element from a set if that element exists. If the element does not exist, <code>discard()</code> does not raise an error.</p>
+<table><thead><tr><th>Method</th><th>Difference</th></tr></thead><tbody>
+<tr><td><code>pop()</code></td><td>Removes and returns an element. Used with lists, sets and dictionaries. Behavior depends on the collection</td></tr>
+<tr><td><code>discard()</code></td><td>Removes a specified element from a set. Does not raise an error if the element is missing. Does not return the removed element</td></tr>
+</tbody></table></div><pre><code>numbers = [10, 20, 30, 40]
+result = numbers.pop(1)
+print(&quot;Removed:&quot;, result)
+print(&quot;Updated list:&quot;, numbers)
+
+student = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 22}
+result = student.pop(&quot;age&quot;)
+print(&quot;Removed value:&quot;, result)
+print(&quot;Updated dictionary:&quot;, student)
+
+numbers = {10, 20, 30, 40}
+numbers.discard(20)
+print(numbers)
+
+numbers = {10, 20, 30}
+numbers.discard(100)
+print(numbers)</code></pre></article><article class="topic" id="t105"><h2><span class="num">105</span> String formatting</h2><div class="body"><p><strong>Definition:</strong> String formatting is the process of inserting variables or values into a string in a readable and organized way.</p>
+<table><thead><tr><th>Method</th><th>Definition</th></tr></thead><tbody>
+<tr><td>f-string</td><td>Insert variables and expressions inside a string using <code>{ }</code></td></tr>
+<tr><td><code>format()</code></td><td>Inserts values into placeholders <code>{ }</code></td></tr>
+<tr><td><code>%</code> formatting</td><td>Inserts values using <code>%s</code>, <code>%d</code> and <code>%f</code></td></tr>
+</tbody></table>
+<p><strong>Important format specifiers:</strong> <code>%s</code> string, <code>%d</code> integer, <code>%f</code> floating-point number.</p>
+<p>f-strings are generally the most convenient option for modern Python code.</p></div><pre><code>name = &quot;Rahul&quot;
+age = 22
+print(f&quot;My name is {name} and my age is {age}&quot;)
+print(&quot;My name is {} and my age is {}&quot;.format(name, age))
+print(&quot;My name is %s and my age is %d&quot; % (name, age))
+
+price = 99.567
+print(f&quot;Price: {price:.2f}&quot;)</code></pre></article><article class="topic" id="t106"><h2><span class="num">106</span> Type casting</h2><div class="body"><p><strong>Definition:</strong> Type casting is the process of converting a value from one data type to another data type.</p>
+<p>Python provides built-in functions to perform type casting.</p>
+<table><thead><tr><th>Function</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>int()</code></td><td>Converts a compatible value into an integer</td></tr>
+<tr><td><code>float()</code></td><td>Converts a compatible value into a float</td></tr>
+<tr><td><code>str()</code></td><td>Converts a value into a string</td></tr>
+<tr><td><code>bool()</code></td><td>Converts a value into a Boolean</td></tr>
+<tr><td><code>list()</code></td><td>Converts an iterable into a list</td></tr>
+<tr><td><code>tuple()</code></td><td>Converts an iterable into a tuple</td></tr>
+<tr><td><code>set()</code></td><td>Converts an iterable into a set</td></tr>
+</tbody></table>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>Type casting changes the data type of a value</li>
+<li>Some conversions are not possible</li>
+<li><code>int(&quot;hello&quot;)</code> raises a <code>ValueError</code></li>
+<li><code>float(&quot;10.5&quot;)</code> converts the string into a float</li>
+</ul></div><pre><code>number = &quot;100&quot;
+result = int(number)
+print(result)
+print(type(result))
+
+number = 10
+result = float(number)
+print(result)
+print(type(result))
+
+number = 100
+result = str(number)
+print(result)
+print(type(result))
+
+numbers = [10, 20, 30]
+result = tuple(numbers)
+print(result)</code></pre></article><article class="topic" id="t107"><h2><span class="num">107</span> Dynamic typing</h2><div class="body"><p><strong>Definition:</strong> Dynamic typing means that Python determines the data type of a variable at runtime.</p>
+<p>We do not need to declare the variable&#x27;s data type explicitly before assigning a value. The same variable can refer to values of different data types during program execution.</p>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>Initially, <code>x</code> refers to an integer</li>
+<li>Then, <code>x</code> refers to a string</li>
+<li>Finally, <code>x</code> refers to a float</li>
+<li>Python determines the type at runtime</li>
+</ul>
+<p><strong>Important points:</strong></p>
+<ul>
+<li>Python is a dynamically typed language</li>
+<li>We do not need to declare variable types</li>
+<li>A variable can be assigned values of different types</li>
+<li>The type is associated with the value, not permanently fixed to the variable name</li>
+</ul></div><pre><code>x = 10
+print(x)
+print(type(x))
+
+x = &quot;Python&quot;
+print(x)
+print(type(x))
+
+x = 10.5
+print(x)
+print(type(x))</code></pre></article><article class="topic" id="t108"><h2><span class="num">108</span> frozenset</h2><div class="body"><p><strong>Definition:</strong> A frozenset is an immutable version of a set in Python.</p>
+<p>It stores unique elements and does not allow elements to be added or removed after creation.</p>
+<p>Syntax: <code>frozenset(iterable)</code></p>
+<table><thead><tr><th></th><th>Set</th><th>Frozenset</th></tr></thead><tbody>
+<tr><td>Change items</td><td>Mutable. <code>add()</code>, <code>remove()</code>, <code>discard()</code></td><td>Immutable. Cannot add or remove</td></tr>
+<tr><td>Dictionary key</td><td>Cannot be used as a key</td><td>Can be used as a key if its elements are hashable</td></tr>
+</tbody></table>
+<p><strong>Important points:</strong></p>
+<ul>
+<li><code>frozenset</code> is immutable</li>
+<li>It stores unique elements</li>
+<li>Elements cannot be added or removed</li>
+<li>It supports <code>union()</code>, <code>intersection()</code> and <code>difference()</code></li>
+<li>It can be used as a dictionary key if all its elements are hashable</li>
+</ul></div><pre><code>numbers = frozenset([10, 20, 30, 20])
+print(numbers)
+
+numbers = frozenset([1, 2, 2, 3, 3, 4])
+print(numbers)
+
+a = frozenset([1, 2, 3])
+b = frozenset([3, 4, 5])
+print(a.union(b))
+print(a.intersection(b))
+print(a.difference(b))</code></pre></article><article class="topic" id="t109"><h2><span class="num">109</span> Quick revision</h2><div class="body"><table><thead><tr><th>Topic</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Iterable</td><td>An object that can be iterated over</td></tr>
+<tr><td>Shallow copy</td><td>Copies the outer object but shares nested objects</td></tr>
+<tr><td>Deep copy</td><td>Copies the object and its nested objects</td></tr>
+<tr><td>Exception</td><td>An error that occurs during program execution</td></tr>
+<tr><td>Dictionary</td><td>Stores data in key-value pairs</td></tr>
+<tr><td><code>keys()</code></td><td>Accesses dictionary keys</td></tr>
+<tr><td><code>values()</code></td><td>Accesses dictionary values</td></tr>
+<tr><td><code>items()</code></td><td>Accesses dictionary key-value pairs</td></tr>
+<tr><td><code>pop()</code></td><td>Removes and returns an element or value</td></tr>
+<tr><td><code>discard()</code></td><td>Removes an element from a set if it exists</td></tr>
+<tr><td>String format</td><td>Inserts values into a string</td></tr>
+<tr><td>Type casting</td><td>Converts one data type into another</td></tr>
+<tr><td>Dynamic typing</td><td>Determines variable types at runtime</td></tr>
+<tr><td>Frozenset</td><td>An immutable set</td></tr>
+</tbody></table></div></article><h1 class="stage">7 Day 6 OOP</h1><article class="topic" id="t110"><h2><span class="num">110</span> Class</h2><div class="body"><p><strong>Definition:</strong> A class is a blueprint or template used to create objects. It defines the attributes and methods that its objects can have.</p>
+<p>Syntax: <code>class ClassName:</code></p>
+<ul>
+<li><code>class</code> — keyword used to create a class</li>
+<li><code>Student</code> — name of the class</li>
+<li><code>pass</code> — placeholder when the class has no code yet</li>
+</ul>
+<p><strong>Remember:</strong> Class = blueprint. Object = instance created from the class.</p></div><pre><code>class Student:
+    pass
+
+class Car:
+    pass
+
+print(Student)
+print(Car)</code></pre></article><article class="topic" id="t111"><h2><span class="num">111</span> OOP</h2><div class="body"><p><strong>Definition:</strong> Object-Oriented Programming (OOP) is a programming approach in which programs are organized around objects.</p>
+<p>An object contains data (attributes) and actions (methods) that can be performed using that data.</p>
+<p><strong>Example — Employee</strong></p>
+<ul>
+<li>Attributes: name, age, salary, department</li>
+<li>Methods: display details, calculate salary, calculate bonus</li>
+</ul>
+<p><strong>Why we use OOP:</strong></p>
+<ul>
+<li>Makes code easier to organize</li>
+<li>Helps reuse code</li>
+<li>Reduces code repetition</li>
+<li>Makes large programs easier to maintain</li>
+</ul></div><pre><code># Think of Employee as a class blueprint.
+# Each employee object has its own name, age, salary, department.</code></pre></article><article class="topic" id="t112"><h2><span class="num">112</span> Object</h2><div class="body"><p><strong>Definition:</strong> An object is an instance of a class. It is created using the class and can have its own attributes and use the methods defined in that class.</p>
+<table><thead><tr><th>Class</th><th>Objects</th></tr></thead><tbody>
+<tr><td>Student</td><td>Rahul, Priya, Alex</td></tr>
+<tr><td>Car</td><td>Toyota, Honda, BMW</td></tr>
+<tr><td>Employee</td><td>Employee1, Employee2</td></tr>
+<tr><td>BankAccount</td><td>Account1, Account2</td></tr>
+</tbody></table>
+<p><strong>Remember:</strong> Class = blueprint. Object = instance.</p></div><pre><code>class Student:
+    pass
+
+student1 = Student()
+student2 = Student()
+print(student1)
+print(student2)</code></pre></article><article class="topic" id="t113"><h2><span class="num">113</span> Attributes</h2><div class="body"><p><strong>Definition:</strong> Attributes are variables that store data or properties associated with an object or class.</p>
+<p>The <strong>dot operator</strong> <code>.</code> is used to access attributes and methods of an object: <code>student1.name</code>.</p></div><pre><code>class Student:
+    pass
+
+student1 = Student()
+student1.name = &quot;Rahul&quot;
+student1.age = 15
+student1.course = &quot;Python&quot;
+print(student1.name)
+print(student1.age)
+print(student1.course)
+
+student2 = Student()
+student2.name = &quot;Priya&quot;
+student2.age = 17
+student2.course = &quot;Python&quot;
+print(student2.name)</code></pre></article><article class="topic" id="t114"><h2><span class="num">114</span> __init__()</h2><div class="body"><p><strong>Definition:</strong> <code>__init__()</code> is a special method in Python that is automatically called when a new object is created. It is commonly used to initialize the object&#x27;s attributes.</p>
+<p>Syntax:</p>
+<p>```</p>
+<p>class ClassName:</p>
+<p>def __init__(self, parameters):</p>
+<p>self.attribute = parameters</p>
+<p>```</p>
+<p><strong>Important:</strong></p>
+<ul>
+<li><code>__init__()</code> is a special method</li>
+<li>It is not a Python keyword</li>
+<li>It initializes object attributes</li>
+<li>It is automatically called when an object is created</li>
+</ul></div><pre><code>class Student:
+    def __init__(self, name, age, course):
+        self.name = name
+        self.age = age
+        self.course = course
+
+s1 = Student(&quot;Rahul&quot;, 15, &quot;Python&quot;)
+s2 = Student(&quot;Priya&quot;, 17, &quot;Python&quot;)
+print(s1.name)
+print(s2.name)</code></pre></article><article class="topic" id="t115"><h2><span class="num">115</span> self</h2><div class="body"><p><strong>Definition:</strong> <code>self</code> refers to the current object or instance of a class. It is used inside instance methods to access the attributes and methods belonging to that object.</p>
+<p>When you create <code>s1 = Student(&quot;Rahul&quot;, 15)</code>, <code>self</code> refers to <code>s1</code>. When you create <code>s2</code>, <code>self</code> refers to <code>s2</code>.</p>
+<p><strong>Important points:</strong></p>
+<ol>
+<li><code>self</code> refers to the current object</li>
+<li>It is generally the first parameter of an instance method</li>
+<li>It helps access object attributes</li>
+<li><code>self</code> is not a reserved Python keyword</li>
+<li>It is the standard naming convention</li>
+</ol></div><pre><code>class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+s1 = Student(&quot;Rahul&quot;, 15)
+s2 = Student(&quot;Priya&quot;, 17)
+print(s1.name)
+print(s2.name)</code></pre></article><article class="topic" id="t116"><h2><span class="num">116</span> Methods</h2><div class="body"><p><strong>Definition:</strong> A method is a function defined inside a class. It describes an action or behaviour that an object can perform.</p>
+<table><thead><tr><th></th><th>Attributes</th><th>Methods</th></tr></thead><tbody>
+<tr><td>Role</td><td>Store information</td><td>Perform actions</td></tr>
+<tr><td>Represent</td><td>Properties</td><td>Behaviour</td></tr>
+<tr><td>Examples</td><td>name, age, salary</td><td>display(), calculate(), intro()</td></tr>
+</tbody></table></div><pre><code>class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def intro(self):
+        print(&quot;My name is&quot;, self.name)
+        print(&quot;My age is&quot;, self.age)
+
+s1 = Student(&quot;Rahul&quot;, 15)
+s1.intro()
+
+class Employee:
+    def __init__(self, name, salary, department):
+        self.name = name
+        self.salary = salary
+        self.department = department
+
+    def calculate_bonus(self):
+        return self.salary * 0.10
+
+    def final_salary(self):
+        return self.salary + self.calculate_bonus()
+
+e1 = Employee(&quot;Rahul&quot;, 15000, &quot;IT&quot;)
+print(e1.calculate_bonus())
+print(e1.final_salary())
+
+class StudentResult:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+    def result(self):
+        if self.marks &gt; 50:
+            return &quot;Pass&quot;
+        return &quot;Fail&quot;
+
+print(StudentResult(&quot;Rahul&quot;, 75).result())</code></pre></article><article class="topic" id="t117"><h2><span class="num">117</span> Inheritance</h2><div class="body"><p><strong>Definition:</strong> Inheritance is an OOP concept in which a child class acquires attributes and methods from another class called the parent class. It allows us to reuse existing code instead of writing the same code again.</p>
+<table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Parent class</td><td>Class whose attributes and methods are inherited (base class)</td></tr>
+<tr><td>Child class</td><td>Class that inherits (derived class)</td></tr>
+</tbody></table>
+<p>Syntax: <code>class Child(Parent):</code></p>
+<p><strong>Types of inheritance:</strong> single, multiple, multilevel, hierarchical, hybrid.</p>
+<p><strong>Why:</strong> Employee, Data Scientist, Data Analyst may share name and salary — put common parts in a parent <code>Employee</code> class.</p></div><pre><code>class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        print(&quot;Name:&quot;, self.name)
+        print(&quot;Salary:&quot;, self.salary)
+
+class DataScientist(Employee):
+    pass
+
+d1 = DataScientist(&quot;Amit&quot;, 10000)
+d1.display()</code></pre></article><article class="topic" id="t118"><h2><span class="num">118</span> Multiple inheritance</h2><div class="body"><p><strong>Definition:</strong> Multiple inheritance is a type of inheritance in which a single child class inherits from more than one parent class.</p>
+<p><strong>Method Resolution Order (MRO):</strong> When parent classes have methods with the same name, Python follows MRO to decide which method to use. Check with <code>ClassName.mro()</code>.</p></div><pre><code>class Employee:
+    def employee_details(self):
+        print(&quot;Employee details&quot;)
+
+class Researcher:
+    def research_details(self):
+        print(&quot;Research details&quot;)
+
+class DataScientist(Employee, Researcher):
+    pass
+
+d1 = DataScientist()
+d1.employee_details()
+d1.research_details()
+print(DataScientist.mro())</code></pre></article><article class="topic" id="t119"><h2><span class="num">119</span> Day 6 differences</h2><div class="body"><table><thead><tr><th>Topic</th><th>Difference</th></tr></thead><tbody>
+<tr><td>Class</td><td>Blueprint/template. Defines attributes and methods. <code>class Student:</code></td></tr>
+<tr><td>Object</td><td>Instance of a class. <code>s1 = Student()</code></td></tr>
+<tr><td>Attributes</td><td>Store information / properties: name, age, salary</td></tr>
+<tr><td>Methods</td><td>Perform actions / behaviour: display(), calculate()</td></tr>
+<tr><td>Parent class</td><td>Class being inherited from (base class)</td></tr>
+<tr><td>Child class</td><td>Class that inherits (derived class)</td></tr>
+<tr><td>Module</td><td>Python file with reusable code (<code>math</code>)</td></tr>
+<tr><td>Function</td><td>One task (<code>math.sqrt()</code>)</td></tr>
+</tbody></table></div></article><article class="topic" id="t120"><h2><span class="num">120</span> Day 6 interview</h2><div class="body"><ol>
+<li>What is Object-Oriented Programming?</li>
+<li>What is a class in Python?</li>
+<li>What is an object?</li>
+<li>What is the difference between a class and an object?</li>
+<li>What are attributes?</li>
+<li>What is the purpose of <code>__init__()</code>?</li>
+<li>What is <code>self</code> in Python?</li>
+<li>Is <code>self</code> a keyword in Python?</li>
+<li>What is a method?</li>
+<li>What is the difference between attributes and methods?</li>
+<li>What is inheritance?</li>
+<li>What is the difference between parent and child classes?</li>
+<li>What is multiple inheritance?</li>
+<li>What is Method Resolution Order?</li>
+<li>What is exception handling?</li>
+<li>What is the difference between try and except?</li>
+<li>What is ValueError / TypeError / KeyError / IndexError / ZeroDivisionError?</li>
+<li>What is a module?</li>
+<li>Purpose of math and random modules?</li>
+<li>Standard library modules vs third-party packages?</li>
+</ol></div></article><article class="topic" id="t121"><h2><span class="num">121</span> Day 6 revision</h2><div class="body"><table><thead><tr><th>Topic</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>OOP</td><td>Organizes programs around objects</td></tr>
+<tr><td>Class</td><td>Blueprint for creating objects</td></tr>
+<tr><td>Object</td><td>Instance of a class</td></tr>
+<tr><td>Attributes</td><td>Store object data</td></tr>
+<tr><td><code>__init__()</code></td><td>Initializes object attributes</td></tr>
+<tr><td>self</td><td>Refers to the current instance</td></tr>
+<tr><td>Methods</td><td>Functions defined inside a class</td></tr>
+<tr><td>Inheritance</td><td>Reuses parent class functionality</td></tr>
+<tr><td>Multiple inheritance</td><td>Inherits from multiple parent classes</td></tr>
+<tr><td>Exception handling</td><td>Handles runtime exceptions</td></tr>
+<tr><td>Modules</td><td>Reusable Python code</td></tr>
+<tr><td>File handling</td><td>Next class</td></tr>
+</tbody></table></div></article><article class="topic" id="t122"><h2><span class="num">122</span> Exception handling</h2><div class="body"><p><strong>Definition:</strong> Exception handling is a mechanism in Python used to handle runtime exceptions so that a program can respond to errors instead of terminating unexpectedly.</p>
+<p><strong>Why:</strong> handle runtime exceptions, prevent unexpected termination, show meaningful messages, make programs more reliable.</p>
+<table><thead><tr><th>Keyword</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>try</code></td><td>Code that may cause an exception</td></tr>
+<tr><td><code>except</code></td><td>Code to handle the exception</td></tr>
+</tbody></table>
+<table><thead><tr><th>Exception</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>ValueError</code></td><td>Correct type, invalid value</td></tr>
+<tr><td><code>TypeError</code></td><td>Operation on inappropriate type</td></tr>
+<tr><td><code>ZeroDivisionError</code></td><td>Division by zero</td></tr>
+<tr><td><code>KeyError</code></td><td>Dictionary key not found</td></tr>
+<tr><td><code>IndexError</code></td><td>Index outside valid range</td></tr>
+<tr><td><code>NameError</code></td><td>Name not defined</td></tr>
+<tr><td><code>FileNotFoundError</code></td><td>File does not exist</td></tr>
+</tbody></table>
+<p><strong>Note:</strong> <code>SyntaxError</code> generally cannot be caught by a normal try-except; fix it before running.</p></div><pre><code>try:
+    num = int(&quot;ABC&quot;)
+    print(num)
+except ValueError:
+    print(&quot;Please enter a valid integer.&quot;)
+
+try:
+    print(10 / 0)
+except ZeroDivisionError:
+    print(&quot;Cannot divide by zero.&quot;)
+
+student = {&quot;name&quot;: &quot;Rahul&quot;, &quot;age&quot;: 20, &quot;course&quot;: &quot;Python&quot;}
+try:
+    print(student[&quot;salary&quot;])
+except KeyError as e:
+    print(&quot;Key does not exist:&quot;, e)
+
+numbers = [10, 20, 30]
+try:
+    print(numbers[5])
+except IndexError:
+    print(&quot;Index is out of range.&quot;)
+
+try:
+    result = 10 + &quot;Python&quot;
+except TypeError:
+    print(&quot;Cannot add an integer and a string.&quot;)
+
+try:
+    a, b = 10, 0
+    print(a / b)
+except ValueError:
+    print(&quot;Please enter numbers only.&quot;)
+except ZeroDivisionError:
+    print(&quot;Cannot divide by zero.&quot;)</code></pre></article><article class="topic" id="t123"><h2><span class="num">123</span> Modules</h2><div class="body"><p><strong>Definition:</strong> A module is a Python file containing reusable code such as functions, variables and classes. Modules allow us to reuse existing code instead of writing everything from scratch.</p>
+<p>Syntax: <code>import module_name</code></p>
+<table><thead><tr><th>Module / package</th><th>Use</th></tr></thead><tbody>
+<tr><td><code>math</code></td><td>Mathematical operations (standard library)</td></tr>
+<tr><td><code>random</code></td><td>Random values (standard library)</td></tr>
+<tr><td><code>statistics</code></td><td>Statistical calculations (standard library)</td></tr>
+<tr><td>Pandas</td><td>Data manipulation (third-party)</td></tr>
+<tr><td>TensorFlow</td><td>ML / deep learning (third-party)</td></tr>
+<tr><td>OpenCV</td><td>Image and video processing (third-party)</td></tr>
+</tbody></table>
+<p><strong>Difference:</strong> Module = a file of reusable code. Function = one task inside it, e.g. <code>math.sqrt()</code>.</p></div><pre><code>import math
+print(math.sqrt(25))
+print(math.factorial(5))
+print(math.ceil(4.2))
+print(math.floor(4.8))
+
+import random
+print(random.randint(1, 6))</code></pre></article></main></div></body></html>

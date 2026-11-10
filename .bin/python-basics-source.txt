@@ -1,0 +1,3440 @@
+============================================================
+             PYTHON BASICS - INTERVIEW QUESTIONS
+                   COMPLETE QUESTION BANK
+============================================================
+
+------------------------------------------------------------
+TOPIC 1: PYTHON INTRODUCTION
+------------------------------------------------------------
+
+Q1. What is Python?
+
+ANS:
+Python is a high-level, interpreted, general-purpose
+programming language. It is easy to read and understand.
+
+Q2. What are the features of Python?
+
+ANS:
+1. Easy to learn
+2. High-level language
+3. Interpreted execution model
+4. Dynamically typed
+5. Object-oriented
+6. Platform independent
+7. Open-source
+8. Large standard library
+
+Q3. Why is Python called a high-level language?
+
+ANS:
+Because its syntax is close to human language and developers
+do not need to manage low-level hardware operations directly.
+
+Q4. Is Python compiled or interpreted?
+
+ANS:
+Python is commonly called an interpreted language.
+In CPython, source code is first compiled into bytecode,
+which is executed by the Python virtual machine.
+
+Q5. What is an interpreter?
+
+ANS:
+An interpreter is a program that executes code.
+
+Q6. Difference between compiler and interpreter?
+
+ANS:
+Compiler:
+- Translates source code before execution.
+- Commonly generates machine code or another target form.
+
+Interpreter:
+- Executes code through an execution environment.
+- Runtime errors can occur during execution.
+
+Q7. What is indentation?
+
+ANS:
+Indentation means spaces at the beginning of a line.
+Python uses indentation to define code blocks.
+
+Q8. What happens if indentation is incorrect?
+
+ANS:
+Python may raise IndentationError or another syntax error.
+
+Q9. What are comments?
+
+ANS:
+Comments are notes in code that are ignored during
+normal execution.
+
+Example:
+# This is a comment
+
+Q10. What is PEP 8?
+
+ANS:
+PEP 8 is the Python style guide that defines coding
+conventions and improves code readability.
+
+Q11. Is Python case-sensitive?
+
+ANS:
+Yes. Name and name are treated as different identifiers.
+
+Q12. What is the difference between input() and print()?
+
+ANS:
+input()  - Receives input from the user.
+print()  - Displays output to the user.
+
+Q13. What is the use of input()?
+
+ANS:
+It receives user input and returns it as a string.
+
+Q14. What is the use of print()?
+
+ANS:
+It displays information on the screen.
+
+------------------------------------------------------------
+TOPIC 2: VARIABLES AND CONSTANTS
+------------------------------------------------------------
+
+Q1. What is a variable?
+
+ANS:
+A variable is a name that refers to an object in memory.
+It is used to store and access data.
+
+Q2. How do you declare a variable?
+
+ANS:
+By assigning a value using the assignment operator.
+
+Example:
+x = 10
+
+Q3. What are variable naming rules?
+
+ANS:
+1. Must start with a letter or underscore.
+2. Cannot start with a number.
+3. Can contain letters, numbers and underscores.
+4. Spaces are not allowed.
+5. Keywords cannot be used.
+6. Names are case-sensitive.
+
+Q4. What is multiple assignment?
+
+ANS:
+Assigning values to multiple variables in one statement.
+
+Example:
+a, b, c = 10, 20, 30
+
+Q5. How do you assign the same value to multiple variables?
+
+ANS:
+a = b = c = 100
+
+Q6. What is a constant?
+
+ANS:
+A constant is a value intended not to change.
+Python does not strictly enforce constants.
+Uppercase names are used by convention.
+
+Example:
+PI = 3.14
+
+Q7. What is dynamic typing?
+
+ANS:
+Python determines the data type of an object at runtime.
+A variable can refer to objects of different types.
+
+Example:
+x = 10
+x = "Python"
+
+Q8. What is type casting?
+
+ANS:
+Converting one data type into another.
+
+Types:
+1. Implicit type conversion
+2. Explicit type conversion
+
+Q9. Difference between implicit and explicit conversion?
+
+ANS:
+Implicit:
+Python performs conversion automatically in supported
+operations.
+
+Explicit:
+Developer manually converts using functions such as
+int(), float(), str() and bool().
+
+Q10. What is type()?
+
+ANS:
+Returns the exact type of an object.
+
+Example:
+print(type(10))
+
+Output:
+<class 'int'>
+
+Q11. What is isinstance()?
+
+ANS:
+Checks whether an object belongs to a particular class
+or its subclass.
+
+Example:
+print(isinstance(10, int))
+
+Output:
+True
+
+Q12. Difference between type() and isinstance()?
+
+ANS:
+type()       - Checks exact type.
+isinstance() - Checks class and subclass compatibility.
+
+Q13. What is id()?
+
+ANS:
+Returns an object's identity, which remains constant
+during the object's lifetime.
+
+Q14. What are common type conversion functions?
+
+ANS:
+int()
+float()
+str()
+bool()
+list()
+tuple()
+set()
+dict()
+complex()
+
+Q15. Output-based question:
+
+x = 10
+y = x
+x = 20
+
+print(x)
+print(y)
+
+OUTPUT:
+20
+10
+
+EXPLANATION:
+Reassigning x does not change the object referred to by y.
+
+------------------------------------------------------------
+TOPIC 3: DATA TYPES
+------------------------------------------------------------
+
+Q1. What are data types?
+
+ANS:
+Data types define the kind of value an object represents
+and the operations that can be performed on it.
+
+Q2. What are the main built-in data types?
+
+ANS:
+
+1. Numeric:
+   int, float, complex
+
+2. Text:
+   str
+
+3. Boolean:
+   bool
+
+4. Sequence:
+   list, tuple, range
+
+5. Set:
+   set, frozenset
+
+6. Mapping:
+   dict
+
+7. Binary:
+   bytes, bytearray, memoryview
+
+8. None:
+   NoneType
+
+Q3. What is int?
+
+ANS:
+Stores whole numbers without decimal points.
+
+Q4. What is float?
+
+ANS:
+Stores decimal numbers.
+
+Q5. What is complex?
+
+ANS:
+Stores real and imaginary numbers.
+Python uses j for the imaginary part.
+
+Example:
+x = 5 + 3j
+
+Q6. What is string?
+
+ANS:
+A sequence of characters enclosed in quotes.
+
+Q7. What is Boolean?
+
+ANS:
+A data type that represents True or False.
+
+Q8. What is NoneType?
+
+ANS:
+Represents the absence of a value.
+Its only value is None.
+
+Q9. What are mutable data types?
+
+ANS:
+Objects whose contents can be modified after creation.
+
+Examples:
+list, dict, set, bytearray
+
+Q10. What are immutable data types?
+
+ANS:
+Objects whose contents cannot be modified after creation.
+
+Examples:
+int, float, complex, str, tuple, bool,
+frozenset, bytes
+
+Q11. Difference between mutable and immutable?
+
+ANS:
+Mutable   - Can be modified after creation.
+Immutable - Cannot be modified after creation.
+
+Q12. Difference between list and tuple?
+
+ANS:
+List:
+- Mutable
+- Uses []
+- Supports modification
+- Allows duplicates
+
+Tuple:
+- Immutable
+- Uses ()
+- Does not support element reassignment
+- Allows duplicates
+
+Q13. Difference between set and frozenset?
+
+ANS:
+Set:
+- Mutable
+- Can add and remove elements
+
+Frozenset:
+- Immutable
+- Cannot add or remove elements
+
+Q14. Difference between list, tuple, set and dictionary?
+
+ANS:
+List:
+Ordered, mutable, duplicates allowed.
+
+Tuple:
+Ordered, immutable, duplicates allowed.
+
+Set:
+No positional order, mutable, unique elements.
+
+Dictionary:
+Insertion ordered, mutable, key-value pairs,
+unique keys.
+
+Q15. Can a list contain different data types?
+
+ANS:
+Yes.
+
+Example:
+data = [10, "Python", 20.5, True]
+
+Q16. Can a tuple contain a list?
+
+ANS:
+Yes. The tuple is immutable, but its nested list
+can still be modified.
+
+Q17. Can a dictionary have duplicate keys?
+
+ANS:
+No. Duplicate keys overwrite previous values.
+
+Q18. What are truthy and falsy values?
+
+ANS:
+Truthy values evaluate to True in Boolean conditions.
+Falsy values evaluate to False.
+
+Common falsy values:
+False, None, 0, 0.0, "", [], (), {}, set()
+
+Q19. What are binary data types?
+
+ANS:
+bytes       - Immutable byte sequence.
+bytearray   - Mutable byte sequence.
+memoryview  - Accesses binary data without copying it.
+
+Q20. Output-based question:
+
+a = 10
+b = 10.0
+
+print(a == b)
+print(type(a) == type(b))
+
+OUTPUT:
+True
+False
+
+------------------------------------------------------------
+TOPIC 4: OPERATORS
+------------------------------------------------------------
+
+Q1. What are operators?
+
+ANS:
+Operators are symbols or keywords used to perform
+operations on variables and values.
+
+Q2. What are the types of operators?
+
+ANS:
+1. Arithmetic
+2. Comparison
+3. Logical
+4. Assignment
+5. Membership
+6. Identity
+7. Bitwise
+
+Q3. What are arithmetic operators?
+
+ANS:
++   Addition
+-   Subtraction
+*   Multiplication
+/   Division
+//  Floor division
+%   Modulus
+**  Exponentiation
+
+Q4. Difference between / and //?
+
+ANS:
+/  - Division, returns a float.
+ // - Floor division, rounds down.
+
+Example:
+print(10 / 3)
+print(10 // 3)
+
+OUTPUT:
+3.3333333333333335
+3
+
+Q5. What is modulus?
+
+ANS:
+Returns the remainder after division.
+
+Example:
+print(10 % 3)
+
+OUTPUT:
+1
+
+Q6. What are comparison operators?
+
+ANS:
+==  Equal
+!=  Not equal
+>   Greater than
+<   Less than
+>=  Greater than or equal
+<=  Less than or equal
+
+Q7. What are logical operators?
+
+ANS:
+and - Both operands must be truthy.
+or  - At least one operand must be truthy.
+not - Reverses the truth value.
+
+Q8. Difference between and and or?
+
+ANS:
+and requires both conditions to be True.
+or requires at least one condition to be True.
+
+Q9. What are assignment operators?
+
+ANS:
+=, +=, -=, *=, /=, //=, %=, **=
+
+Q10. What are membership operators?
+
+ANS:
+in      - Checks whether an element exists.
+not in  - Checks whether an element does not exist.
+
+Q11. What are identity operators?
+
+ANS:
+is     - Checks whether two references point to
+         the same object.
+is not - Checks whether they point to different objects.
+
+Q12. Difference between == and is?
+
+ANS:
+== checks value equality.
+is checks object identity.
+
+Q13. What are bitwise operators?
+
+ANS:
+&   AND
+|   OR
+^   XOR
+~   NOT
+<<  Left shift
+>>  Right shift
+
+Q14. What is operator precedence?
+
+ANS:
+Determines the order in which operators are evaluated.
+
+Q15. Output-based question:
+
+print(True + True)
+print(False + True)
+print(True * 10)
+
+OUTPUT:
+2
+1
+10
+
+EXPLANATION:
+True behaves like 1 and False behaves like 0
+in arithmetic operations.
+
+------------------------------------------------------------
+TOPIC 5: CONDITIONAL STATEMENTS
+------------------------------------------------------------
+
+Q1. What are conditional statements?
+
+ANS:
+Used to execute code depending on whether conditions
+are True or False.
+
+Q2. What are the types?
+
+ANS:
+1. if
+2. if-else
+3. if-elif-else
+4. Nested if
+5. Short-hand if
+6. Ternary conditional expression
+
+Q3. What is if?
+
+ANS:
+Executes a block when the condition is True.
+
+Q4. What is if-else?
+
+ANS:
+Executes one block if True and another if False.
+
+Q5. What is if-elif-else?
+
+ANS:
+Checks multiple conditions and executes the first
+matching branch.
+
+Q6. What is nested if?
+
+ANS:
+An if statement written inside another if statement.
+
+Q7. What is a ternary operator?
+
+ANS:
+A one-line conditional expression.
+
+Syntax:
+value_if_true if condition else value_if_false
+
+Example:
+age = 20
+result = "Adult" if age >= 18 else "Minor"
+
+Q8. Difference between if, elif and else?
+
+ANS:
+if   - First condition.
+elif - Additional conditions.
+else - Executes when previous conditions are False.
+
+Q9. Can we use multiple elif statements?
+
+ANS:
+Yes.
+
+Q10. Can we use if without else?
+
+ANS:
+Yes. Else is optional.
+
+Q11. What happens if multiple if statements are True?
+
+ANS:
+Separate if statements execute independently.
+In an if-elif-else chain, only the first matching
+branch executes.
+
+Q12. What are truthy and falsy conditions?
+
+ANS:
+Truthy values evaluate to True.
+Falsy values evaluate to False.
+
+Q13. Practical question: Find the largest of three numbers.
+
+a = 10
+b = 25
+c = 15
+
+if a > b and a > c:
+    print("A is largest")
+elif b > a and b > c:
+    print("B is largest")
+else:
+    print("C is largest")
+
+OUTPUT:
+B is largest
+
+------------------------------------------------------------
+TOPIC 6: LOOPS
+------------------------------------------------------------
+
+Q1. What is a loop?
+
+ANS:
+A loop repeatedly executes a block of code.
+
+Q2. What are the types of loops?
+
+ANS:
+1. for loop
+2. while loop
+3. Nested loops
+
+Q3. What is a for loop?
+
+ANS:
+Iterates over an iterable such as a list, tuple,
+string or range.
+
+Q4. What is a while loop?
+
+ANS:
+Executes repeatedly while the condition is True.
+
+Q5. Difference between for and while?
+
+ANS:
+for:
+- Iterates over an iterable.
+- Commonly used to traverse sequences.
+
+while:
+- Runs based on a condition.
+- Commonly used when repetitions depend on a condition.
+
+Q6. What is a nested loop?
+
+ANS:
+A loop inside another loop.
+
+Q7. What is an infinite loop?
+
+ANS:
+A loop that does not terminate because its stopping
+condition is never reached.
+
+Q8. What is range()?
+
+ANS:
+Generates a sequence of integers.
+
+Syntax:
+range(start, stop, step)
+
+Q9. What are loop control statements?
+
+ANS:
+1. break
+2. continue
+3. pass
+
+Q10. What is break?
+
+ANS:
+Immediately terminates the nearest enclosing loop.
+
+Q11. What is continue?
+
+ANS:
+Skips the remaining statements in the current iteration
+and moves to the next iteration.
+
+Q12. What is pass?
+
+ANS:
+Does nothing. It is used as a placeholder.
+
+Q13. Difference between break, continue and pass?
+
+ANS:
+break    - Exits the loop.
+continue - Skips current iteration.
+pass     - Does nothing.
+
+Q14. Can we use else with loops?
+
+ANS:
+Yes. The else block executes when the loop finishes
+normally, but not when it terminates using break.
+
+Q15. What is enumerate()?
+
+ANS:
+Returns an index and corresponding value while iterating.
+
+Q16. What is zip()?
+
+ANS:
+Combines multiple iterables element by element.
+By default, stops at the shortest iterable.
+
+Q17. Difference between range() and enumerate()?
+
+ANS:
+range() generates numbers.
+enumerate() provides index and value.
+
+Q18. Practical: Print even numbers from 1 to 20.
+
+for i in range(1, 21):
+    if i % 2 == 0:
+        print(i)
+
+Q19. Practical: Factorial of a number.
+
+number = 5
+factorial = 1
+
+for i in range(1, number + 1):
+    factorial *= i
+
+print(factorial)
+
+OUTPUT:
+120
+
+Q20. Practical: Reverse a number.
+
+number = 1234
+reverse = 0
+
+while number > 0:
+    digit = number % 10
+    reverse = reverse * 10 + digit
+    number //= 10
+
+print(reverse)
+
+OUTPUT:
+4321
+
+------------------------------------------------------------
+TOPIC 7: STRINGS
+------------------------------------------------------------
+
+Q1. What is a string?
+
+ANS:
+A string is an immutable sequence of characters.
+
+Q2. How do you create strings?
+
+ANS:
+Single quotes: 'Python'
+Double quotes: "Python"
+Triple quotes: """Python"""
+
+Q3. What is indexing?
+
+ANS:
+Accessing individual characters using their positions.
+
+Q4. What is slicing?
+
+ANS:
+Extracting a portion of a sequence.
+
+Syntax:
+string[start:stop:step]
+
+Q5. What is negative indexing?
+
+ANS:
+Accessing elements from the end using negative indexes.
+
+Q6. Why are strings immutable?
+
+ANS:
+String contents cannot be changed after creation.
+Operations that modify a string return a new string.
+
+Q7. What are string methods?
+
+ANS:
+
+CASE CONVERSION:
+upper()
+lower()
+title()
+capitalize()
+swapcase()
+
+SEARCHING:
+find()
+index()
+count()
+
+CHECKING:
+isalpha()
+isdigit()
+isalnum()
+islower()
+isupper()
+isspace()
+
+REMOVING:
+strip()
+lstrip()
+rstrip()
+
+REPLACING:
+replace()
+
+SPLITTING:
+split()
+rsplit()
+splitlines()
+
+JOINING:
+join()
+
+OTHER:
+startswith()
+endswith()
+partition()
+center()
+
+Q8. Difference between find() and index()?
+
+ANS:
+find()  - Returns -1 if not found.
+index() - Raises ValueError if not found.
+
+Q9. Difference between split() and join()?
+
+ANS:
+split() - Converts string into a list.
+join()  - Combines strings into one string.
+
+Q10. Difference between strip(), lstrip() and rstrip()?
+
+ANS:
+strip()  - Removes leading and trailing whitespace.
+lstrip() - Removes leading whitespace.
+rstrip() - Removes trailing whitespace.
+
+Q11. What is string formatting?
+
+ANS:
+Used to insert values into strings.
+
+Types:
+1. f-strings
+2. format()
+3. % formatting
+
+Q12. What are escape characters?
+
+ANS:
+\n - New line
+\t - Tab
+\\ - Backslash
+\' - Single quote
+\" - Double quote
+
+Q13. Output-based question:
+
+text = "Python"
+
+print(text[1:5:2])
+print(text[::-1])
+print(len(text))
+
+OUTPUT:
+yh
+nohtyP
+6
+
+Q14. Practical: Reverse a string.
+
+text = "Python"
+print(text[::-1])
+
+OUTPUT:
+nohtyP
+
+Q15. Practical: Check palindrome.
+
+text = "madam"
+
+if text == text[::-1]:
+    print("Palindrome")
+else:
+    print("Not palindrome")
+
+Q16. Practical: Count vowels.
+
+text = "Python Programming"
+count = 0
+
+for char in text.lower():
+    if char in "aeiou":
+        count += 1
+
+print(count)
+
+OUTPUT:
+4
+
+------------------------------------------------------------
+TOPIC 8: LIST
+------------------------------------------------------------
+
+Q1. What is a list?
+
+ANS:
+An ordered, mutable collection that allows duplicates.
+
+Q2. What are list characteristics?
+
+ANS:
+1. Ordered
+2. Mutable
+3. Duplicates allowed
+4. Supports indexing
+5. Supports slicing
+6. Supports nested lists
+7. Supports different data types
+
+Q3. How do you create a list?
+
+ANS:
+a = [10, 20, 30]
+b = list((10, 20, 30))
+
+Q4. What are list methods?
+
+ANS:
+append() - Add one element at the end.
+extend() - Add multiple elements.
+insert() - Insert at a specified position.
+remove() - Remove first matching value.
+pop()    - Remove and return an element.
+clear()  - Remove all elements.
+index()  - Find an element position.
+count()  - Count occurrences.
+sort()   - Sort original list.
+reverse()- Reverse original list.
+copy()   - Create shallow copy.
+
+Q5. Difference between append() and extend()?
+
+ANS:
+append() adds an object as one element.
+extend() adds elements from an iterable individually.
+
+Q6. Difference between remove() and pop()?
+
+ANS:
+remove() removes by value.
+pop() removes by index and returns the element.
+
+Q7. Difference between sort() and sorted()?
+
+ANS:
+sort() modifies the original list and returns None.
+sorted() returns a new sorted list.
+
+Q8. What is a nested list?
+
+ANS:
+A list containing another list.
+
+Q9. What is list comprehension?
+
+ANS:
+A concise way to create lists using an expression
+and iteration.
+
+Q10. Practical: Remove duplicates.
+
+numbers = [10, 20, 10, 30, 20]
+
+result = list(dict.fromkeys(numbers))
+
+print(result)
+
+OUTPUT:
+[10, 20, 30]
+
+Q11. Practical: Find the second-largest unique number.
+
+numbers = [10, 20, 30, 40, 30]
+
+unique = sorted(set(numbers))
+
+print(unique[-2])
+
+OUTPUT:
+30
+
+Q12. Practical: Find maximum and minimum.
+
+numbers = [10, 50, 20, 5, 30]
+
+print(max(numbers))
+print(min(numbers))
+
+OUTPUT:
+50
+5
+
+------------------------------------------------------------
+TOPIC 9: TUPLE
+------------------------------------------------------------
+
+Q1. What is a tuple?
+
+ANS:
+An ordered, immutable collection that allows duplicates.
+
+Q2. What are tuple methods?
+
+ANS:
+count()
+index()
+
+Q3. Why are tuples immutable?
+
+ANS:
+Their element references cannot be reassigned after
+creation. They are useful for fixed collections.
+
+Q4. What is tuple packing?
+
+ANS:
+Combining multiple values into a tuple.
+
+Example:
+data = 10, 20, 30
+
+Q5. What is tuple unpacking?
+
+ANS:
+Assigning tuple elements to separate variables.
+
+Example:
+a, b, c = (10, 20, 30)
+
+Q6. How do you create a single-element tuple?
+
+ANS:
+Use a trailing comma.
+
+Example:
+data = (10,)
+
+Q7. Can a tuple contain duplicates?
+
+ANS:
+Yes.
+
+Q8. Can a tuple contain a mutable object?
+
+ANS:
+Yes. A tuple can contain a list, dictionary or set.
+The nested mutable object can still be modified.
+
+Q9. Can we modify a tuple?
+
+ANS:
+No, its elements cannot be reassigned.
+However, mutable objects inside it can be changed.
+
+------------------------------------------------------------
+TOPIC 10: SET
+------------------------------------------------------------
+
+Q1. What is a set?
+
+ANS:
+A mutable collection of unique, hashable elements.
+It does not support indexing or slicing.
+
+Q2. What are set characteristics?
+
+ANS:
+1. Unique elements
+2. Mutable collection
+3. No positional order
+4. No indexing
+5. Supports mathematical set operations
+
+Q3. How do you create an empty set?
+
+ANS:
+data = set()
+
+Note:
+{} creates an empty dictionary.
+
+Q4. What are set methods?
+
+ANS:
+add()
+update()
+remove()
+discard()
+pop()
+clear()
+copy()
+union()
+intersection()
+difference()
+symmetric_difference()
+issubset()
+issuperset()
+isdisjoint()
+
+Q5. Difference between remove() and discard()?
+
+ANS:
+remove() raises KeyError when the element is missing.
+discard() does not raise an error.
+
+Q6. What is union?
+
+ANS:
+Combines unique elements from both sets.
+
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a.union(b))
+
+OUTPUT:
+{1, 2, 3, 4, 5}
+
+Q7. What is intersection?
+
+ANS:
+Returns common elements.
+
+print(a.intersection(b))
+
+OUTPUT:
+{3}
+
+Q8. What is difference?
+
+ANS:
+Returns elements present in the first set but not
+in the second.
+
+print(a.difference(b))
+
+OUTPUT:
+{1, 2}
+
+Q9. What is symmetric difference?
+
+ANS:
+Returns elements that exist in either set but not both.
+
+print(a.symmetric_difference(b))
+
+OUTPUT:
+{1, 2, 4, 5}
+
+Q10. What is subset?
+
+ANS:
+A set is a subset if all its elements are contained
+in another set.
+
+Q11. What is superset?
+
+ANS:
+A set is a superset if it contains all elements of
+another set.
+
+Q12. What is disjoint?
+
+ANS:
+Two sets are disjoint if they have no common elements.
+
+Q13. What is frozenset?
+
+ANS:
+An immutable version of a set.
+
+------------------------------------------------------------
+TOPIC 11: DICTIONARY
+------------------------------------------------------------
+
+Q1. What is a dictionary?
+
+ANS:
+A mutable collection that stores data in key-value pairs.
+
+Q2. What are dictionary characteristics?
+
+ANS:
+1. Key-value pairs
+2. Mutable
+3. Insertion ordered
+4. Unique keys
+5. Keys must be hashable
+6. Values can be duplicated
+
+Q3. How do you create a dictionary?
+
+ANS:
+data = {"name": "John", "age": 25}
+
+Q4. How do you access dictionary values?
+
+ANS:
+Using keys or get().
+
+Q5. Difference between get() and square brackets?
+
+ANS:
+get() returns None by default for a missing key.
+Square brackets raise KeyError for a missing key.
+
+Q6. What are dictionary methods?
+
+ANS:
+keys()
+values()
+items()
+get()
+update()
+pop()
+popitem()
+setdefault()
+clear()
+copy()
+fromkeys()
+
+Q7. What is keys()?
+
+ANS:
+Returns a view of dictionary keys.
+
+Q8. What is values()?
+
+ANS:
+Returns a view of dictionary values.
+
+Q9. What is items()?
+
+ANS:
+Returns a view of key-value pairs.
+
+Q10. How do you add or update values?
+
+ANS:
+data["age"] = 25
+
+Q11. How do you remove a dictionary element?
+
+ANS:
+pop()     - Removes a specified key.
+popitem() - Removes the last inserted pair.
+del       - Deletes a specified key.
+clear()   - Removes all elements.
+
+Q12. What is dictionary comprehension?
+
+ANS:
+A short way to create dictionaries using an expression.
+
+Q13. Practical: Character frequency.
+
+text = "banana"
+result = {}
+
+for char in text:
+    result[char] = result.get(char, 0) + 1
+
+print(result)
+
+OUTPUT:
+{'b': 1, 'a': 3, 'n': 2}
+
+Q14. Can dictionary keys be lists?
+
+ANS:
+No. Lists are unhashable and cannot be dictionary keys.
+
+Q15. Can dictionary values be duplicated?
+
+ANS:
+Yes.
+
+------------------------------------------------------------
+TOPIC 12: COMPREHENSIONS
+------------------------------------------------------------
+
+Q1. What is comprehension?
+
+ANS:
+A concise way to create collections using expressions
+and iteration.
+
+Q2. What are the types?
+
+ANS:
+1. List comprehension
+2. Dictionary comprehension
+3. Set comprehension
+4. Generator expression
+
+Q3. What is list comprehension?
+
+ANS:
+Creates a list using a compact expression.
+
+Example:
+numbers = [1, 2, 3, 4]
+result = [x * 2 for x in numbers]
+
+OUTPUT:
+[2, 4, 6, 8]
+
+Q4. What is conditional list comprehension?
+
+ANS:
+A comprehension that filters values using an if condition.
+
+Example:
+[x for x in range(10) if x % 2 == 0]
+
+Q5. What is dictionary comprehension?
+
+ANS:
+Creates dictionaries using an expression.
+
+Example:
+{x: x**2 for x in range(1, 4)}
+
+OUTPUT:
+{1: 1, 2: 4, 3: 9}
+
+Q6. What is set comprehension?
+
+ANS:
+Creates a set using a comprehension expression.
+
+Q7. What is generator expression?
+
+ANS:
+Creates a generator that produces values on demand.
+
+Q8. Difference between list comprehension and generator?
+
+ANS:
+List comprehension:
+- Uses []
+- Creates the list immediately
+- Stores all results in memory
+
+Generator expression:
+- Uses ()
+- Produces values on demand
+- Generally uses less memory
+
+Q9. Practical: Increase elements by 10.
+
+numbers = [10, 20, 30]
+
+result = [x + 10 for x in numbers]
+
+print(result)
+
+OUTPUT:
+[20, 30, 40]
+
+------------------------------------------------------------
+TOPIC 13: FUNCTIONS
+------------------------------------------------------------
+
+Q1. What is a function?
+
+ANS:
+A function is a reusable block of code designed to
+perform a specific task.
+
+Q2. Why do we use functions?
+
+ANS:
+1. Code reusability
+2. Reduces repetition
+3. Improves readability
+4. Easy maintenance
+5. Better organization
+
+Q3. How do you define a function?
+
+ANS:
+Using the def keyword.
+
+Example:
+
+def greet():
+    print("Hello")
+
+Q4. How do you call a function?
+
+ANS:
+By writing its name followed by parentheses.
+
+Example:
+greet()
+
+Q5. What are the types of functions?
+
+ANS:
+1. Built-in functions
+2. User-defined functions
+3. Anonymous (lambda) functions
+4. Recursive functions
+5. Generator functions
+
+Q6. What are built-in functions?
+
+ANS:
+Functions already provided by Python.
+
+Examples:
+print()
+input()
+len()
+type()
+range()
+sum()
+min()
+max()
+sorted()
+abs()
+round()
+enumerate()
+zip()
+map()
+filter()
+all()
+any()
+
+Q7. What is a user-defined function?
+
+ANS:
+A function created by the developer using def.
+
+Q8. What is an anonymous function?
+
+ANS:
+A function without a regular name, created using lambda.
+
+Q9. What is a recursive function?
+
+ANS:
+A function that calls itself.
+
+Q10. What is a return statement?
+
+ANS:
+Returns a result from a function and terminates
+that function's execution.
+
+Q11. Difference between return and print?
+
+ANS:
+return:
+- Sends a result back to the caller.
+- Can be stored in a variable.
+- Exits the function.
+
+print():
+- Displays information.
+- Does not return the displayed value.
+- print() itself returns None.
+
+Q12. What happens if a function has no return statement?
+
+ANS:
+It implicitly returns None.
+
+Q13. What is a docstring?
+
+ANS:
+A string literal used to document a function,
+class or module.
+
+Example:
+
+def add(a, b):
+    """Returns the sum of two numbers."""
+    return a + b
+
+Q14. What is function calling?
+
+ANS:
+Invoking a function to execute its code.
+
+Q15. What is a higher-order function?
+
+ANS:
+A function that accepts another function as an argument
+or returns a function.
+
+------------------------------------------------------------
+TOPIC 14: FUNCTION ARGUMENTS
+------------------------------------------------------------
+
+Q1. What is a parameter?
+
+ANS:
+A variable defined in a function's definition.
+
+Q2. What is an argument?
+
+ANS:
+An actual value passed to a function when it is called.
+
+Q3. What are the types of function arguments?
+
+ANS:
+1. Positional arguments
+2. Keyword arguments
+3. Default arguments
+4. Variable-length positional arguments (*args)
+5. Variable-length keyword arguments (**kwargs)
+
+Q4. What are positional arguments?
+
+ANS:
+Values passed according to the order of parameters.
+
+Example:
+def add(a, b):
+    return a + b
+
+add(10, 20)
+
+Q5. What are keyword arguments?
+
+ANS:
+Values passed using parameter names.
+
+Example:
+def student(name, age):
+    print(name, age)
+
+student(age=25, name="John")
+
+Q6. What are default arguments?
+
+ANS:
+Parameters that have default values if the caller
+does not provide an argument.
+
+Example:
+def greet(name="Guest"):
+    print(name)
+
+Q7. What is *args?
+
+ANS:
+Allows a function to accept a variable number of
+positional arguments. They are collected into a tuple.
+
+Example:
+
+def add(*args):
+    print(args)
+
+add(10, 20, 30)
+
+OUTPUT:
+(10, 20, 30)
+
+Q8. What is **kwargs?
+
+ANS:
+Allows a function to accept a variable number of
+keyword arguments. They are collected into a dictionary.
+
+Example:
+
+def details(**kwargs):
+    print(kwargs)
+
+details(name="John", age=25)
+
+OUTPUT:
+{'name': 'John', 'age': 25}
+
+Q9. Difference between *args and **kwargs?
+
+ANS:
+*args   - Collects positional arguments into a tuple.
+**kwargs - Collects keyword arguments into a dictionary.
+
+Q10. Can we use both *args and **kwargs?
+
+ANS:
+Yes.
+
+Example:
+
+def display(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+display(10, 20, name="John")
+
+Q11. What is argument unpacking?
+
+ANS:
+Passing elements from an iterable using * or
+key-value pairs from a mapping using **.
+
+Example:
+numbers = [10, 20]
+add(*numbers)
+
+Q12. What is a keyword-only argument?
+
+ANS:
+An argument that must be supplied using its parameter
+name. It can be defined after * in a function signature.
+
+Q13. What is a positional-only argument?
+
+ANS:
+An argument that must be supplied by position.
+It can be defined before / in a function signature.
+
+Q14. Tricky question: What is the problem with mutable
+default arguments?
+
+ANS:
+Default argument objects are created once when the
+function is defined and reused across calls.
+
+Better approach:
+
+def add_item(item, data=None):
+    if data is None:
+        data = []
+    data.append(item)
+    return data
+
+------------------------------------------------------------
+TOPIC 15: LAMBDA, MAP, FILTER AND REDUCE
+------------------------------------------------------------
+
+Q1. What is a lambda function?
+
+ANS:
+A lambda function is a small anonymous function created
+using the lambda keyword.
+
+Syntax:
+lambda arguments: expression
+
+Example:
+square = lambda x: x * x
+
+print(square(5))
+
+OUTPUT:
+25
+
+Q2. What is map()?
+
+ANS:
+Applies a function to every item in an iterable
+and returns a map iterator.
+
+Example:
+
+numbers = [1, 2, 3, 4]
+
+result = list(map(lambda x: x * 2, numbers))
+
+print(result)
+
+OUTPUT:
+[2, 4, 6, 8]
+
+Q3. What is filter()?
+
+ANS:
+Filters elements based on a condition and returns
+a filter iterator.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(result)
+
+OUTPUT:
+[2, 4, 6]
+
+Q4. What is reduce()?
+
+ANS:
+Repeatedly applies a function to accumulate a single
+result from an iterable.
+
+Module:
+functools
+
+Example:
+
+from functools import reduce
+
+numbers = [1, 2, 3, 4]
+
+result = reduce(lambda x, y: x + y, numbers)
+
+print(result)
+
+OUTPUT:
+10
+
+Q5. Difference between map() and filter()?
+
+ANS:
+map()    - Transforms every element.
+filter() - Selects elements based on a condition.
+
+Q6. Difference between map() and reduce()?
+
+ANS:
+map()    - Produces a transformed result per element.
+reduce() - Combines elements into an accumulated result.
+
+Q7. What is sorted() with lambda?
+
+ANS:
+Allows custom sorting using a key function.
+
+Example:
+
+students = [
+    ("John", 25),
+    ("David", 20),
+    ("Sam", 30)
+]
+
+result = sorted(students, key=lambda x: x[1])
+
+print(result)
+
+OUTPUT:
+[('David', 20), ('John', 25), ('Sam', 30)]
+
+Q8. What is the difference between lambda and def?
+
+ANS:
+lambda:
+- Creates a small anonymous function.
+- Contains a single expression.
+- Commonly used for short operations.
+
+def:
+- Defines a regular function.
+- Supports multiple statements.
+- Can contain documentation and complex logic.
+
+------------------------------------------------------------
+TOPIC 16: VARIABLE SCOPE
+------------------------------------------------------------
+
+Q1. What is variable scope?
+
+ANS:
+Scope determines where a variable can be accessed
+within a program.
+
+Q2. What are the four scopes in Python?
+
+ANS:
+1. Local
+2. Enclosing
+3. Global
+4. Built-in
+
+Q3. What is local scope?
+
+ANS:
+A variable defined inside a function.
+
+Q4. What is global scope?
+
+ANS:
+A variable defined at module level.
+
+Q5. What is enclosing scope?
+
+ANS:
+A variable defined in an outer function and accessed
+inside an inner function.
+
+Q6. What is built-in scope?
+
+ANS:
+Names provided by Python, such as print(), len()
+and range().
+
+Q7. What is LEGB?
+
+ANS:
+Python searches for a variable in this order:
+
+L - Local
+E - Enclosing
+G - Global
+B - Built-in
+
+Q8. What is global keyword?
+
+ANS:
+Allows a function to reassign a variable defined
+at module level.
+
+Example:
+
+x = 10
+
+def change():
+    global x
+    x = 20
+
+change()
+print(x)
+
+OUTPUT:
+20
+
+Q9. What is nonlocal keyword?
+
+ANS:
+Allows an inner function to reassign a variable
+from its nearest enclosing function scope.
+
+Q10. Difference between global and nonlocal?
+
+ANS:
+global   - Refers to a module-level variable.
+nonlocal - Refers to a variable in an enclosing function.
+
+Q11. Can a local variable have the same name as a
+global variable?
+
+ANS:
+Yes. The local variable shadows the global variable
+inside its local scope.
+
+------------------------------------------------------------
+TOPIC 17: MODULES AND PACKAGES
+------------------------------------------------------------
+
+Q1. What is a module?
+
+ANS:
+A module is a Python file containing reusable functions,
+classes and variables.
+
+Q2. What is a package?
+
+ANS:
+A package is a collection of related Python modules
+organized in a directory.
+
+Q3. Difference between module and package?
+
+ANS:
+Module  - A single Python file.
+Package - A directory containing related modules.
+
+Q4. What is import?
+
+ANS:
+Used to access functionality from another module.
+
+Example:
+import math
+
+print(math.sqrt(25))
+
+OUTPUT:
+5.0
+
+Q5. What is from import?
+
+ANS:
+Imports specific objects from a module.
+
+Example:
+from math import sqrt
+
+print(sqrt(25))
+
+Q6. What is an alias?
+
+ANS:
+A shorter alternative name given during import.
+
+Example:
+import math as m
+
+print(m.sqrt(25))
+
+Q7. What are built-in modules?
+
+ANS:
+Modules provided by Python's standard library.
+
+Q8. What are important Python modules?
+
+ANS:
+
+1. math
+   sqrt(), factorial(), ceil(), floor(), pow()
+
+2. random
+   random(), randint(), choice(), shuffle()
+
+3. os
+   getcwd(), listdir(), mkdir(), remove()
+
+4. sys
+   argv, path, version, exit()
+
+5. datetime
+   datetime.now(), date.today(), strftime(), strptime()
+
+6. time
+   sleep(), time(), ctime()
+
+7. json
+   loads(), dumps(), load(), dump()
+
+8. re
+   search(), match(), findall(), sub(), split()
+
+9. copy
+   copy(), deepcopy()
+
+10. collections
+    Counter, defaultdict, deque, namedtuple
+
+11. itertools
+    count(), cycle(), repeat(), combinations(),
+    permutations()
+
+12. functools
+    reduce(), partial(), lru_cache()
+
+Q9. Difference between json.load() and json.loads()?
+
+ANS:
+json.load()  - Reads JSON from a file-like object.
+json.loads() - Converts a JSON string into Python data.
+
+Q10. Difference between json.dump() and json.dumps()?
+
+ANS:
+json.dump()  - Writes JSON to a file-like object.
+json.dumps() - Converts Python data into a JSON string.
+
+Q11. What is a custom module?
+
+ANS:
+A Python file created by the developer for reusable code.
+
+Q12. What is __name__ == "__main__"?
+
+ANS:
+It checks whether a Python file is being executed
+directly as the main program rather than imported
+as a module.
+
+Q13. What is the difference between standard and
+third-party modules?
+
+ANS:
+Standard modules come with Python.
+Third-party modules are installed separately.
+
+Q14. What is pip?
+
+ANS:
+pip is a package installer used to install and manage
+Python packages.
+
+Example:
+pip install pandas
+
+------------------------------------------------------------
+TOPIC 18: EXCEPTION HANDLING
+------------------------------------------------------------
+
+Q1. What is an error?
+
+ANS:
+An error is a problem that prevents code from working
+as intended.
+
+Q2. What are the types of errors?
+
+ANS:
+1. Syntax errors
+2. Runtime exceptions
+3. Logical errors
+
+Q3. What is a syntax error?
+
+ANS:
+An error caused by violating Python's syntax rules.
+
+Q4. What is an exception?
+
+ANS:
+An exception is an event raised during execution
+that interrupts the normal flow of a program.
+
+Q5. Difference between syntax error and exception?
+
+ANS:
+Syntax error:
+- Code violates syntax rules.
+- Detected during parsing.
+
+Exception:
+- Occurs during execution.
+- Can be handled using exception handling.
+
+Q6. What are common Python exceptions?
+
+ANS:
+
+ZeroDivisionError:
+Dividing a number by zero.
+
+TypeError:
+Performing an unsupported operation or using
+an inappropriate argument type.
+
+ValueError:
+Correct type but invalid value.
+
+IndexError:
+Sequence index does not exist.
+
+KeyError:
+Dictionary key does not exist.
+
+NameError:
+Variable name is not defined.
+
+AttributeError:
+Object does not have the requested attribute.
+
+FileNotFoundError:
+Requested file does not exist.
+
+ImportError:
+Import operation fails.
+
+ModuleNotFoundError:
+Requested module cannot be found.
+
+IndentationError:
+Incorrect indentation.
+
+Q7. What is exception handling?
+
+ANS:
+Exception handling is used to handle runtime exceptions
+and prevent unexpected program termination.
+
+Q8. What are exception handling keywords?
+
+ANS:
+1. try
+2. except
+3. else
+4. finally
+5. raise
+
+Q9. What is try?
+
+ANS:
+Contains code that may raise an exception.
+
+Q10. What is except?
+
+ANS:
+Handles exceptions raised in the try block.
+
+Q11. What is else?
+
+ANS:
+Executes when no exception occurs in the try block.
+
+Q12. What is finally?
+
+ANS:
+Executes whether an exception occurs or not.
+Commonly used for cleanup operations.
+
+Q13. Difference between else and finally?
+
+ANS:
+else:
+Executes only when no exception occurs.
+
+finally:
+Executes whether an exception occurs or not.
+
+Q14. What is raise?
+
+ANS:
+Used to explicitly raise an exception.
+
+Example:
+
+age = 15
+
+if age < 18:
+    raise ValueError("Age must be 18 or above")
+
+Q15. What is a custom exception?
+
+ANS:
+An exception created by the developer by defining
+a class that inherits from Exception.
+
+Example:
+
+class AgeError(Exception):
+    pass
+
+age = 15
+
+if age < 18:
+    raise AgeError("Not eligible")
+
+Q16. Can we use multiple except blocks?
+
+ANS:
+Yes. Different exceptions can be handled separately.
+
+Q17. Can we handle multiple exceptions in one except?
+
+ANS:
+Yes.
+
+Example:
+
+except (ValueError, TypeError):
+    print("Invalid input")
+
+Q18. What happens if an exception is not handled?
+
+ANS:
+The exception propagates through the call stack.
+If it remains unhandled, the program terminates
+with a traceback.
+
+Q19. What is exception propagation?
+
+ANS:
+When an exception moves from the current function
+to its caller because it was not handled locally.
+
+Q20. Output-based question:
+
+try:
+    print(10 / 0)
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+else:
+    print("Success")
+finally:
+    print("Completed")
+
+OUTPUT:
+Cannot divide by zero
+Completed
+
+------------------------------------------------------------
+TOPIC 19: FILE HANDLING
+------------------------------------------------------------
+
+Q1. What is file handling?
+
+ANS:
+File handling is used to create, read, write, append
+and manage files using Python.
+
+Q2. What are the types of files?
+
+ANS:
+1. Text files
+2. Binary files
+
+Q3. What is a text file?
+
+ANS:
+Stores data as readable characters.
+
+Examples:
+.txt, .csv, .json, .py
+
+Q4. What is a binary file?
+
+ANS:
+Stores data as bytes rather than ordinary readable text.
+
+Examples:
+.jpg, .png, .pdf, .mp3
+
+Q5. What is open()?
+
+ANS:
+Built-in function used to open a file.
+
+Syntax:
+open(filename, mode)
+
+Q6. What are file modes?
+
+ANS:
+
+r  - Read
+w  - Write and overwrite
+a  - Append
+x  - Create a new file
+r+ - Read and write
+w+ - Write and read, truncating existing content
+a+ - Append and read
+
+rb - Read binary
+wb - Write binary
+ab - Append binary
+
+Q7. What is read()?
+
+ANS:
+Reads file content.
+
+Q8. What is readline()?
+
+ANS:
+Reads one line from a file.
+
+Q9. What is readlines()?
+
+ANS:
+Reads all lines and returns them as a list.
+
+Q10. What is write()?
+
+ANS:
+Writes a string to a file.
+
+Q11. What is writelines()?
+
+ANS:
+Writes multiple strings from an iterable.
+It does not automatically insert newline characters.
+
+Q12. Difference between read() and readline()?
+
+ANS:
+read()     - Reads the requested file content.
+readline() - Reads one line at a time.
+
+Q13. Difference between write() and writelines()?
+
+ANS:
+write()     - Writes a string.
+writelines() - Writes multiple strings from an iterable.
+
+Q14. What is close()?
+
+ANS:
+Closes an open file and releases its associated resources.
+
+Q15. What is a file pointer?
+
+ANS:
+A file pointer represents the current position
+from which reading or writing takes place.
+
+Q16. What is tell()?
+
+ANS:
+Returns the current file pointer position.
+
+Q17. What is seek()?
+
+ANS:
+Moves the file pointer to a specified position.
+
+Q18. What is a context manager?
+
+ANS:
+A context manager manages resources automatically.
+It handles setup and cleanup operations.
+
+Q19. What is with open()?
+
+ANS:
+It opens a file using a context manager and automatically
+closes the file when the block exits.
+
+Q20. Difference between open() and with open()?
+
+ANS:
+open():
+- Opens a file.
+- Developer generally needs to close it manually.
+
+with open():
+- Opens the file using a context manager.
+- Automatically closes it after the block.
+
+Q21. What exceptions can occur in file handling?
+
+ANS:
+FileNotFoundError
+PermissionError
+IsADirectoryError
+NotADirectoryError
+OSError
+UnicodeDecodeError
+ValueError
+TypeError
+
+Q22. What is encoding?
+
+ANS:
+Encoding defines how text characters are converted
+into bytes when reading or writing a file.
+
+Example:
+encoding="utf-8"
+
+Q23. Practical: Write into a file.
+
+with open("sample.txt", "w", encoding="utf-8") as file:
+    file.write("Hello Python")
+
+Q24. Practical: Read a file.
+
+with open("sample.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+    print(content)
+
+OUTPUT:
+Hello Python
+
+Q25. Practical: Append to a file.
+
+with open("sample.txt", "a", encoding="utf-8") as file:
+    file.write("\nWelcome")
+
+Q26. Practical: Read line by line.
+
+with open("sample.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line.strip())
+
+------------------------------------------------------------
+TOPIC 20: SHALLOW COPY AND DEEP COPY
+------------------------------------------------------------
+
+Q1. What is copying?
+
+ANS:
+Copying means creating another reference or object
+based on an existing object.
+
+Q2. What are the types of copying?
+
+ANS:
+1. Assignment
+2. Shallow copy
+3. Deep copy
+
+Q3. What is assignment?
+
+ANS:
+Assignment creates another reference to the same object.
+It does not create a copy.
+
+Example:
+
+a = [10, 20]
+b = a
+
+b.append(30)
+
+print(a)
+
+OUTPUT:
+[10, 20, 30]
+
+Q4. What is shallow copy?
+
+ANS:
+Shallow copy creates a new outer object but references
+the same nested objects.
+
+Module:
+copy
+
+Method:
+copy.copy()
+
+Q5. What is deep copy?
+
+ANS:
+Deep copy creates a new outer object and recursively
+copies nested objects.
+
+Module:
+copy
+
+Method:
+copy.deepcopy()
+
+Q6. Difference between shallow and deep copy?
+
+ANS:
+
+Shallow copy:
+- New outer object.
+- Nested objects are shared.
+- Nested modifications can affect original.
+
+Deep copy:
+- New outer object.
+- Nested objects are copied recursively.
+- Nested modifications do not affect original.
+
+Q7. Practical example:
+
+import copy
+
+original = [[10, 20], [30, 40]]
+
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)
+
+shallow[0][0] = 100
+deep[1][0] = 999
+
+print("Original:", original)
+print("Shallow:", shallow)
+print("Deep:", deep)
+
+OUTPUT:
+
+Original: [[100, 20], [30, 40]]
+Shallow:  [[100, 20], [30, 40]]
+Deep:     [[10, 20], [999, 40]]
+
+Q8. What is the difference between copy.copy()
+and copy.deepcopy()?
+
+ANS:
+copy.copy() creates a shallow copy.
+copy.deepcopy() creates a deep copy.
+
+------------------------------------------------------------
+TOPIC 21: ITERATORS AND GENERATORS
+------------------------------------------------------------
+
+Q1. What is an iterable?
+
+ANS:
+An object that can return an iterator.
+Examples: list, tuple, string, dictionary and set.
+
+Q2. What is an iterator?
+
+ANS:
+An object that produces elements one at a time
+using the iterator protocol.
+
+Q3. What is iter()?
+
+ANS:
+Returns an iterator from an iterable.
+
+Q4. What is next()?
+
+ANS:
+Returns the next element from an iterator.
+
+Q5. What is StopIteration?
+
+ANS:
+An exception raised when an iterator has no more
+elements to return.
+
+Q6. Difference between iterable and iterator?
+
+ANS:
+Iterable:
+- Can provide an iterator.
+- Example: list.
+
+Iterator:
+- Produces values one by one.
+- Implements __iter__() and __next__().
+
+Q7. What is a generator?
+
+ANS:
+A generator is a special iterator that produces
+values lazily, one at a time.
+
+Q8. What is yield?
+
+ANS:
+yield returns a value from a generator and suspends
+its execution, preserving its state for the next call.
+
+Q9. Difference between return and yield?
+
+ANS:
+return:
+- Returns a result and exits the function.
+
+yield:
+- Produces a value and suspends the function.
+- Execution can resume later.
+
+Q10. What is lazy evaluation?
+
+ANS:
+Values are calculated only when they are requested.
+
+Q11. What is generator expression?
+
+ANS:
+A compact way to create a generator using parentheses.
+
+Example:
+
+numbers = (x * 2 for x in range(5))
+
+print(next(numbers))
+
+OUTPUT:
+0
+
+Q12. Practical: Generator function.
+
+def numbers():
+    yield 10
+    yield 20
+    yield 30
+
+for value in numbers():
+    print(value)
+
+OUTPUT:
+10
+20
+30
+
+--- Extra study notes ---
+
+Q13. WHAT IS A GENERATOR
+Ans:
+A generator is a special type of iterator that
+produces values one at a time.
+
+It uses the yield keyword.
+
+Advantages:
+    - Memory efficient.
+    - Lazy evaluation.
+    - Useful for large datasets.
+    - Does not need to store all results at once.
+
+Q14. NORMAL FUNCTION VS GENERATOR
+Ans:
+Normal function:
+
+    def numbers():
+        return [1, 2, 3]
+
+Generator function:
+
+    def numbers():
+        yield 1
+        yield 2
+        yield 3
+
+Q15. YIELD KEYWORD
+Ans:
+yield:
+    Returns a value and pauses the function.
+
+When the generator is requested again,
+execution continues from where it paused.
+
+Example:
+
+    def count():
+        yield 1
+        yield 2
+        yield 3
+
+    for value in count():
+        print(value)
+
+Output:
+
+    1
+    2
+    3
+
+Q16. NEXT FUNCTION
+Ans:
+next() retrieves the next value from an iterator.
+
+    def numbers():
+        yield 10
+        yield 20
+        yield 30
+
+    gen = numbers()
+
+    print(next(gen))
+    print(next(gen))
+    print(next(gen))
+
+Output:
+
+    10
+    20
+    30
+
+Calling next() again raises StopIteration.
+
+Q17. GENERATOR EXPRESSION
+Ans:
+Similar to list comprehension,
+but uses parentheses.
+
+List comprehension:
+
+    squares = [x*x for x in range(5)]
+
+Generator expression:
+
+    squares = (x*x for x in range(5))
+
+Difference:
+
+List:
+    Stores all elements in memory.
+
+Generator:
+    Produces elements when requested.
+
+Q18. ITERATOR VS GENERATOR
+Ans:
+Iterator:
+    Object that supports __iter__() and __next__().
+
+Generator:
+    Convenient way to create an iterator using yield.
+
+Both:
+    Support iteration.
+    Can be used in for loops.
+    Can raise StopIteration.
+
+Q19. SEND, THROW AND CLOSE
+Ans:
+Generator methods:
+
+    next(gen):
+        Gets the next value.
+
+    gen.send(value):
+        Sends a value into a suspended generator.
+
+    gen.throw(exception):
+        Raises an exception inside the generator.
+
+    gen.close():
+        Closes the generator.
+
+Advanced topic:
+    Understand send(), throw() and close()
+    after learning basic yield and next().
+
+Q20. GENERATOR USE CASES
+Ans:
+- Reading large CSV files.
+    - Processing log files.
+    - Streaming API results.
+    - Processing records one by one.
+    - Memory-efficient pipelines.
+
+
+------------------------------------------------------------
+TOPIC 22: DECORATORS
+------------------------------------------------------------
+
+Q1. What is a decorator?
+
+ANS:
+A decorator is a function that modifies or extends
+the behavior of another function without changing
+its original source code.
+
+Q2. Why do we use decorators?
+
+ANS:
+1. Code reusability
+2. Logging
+3. Authentication
+4. Timing functions
+5. Validation
+6. Adding functionality
+
+Q3. What is a wrapper function?
+
+ANS:
+An inner function that wraps another function
+and adds extra behavior.
+
+Q4. What is the @ symbol?
+
+ANS:
+It is the decorator syntax used to apply a decorator
+to a function or class.
+
+Q5. What are function decorators?
+
+ANS:
+Decorators that modify the behavior of functions.
+
+Q6. What are nested decorators?
+
+ANS:
+Multiple decorators applied to the same function.
+
+Q7. Can decorators accept arguments?
+
+ANS:
+Yes. A decorator factory can accept arguments and
+return a decorator.
+
+Q8. Practical: Simple decorator.
+
+def my_decorator(func):
+
+    def wrapper():
+        print("Before function")
+
+        func()
+
+        print("After function")
+
+    return wrapper
+
+@my_decorator
+def greet():
+    print("Hello")
+
+greet()
+
+OUTPUT:
+
+Before function
+Hello
+After function
+
+Q9. What is functools.wraps?
+
+ANS:
+A decorator from functools that preserves important
+metadata of the original decorated function,
+such as its name and docstring.
+
+--- Extra study notes ---
+
+Q10. WHAT IS A DECORATOR
+Ans:
+A decorator is a function that modifies or extends
+the behavior of another function without changing
+its original source code.
+
+Decorators use the @ symbol.
+
+Q11. FUNCTIONS ARE FIRST-CLASS OBJECTS
+Ans:
+In Python, functions can be:
+    - Stored in variables.
+    - Passed as arguments.
+    - Returned from other functions.
+    - Stored in data structures.
+
+Example:
+
+    def greet():
+        print("Hello")
+
+    x = greet
+
+    x()
+
+Q12. FUNCTION INSIDE FUNCTION
+Ans:
+def outer():
+        print("Outer function")
+
+        def inner():
+            print("Inner function")
+
+        inner()
+
+    outer()
+
+Q13. RETURNING A FUNCTION
+Ans:
+def outer():
+        def inner():
+            print("Hello")
+
+        return inner
+
+    result = outer()
+
+    result()
+
+Q14. BASIC DECORATOR
+Ans:
+def my_decorator(func):
+
+        def wrapper():
+            print("Before function")
+
+            func()
+
+            print("After function")
+
+        return wrapper
+
+    @my_decorator
+    def greet():
+        print("Hello")
+
+    greet()
+
+Output:
+
+    Before function
+    Hello
+    After function
+
+Explanation:
+
+    @my_decorator
+    is equivalent to:
+
+    greet = my_decorator(greet)
+
+Q15. DECORATOR WITH ARGUMENTS
+Ans:
+def decorator(func):
+
+        def wrapper(*args, **kwargs):
+            print("Before")
+
+            result = func(*args, **kwargs)
+
+            print("After")
+
+            return result
+
+        return wrapper
+
+    @decorator
+    def add(a, b):
+        return a + b
+
+    print(add(10, 20))
+
+Output:
+
+    Before
+    After
+    30
+
+*args:
+    Accepts positional arguments.
+
+**kwargs:
+    Accepts keyword arguments.
+
+Q16. DECORATOR WITH PARAMETERS
+Ans:
+def repeat(times):
+
+        def decorator(func):
+
+            def wrapper(*args, **kwargs):
+
+                for _ in range(times):
+                    func(*args, **kwargs)
+
+            return wrapper
+
+        return decorator
+
+    @repeat(3)
+    def greet():
+        print("Hello")
+
+    greet()
+
+Output:
+
+    Hello
+    Hello
+    Hello
+
+Q17. FUNCTOOLS WRAPS
+Ans:
+Use functools.wraps to preserve metadata
+of the original function.
+
+    from functools import wraps
+
+    def decorator(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return wrapper
+
+Q18. BUILT-IN DECORATORS
+Ans:
+@staticmethod
+    @classmethod
+    @property
+
+Other commonly used decorators:
+
+    @functools.lru_cache()
+    @functools.cache
+    @functools.wraps
+
+Q19. PRACTICAL DECORATOR USE CASES
+Ans:
+- Logging
+    - Authentication
+    - Authorization
+    - Execution time measurement
+    - Caching
+    - Validation
+    - Retry logic
+    - Access control
+
+Example: Execution time decorator
+
+    import time
+    from functools import wraps
+
+    def timer(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+
+            start = time.perf_counter()
+
+            result = func(*args, **kwargs)
+
+            end = time.perf_counter()
+
+            print("Execution time:", end - start)
+
+            return result
+
+        return wrapper
+
+    @timer
+    def calculate():
+        return sum(range(100000))
+
+    calculate()
+
+============================================================
+              IMPORTANT DIFFERENCE QUESTIONS
+============================================================
+
+1. List vs Tuple
+2. Set vs Dictionary
+3. Mutable vs Immutable
+4. == vs is
+5. / vs //
+6. and vs or
+7. break vs continue vs pass
+8. for vs while
+9. append() vs extend()
+10. remove() vs pop()
+11. sort() vs sorted()
+12. find() vs index()
+13. split() vs join()
+14. strip() vs replace()
+15. get() vs dictionary square brackets
+16. *args vs **kwargs
+17. return vs print
+18. return vs yield
+19. map() vs filter()
+20. map() vs reduce()
+21. Iterable vs Iterator
+22. Module vs Package
+23. SyntaxError vs Exception
+24. else vs finally
+25. raise vs custom exception
+26. read() vs readline()
+27. write() vs writelines()
+28. open() vs with open()
+29. tell() vs seek()
+30. Text file vs Binary file
+31. Shallow copy vs Deep copy
+32. List comprehension vs Generator expression
+33. global vs nonlocal
+34. type() vs isinstance()
+35. Assignment vs Shallow copy
+
+============================================================
+              IMPORTANT OUTPUT-BASED QUESTIONS
+============================================================
+
+Q1.
+
+x = [1, 2, 3]
+y = x
+y.append(4)
+
+print(x)
+
+OUTPUT:
+[1, 2, 3, 4]
+
+Q2.
+
+a = [10, 20]
+b = a.copy()
+
+b.append(30)
+
+print(a)
+print(b)
+
+OUTPUT:
+[10, 20]
+[10, 20, 30]
+
+Q3.
+
+print(bool([]))
+print(bool(" "))
+print(bool(0))
+print(bool(None))
+
+OUTPUT:
+False
+True
+False
+False
+
+Q4.
+
+print(10 == 10.0)
+print(10 is 10.0)
+
+OUTPUT:
+True
+False
+
+Q5.
+
+a = [1, 2, 3, 4, 5]
+
+print(a[::2])
+print(a[::-1])
+
+OUTPUT:
+[1, 3, 5]
+[5, 4, 3, 2, 1]
+
+Q6.
+
+for i in range(3):
+    print(i)
+else:
+    print("Completed")
+
+OUTPUT:
+0
+1
+2
+Completed
+
+Q7.
+
+x = "Python"
+
+print(x[-1])
+print(x[-3:])
+print(x[::-1])
+
+OUTPUT:
+n
+hon
+nohtyP
+
+Q8.
+
+a = {1, 2, 3}
+b = {2, 3, 4}
+
+print(a & b)
+print(a | b)
+print(a - b)
+
+OUTPUT:
+{2, 3}
+{1, 2, 3, 4}
+{1}
+
+Q9.
+
+data = {"a": 1, "b": 2}
+
+print(data.get("c"))
+print(data.get("c", 0))
+
+OUTPUT:
+None
+0
+
+Q10.
+
+def test():
+    x = 10
+
+print(test())
+
+OUTPUT:
+None
+
+============================================================
+              IMPORTANT PRACTICAL CODING QUESTIONS
+============================================================
+
+1. Reverse a string.
+2. Check whether a string is palindrome.
+3. Count vowels and consonants.
+4. Count characters in a string.
+5. Find the frequency of each character.
+6. Find the largest of three numbers.
+7. Check even or odd.
+8. Check prime number.
+9. Print Fibonacci series.
+10. Find factorial.
+11. Reverse a number.
+12. Check palindrome number.
+13. Find sum of digits.
+14. Find the maximum and minimum in a list.
+15. Find the second-largest number.
+16. Remove duplicates from a list.
+17. Sort a list without sort().
+18. Find common elements between two lists.
+19. Find union and intersection of two sets.
+20. Count word frequency using a dictionary.
+21. Find the key with the maximum dictionary value.
+22. Merge two dictionaries.
+23. Swap two variables.
+24. Create a calculator using functions.
+25. Filter even numbers using filter().
+26. Square numbers using map().
+27. Find sum using reduce().
+28. Use list comprehension to increase elements by 10.
+29. Read a file and count the number of words.
+30. Handle division by zero.
+31. Create a custom exception.
+32. Demonstrate shallow and deep copy.
+33. Create an iterator.
+34. Create a generator.
+35. Create a simple decorator.
+
+============================================================
+                  IMPORTANT MODULES REVISION
+============================================================
+
+math:
+sqrt()
+factorial()
+ceil()
+floor()
+pow()
+
+random:
+random()
+randint()
+choice()
+shuffle()
+
+os:
+getcwd()
+listdir()
+mkdir()
+remove()
+
+sys:
+argv
+path
+version
+exit()
+
+datetime:
+datetime.now()
+date.today()
+strftime()
+strptime()
+
+time:
+sleep()
+time()
+ctime()
+
+json:
+load()
+loads()
+dump()
+dumps()
+
+re:
+search()
+match()
+findall()
+sub()
+split()
+
+copy:
+copy()
+deepcopy()
+
+collections:
+Counter
+defaultdict
+deque
+namedtuple
+
+itertools:
+count()
+cycle()
+repeat()
+combinations()
+permutations()
+
+functools:
+reduce()
+partial()
+lru_cache()
+
+============================================================
+                PYTHON BUILT-IN FUNCTIONS
+============================================================
+
+TYPE AND CONVERSION:
+type()
+isinstance()
+int()
+float()
+str()
+bool()
+list()
+tuple()
+set()
+dict()
+complex()
+
+MATHEMATICAL:
+abs()
+round()
+pow()
+sum()
+min()
+max()
+
+SEQUENCE:
+len()
+range()
+sorted()
+reversed()
+enumerate()
+zip()
+
+LOGICAL:
+all()
+any()
+
+ITERATION:
+iter()
+next()
+map()
+filter()
+
+OTHER:
+print()
+input()
+id()
+hash()
+help()
+dir()
+open()
+
+
+============================================================
+                 END OF PYTHON BASICS
+============================================================
+
+
+NEXT TOPIC:
+OBJECT-ORIENTED PROGRAMMING (OOP)
+
+1. Class
+2. Object
+3. Constructor
+4. self
+5. Attributes and Methods
+6. Instance, Class and Static Methods
+7. Four Pillars of OOP
+8. Inheritance
+9. Encapsulation
+10. Polymorphism
+11. Abstraction
+12. Access Modifiers
+13. Method Overriding
+14. Method Overloading
+15. super()
+16. Abstract Classes
+17. File Handling and Context Managers
+============================================================

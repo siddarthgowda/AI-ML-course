@@ -1,0 +1,2063 @@
+=======
+          PYTHON OOPS / CLASSES
+       COMPLETE INTERVIEW QUESTIONS & ANSWERS
+============================================================
+
+PART 1: INTRODUCTION TO OOPS
+------------------------------------------------------------
+
+Q1. What is OOPs?
+Ans: OOPs stands for Object-Oriented Programming.
+It is a programming approach that organizes code using
+classes and objects.
+
+Q2. What are the four pillars of OOPs?
+Ans:
+1. Inheritance
+2. Polymorphism
+3. Encapsulation
+4. Abstraction
+
+Q3. What are the advantages of OOPs?
+Ans:
+1. Code reusability
+2. Data organization
+3. Easy maintenance
+4. Flexibility
+5. Scalability
+6. Encapsulation
+
+Q4. What is procedural programming?
+Ans: Procedural programming organizes code using functions
+and procedures.
+
+Q5. Difference between procedural programming and OOPs?
+Ans:
+Procedural: Focuses on functions.
+OOPs: Focuses on classes and objects.
+
+Q6. Does Python support OOPs?
+Ans: Yes. Python supports classes, objects, inheritance,
+polymorphism, encapsulation and abstraction.
+
+Q7. Is Python fully object-oriented?
+Ans: Python is an object-oriented language, but it also
+supports procedural and functional programming.
+
+Q8. Give a real-world example of OOPs.
+Ans:
+Class: Car
+Objects: BMW, Audi, Toyota
+Attributes: Color, model, speed
+Methods: Start, stop, accelerate.
+
+PART 2: CLASS AND OBJECT
+------------------------------------------------------------
+
+Q9. What is a class?
+Ans: A class is a blueprint or template used to create objects.
+
+Q10. What is an object?
+Ans: An object is an instance of a class.
+
+Q11. Difference between class and object?
+Ans:
+Class:
+- Blueprint.
+- Defines attributes and methods.
+- Created using class keyword.
+
+Object:
+- Instance of a class.
+- Has individual data.
+- Created by calling the class.
+
+Q12. How do you create a class?
+
+class Student:
+    pass
+
+Q13. How do you create an object?
+
+class Student:
+    pass
+
+s1 = Student()
+
+Q14. Can we create multiple objects from one class?
+Ans: Yes.
+
+s1 = Student()
+s2 = Student()
+s3 = Student()
+
+Q15. Can multiple objects have different values?
+Ans: Yes. Each object can have different instance variables.
+
+Q16. What happens when an object is created?
+Ans: Python creates an instance and calls __init__()
+if it is defined.
+
+Q17. Can we create a class without an object?
+Ans: Yes.
+
+Q18. Can we create an object without a user-defined class?
+Ans: Yes. Built-in classes such as int, str and list
+can create objects.
+
+Q19. What is an instance?
+Ans: An individual object created from a class.
+
+Q20. What is an attribute?
+Ans: A variable or property associated with an object or class.
+
+PART 3: VARIABLES IN CLASSES
+------------------------------------------------------------
+
+Q21. What are the types of variables in classes?
+Ans:
+1. Instance variable
+2. Class variable
+3. Local variable
+
+Global variables can also be accessed according to scope rules.
+
+Q22. What is an instance variable?
+Ans: A variable belonging to an individual object.
+Usually defined using self.
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+s1 = Student("Rahul")
+s2 = Student("John")
+
+print(s1.name)
+print(s2.name)
+
+Output:
+Rahul
+John
+
+Q23. What is a class variable?
+Ans: A variable defined inside a class but outside
+instance methods. It is shared at class level.
+
+class Student:
+    school = "ABC"
+
+print(Student.school)
+
+Q24. Difference between instance and class variables?
+Ans:
+Instance variable:
+- Belongs to individual object.
+- Usually uses self.
+- Each object can have a different value.
+
+Class variable:
+- Belongs to the class.
+- Shared at class level.
+- Access using class name or object.
+
+Q25. What is a local variable?
+Ans: A variable declared inside a function or method.
+
+Q26. What is a global variable?
+Ans: A variable declared outside functions and classes.
+
+Q27. What is variable shadowing?
+Ans: When a variable in an inner scope has the same name
+as a variable in an outer scope.
+
+Q28. Can we modify a class variable using an object?
+Ans: Yes, but assigning through an object normally creates
+an instance attribute instead of changing the class variable.
+
+Q29. How do we modify a class variable?
+
+class Student:
+    school = "ABC"
+
+Student.school = "XYZ"
+
+PART 4: SELF, CLS AND SUPER()
+------------------------------------------------------------
+
+Q30. What is self?
+Ans: self refers to the current object of the class.
+
+Q31. Is self a keyword?
+Ans: No. It is a naming convention.
+
+Q32. Can we use another name instead of self?
+Ans: Yes, but self is the standard convention.
+
+Q33. What is cls?
+Ans: cls refers to the current class.
+
+Q34. Difference between self and cls?
+Ans:
+self = Current object.
+cls = Current class.
+
+Q35. What is super()?
+Ans: super() is used to access the next class in MRO,
+commonly used to call parent class functionality.
+
+class Parent:
+    def display(self):
+        print("Parent")
+
+class Child(Parent):
+    def display(self):
+        super().display()
+        print("Child")
+
+obj = Child()
+obj.display()
+
+Output:
+Parent
+Child
+
+Q36. Can we use super() in multiple inheritance?
+Ans: Yes. It follows MRO.
+
+Q37. What happens if self is missing?
+Ans: Calling the instance method normally through an object
+usually causes TypeError if the method does not accept
+the automatically passed object.
+
+PART 5: METHODS IN PYTHON
+------------------------------------------------------------
+
+Q38. What is a method?
+Ans: A function defined inside a class.
+
+Q39. What are the three main types of methods?
+Ans:
+1. Instance method
+2. Class method
+3. Static method
+
+Q40. What is an instance method?
+Ans: A method that works with instance data and uses self.
+
+Q41. What is a class method?
+Ans: A method that works with class-level data and uses cls.
+It uses @classmethod.
+
+Q42. What is a static method?
+Ans: A method that does not automatically receive self or cls.
+It uses @staticmethod.
+
+Q43. Difference between three methods?
+
+Instance method:
+- Uses self.
+- Accesses instance data.
+
+Class method:
+- Uses cls.
+- Accesses class data.
+
+Static method:
+- No automatic self or cls.
+- Used for utility operations.
+
+Q44. Can we call static methods using objects?
+Ans: Yes.
+
+Q45. Can class methods access instance variables directly?
+Ans: No. They need an object to access instance data.
+
+Q46. Can we create multiple methods in one class?
+Ans: Yes.
+
+Q47. Can one method call another method?
+Ans: Yes, using self for instance methods.
+
+PART 6: CONSTRUCTOR AND DESTRUCTOR
+------------------------------------------------------------
+
+Q48. What is a constructor?
+Ans: A special initialization mechanism used when an object
+is created.
+
+Q49. What is __init__()?
+Ans: An initializer automatically called after object creation.
+
+class Student:
+    def __init__(self):
+        print("Constructor called")
+
+s1 = Student()
+
+Q50. What are the types of constructors?
+Ans:
+1. Non-parameterized constructor.
+2. Parameterized constructor.
+
+Q51. What is a default constructor?
+Ans: A constructor that does not require additional
+user-defined arguments.
+
+Q52. What is a parameterized constructor?
+Ans: A constructor that accepts arguments to initialize
+object attributes.
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+s1 = Student("Rahul", 25)
+
+Q53. Does Python support constructor overloading?
+Ans: Not traditional constructor overloading.
+We can simulate it using default arguments, *args,
+or class methods.
+
+Q54. Can we define multiple __init__ methods?
+Ans: No. The last definition replaces earlier definitions.
+
+Q55. What is a destructor?
+Ans: A finalizer used for cleanup when an object is finalized.
+
+Q56. What is __del__()?
+Ans: A special finalizer method.
+
+Q57. Difference between constructor and destructor?
+Ans:
+__init__() = Initializes an object.
+__del__() = Performs finalization.
+
+Q58. Difference between del and __del__()?
+Ans:
+del = Deletes a reference or attribute.
+__del__() = Finalizer method.
+
+Q59. Is __del__() guaranteed to execute?
+Ans: No. Its execution timing is not guaranteed.
+Context managers are preferred for resource cleanup.
+
+PART 7: FOUR PILLARS OF OOPS
+------------------------------------------------------------
+
+Q60. What are the four pillars?
+Ans:
+1. Inheritance
+2. Polymorphism
+3. Encapsulation
+4. Abstraction
+
+---------------- INHERITANCE ----------------
+
+Q61. What is inheritance?
+Ans: One class acquires attributes and methods from another
+class.
+
+Q62. What are the five types of inheritance?
+Ans:
+1. Single
+2. Multiple
+3. Multilevel
+4. Hierarchical
+5. Hybrid
+
+Q63. What is single inheritance?
+Ans: One child class inherits from one parent class.
+
+class Parent:
+    def show(self):
+        print("Parent")
+
+class Child(Parent):
+    pass
+
+obj = Child()
+obj.show()
+
+Q64. What is multiple inheritance?
+Ans: One child class inherits from multiple parent classes.
+
+class Father:
+    def show1(self):
+        print("Father")
+
+class Mother:
+    def show2(self):
+        print("Mother")
+
+class Child(Father, Mother):
+    pass
+
+obj = Child()
+obj.show1()
+obj.show2()
+
+Q65. What is multilevel inheritance?
+Ans: Inheritance across multiple levels.
+
+class A:
+    pass
+
+class B(A):
+    pass
+
+class C(B):
+    pass
+
+Q66. What is hierarchical inheritance?
+Ans: Multiple child classes inherit from one parent.
+
+class Parent:
+    pass
+
+class Child1(Parent):
+    pass
+
+class Child2(Parent):
+    pass
+
+Q67. What is hybrid inheritance?
+Ans: Combination of two or more inheritance types.
+
+Q68. Difference between single and multiple inheritance?
+Ans:
+Single = One parent.
+Multiple = Multiple parents.
+
+Q69. Difference between multilevel and hierarchical?
+Ans:
+Multilevel = Multiple inheritance levels.
+Hierarchical = Multiple children share one parent.
+
+Q70. What is method overriding?
+Ans: Child class provides its own implementation of an
+inherited method.
+
+Q71. Why use method overriding?
+Ans: To customize parent class behavior.
+
+Q72. Can we override constructors?
+Ans: Yes. A child class can define its own __init__().
+
+Q73. Does the parent constructor execute automatically
+if the child defines its own constructor?
+Ans: No. Use super().__init__() when required.
+
+Q74. What is the diamond problem?
+Ans: A multiple inheritance situation where a class has
+multiple inheritance paths to a common parent.
+
+Q75. What is MRO?
+Ans: Method Resolution Order determines the order in which
+Python searches classes for methods and attributes.
+
+Q76. How to check MRO?
+
+print(ClassName.mro())
+print(ClassName.__mro__)
+
+Q77. Difference between super() and directly calling parent?
+Ans: super() follows MRO and supports cooperative
+multiple inheritance. Direct parent calls do not.
+
+---------------- POLYMORPHISM ----------------
+
+Q78. What is polymorphism?
+Ans: One interface or method name can have different
+behaviors depending on the object.
+
+Q79. What are common forms of polymorphism?
+Ans:
+1. Method overriding
+2. Operator overloading
+3. Method overloading simulation
+4. Duck typing
+
+Q80. What is method overloading?
+Ans: Same method name with different parameter lists.
+Python does not directly support traditional overloading.
+
+Q81. How can we simulate method overloading?
+Ans: Using default arguments, *args and **kwargs.
+
+Q82. Difference between overloading and overriding?
+Ans:
+Overloading = Same name with different parameters.
+Overriding = Child redefines inherited method.
+
+Q83. What is operator overloading?
+Ans: Giving special behavior to operators for custom objects.
+
+Q84. Give an example of operator overloading.
+
+class Number:
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return self.value + other.value
+
+n1 = Number(10)
+n2 = Number(20)
+
+print(n1 + n2)
+
+Output:
+30
+
+Q85. What is duck typing?
+Ans: Python focuses on an object's behavior rather than
+its actual class or type.
+
+Q86. What is runtime polymorphism?
+Ans: Method behavior is determined at runtime based on
+the actual object.
+
+Q87. What is compile-time polymorphism?
+Ans: Polymorphism resolved during compilation, such as
+traditional method overloading in Java.
+
+---------------- ENCAPSULATION ----------------
+
+Q88. What is encapsulation?
+Ans: Combining data and methods inside a class and
+controlling access to internal data.
+
+Q89. Why use encapsulation?
+Ans:
+1. Protect internal data from accidental changes.
+2. Control data modification.
+3. Improve code organization.
+4. Maintain data consistency.
+
+Q90. What are access modifiers in Python?
+Ans:
+1. Public
+2. Protected
+3. Private
+
+Q91. What is a public variable?
+Ans: Normally accessible from inside and outside the class.
+
+Q92. What is a protected variable?
+Ans: Starts with a single underscore (_).
+It is a convention for internal or subclass use.
+
+Q93. What is a private variable?
+Ans: Starts with double underscores (__).
+Python applies name mangling.
+
+Q94. Does Python support strict private access?
+Ans: No. Python uses naming conventions and name mangling.
+
+Q95. What is name mangling?
+Ans: Double-underscore attributes are renamed internally
+using the class name.
+
+Example:
+self.__salary
+
+Becomes approximately:
+self._Student__salary
+
+Q96. What is a getter?
+Ans: A method used to retrieve an attribute value.
+
+Q97. What is a setter?
+Ans: A method used to modify an attribute value.
+
+Q98. What is @property?
+Ans: It allows us to access a method like an attribute.
+
+Q99. Difference between public, protected and private?
+Ans:
+Public = name
+Protected = _name
+Private = __name
+
+---------------- ABSTRACTION ----------------
+
+Q100. What is abstraction?
+Ans: Hiding implementation details and exposing essential
+functionality.
+
+Q101. Why use abstraction?
+Ans: To reduce complexity and define common interfaces.
+
+Q102. What is an abstract class?
+Ans: A class that can define abstract methods which
+concrete subclasses must implement.
+
+Q103. What is an abstract method?
+Ans: A method declared using @abstractmethod.
+
+Q104. Can we create an object of an abstract class?
+Ans: Not while unresolved abstract methods remain.
+
+Q105. What is the abc module?
+Ans: A built-in Python module for abstract base classes.
+
+Q106. What is ABC?
+Ans: A helper base class for defining abstract classes.
+
+Q107. What is @abstractmethod?
+Ans: A decorator used to declare abstract methods.
+
+Q108. Can abstract classes contain normal methods?
+Ans: Yes.
+
+Q109. Can abstract classes have constructors?
+Ans: Yes.
+
+Q110. Difference between abstraction and encapsulation?
+Ans:
+Abstraction = Hides implementation details.
+Encapsulation = Bundles data and methods with controlled access.
+
+PART 8: MAGIC / DUNDER METHODS
+------------------------------------------------------------
+
+Q111. What are magic methods?
+Ans: Special methods that define object behavior.
+
+Q112. What does dunder mean?
+Ans: Double underscore.
+
+Q113. What is __str__()?
+Ans: User-friendly string representation.
+
+Q114. What is __repr__()?
+Ans: Developer-oriented object representation.
+
+Q115. Difference between __str__ and __repr__?
+Ans:
+__str__ = Readable representation.
+__repr__ = Unambiguous developer representation.
+
+Q116. What is __len__()?
+Ans: Defines behavior of len().
+
+Q117. What is __add__()?
+Ans: Defines + operator behavior.
+
+Q118. What is __sub__()?
+Ans: Defines - operator behavior.
+
+Q119. What is __mul__()?
+Ans: Defines * operator behavior.
+
+Q120. What is __eq__()?
+Ans: Defines == operator behavior.
+
+Q121. What is __lt__()?
+Ans: Defines < operator behavior.
+
+Q122. What is __gt__()?
+Ans: Defines > operator behavior.
+
+Q123. What is __call__()?
+Ans: Allows an object to be called like a function.
+
+Q124. What is __iter__()?
+Ans: Returns an iterator.
+
+Q125. What is __next__()?
+Ans: Returns the next iterator value.
+
+Q126. What is __getitem__()?
+Ans: Handles item access using [].
+
+Q127. What is __setitem__()?
+Ans: Handles item assignment using [].
+
+Q128. Important dunder methods?
+
+__init__()    - Initialize object
+__new__()     - Create object
+__str__()     - String representation
+__repr__()    - Developer representation
+__len__()     - Length
+__add__()     - Addition
+__sub__()     - Subtraction
+__mul__()     - Multiplication
+__eq__()      - Equality
+__call__()    - Callable object
+__iter__()    - Iterator
+__next__()    - Next item
+__getitem__() - Get item
+__setitem__() - Set item
+__del__()     - Finalizer
+__enter__()   - Context manager entry
+__exit__()    - Context manager exit
+
+Q129. Difference between __new__() and __init__()?
+Ans:
+__new__() = Creates and returns object.
+__init__() = Initializes the object.
+
+Q130. Difference between == and is?
+Ans:
+== checks value equality.
+is checks object identity.
+
+PART 9: CLASS RELATIONSHIPS
+------------------------------------------------------------
+
+Q131. What is association?
+Ans: Relationship where two independent classes interact.
+
+Q132. What is aggregation?
+Ans: Weak has-a relationship. Objects can exist independently.
+
+Q133. What is composition?
+Ans: Strong has-a relationship involving ownership and
+lifecycle dependency.
+
+Q134. Difference between aggregation and composition?
+Ans:
+Aggregation = Weak ownership.
+Composition = Strong ownership.
+
+Q135. What is has-a relationship?
+Ans: One class contains or uses another class object.
+
+Q136. What is is-a relationship?
+Ans: Inheritance relationship.
+
+Q137. Difference between has-a and is-a?
+Ans:
+Has-a = Composition or aggregation.
+Is-a = Inheritance.
+
+Q138. Difference between inheritance and composition?
+Ans:
+Inheritance = Reuse through parent-child relationship.
+Composition = Reuse through contained objects.
+
+PART 10: PROPERTIES AND DECORATORS
+------------------------------------------------------------
+
+Q139. What is a decorator?
+Ans: A function that modifies or extends another function's
+or method's behavior.
+
+Q140. Important OOP decorators?
+Ans:
+1. @classmethod
+2. @staticmethod
+3. @property
+4. @abstractmethod
+5. Custom decorators
+
+Q141. What is @property?
+Ans: Accesses a method like an attribute.
+
+Q142. What is a property setter?
+Ans: Controls assignment to a property.
+
+Q143. What is a property deleter?
+Ans: Controls deletion of a property.
+
+Q144. Difference between method and property?
+Ans:
+Method = Called with parentheses.
+Property = Accessed like an attribute.
+
+Q145. Can we use multiple decorators?
+Ans: Yes. Decorators can be stacked.
+
+Q146. What is a custom decorator?
+Ans: A decorator created by the programmer.
+
+PART 11: SHALLOW COPY AND DEEP COPY
+------------------------------------------------------------
+
+Q147. What is object copying?
+Ans: Creating another object based on an existing object.
+
+Q148. What are the types of copying?
+Ans:
+1. Assignment/reference sharing
+2. Shallow copy
+3. Deep copy
+
+Q149. What is shallow copy?
+Ans: Creates a new outer object but shares nested objects.
+
+Q150. What is deep copy?
+Ans: Recursively copies nested objects.
+
+Q151. Which module is used for copying?
+Ans: copy module.
+
+Q152. What is copy.copy()?
+Ans: Creates shallow copy.
+
+Q153. What is copy.deepcopy()?
+Ans: Creates deep copy.
+
+Q154. Difference between shallow and deep copy?
+Ans:
+Shallow = New outer object, shared nested objects.
+Deep = New outer object and recursively copied nested objects.
+
+Q155. What happens when b = a?
+Ans: Both variables refer to the same object.
+
+Q156. How to check whether two variables refer to same object?
+Ans: Use is or compare id() values.
+
+Q157. Does shallow copy work with nested lists?
+Ans: Yes, but nested objects remain shared.
+
+Q158. Can deep copy copy custom class objects?
+Ans: Yes, subject to custom copying behavior.
+
+PART 12: BUILT-IN FUNCTIONS IN OOPS
+------------------------------------------------------------
+
+Q159. What is type()?
+Ans: Returns the type of an object.
+
+Q160. What is isinstance()?
+Ans: Checks whether an object belongs to a class or subclass.
+
+Q161. What is issubclass()?
+Ans: Checks whether a class inherits from another class.
+
+Q162. Difference between isinstance and issubclass?
+Ans:
+isinstance = Checks object.
+issubclass = Checks class inheritance.
+
+Q163. What is getattr()?
+Ans: Retrieves an attribute dynamically.
+
+Q164. What is setattr()?
+Ans: Creates or modifies an attribute dynamically.
+
+Q165. What is hasattr()?
+Ans: Checks whether an attribute exists.
+
+Q166. What is delattr()?
+Ans: Deletes an attribute.
+
+Q167. What is dir()?
+Ans: Lists available attribute names and methods.
+
+Q168. What is vars()?
+Ans: Returns an object's __dict__ when available.
+
+Q169. What is id()?
+Ans: Returns an object's identity.
+
+Q170. What is callable()?
+Ans: Checks whether an object can be called.
+
+Q171. What is property()?
+Ans: Creates a property attribute.
+
+PART 13: IMPORTANT OOP MODULES
+------------------------------------------------------------
+
+Q172. What is a module?
+Ans: A Python file containing reusable code.
+
+Q173. Difference between module and package?
+Ans:
+Module = Single Python file.
+Package = Collection of related modules.
+
+Q174. Important OOP modules?
+
+1. abc
+2. copy
+3. dataclasses
+4. enum
+5. inspect
+6. types
+7. functools
+8. collections
+9. operator
+10. pickle
+11. json
+12. typing
+
+---------------- ABC MODULE ----------------
+
+Q175. What is abc?
+Ans: Module for abstract base classes.
+
+Important components:
+ABC
+ABCMeta
+abstractmethod
+
+---------------- COPY MODULE ----------------
+
+Q176. What is copy module?
+Ans: Used for shallow and deep copying.
+
+Functions:
+copy.copy()
+copy.deepcopy()
+
+---------------- DATACLASSES MODULE ----------------
+
+Q177. What is dataclasses?
+Ans: Helps create data-holding classes with automatically
+generated methods.
+
+Q178. What is @dataclass?
+Ans: Decorator that generates methods such as __init__()
+and __repr__().
+
+Q179. What is field()?
+Ans: Customizes individual dataclass fields.
+
+Q180. What is asdict()?
+Ans: Converts a dataclass instance into a dictionary.
+
+Q181. What is astuple()?
+Ans: Converts a dataclass instance into a tuple.
+
+Q182. What is replace()?
+Ans: Creates a dataclass instance with selected fields changed.
+
+Q183. What is fields()?
+Ans: Returns field information for a dataclass.
+
+---------------- ENUM MODULE ----------------
+
+Q184. What is enum?
+Ans: Creates enumerations containing named constants.
+
+Q185. What is Enum?
+Ans: Base class for creating enumeration types.
+
+Q186. What is auto()?
+Ans: Automatically generates enumeration values.
+
+Q187. What is IntEnum?
+Ans: Enumeration whose members are also integers.
+
+---------------- INSPECT MODULE ----------------
+
+Q188. What is inspect?
+Ans: Inspects classes, methods, functions and objects.
+
+Important functions:
+inspect.isclass()
+inspect.isfunction()
+inspect.ismethod()
+inspect.signature()
+inspect.getmembers()
+
+---------------- PICKLE MODULE ----------------
+
+Q189. What is pickle?
+Ans: Serializes and deserializes Python objects.
+
+Q190. What is serialization?
+Ans: Converting objects into a storable or transferable form.
+
+Q191. What is deserialization?
+Ans: Reconstructing objects from serialized data.
+
+Q192. What is pickle.dump()?
+Ans: Writes serialized object to a file.
+
+Q193. What is pickle.load()?
+Ans: Reads a serialized object from a file.
+
+IMPORTANT:
+Never unpickle untrusted data.
+
+---------------- JSON MODULE ----------------
+
+Q194. What is JSON?
+Ans: JavaScript Object Notation. A text-based data format.
+
+Q195. Difference between pickle and JSON?
+Ans:
+Pickle = Python-specific object serialization.
+JSON = Language-independent data interchange format.
+
+---------------- TYPING MODULE ----------------
+
+Q196. What is typing?
+Ans: Provides type hints for variables, functions and classes.
+
+Important:
+List
+Dict
+Tuple
+Set
+Optional
+Union
+Any
+Protocol
+
+---------------- COLLECTIONS MODULE ----------------
+
+Q197. What is collections?
+Ans: Provides specialized container data structures.
+
+Important:
+Counter
+defaultdict
+deque
+namedtuple
+ChainMap
+
+---------------- OPERATOR MODULE ----------------
+
+Q198. What is operator?
+Ans: Provides functions corresponding to Python operators.
+
+Important:
+add()
+sub()
+mul()
+eq()
+lt()
+gt()
+
+---------------- FUNCTOOLS MODULE ----------------
+
+Q199. What is functools?
+Ans: Provides reusable function and decorator utilities.
+
+Important:
+wraps()
+lru_cache()
+cache()
+partial()
+reduce()
+singledispatch()
+
+PART 14: ADVANCED OOP CONCEPTS
+------------------------------------------------------------
+
+Q200. What is a metaclass?
+Ans: A class whose instances are classes.
+
+Q201. What is the default metaclass?
+Ans: type.
+
+Q202. What is type used for?
+Ans: Identifying object types and dynamically creating classes.
+
+Q203. What is a descriptor?
+Ans: An object that controls attribute access using special
+methods.
+
+Q204. What are the types of descriptors?
+Ans:
+1. Data descriptor
+2. Non-data descriptor
+
+Q205. What is a data descriptor?
+Ans: Defines __get__() and at least one of __set__()
+or __delete__().
+
+Q206. What is a non-data descriptor?
+Ans: Defines __get__() without __set__() or __delete__().
+
+Q207. What is __slots__?
+Ans: Declares specific instance attributes and can prevent
+automatic creation of an instance __dict__.
+
+Q208. What is dynamic attribute creation?
+Ans: Creating attributes at runtime.
+
+Q209. What is dynamic class creation?
+Ans: Creating a class at runtime using mechanisms such as type().
+
+Q210. What is a callable object?
+Ans: An object implementing __call__().
+
+Q211. What is a context manager?
+Ans: Manages resources and setup/cleanup operations.
+
+Q212. Which methods create a class-based context manager?
+Ans:
+__enter__()
+__exit__()
+
+Q213. What is dependency injection?
+Ans: Supplying required dependencies to an object from outside.
+
+Q214. What is a design pattern?
+Ans: A reusable solution to a common software design problem.
+
+Q215. Common design patterns?
+Ans:
+1. Singleton
+2. Factory
+3. Observer
+4. Strategy
+5. Adapter
+6. Builder
+7. Decorator
+
+Q216. What is Singleton?
+Ans: A pattern intended to ensure one shared instance.
+
+Q217. What is Factory?
+Ans: A pattern for creating objects without exposing
+all creation details.
+
+Q218. What is Observer?
+Ans: A pattern where objects receive notifications
+when another object's state changes.
+
+Q219. What is SOLID?
+Ans: Five object-oriented design principles.
+
+S = Single Responsibility
+O = Open/Closed
+L = Liskov Substitution
+I = Interface Segregation
+D = Dependency Inversion
+
+PART 15: SOLID PRINCIPLES
+------------------------------------------------------------
+
+Q220. What is Single Responsibility Principle?
+Ans: A class should have one main responsibility and one
+reason to change.
+
+Q221. What is Open/Closed Principle?
+Ans: Open for extension, closed for modification.
+
+Q222. What is Liskov Substitution Principle?
+Ans: Subclasses should be usable in place of parent classes
+without breaking expected behavior.
+
+Q223. What is Interface Segregation Principle?
+Ans: Classes should not be forced to depend on methods
+they do not need.
+
+Q224. What is Dependency Inversion Principle?
+Ans: High-level modules should depend on abstractions
+rather than concrete implementations.
+
+PART 16: PRACTICAL CODING QUESTIONS
+------------------------------------------------------------
+
+Q225. Create a Student class.
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display(self):
+        print(self.name, self.age)
+
+s1 = Student("Rahul", 25)
+s1.display()
+
+Q226. Create an Employee class.
+
+class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        print(self.name, self.salary)
+
+e1 = Employee("Rahul", 30000)
+e1.display()
+
+Q227. Calculate rectangle area using a class.
+
+class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+r1 = Rectangle(10, 5)
+print(r1.area())
+
+Output:
+50
+
+Q228. Create a calculator using a class.
+
+class Calculator:
+    def add(self, a, b):
+        return a + b
+
+    def subtract(self, a, b):
+        return a - b
+
+    def multiply(self, a, b):
+        return a * b
+
+    def divide(self, a, b):
+        return a / b
+
+c = Calculator()
+
+print(c.add(10, 5))
+print(c.subtract(10, 5))
+print(c.multiply(10, 5))
+print(c.divide(10, 5))
+
+Q229. Demonstrate single inheritance.
+
+class Parent:
+    def show(self):
+        print("Parent")
+
+class Child(Parent):
+    pass
+
+obj = Child()
+obj.show()
+
+Q230. Demonstrate multiple inheritance.
+
+class Father:
+    def father(self):
+        print("Father")
+
+class Mother:
+    def mother(self):
+        print("Mother")
+
+class Child(Father, Mother):
+    pass
+
+obj = Child()
+obj.father()
+obj.mother()
+
+Q231. Demonstrate method overriding.
+
+class Animal:
+    def sound(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Bark")
+
+obj = Dog()
+obj.sound()
+
+Q232. Demonstrate encapsulation.
+
+class Bank:
+    def __init__(self, balance):
+        self.__balance = balance
+
+    def get_balance(self):
+        return self.__balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+
+b = Bank(1000)
+b.deposit(500)
+
+print(b.get_balance())
+
+Output:
+1500
+
+Q233. Demonstrate abstraction.
+
+from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+    @abstractmethod
+    def start(self):
+        pass
+
+class Car(Vehicle):
+    def start(self):
+        print("Car started")
+
+c = Car()
+c.start()
+
+Q234. Demonstrate polymorphism.
+
+class Dog:
+    def sound(self):
+        print("Bark")
+
+class Cat:
+    def sound(self):
+        print("Meow")
+
+animals = [Dog(), Cat()]
+
+for animal in animals:
+    animal.sound()
+
+Q235. Demonstrate class method.
+
+class Student:
+    school = "ABC"
+
+    @classmethod
+    def change_school(cls, name):
+        cls.school = name
+
+Student.change_school("XYZ")
+print(Student.school)
+
+Q236. Demonstrate static method.
+
+class Calculator:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+print(Calculator.add(10, 20))
+
+Q237. Demonstrate super().
+
+class Parent:
+    def __init__(self):
+        print("Parent constructor")
+
+class Child(Parent):
+    def __init__(self):
+        super().__init__()
+        print("Child constructor")
+
+obj = Child()
+
+Output:
+Parent constructor
+Child constructor
+
+Q238. Count objects created.
+
+class Student:
+    count = 0
+
+    def __init__(self):
+        Student.count += 1
+
+s1 = Student()
+s2 = Student()
+s3 = Student()
+
+print(Student.count)
+
+Output:
+3
+
+Q239. Demonstrate __str__().
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+e1 = Employee("Rahul")
+print(e1)
+
+Q240. Demonstrate operator overloading.
+
+class Number:
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return Number(self.value + other.value)
+
+    def __str__(self):
+        return str(self.value)
+
+n1 = Number(10)
+n2 = Number(20)
+
+print(n1 + n2)
+
+Q241. Demonstrate composition.
+
+class Engine:
+    def start(self):
+        print("Engine started")
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()
+
+    def start(self):
+        self.engine.start()
+
+car = Car()
+car.start()
+
+Q242. Demonstrate property setter.
+
+class Employee:
+    def __init__(self, salary):
+        self._salary = salary
+
+    @property
+    def salary(self):
+        return self._salary
+
+    @salary.setter
+    def salary(self, value):
+        if value > 0:
+            self._salary = value
+        else:
+            print("Invalid salary")
+
+e1 = Employee(30000)
+e1.salary = 40000
+
+print(e1.salary)
+
+Q243. Demonstrate dataclass.
+
+from dataclasses import dataclass
+
+@dataclass
+class Employee:
+    name: str
+    salary: int
+
+e1 = Employee("Rahul", 30000)
+
+print(e1)
+
+PART 17: OUTPUT-BASED QUESTIONS
+------------------------------------------------------------
+
+Q244. What is the output?
+
+class Student:
+    name = "Rahul"
+
+s1 = Student()
+s2 = Student()
+
+print(s1.name)
+print(s2.name)
+
+Answer:
+Rahul
+Rahul
+
+Q245. What is the output?
+
+class Student:
+    name = "Rahul"
+
+s1 = Student()
+s1.name = "John"
+
+print(s1.name)
+print(Student.name)
+
+Answer:
+John
+Rahul
+
+Q246. What is the output?
+
+class A:
+    def show(self):
+        print("A")
+
+class B(A):
+    def show(self):
+        print("B")
+
+obj = B()
+obj.show()
+
+Answer:
+B
+
+Q247. What is the output?
+
+class A:
+    def show(self):
+        print("A")
+
+class B(A):
+    pass
+
+obj = B()
+obj.show()
+
+Answer:
+A
+
+Q248. What is the output?
+
+class A:
+    def __init__(self):
+        print("A")
+
+class B(A):
+    def __init__(self):
+        print("B")
+
+obj = B()
+
+Answer:
+B
+
+Q249. What is the output?
+
+class A:
+    def __init__(self):
+        print("A")
+
+class B(A):
+    def __init__(self):
+        super().__init__()
+        print("B")
+
+obj = B()
+
+Answer:
+A
+B
+
+Q250. What is the output?
+
+class Student:
+    count = 0
+
+    def __init__(self):
+        Student.count += 1
+
+s1 = Student()
+s2 = Student()
+
+print(Student.count)
+
+Answer:
+2
+
+Q251. What is the output?
+
+class Student:
+    def display(self):
+        print("Hello")
+
+s1 = Student()
+print(callable(s1))
+
+Answer:
+False
+
+Q252. What is the output?
+
+class Student:
+    def __call__(self):
+        print("Called")
+
+s1 = Student()
+
+print(callable(s1))
+s1()
+
+Answer:
+True
+Called
+
+Q253. What is the output?
+
+class A:
+    pass
+
+a = A()
+b = A()
+
+print(a == b)
+print(a is b)
+
+Answer:
+False
+False
+
+Q254. What is the output?
+
+class A:
+    pass
+
+a = A()
+b = a
+
+print(a is b)
+
+Answer:
+True
+
+Q255. What is the output?
+
+class Parent:
+    def show(self):
+        print("Parent")
+
+class Child(Parent):
+    def display(self):
+        print("Child")
+
+obj = Child()
+obj.show()
+obj.display()
+
+Answer:
+Parent
+Child
+
+Q256. What is the output?
+
+class A:
+    x = 10
+
+class B(A):
+    x = 20
+
+obj = B()
+
+print(obj.x)
+print(A.x)
+
+Answer:
+20
+10
+
+PART 18: ERROR-BASED QUESTIONS
+------------------------------------------------------------
+
+Q257. What is AttributeError?
+Ans: Occurs when an attribute cannot be found.
+
+Q258. What is TypeError?
+Ans: Occurs when an operation or function receives
+an inappropriate type or incorrect arguments.
+
+Q259. What is NameError?
+Ans: Occurs when a variable name cannot be found.
+
+Q260. What is RecursionError?
+Ans: Occurs when recursion exceeds maximum recursion depth.
+
+Q261. What is NotImplementedError?
+Ans: Exception used to indicate an operation is not implemented.
+
+Q262. What happens if we access an undefined attribute?
+Ans: AttributeError.
+
+Q263. What happens if we call a method without required arguments?
+Ans: TypeError.
+
+Q264. What happens if we instantiate an abstract class
+with unresolved abstract methods?
+Ans: TypeError.
+
+Q265. What happens if we access a private-style attribute
+using its original name?
+Ans: Usually AttributeError.
+
+Q266. What happens if super() is used incorrectly?
+Ans: It may raise TypeError, AttributeError or other errors.
+
+Q267. What happens if we divide by zero?
+Ans: ZeroDivisionError.
+
+Q268. What happens if a method does not accept self
+but is called through an object?
+Ans: Usually TypeError.
+
+Q269. What happens if we assign an attribute not allowed
+by __slots__?
+Ans: AttributeError, if no other mechanism allows it.
+
+Q270. What happens if abstract methods are not implemented?
+Ans: The child remains abstract and cannot be instantiated.
+
+Q271. Difference between NotImplemented and NotImplementedError?
+Ans:
+NotImplemented = Special value returned by certain
+operator methods.
+NotImplementedError = Exception.
+
+PART 19: SCENARIO-BASED QUESTIONS
+------------------------------------------------------------
+
+Q272. How would you design a banking system?
+Ans: Create a BankAccount class with account number,
+balance, deposit, withdraw and check_balance methods.
+Use encapsulation to control balance access.
+
+Q273. How would you design employee management?
+Ans: Create an Employee class with ID, name and salary.
+Use inheritance for different employee types.
+
+Q274. How would you implement multiple payment methods?
+Ans: Use an abstract payment interface and separate
+UPI, card and net banking classes.
+
+Q275. How do different classes execute different methods
+with the same name?
+Ans: Using polymorphism.
+
+Q276. How would you hide salary information?
+Ans: Use encapsulation and controlled access through
+properties or methods.
+
+Q277. How do you force child classes to implement a method?
+Ans: Use abstraction and @abstractmethod.
+
+Q278. How do you reuse functionality from multiple parents?
+Ans: Multiple inheritance.
+
+Q279. How do you modify parent method behavior?
+Ans: Method overriding.
+
+Q280. Which method is used when object data is not required?
+Ans: Static method.
+
+Q281. How do you create an alternative constructor?
+Ans: Use a class method as a factory method.
+
+Q282. How do classes interact without inheritance?
+Ans: Association or composition.
+
+Q283. How do you validate an attribute whenever it changes?
+Ans: Use @property and a setter.
+
+Q284. How do you copy a nested object independently?
+Ans: copy.deepcopy().
+
+Q285. How do you save an object into a file?
+Ans: Use serialization such as JSON or pickle,
+depending on the object's data and requirements.
+
+Q286. What if a class has too many responsibilities?
+Ans: Apply Single Responsibility Principle.
+
+PART 20: TRICKY INTERVIEW QUESTIONS
+------------------------------------------------------------
+
+Q287. Is self mandatory?
+Ans: The name is not mandatory, but the instance method
+needs a parameter to receive the object.
+
+Q288. Can a class inherit from multiple classes?
+Ans: Yes.
+
+Q289. Can a class inherit from itself?
+Ans: No. Direct self-inheritance causes an error.
+
+Q290. Can we create an object without calling __init__()?
+Ans: Yes, using object.__new__() or other creation mechanisms.
+The object may not have initialized attributes.
+
+Q291. Is __init__() compulsory?
+Ans: No.
+
+Q292. Can we define a class inside another class?
+Ans: Yes. It is called a nested class.
+
+Q293. Can we modify classes at runtime?
+Ans: Yes.
+
+Q294. Can we delete an object?
+Ans: We can delete references using del. Actual object
+finalization depends on garbage collection.
+
+Q295. What is garbage collection?
+Ans: Process of reclaiming memory used by objects
+that are no longer needed.
+
+Q296. Can static methods access class variables?
+Ans: Yes, by explicitly using the class name.
+
+Q297. Can instance methods access class variables?
+Ans: Yes.
+
+Q298. Can a child object access parent methods?
+Ans: Yes, if the methods are inherited and accessible.
+
+Q299. Does Python support interfaces?
+Ans: Python has no separate interface keyword like Java.
+ABC and Protocol can provide similar functionality.
+
+Q300. What is Protocol?
+Ans: Protocol defines a structural interface. Classes can
+satisfy its requirements without explicit inheritance.
+
+Q301. Difference between abstract class and normal class?
+Ans:
+Abstract class = Cannot be instantiated while abstract
+methods remain unresolved.
+Normal class = Can generally be instantiated.
+
+Q302. Difference between __dict__ and __slots__?
+Ans:
+__dict__ = Stores writable instance attributes.
+__slots__ = Declares specific instance attributes.
+
+Q303. Difference between object and reference?
+Ans:
+Object = Actual instance.
+Reference = A way to access the object.
+
+Q304. What is the most important OOP concept?
+Ans: All are important. Focus on the four pillars,
+classes, objects, methods, constructors and inheritance.
+
+PART 21: QUICK REVISION
+------------------------------------------------------------
+
+OOPs              = Object-Oriented Programming
+Class             = Blueprint
+Object            = Instance
+Method            = Function inside a class
+Attribute         = Variable associated with object/class
+self              = Current object reference
+cls               = Current class reference
+__init__()        = Initializer
+__new__()         = Object creation
+__del__()         = Finalizer
+Inheritance       = Reusing parent functionality
+Polymorphism      = Different behavior through common interface
+Encapsulation     = Bundling data and methods with controlled access
+Abstraction       = Hiding implementation details
+Overriding        = Redefining inherited method
+Overloading       = Same name with different arguments/behavior
+super()           = Next class in MRO
+MRO               = Method Resolution Order
+@staticmethod     = Static method decorator
+@classmethod      = Class method decorator
+@property         = Property decorator
+Magic methods     = Special object behavior methods
+Composition       = Strong has-a relationship
+Aggregation       = Weak has-a relationship
+Association       = Relationship between objects
+Metaclass         = Class that creates classes
+Descriptor        = Controls attribute access
+__slots__         = Declares specific instance attributes
+Shallow copy      = New outer object, shared nested references
+Deep copy         = Recursively copies nested objects
+ABC               = Abstract Base Class
+SOLID             = Five object-oriented design principles
+
+
+============================================================
+PART 22: SOLID PRINCIPLES STUDY NOTES
+------------------------------------------------------------
+
+Q305. WHAT IS SOLID
+Ans:
+SOLID is a set of five object-oriented design principles.
+
+It helps create software that is:
+    - Maintainable
+    - Reusable
+    - Flexible
+    - Easy to test
+    - Easy to extend
+
+Q306. S - SINGLE RESPONSIBILITY PRINCIPLE
+Ans:
+A class should have one main responsibility
+and one reason to change.
+
+Bad design:
+    One class handles database, email and reporting.
+
+Better design:
+    DatabaseManager
+    EmailService
+    ReportGenerator
+
+Q307. O - OPEN/CLOSED PRINCIPLE
+Ans:
+Software entities should be:
+    Open for extension.
+    Closed for modification.
+
+Meaning:
+    Add new functionality without constantly
+    changing existing tested code.
+
+Example:
+    Use inheritance or composition to add
+    new payment methods.
+
+Q308. L - LISKOV SUBSTITUTION PRINCIPLE
+Ans:
+A child class should be usable wherever its
+parent class is expected without breaking
+the program's expected behavior.
+
+Meaning:
+    Subclasses must correctly follow the
+    behavior promised by their base class.
+
+Q309. I - INTERFACE SEGREGATION PRINCIPLE
+Ans:
+A class should not be forced to implement
+methods it does not need.
+
+Meaning:
+    Prefer smaller, focused interfaces
+    instead of one large interface.
+
+Python:
+    Use small abstract base classes or
+    protocols where appropriate.
+
+Q310. D - DEPENDENCY INVERSION PRINCIPLE
+Ans:
+High-level modules should depend on abstractions,
+not directly on low-level implementations.
+
+Meaning:
+    Depend on interfaces or abstractions
+    rather than tightly coupling classes.
+
+Python:
+    Use abstract base classes, protocols,
+    dependency injection and composition.
+
+Q311. SOLID SUMMARY
+Ans:
+S:
+    Single Responsibility.
+
+O:
+    Open/Closed.
+
+L:
+    Liskov Substitution.
+
+I:
+    Interface Segregation.
+
+D:
+    Dependency Inversion.
+
+============================================================
+PART 23: METACLASSES STUDY NOTES
+------------------------------------------------------------
+
+Q312. WHAT IS A METACLASS
+Ans:
+A metaclass is a class whose instances are classes.
+
+Normal relationship:
+
+    Class creates objects.
+
+Metaclass relationship:
+
+    Metaclass creates classes.
+
+In Python, the default metaclass is:
+
+    type
+
+Q313. TYPE FUNCTION
+Ans:
+Check the type of an object:
+
+    x = 10
+
+    type(x)
+
+Output:
+
+    <class 'int'>
+
+Create a class dynamically:
+
+    MyClass = type(
+        "MyClass",
+        (),
+        {"x": 10}
+    )
+
+    obj = MyClass()
+
+    print(obj.x)
+
+Output:
+
+    10
+
+Q314. CUSTOM METACLASS
+Ans:
+class MyMeta(type):
+        def __new__(mcs, name, bases, namespace):
+            print("Creating class:", name)
+
+            return super().__new__(
+                mcs,
+                name,
+                bases,
+                namespace
+            )
+
+    class MyClass(metaclass=MyMeta):
+        pass
+
+When MyClass is created, the metaclass
+customizes the class creation process.
+
+Q315. METACLASS METHODS
+Ans:
+__new__():
+        Creates the class object.
+
+    __init__():
+        Initializes the class object.
+
+    __call__():
+        Controls what happens when the class
+        is called to create an instance.
+
+Q316. METACLASS VS CLASS
+Ans:
+Class:
+    Creates objects.
+
+Metaclass:
+    Creates classes.
+
+Normal class:
+    Defines object behavior.
+
+Metaclass:
+    Defines class creation behavior.
+
+Use cases:
+    Frameworks, class validation, registration,
+    automatic class modification and ORMs.
+
+============================================================
+             END OF OOPS INTERVIEW NOTES
+============================================================

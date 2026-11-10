@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Today Practice Plan</title>
+  <style>
+    :root { color-scheme: dark; --bg:#181818; --panel:#202020; --text:#e8e8e8; --muted:#9a9a9a; --line:#3a3a3a; --accent:#7dcea0; --warn:#e0b15a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); }
+    main { max-width: 860px; margin: 0 auto; padding: 28px 20px 80px; }
+    h1 { margin:0 0 6px; font-size:28px; }
+    .lead { color:var(--muted); margin:0 0 22px; }
+    .rule { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:22px; }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+    .card strong { color:var(--accent); }
+    h2 { margin:28px 0 10px; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+    .slot { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:0 0 12px; }
+    .time { color:var(--warn); font-weight:650; margin-bottom:4px; }
+    .slot h3 { margin:0 0 8px; font-size:18px; }
+    ul { margin:6px 0 0; padding-left:18px; }
+    li { margin:3px 0; }
+    .diff { color:var(--muted); }
+    .method { margin-top:8px; font-size:14px; color:var(--muted); }
+    code { font-family: ui-monospace, Menlo, monospace; font-size:13px; background:#2a2a2a; padding:1px 5px; border-radius:4px; }
+    .rev { border-color:#3d6b4a; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Today practice</h1>
+  <p class="lead">Includes Day 6 OOP. Learn covered concepts by <strong>4:00 pm</strong> when possible. Revision only from <strong>4:00–6:00 pm</strong>. Open <code>pratice-today.ipynb</code> and write answers yourself.</p>
+
+  <div class="rule">
+    <div class="card"><strong>Every topic (8–12 min)</strong><br>1) Say definition out loud<br>2) Write 1 small code example<br>3) Write 1 difference / when to use</div>
+    <div class="card"><strong>Do not skip</strong><br>If stuck &gt; 3 minutes, mark it, move on, fix in revision.</div>
+  </div>
+
+  <h2>Morning · 10:30 am – 1:30 pm · 3 hours</h2>
+
+  <div class="slot">
+    <div class="time">10:30 – 11:15 · 45 min</div>
+    <h3>Block A · Basics</h3>
+    <ul>
+      <li><code>print</code>, comments, variables, data types (<code>int</code> <code>float</code> <code>str</code> <code>bool</code>)</li>
+      <li>operators: arithmetic, comparison, assignment, logical</li>
+      <li><code>input()</code> + type casting</li>
+    </ul>
+    <p class="diff">Difference focus: <code>=</code> vs <code>==</code> · <code>and</code>/<code>or</code>/<code>not</code> · dynamic typing</p>
+    <p class="method">Use: notebook cells A1–A6</p>
+  </div>
+
+  <div class="slot">
+    <div class="time">11:15 – 12:00 · 45 min</div>
+    <h3>Block B · Conditions + loops</h3>
+    <ul>
+      <li><code>if</code> / <code>elif</code> / <code>else</code></li>
+      <li><code>for</code>, <code>while</code>, <code>break</code>, <code>continue</code></li>
+      <li>iterable idea (list, string, range)</li>
+    </ul>
+    <p class="diff">Difference focus: <code>for</code> vs <code>while</code> · <code>break</code> vs <code>continue</code></p>
+    <p class="method">Use: notebook cells B1–B5</p>
+  </div>
+
+  <div class="slot">
+    <div class="time">12:00 – 12:50 · 50 min</div>
+    <h3>Block C · Strings + lists + tuples + sets</h3>
+    <ul>
+      <li>string indexing, slicing, methods</li>
+      <li>list: append, insert, extend, remove, pop, sort</li>
+      <li>tuple: immutable, unpacking</li>
+      <li>set: unique, operators, <code>discard</code>, <code>frozenset</code></li>
+    </ul>
+    <p class="diff">Difference focus: list vs tuple vs set · <code>pop</code> vs <code>discard</code> · set vs frozenset · shallow vs deep copy (quick)</p>
+    <p class="method">Use: notebook cells C1–C7</p>
+  </div>
+
+  <div class="slot">
+    <div class="time">12:50 – 1:30 · 40 min</div>
+    <h3>Block D · Dictionaries</h3>
+    <ul>
+      <li>create, access, add/update, remove</li>
+      <li><code>keys</code>, <code>values</code>, <code>items</code>, <code>get</code></li>
+      <li>loop a dictionary, nested dict</li>
+    </ul>
+    <p class="diff">Difference focus: <code>dict[key]</code> vs <code>get</code> · keys vs values vs items</p>
+    <p class="method">Use: notebook cells D1–D5</p>
+  </div>
+
+  <p class="lead">Break · 1:30 – 2:30</p>
+
+  <h2>Afternoon learn · 2:30 pm – 4:00 pm · 1.5 hours</h2>
+
+  <div class="slot">
+    <div class="time">2:30 – 3:15 · 45 min</div>
+    <h3>Block E · Functions</h3>
+    <ul>
+      <li>define vs call · parameter vs argument</li>
+      <li>print vs return · positional / keyword / default</li>
+      <li><code>*args</code>, <code>**kwargs</code>, combine both · scope</li>
+      <li>lambda</li>
+    </ul>
+    <p class="diff">Difference focus: print vs return · *args (tuple) vs **kwargs (dict) · lambda vs def</p>
+    <p class="method">Use: notebook cells E1–E6</p>
+  </div>
+
+  <div class="slot">
+    <div class="time">3:15 – 4:00 · 45 min</div>
+    <h3>Block F · Day 5 tools + important</h3>
+    <ul>
+      <li>list / set / dict comprehension</li>
+      <li><code>map</code>, <code>filter</code>, <code>sorted</code>, <code>zip</code>, <code>enumerate</code>, <code>min</code>/<code>max</code></li>
+      <li>exception <code>try/except/else/finally</code></li>
+      <li>string formatting (f-string)</li>
+    </ul>
+    <p class="diff">Difference focus: map vs filter · sorted vs min/max · zip vs enumerate · shallow vs deep copy</p>
+    <p class="method">Use: notebook cells F1–F7 · Finish learning by 4:00</p>
+  </div>
+
+  <h2>Revision · 4:00 pm – 6:00 pm · 2 hours</h2>
+
+  <div class="slot rev">
+    <div class="time">4:00 – 4:40 · 40 min</div>
+    <h3>Revision R1 · Speak definitions</h3>
+    <ul>
+      <li>Close notes. Say each definition in 1–2 lines (blocks A–F).</li>
+      <li>Mark any definition you cannot say cleanly.</li>
+    </ul>
+  </div>
+
+  <div class="slot rev">
+    <div class="time">4:40 – 5:20 · 40 min</div>
+    <h3>Revision R2 · Differences only</h3>
+    <ul>
+      <li>list vs tuple vs set vs dict</li>
+      <li>*args vs **kwargs · map vs filter · shallow vs deep</li>
+      <li>pop vs discard · for vs while · = vs == · print vs return</li>
+      <li>Write each difference in notebook section R2 without looking.</li>
+    </ul>
+  </div>
+
+  <div class="slot rev">
+    <div class="time">5:20 – 6:00 · 40 min</div>
+    <h3>Revision R3 · Blind code drill</h3>
+    <ul>
+      <li>Rewrite 8 short programs from memory (R3 cells).</li>
+      <li>Then compare with notes. Fix only the weak ones.</li>
+      <li>End: open <code>html/python-notes.html</code> only for marked weak topics.</li>
+    </ul>
+  </div>
+
+  <div class="slot rev">
+    <div class="time">Add-on · Day 6</div>
+    <h3>Block G · OOP + exceptions + modules</h3>
+    <ul>
+      <li>OOP, class, object, attributes</li>
+      <li><code>__init__()</code>, <code>self</code>, methods</li>
+      <li>inheritance, multiple inheritance, MRO</li>
+      <li>exception handling (ValueError, ZeroDivision, KeyError, IndexError, TypeError)</li>
+      <li>modules: <code>math</code>, <code>random</code></li>
+    </ul>
+    <p class="diff">Difference focus: class vs object · attributes vs methods · parent vs child · module vs function · self is not a keyword</p>
+    <p class="method">Use: notebook cells G1–G10 · reference: <code>pratice-today-reference.ipynb</code> Block G</p>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <title>Python topics · Day 7</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --text: #e6e6e6;
+      --muted: #9a9a9a;
+      --line: #6a6a6a;
+      --done: #243528;
+      --done-line: #3d6b4a;
+      --next: #2f6f4e;
+      --ahead: #222222;
+      --ahead-line: #4a4a4a;
+      --panel: #202020;
+      --code: #141414;
+      --chip: #1a2a1e;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.4 ui-sans-serif, system-ui, sans-serif;
+      overflow: hidden;
+    }
+    main {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 16px 0;
+      min-height: 0;
+      gap: 10px;
+    }
+    .top {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    h1 { margin: 0; font-size: 18px; font-weight: 590; }
+    .lead { margin: 0; color: var(--muted); font-size: 12px; }
+    .legend { display: flex; gap: 14px; color: var(--muted); font-size: 11px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .swatch { width: 10px; height: 10px; border: 1px solid var(--done-line); background: var(--done); }
+    .swatch.next { background: var(--next); border-color: var(--next); }
+    .swatch.ahead { background: var(--ahead); border-color: var(--ahead-line); }
+    .info {
+      flex: 0 0 auto;
+      max-height: 30vh;
+      overflow: auto;
+      margin: 0;
+      padding: 10px 12px 10px;
+      background: var(--panel);
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+    .kicker { margin: 0 0 2px; color: var(--muted); font-size: 11px; }
+    .info h2 { margin: 0 0 6px; font-size: 16px; font-weight: 590; }
+    .info-body {
+      margin: 0 0 8px;
+      max-width: 760px;
+      line-height: 1.4;
+      font-size: 13px;
+    }
+    .info-body p { margin: 0 0 6px; }
+    .info-body h3 {
+      margin: 8px 0 4px;
+      font-size: 13px;
+      font-weight: 590;
+      color: var(--text);
+    }
+    .info-body ul {
+      margin: 0 0 6px 18px;
+      padding: 0;
+    }
+    .info-body li { margin: 2px 0; }
+    .info-body table {
+      width: auto;
+      max-width: 100%;
+      margin: 4px 0 8px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .info-body th,
+    .info-body td {
+      border: 1px solid #444;
+      padding: 4px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .info-body th {
+      background: #2a2a2a;
+      color: var(--text);
+      font-weight: 590;
+    }
+    .info-body code {
+      font: 11px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: #2a2a2a;
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    .info-body .note { color: var(--muted); font-size: 12px; }
+    .info-body pre {
+      margin: 4px 0 8px;
+    }
+    pre {
+      margin: 0;
+      padding: 8px 10px;
+      overflow: auto;
+      max-height: 12em;
+      background: var(--code);
+      border-radius: 6px;
+      color: #d7d7d7;
+      font: 12px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .path-wrap {
+      flex: 1 1 auto;
+      min-height: 0;
+      margin: 0 -16px 0;
+      padding: 8px 16px 14px;
+      border-top: 1px solid #333;
+      background: var(--bg);
+      overflow: auto;
+    }
+    .path { display: flex; align-items: flex-start; gap: 18px; min-width: min-content; }
+    .column { min-width: 230px; }
+    .column h2 { margin: 0 0 12px; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .group {
+      width: 220px;
+      padding: 8px;
+      border: 1px solid var(--done-line);
+      border-radius: 8px;
+      background: var(--done);
+    }
+    .ahead .group { background: var(--ahead); border-color: var(--ahead-line); }
+    .ahead .group.next-group { background: #1a3326; border-color: var(--next); }
+    button.topic, button.child {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    button.topic { width: 100%; padding: 4px 6px; font-weight: 590; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 4px 4px; }
+    button.child {
+      padding: 4px 8px;
+      border: 1px solid #3d6b4a;
+      border-radius: 999px;
+      background: var(--chip);
+      font-size: 12px;
+    }
+    .ahead button.child { border-color: #4a4a4a; background: #1a1a1a; }
+    button.topic:hover, button.child:hover, button.topic:focus-visible, button.child:focus-visible { outline: 1px solid #8fd0a4; }
+    button[aria-pressed="true"] { outline: 1px solid #fff; }
+    .arrow { margin-top: 28px; color: var(--muted); font-size: 18px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="top">
+      <div>
+        <h1>Topics from the start</h1>
+        <p class="lead">Day 7 Files + NumPy are in this map. Click a topic. Matches <strong>test.ipynb</strong>.</p>
+      </div>
+      <div class="legend">
+        <span><i class="swatch"></i>Done in class</span>
+        <span><i class="swatch next"></i>Next</span>
+        <span><i class="swatch ahead"></i>Still ahead</span>
+      </div>
+    </div>
+    <section class="info" id="info" aria-live="polite">
+      <p class="kicker" id="info-path"></p>
+      <h2 id="info-title"></h2>
+      <div id="info-body" class="info-body"></div>
+      <pre id="info-code"></pre>
+    </section>
+    <div class="path-wrap">
+      <div class="path" id="path"></div>
+    </div>
+  </main>
+  <script>
+    const stages = [
+      { title: "1 Basics", state: "done", topics: ["print", "comments", "variables", "data types", "operators", "input", "conditions", "loops"] },
+      { title: "2 Collections", state: "done", topics: ["strings", "lists", "tuples", "sets"] },
+      { title: "3 Dictionaries", state: "done", topics: ["dictionary"] },
+      { title: "4 Functions", state: "done", topics: ["functions"] },
+      { title: "5 Day 5", state: "done", topics: ["args kwargs", "list comprehension", "map filter"] },
+      { title: "6 Important", state: "done", topics: ["important"] },
+      { title: "7 Day 6 OOP", state: "done", topics: ["classes", "try except", "modules"] },
+      { title: "8 Day 7 Files", state: "done", topics: ["files"] },
+      { title: "9 Day 7 NumPy", state: "done", topics: ["numpy"] },
+      { title: "10 Intermediate", state: "ahead", topics: ["JSON"] }
+    ];
+
+    const info = {
+  "print": {
+    "question": "print",
+    "body": "**Definition:** `print()` is a built-in Python function used to display text, numbers, variables, and other values on the screen.",
+    "code": "print(\"good morning\")\nprint(\"hello    AI\")\nprint(25)\nprint(\"Score:\", 95)"
+  },
+  "comments": {
+    "question": "Comments",
+    "body": "**Definition:** A comment is text written in the code to explain what the program does. Python ignores comments beginning with `#` when executing the program.",
+    "code": "# this line is not executed\nprint(\"hello\")"
+  },
+  "variables": {
+    "question": "Variables",
+    "body": "**Definition:** A variable is a name that refers to a value or object in a program. You can assign a value to a variable and use that name later.\n\n### Naming rules\n\n- Must start with a letter or `_`. Cannot start with a number.\n- Cannot contain spaces.\n- Can contain letters, numbers, and underscores.\n- Python keywords such as `if`, `else`, and `for` cannot be used as names.\n- Python is case-sensitive, so `age` and `Age` are different names.\n\n`print` is a built-in function, not a keyword. Avoid using `print` as a variable name because it hides the built-in function.",
+    "code": "a = 12\nb = \"AI\"\nage = 15\nage = 20\nprint(a)\nprint(b)\nprint(age)"
+  },
+  "data types": {
+    "question": "Data types",
+    "body": "**Definition:** A data type identifies the kind of value an object represents and determines which operations can be performed on it.\n\n| Type | Definition | Example |\n|---|---|---|\n| `int` | Whole numbers without a decimal point | `10`, `-5`, `0` |\n| `float` | Numbers with a decimal component | `3.5`, `10.0` |\n| `str` | A sequence of text characters | `\"Hello\"`, `\"123\"` |\n| `bool` | One of two truth values: `True` or `False` | `True` |\n| `list` | Ordered, changeable collection of items | `[10, 20, 30]` |\n| `tuple` | Ordered collection whose elements cannot be reassigned | `(10, 20, 30)` |\n| `set` | Collection of unique, hashable elements | `{10, 20, 30}` |\n| `dict` | Data stored as key-value pairs | `{\"name\": \"Rahul\"}` |\n\n`type()` is a built-in function that returns the type of an object.",
+    "code": "a = 12\nb = \"A\"\nc = \"1234\"\nd = 3.5\ne = False\n\nprint(type(a))\nprint(type(b))\nprint(type(c))\nprint(type(d))\nprint(type(e))",
+    "children": [
+      "int",
+      "float",
+      "str",
+      "bool"
+    ]
+  },
+  "int": {
+    "question": "int",
+    "body": "**Definition:** `int` represents whole numbers without a decimal point. Example: `10`, `-5`, `0`.",
+    "code": "age = 12\nprint(age)\nprint(type(age))"
+  },
+  "float": {
+    "question": "float",
+    "body": "**Definition:** `float` represents numbers with a fractional or decimal component. Example: `3.5`, `10.0`.",
+    "code": "price = 3.5\nprint(price)\nprint(type(price))"
+  },
+  "str": {
+    "question": "str",
+    "body": "**Definition:** `str` represents a sequence of text characters. Example: `\"Hello\"`, `\"123\"`. Quotes make it a string even if the text looks like a number.",
+    "code": "name = \"1234\"\nprint(name)\nprint(type(name))"
+  },
+  "bool": {
+    "question": "bool",
+    "body": "**Definition:** `bool` represents one of two truth values: `True` or `False`. Write them with a capital first letter.",
+    "code": "flag = False\nprint(flag)\nprint(type(flag))"
+  },
+  "operators": {
+    "question": "Operators",
+    "body": "**Definition:** An operator is a symbol or keyword that performs an operation on one or more values.\n\n| Kind | Operators |\n|---|---|\n| Arithmetic | `+` `-` `*` `/` `%` `//` `**` |\n| Comparison | `>` `<` `>=` `<=` `==` `!=` |\n| Assignment | `=` assigns a value |\n| Logical | `and` `or` `not` |",
+    "code": "a = 12\nb = 67\nprint(a + b)\nprint(a == 12)\nprint(a > 20 or b > 20)",
+    "children": [
+      "arithmetic",
+      "comparison",
+      "assignment",
+      "logical"
+    ]
+  },
+  "arithmetic": {
+    "question": "Arithmetic operators",
+    "body": "**Definition:** Arithmetic operators perform mathematical calculations.\n\n| Operator | Definition | Example | Result |\n|---|---|---|---|\n| `+` | Addition | `10 + 5` | `15` |\n| `-` | Subtraction | `10 - 5` | `5` |\n| `*` | Multiplication | `10 * 5` | `50` |\n| `/` | Division | `10 / 2` | `5.0` |\n| `%` | Modulus; remainder | `10 % 3` | `1` |\n| `//` | Floor division; rounds the quotient down | `7 // 2` | `3` |\n| `**` | Exponentiation; raises a number to a power | `2 ** 3` | `8` |",
+    "code": "print(10 + 5)\nprint(10 - 5)\nprint(10 * 5)\nprint(10 / 2)\nprint(10 % 3)\nprint(7 // 2)\nprint(2 ** 3)"
+  },
+  "comparison": {
+    "question": "Comparison operators",
+    "body": "**Definition:** Comparison operators compare two values and return a Boolean result, either `True` or `False`.\n\n| Operator | Definition |\n|---|---|\n| `>` | Greater than |\n| `<` | Less than |\n| `>=` | Greater than or equal to |\n| `<=` | Less than or equal to |\n| `==` | Equal to |\n| `!=` | Not equal to |\n\n`=` assigns a value. `==` checks whether two values are equal.",
+    "code": "a = 12\nb = 67\nprint(a >= b)\nprint(a == b)\nprint(a == 12)"
+  },
+  "assignment": {
+    "question": "= and ==",
+    "body": "**Definition:** The assignment operator `=` assigns a value to a variable or name.\n\n| Operator | Definition |\n|---|---|\n| `=` | Assigns a value |\n| `==` | Checks whether two values are equal |",
+    "code": "a = 12\nprint(a)\nprint(a == 12)\nprint(a == 5)"
+  },
+  "logical": {
+    "question": "Logical operators",
+    "body": "**Definition:** Logical operators combine or modify conditions and produce Boolean results.\n\n| Operator | Definition |\n|---|---|\n| `and` | `True` when both conditions are true |\n| `or` | `True` when at least one condition is true |\n| `not` | Reverses a Boolean value |",
+    "code": "age = 25\nprint(age > 18 and age < 60)\nprint(age < 18 or age > 20)\nprint(not True)"
+  },
+  "input": {
+    "question": "User input",
+    "body": "**Definition:** `input()` is a built-in function that pauses program execution, displays an optional prompt, and reads the user's input as a string.\n\nWrap it in `int()` or `float()` when you need a number.",
+    "code": "# name = input(\"Enter your name: \")\n# age = int(input(\"Enter your age: \"))\n# probability = float(input(\"Enter the probability: \"))\n\nname = \"Mary\"\nage = 15\nprobability = 65.0\n\nprint(\"Good morning\", name)\nprint(\"Your age is\", age)\nprint(probability)",
+    "children": [
+      "type conversion"
+    ]
+  },
+  "type conversion": {
+    "question": "Type conversion",
+    "body": "**Definition:** Type casting is the process of converting a value from one data type to another data type.\n\nPython provides built-in functions to perform type casting.\n\n| Function | Definition |\n|---|---|\n| `int()` | Converts a compatible value into an integer |\n| `float()` | Converts a compatible value into a float |\n| `str()` | Converts a value into a string |\n| `bool()` | Converts a value into a Boolean |\n| `list()` | Converts an iterable into a list |\n| `tuple()` | Converts an iterable into a tuple |\n| `set()` | Converts an iterable into a set |\n\n**Important points:**\n- Type casting changes the data type of a value\n- Some conversions are not possible\n- `int(\"hello\")` raises a `ValueError`\n- `float(\"10.5\")` converts the string into a float",
+    "code": "number = \"100\"\nresult = int(number)\nprint(result)\nprint(type(result))\n\nnumber = 10\nresult = float(number)\nprint(result)\nprint(type(result))\n\nnumber = 100\nresult = str(number)\nprint(result)\nprint(type(result))\n\nnumbers = [10, 20, 30]\nresult = tuple(numbers)\nprint(result)"
+  },
+  "conditions": {
+    "question": "Conditional statements",
+    "body": "**Definition:** Conditional statements allow a program to make decisions and execute different blocks of code depending on whether conditions are true or false. Python uses indentation to identify which statements belong to each block.\n\n| Keyword | Definition |\n|---|---|\n| `if` | Executes a block when its condition is `True` |\n| `elif` | Checks another condition when earlier ones were false |\n| `else` | Runs when none of the preceding conditions was true |",
+    "code": "age = 18\n# age = int(input(\"Enter your age: \"))\n\nif age >= 18:\n    print(\"You are eligible to vote\")\nelse:\n    print(\"You are not eligible\")",
+    "children": [
+      "if",
+      "elif",
+      "else"
+    ]
+  },
+  "if": {
+    "question": "if",
+    "body": "**Definition:** `if` executes a block of code when its condition evaluates to `True`. The condition ends with `:`. The next line is indented.",
+    "code": "age = 18\nif age >= 18:\n    print(\"You are eligible to vote\")"
+  },
+  "elif": {
+    "question": "elif",
+    "body": "**Definition:** `elif`, meaning “else if,” checks another condition when the preceding `if` or `elif` conditions were false.",
+    "code": "grade = \"A\"\nif grade == \"A\" or grade == \"a\":\n    print(\"Excellent\")\nelif grade == \"B\" or grade == \"b\":\n    print(\"Very good\")\nelif grade == \"C\" or grade == \"c\":\n    print(\"Good\")\nelse:\n    print(\"Invalid grade\")"
+  },
+  "else": {
+    "question": "else",
+    "body": "**Definition:** `else` executes a block when none of the preceding conditions in the same conditional chain was true. It lines up with `if` and has no condition.",
+    "code": "n = 43\nif n % 2 == 0:\n    print(n, \"is even\")\nelse:\n    print(n, \"is odd\")"
+  },
+  "loops": {
+    "question": "Loops",
+    "body": "**Definition:** A loop repeatedly executes a block of code, either by iterating over a sequence or by continuing while a condition remains true.\n\n| Loop | Definition |\n|---|---|\n| `for` | Iterates over the items of an iterable, such as a list, string, tuple, or `range` |\n| `while` | Repeats as long as its condition is `True` |",
+    "code": "for i in range(5):\n    print(\"good morning\")\n\na = 5\nwhile a >= 0:\n    print(a)\n    a = a - 1",
+    "children": [
+      "for",
+      "while",
+      "break",
+      "continue"
+    ]
+  },
+  "for": {
+    "question": "for and range",
+    "body": "**Definition:** A `for` loop iterates over the items of an iterable, such as a list, string, tuple, or `range`.\n\n**`range()`** produces a sequence of integers. The stop value is excluded.\n\n| Call | Produces |\n|---|---|\n| `range(5)` | `0, 1, 2, 3, 4` |\n| `range(1, 5)` | `1, 2, 3, 4` |\n| `range(1, 10, 2)` | `1, 3, 5, 7, 9` |",
+    "code": "for i in range(5):\n    print(i)\n\nfor i in range(1, 11):\n    print(i)\n\nfor i in range(1, 11, 2):\n    print(i)\n\nfor i in range(10, 0, -1):\n    print(i)"
+  },
+  "while": {
+    "question": "while loop",
+    "body": "**Definition:** A `while` loop repeatedly executes a block as long as its condition evaluates to `True`. It can run indefinitely if the stopping condition never becomes false.",
+    "code": "a = 5\nwhile a >= 0:\n    print(a)\n    a = a - 1"
+  },
+  "break": {
+    "question": "break",
+    "body": "**Definition:** `break` immediately terminates the nearest enclosing loop.",
+    "code": "for i in range(1, 11):\n    if i == 6:\n        break\n    print(i)"
+  },
+  "continue": {
+    "question": "continue",
+    "body": "**Definition:** `continue` skips the remaining statements in the current loop iteration and proceeds to the next iteration.",
+    "code": "for i in range(1, 11):\n    if i == 6:\n        continue\n    print(i)"
+  },
+  "strings": {
+    "question": "Strings",
+    "body": "**Definition:** A string (`str`) is an immutable sequence of characters used to represent text. Strings can be written using single, double, or triple quotes.\n\nStrings are immutable: individual characters cannot be changed directly after the string is created.",
+    "code": "name = \"Python\"\nprint(name[0])\nprint(name[1])\nprint(name[-1])\nprint(name[-2])",
+    "children": [
+      "indexing",
+      "slicing",
+      "string methods"
+    ]
+  },
+  "indexing": {
+    "question": "Indexing",
+    "body": "**Definition:** Indexing accesses an individual character or item in a sequence by its position.\n\n- Positive indexing starts at `0` from the left.\n- Negative indexing starts at `-1` from the right.\n- An invalid index raises `IndexError`.",
+    "code": "name = \"Python\"\nprint(name[0])\nprint(name[1])\nprint(name[-1])\nprint(name[-2])"
+  },
+  "slicing": {
+    "question": "Slicing",
+    "body": "**Definition:** Slicing extracts a portion of a sequence using `sequence[start:stop:step]`.\n\nThe stop position is excluded. An empty start means the beginning. An empty stop means the end. `[::-1]` reverses the sequence.",
+    "code": "name = \"Python\"\nprint(name[0:3])\nprint(name[:5])\nprint(name[2:])\n\nmy_string = \"have a nice day\"\nprint(my_string[7:11])\nprint(my_string[::2])\nprint(my_string[::-1])"
+  },
+  "string methods": {
+    "question": "String methods",
+    "body": "**Definition:** String methods are built-in operations called on string objects to inspect or transform text. Because strings are immutable, methods that transform a string return a new string rather than modifying the original.\n\n| Method | Definition |\n|---|---|\n| `lower()` | Returns a lowercase version |\n| `upper()` | Returns an uppercase version |\n| `strip()` | Removes leading and trailing whitespace |\n| `split()` | Splits a string into a list of substrings |\n| `join()` | Joins strings using this string as a separator |\n| `replace()` | Returns a string with specified text replaced |\n| `find()` | Index of the first occurrence, or `-1` if not found |\n| `count()` | Counts non-overlapping occurrences |\n| `startswith()` | Checks whether the string begins with a prefix |\n| `endswith()` | Checks whether the string ends with a suffix |",
+    "code": "s = \"  Have a Nice Day  \"\nprint(s.lower())\nprint(s.upper())\nprint(s.strip())\nprint(\"have  a   nice day\".split())\nprint(s.strip().replace(\"Nice\", \"Wonderful\"))\n\ngrade = \"A\"\nprint(grade.lower() == \"a\")\n\nwords = [\"python\", \"is\", \"easy\"]\nprint(\" \".join(words))\nprint(\"-\".join(words))\n\ntext = \"I am learning programming\"\nprint(text.find(\"pro\"))\nprint(text.count(\"a\"))\nprint(text.startswith(\"I\"))\nprint(text.endswith(\"ing\"))"
+  },
+  "lists": {
+    "question": "Lists",
+    "body": "**Definition:** A list is an ordered, mutable collection that can store multiple items, including duplicate values and items of different data types.\n\n| Property | Meaning |\n|---|---|\n| Ordered | Items keep their sequence |\n| Mutable | Items can be added, removed, or changed |\n| Duplicates allowed | The same value can appear more than once |\n| Indexing and slicing | Supported |",
+    "code": "score = [78, 91, 45, 89, 80]\nprint(type(score))\nprint(score[0])\nprint(score[-1])\nprint(score[2:5])\n\nscore[1] = 90\nprint(score)\n\nmix = [\"Asha\", 21, 3.5, True]\nprint(mix)",
+    "children": [
+      "append",
+      "insert",
+      "extend",
+      "remove",
+      "pop",
+      "sort"
+    ]
+  },
+  "append": {
+    "question": "append",
+    "body": "**Definition:** `append()` adds one item to the end of a list.",
+    "code": "score = [78, 90, 88, 95]\nscore.append(74)\nprint(score)"
+  },
+  "insert": {
+    "question": "insert",
+    "body": "**Definition:** `insert(index, value)` inserts an item at a specified position. Existing items at that position and after it shift to the right.",
+    "code": "score = [78, 90, 88, 95]\nscore.insert(1, 88)\nprint(score)"
+  },
+  "extend": {
+    "question": "extend",
+    "body": "**Definition:** `extend()` adds each item from an iterable to the end of a list.\n\n`append([30, 40])` adds the entire list as one item. `extend([30, 40])` adds its two elements separately.",
+    "code": "score = [78, 90, 88, 95]\na = [10, 20, 30]\nscore.extend(a)\nprint(score)"
+  },
+  "remove": {
+    "question": "remove",
+    "body": "**Definition:** `remove(value)` removes the first occurrence of the specified value from a list.",
+    "code": "score = [78, 90, 88, 95, 74]\nscore.remove(88)\nprint(score)\nprint(score.pop(0))\nprint(score)"
+  },
+  "pop": {
+    "question": "pop",
+    "body": "**Definition:** `pop(index)` removes and returns the item at the specified index. If the index is omitted, it removes and returns the last item.",
+    "code": "score = [78, 90, 88, 95, 74]\nprint(score.pop(4))\nprint(score.pop())\nprint(score)"
+  },
+  "sort": {
+    "question": "sort and sorted",
+    "body": "**Definition:** `list.sort()` sorts a list in place and returns `None`. `sorted(iterable)` returns a new sorted list without changing the original.\n\n| Function or method | Definition |\n|---|---|\n| `len()` | Number of items |\n| `max()` / `min()` | Largest / smallest item |\n| `sum()` | Adds numerical items |\n| `reverse()` | Reverses the list in place |",
+    "code": "score = [78, 90, 88, 95, 10, 20, 30]\nprint(len(score))\nprint(max(score))\nprint(min(score))\nprint(sum(score))\n\nnums = [34, 56, 21]\nprint(sorted(nums))\nprint(nums)\n\nnums.sort()\nprint(nums)\n\nscore.reverse()\nprint(score)"
+  },
+  "tuples": {
+    "question": "Tuples",
+    "body": "**Definition:** A tuple is an ordered collection of items that cannot be reassigned, added, or removed through the tuple itself after creation.\n\n| Property | Meaning |\n|---|---|\n| Ordered | Items keep their position |\n| Indexing and slicing | Supported |\n| Duplicates allowed | Yes |\n| Immutable | Elements cannot be reassigned |\n\nA tuple can still contain a mutable object, such as a list, whose contents may change.",
+    "code": "a = (1, 2, 3, 4)\nprint(type(a))\nprint(a[0])\nprint(a[1:3])\n\nplain = 1, 2, 3, 4\nprint(type(plain))\n\ntry:\n    a[1] = 20\nexcept TypeError as error:\n    print(error)",
+    "children": [
+      "immutable",
+      "unpacking"
+    ]
+  },
+  "immutable": {
+    "question": "Tuple immutability",
+    "body": "**Definition:** Immutability means that an object's contents cannot be changed through that object after creation. For a tuple, its element references cannot be reassigned. `values[0] = 100` raises `TypeError`.",
+    "code": "a = (1, 2, 3, 4)\nprint(type(a))\nprint(a[0])\nprint(a[1:3])\n\nplain = 1, 2, 3, 4\nprint(type(plain))\n\ntry:\n    a[1] = 20\nexcept TypeError as error:\n    print(error)"
+  },
+  "unpacking": {
+    "question": "Tuple unpacking",
+    "body": "**Definition:** Tuple packing groups multiple values into a single tuple. Tuple unpacking assigns the elements to separate variables. The number of names must match the number of items.\n\n`list()` and `tuple()` convert suitable iterables into lists and tuples.",
+    "code": "p1 = (\"Mary\", 23, \"developer\")\nname, age, role = p1\nprint(name)\nprint(age)\nprint(role)\n\na = 12\nb = 45\nc = 78\nt2 = (a, b, c)\nprint(t2)\n\nl1 = [10, 20, 30]\nt1 = tuple(l1)\nl2 = list(t1)\nprint(t1)\nprint(l2)\n\nfor i in t1:\n    print(i + 10)"
+  },
+  "sets": {
+    "question": "Sets",
+    "body": "**Definition:** A set is a mutable collection of unique, hashable elements. It does not provide positional indexing or slicing.\n\n| Property | Meaning |\n|---|---|\n| Unique | Duplicate elements are eliminated |\n| Hashable elements | Required |\n| Mutable | You can add and remove items |\n| Not indexed | No indexing or slicing |\n\nUse `set()` to create an empty set. `{}` creates an empty dictionary.",
+    "code": "skills = [\"Python\", \"SQL\", \"Power BI\", \"Python\", \"SQL\"]\nunique_skills = set(skills)\nprint(unique_skills)\n\nnames = {\"Python\", \"python\", \"SQL\"}\nprint(names)\n\nunique_skills.add(\"nlp\")\nprint(unique_skills)\nunique_skills.remove(\"Python\")\nprint(unique_skills)\n\ntry:\n    print(unique_skills[0])\nexcept TypeError as error:\n    print(error)",
+    "children": [
+      "unique",
+      "set operators"
+    ]
+  },
+  "unique": {
+    "question": "Unique values",
+    "body": "**Definition:** Unique values occur only once in a collection of distinct values. A set automatically removes duplicates according to Python's equality and hashing rules.",
+    "code": "skills = [\"Python\", \"SQL\", \"Power BI\", \"Python\", \"SQL\"]\nunique_skills = set(skills)\nprint(unique_skills)\n\nnames = {\"Python\", \"python\", \"SQL\"}\nprint(names)\n\nunique_skills.add(\"nlp\")\nprint(unique_skills)\nunique_skills.remove(\"Python\")\nprint(unique_skills)\n\ntry:\n    print(unique_skills[0])\nexcept TypeError as error:\n    print(error)"
+  },
+  "set operators": {
+    "question": "Set operators",
+    "body": "**Definition:** Set operators perform mathematical operations on sets.\n\n| Operator | Definition |\n|---|---|\n| `&` | Intersection: elements common to both sets |\n| `\\|` | Union: all distinct elements from both sets |\n| `-` | Difference: elements in the first set but not the second |\n| `^` | Symmetric difference: elements in either set, but not both |",
+    "code": "skills1 = {\"Python\", \"SQL\", \"NLP\"}\nskills2 = {\"Python\", \"ML\", \"pandas\"}\n\nprint(skills1 & skills2)\nprint(skills1 | skills2)\nprint(skills1 - skills2)\n\nprint(skills1 and skills2)\nprint(skills1 or skills2)\n\nletters = {\"b\", \"a\", \"c\"}\nprint(sorted(letters))"
+  },
+  "dictionary": {
+    "question": "Dictionary",
+    "body": "**Definition:** A dictionary is a mutable mapping that stores data as key-value pairs. Each key identifies the value associated with it.\n\n| Property | Meaning |\n|---|---|\n| Key-value pairs | The key is the label |\n| Unique keys | A key appears once |\n| Hashable keys | Required |\n| Values | Any data type |\n| Mutable | Add, update, and delete |\n| Access | By key, not by positional index |",
+    "code": "employee = {\n    \"name\": \"Rahul\",\n    \"age\": 24,\n    \"department\": \"AI\",\n    \"salary\": 1000\n}\nprint(employee)\nprint(employee[\"name\"])\nprint(employee[\"age\"])\n\ntry:\n    print(employee[\"email\"])\nexcept KeyError as error:\n    print(\"KeyError:\", error)\n\nrepeat = {\"name\": \"Rahul\", \"name\": \"Priya\"}\nprint(repeat)\n\ncodes = {1: \"Python\", 2: \"SQL\"}\nprint(codes[1])",
+    "children": [
+      "creating",
+      "access",
+      "add update",
+      "dict remove",
+      "unique keys",
+      "value types",
+      "in operator",
+      "keys",
+      "values",
+      "items",
+      "get",
+      "update copy",
+      "looping",
+      "nested",
+      "properties",
+      "dict quiz"
+    ]
+  },
+  "creating": {
+    "question": "Create a dictionary",
+    "body": "**Definition:** A dictionary is commonly created using curly braces `{ }` with each key and value separated by a colon.",
+    "code": "employee = {\n    \"name\": \"Rahul\",\n    \"age\": 24,\n    \"department\": \"AI\",\n    \"salary\": 1000\n}\nprint(employee)\nprint(type(employee))"
+  },
+  "access": {
+    "question": "Access a value",
+    "body": "**Definition:** Dictionary access retrieves a value using its key. If the key is missing, square-bracket access raises `KeyError`.",
+    "code": "employee = {\"name\": \"Rahul\", \"age\": 24}\nprint(employee[\"name\"])\nprint(employee.get(\"email\", \"not found\"))"
+  },
+  "add update": {
+    "question": "Add and update",
+    "body": "**Definition:** Assigning a value to a new dictionary key adds a pair. Assigning to an existing key replaces its value.",
+    "code": "employee = {\"name\": \"Rahul\", \"age\": 24, \"salary\": 1000}\nemployee[\"city\"] = \"Mumbai\"\nprint(employee)\nemployee[\"salary\"] = 2000\nprint(employee[\"salary\"])"
+  },
+  "unique keys": {
+    "question": "Unique keys",
+    "body": "**Definition:** Keys must be unique. If the same key is written twice, the later value replaces the earlier one. Keys must be hashable. A list cannot be a key.",
+    "code": "data = {\"name\": \"Rahul\", \"age\": 25, \"name\": \"Amit\"}\nprint(data)"
+  },
+  "value types": {
+    "question": "Value types",
+    "body": "**Definition:** Values can be of any data type. A nested value keeps the rules of its own type: a list can be indexed; a set cannot.",
+    "code": "employee = {\n    \"name\": \"Rahul\",\n    \"department\": \"AI\",\n    \"skills\": [\"Python\", \"SQL\", \"ML\"]\n}\nprint(employee[\"skills\"])\nprint(employee[\"skills\"][0])\n\nemployee[\"skills\"].append(\"Deep Learning\")\nprint(employee[\"skills\"])\n\nemployee2 = {\n    \"name\": \"Rahul\",\n    \"skills\": {\"Python\", \"SQL\", \"Python\"}\n}\nprint(employee2[\"skills\"])\ntry:\n    print(employee2[\"skills\"][0])\nexcept TypeError as error:\n    print(error)"
+  },
+  "in operator": {
+    "question": "in operator",
+    "body": "**Definition:** When used with a dictionary, `in` checks whether a specified key exists. To check values, use `in` with `employee.values()`.",
+    "code": "employee = {\"name\": \"Rahul\", \"age\": 24}\nprint(\"name\" in employee)\nprint(\"salary\" in employee)"
+  },
+  "keys": {
+    "question": "keys()",
+    "body": "**Definition:** `keys()` returns a dictionary view containing its keys. A `for` loop over the dictionary also walks the keys.",
+    "code": "employee = {\n    \"name\": \"Rahul\",\n    \"age\": 24,\n    \"department\": \"AI\",\n    \"salary\": 1000\n}\nprint(list(employee.keys()))\nprint(list(employee.values()))\nprint(list(employee.items()))\n\nprint(employee.get(\"name\"))\nprint(employee.get(\"email\", \"not found\"))\n\nemployee = {\n    \"name\": \"Rahul\",\n    \"age\": 24,\n    \"department\": \"AI\",\n    \"salary\": 1000\n}\n\nprint(\"--- keys ---\")\nfor i in employee:\n    print(i)\n\nprint(\"--- values ---\")\nfor i in employee.values():\n    print(i)\n\nprint(\"--- pairs ---\")\nfor k, v in employee.items():\n    print(k, v)"
+  },
+  "values": {
+    "question": "values()",
+    "body": "**Definition:** `values()` returns a dictionary view containing the dictionary's values.",
+    "code": "marks = {\"Python\": 85, \"SQL\": 92, \"ML\": 88}\nprint(list(marks.values()))"
+  },
+  "items": {
+    "question": "items()",
+    "body": "**Definition:** `items()` returns a dictionary view containing key-value pairs, with each pair represented as a tuple.",
+    "code": "employee = {\n    \"name\": \"Rahul\",\n    \"age\": 24,\n    \"department\": \"AI\",\n    \"salary\": 1000\n}\n\nprint(\"--- keys ---\")\nfor i in employee:\n    print(i)\n\nprint(\"--- values ---\")\nfor i in employee.values():\n    print(i)\n\nprint(\"--- pairs ---\")\nfor k, v in employee.items():\n    print(k, v)"
+  },
+  "get": {
+    "question": "get()",
+    "body": "**Definition:** `get(key, default)` returns the value associated with a key, or a default value if the key is absent. If no default is supplied, a missing key returns `None`.",
+    "code": "employee = {\"name\": \"Rahul\"}\nprint(employee.get(\"name\"))\nprint(employee.get(\"email\", \"not found\"))"
+  },
+  "update copy": {
+    "question": "update() and copy()",
+    "body": "**Definition:** `update()` adds pairs from another mapping or replaces values of existing keys. `copy()` creates a shallow copy. Nested mutable objects are not copied recursively.",
+    "code": "employee = {\"name\": \"Rahul\", \"age\": 24}\nemployee.update({\"city\": \"Bengaluru\", \"age\": 26})\nbackup = employee.copy()\nprint(employee)\nprint(backup)"
+  },
+  "looping": {
+    "question": "Loop a dictionary",
+    "body": "**Definition:** Dictionary iteration means accessing dictionary keys, values or key-value pairs one by one using a loop.\n\nA dictionary stores data in key-value pairs.\n\n| Method | What it walks |\n|---|---|\n| `for key in student` | Keys. Using a dictionary directly in a for loop gives its keys |\n| `student.values()` | Values |\n| `student.items()` | Key-value pairs |\n| `student.keys()` | Keys |\n\n**Important dictionary methods:**\n- `keys()` returns all dictionary keys\n- `values()` returns all dictionary values\n- `items()` returns key-value pairs",
+    "code": "student = {\n    \"name\": \"Rahul\",\n    \"age\": 22,\n    \"course\": \"Python\"\n}\n\nfor key in student:\n    print(key)\n\nfor value in student.values():\n    print(value)\n\nfor key, value in student.items():\n    print(key, \":\", value)\n\nfor key in student.keys():\n    print(key)"
+  },
+  "nested": {
+    "question": "Nested dictionaries and lists",
+    "body": "**Definition:** A nested dictionary is a dictionary whose value contains another dictionary. This structure is useful for representing related or hierarchical data.",
+    "code": "employee = {\n    \"name\": \"Rahul\",\n    \"department\": \"AI\",\n    \"skills\": [\"Python\", \"SQL\", \"ML\"]\n}\nprint(employee[\"skills\"])\nprint(employee[\"skills\"][0])\n\nemployee[\"skills\"].append(\"Deep Learning\")\nprint(employee[\"skills\"])\n\nemployee2 = {\n    \"name\": \"Rahul\",\n    \"skills\": {\"Python\", \"SQL\", \"Python\"}\n}\nprint(employee2[\"skills\"])\ntry:\n    print(employee2[\"skills\"][0])\nexcept TypeError as error:\n    print(error)\n\nemployees = [\n    {\"name\": \"Rahul\", \"department\": \"AI\", \"salary\": 2000},\n    {\"name\": \"Priya\", \"department\": \"Data\", \"salary\": 3000},\n    {\"name\": \"Sumit\", \"department\": \"IT\", \"salary\": 1000}\n]\n\nprint(employees[0])\nprint(employees[0][\"name\"])\nprint(employees[0][\"name\"][0])\n\nprint(\"--- every name ---\")\nfor i in employees:\n    print(i[\"name\"])\n\nprint(\"--- salary greater than 1500 ---\")\nfor i in employees:\n    if i[\"salary\"] > 1500:\n        print(i[\"name\"])\n\nprint(\"--- department of Priya ---\")\nfor i in employees:\n    if i[\"name\"] == \"Priya\":\n        print(i[\"department\"])\n\nstudent = {\n    \"name\": \"April\",\n    \"course\": \"AIML\",\n    \"marks\": {\n        \"Python\": 85,\n        \"SQL\": 70,\n        \"ML\": 88\n    }\n}\n\nprint(student[\"name\"])\nprint(student[\"marks\"][\"ML\"])\n\nstudent[\"marks\"][\"SQL\"] = 92\nstudent[\"marks\"][\"Deep Learning\"] = 88\nprint(student[\"marks\"])\n\nprint(\"--- subjects above 90 ---\")\nfor subject, marks in student[\"marks\"].items():\n    if marks > 90:\n        print(subject)\n\naverage = sum(student[\"marks\"].values()) / len(student[\"marks\"])\nprint(average)"
+  },
+  "properties": {
+    "question": "Dictionary properties",
+    "body": "**Definition:** A dictionary stores unique hashable keys mapped to values. It is mutable. Values are accessed by key, not by positional index.",
+    "code": "employee = {\"name\": \"Rahul\", \"age\": 24}\nprint(type(employee))\nprint(\"name\" in employee)\nprint(list(employee.keys()))"
+  },
+  "dict quiz": {
+    "question": "Day 3 QA (from test.ipynb)",
+    "body": "Answer in the code cell below. For questions 1–7, write the answer as a comment. For questions 8–10, write the program.\n\n1. `text = \"Python\"`. What does `text[2]` print? What happens on `text[8]`?\n\n2. `numbers = [10, 20, 30]`, then `numbers.append(40)`, then `numbers[0] = 100`. What is `numbers`?\n\n3. Which of list, tuple, and set keep duplicates? Which one lets you replace an item by index?\n\n4. `employee[\"email\"]` was never stored. What error do you get? What does `employee.get(\"email\", \"not found\")` return?\n\n5. What is the difference between `employee.pop(\"city\")` and `del employee[\"city\"]`?\n\n6. `for i in employee` prints keys or values?\n\n7. `employees[0][\"name\"]` is `\"Rahul\"`. What is `employees[0][\"name\"][0]`?\n\n8. From this list, print the name of each employee whose salary is greater than `1500`.\n\n```python\nemployees = [\n    {\"name\": \"Rahul\", \"salary\": 2000},\n    {\"name\": \"Priya\", \"salary\": 3000},\n    {\"name\": \"Sumit\", \"salary\": 1000}\n]\n```\n\n9. `student[\"marks\"][\"SQL\"]` is `70`. Change it to `92`, then print the marks dictionary.\n\n10. Marks are `{\"Python\": 85, \"SQL\": 92, \"ML\": 88}`. Write the average.",
+    "code": ""
+  },
+  "functions": {
+    "question": "Functions",
+    "body": "**Definition:** A function is a reusable block of code designed to perform a specific task.\n\nInstead of writing the same code multiple times, we can write it once inside a function and call it whenever required.\n\n| Type | Definition | Example |\n|---|---|---|\n| Built-in | Provided by Python, available without `def` | `print()`, `len()`, `sum()`, `type()`, `min()`, `max()` |\n| User-defined | Created by a programmer with `def` | `def greet():` |\n| Lambda | Small anonymous function; body is one expression | `lambda number: number * 2` |\n| Recursive | Calls itself; needs a base case to stop | `countdown(n)` |",
+    "code": "def greet():\n    print(\"Hello, how are you?\")\n\ngreet()\ngreet()",
+    "children": [
+      "syntax",
+      "types",
+      "built-in",
+      "user-defined",
+      "recursive",
+      "define vs call",
+      "parameters",
+      "print vs return",
+      "score check",
+      "vote",
+      "average",
+      "positional",
+      "keyword",
+      "default",
+      "scope",
+      "nested call",
+      "search name",
+      "split tasks",
+      "employee bonus",
+      "interview",
+      "even odd"
+    ]
+  },
+  "arguments": {
+    "question": "arguments",
+    "body": "This topic is not in test.ipynb yet. When your class adds it to the notebook, it will appear here too.",
+    "code": ""
+  },
+  "scope": {
+    "question": "Local and global variables",
+    "body": "**Local variable:** A name bound within a function's local scope. It can normally be accessed within that function, not directly from outside it.\n\n**Global variable:** A name defined at module level. Functions can generally read that name. Prefer parameters and return values because they make functions easier to understand and test.",
+    "code": "def demo():\n    x = 10\n    print(\"inside\", x)\n\ndemo()\n\nx = 100\n\ndef demo2():\n    print(\"inside\", x)\n\ndemo2()\nprint(\"outside\", x)"
+  },
+  "lambda": {
+    "question": "Lambda functions",
+    "body": "**Definition:** A lambda function is a small anonymous function created using the `lambda` keyword.\n\nIt can accept any number of arguments but contains only one expression. The expression is evaluated and its result is automatically returned.\n\nSyntax: `lambda arguments: expression`\n\n**Important points:**\n- Lambda functions are anonymous functions\n- They are created using the `lambda` keyword\n- They can accept multiple arguments\n- They contain only one expression\n- The result of the expression is returned automatically\n- They are commonly used with `map()`, `filter()`, and `sorted()`",
+    "code": "square = lambda x: x * x\nprint(square(5))\n\nadd = lambda a, b: a + b\nprint(add(10, 20))\n\nsubtract = lambda a, b: a - b\nprint(subtract(20, 10))\n\nadd_ten = lambda x: x + 10\nprint(add_ten(5))"
+  },
+  "syntax": {
+    "question": "Function syntax",
+    "body": "**Definition:** `def` is a Python keyword used to define a function. The function body is indented under the definition. Defining a function does not execute its body immediately.\n\nWrong indentation causes `IndentationError`.",
+    "code": "def add():\n    print(10 + 20)\n\nadd()"
+  },
+  "types": {
+    "question": "Types of functions",
+    "body": "**Definition:** These are the main kinds of functions.\n\n| Type | Definition |\n|---|---|\n| Built-in | Provided by Python without defining them yourself |\n| User-defined | Created by a programmer with `def` |\n| Lambda | Small anonymous function created with `lambda`. Body is a single expression |\n| Recursive | A function that calls itself, directly or indirectly. Needs a base case to stop |",
+    "code": "print(len([10, 20, 30]))\nprint(sum([10, 20, 30]))\n\ndef multiply(a, b):\n    return a * b\n\nprint(multiply(4, 5))\n\nsquare = lambda x: x * x\nprint(square(5))\n\ndef countdown(number):\n    if number == 0:\n        print(\"Done\")\n    else:\n        print(number)\n        countdown(number - 1)\n\ncountdown(3)"
+  },
+  "built-in": {
+    "question": "Built-in functions",
+    "body": "**Definition:** Built-in functions are functions provided by Python and available without defining them yourself or importing a module. Examples: `print()`, `len()`, `sum()`, `type()`, `min()`, `max()`.",
+    "code": "print(\"Hello\")\nprint(len([10, 20, 30]))\nprint(sum([10, 20, 30]))\nprint(max([10, 20, 30]))\nprint(min([10, 20, 30]))\nprint(type(100))"
+  },
+  "user-defined": {
+    "question": "User-defined functions",
+    "body": "**Definition:** A user-defined function is a function created by a programmer to perform a particular task.",
+    "code": "def multiply(a, b):\n    return a * b\n\nprint(multiply(4, 5))"
+  },
+  "recursive": {
+    "question": "Recursive functions",
+    "body": "**Definition:** A recursive function is a function that calls itself, directly or indirectly, to solve a problem. A recursive solution normally needs a base case to stop further calls.",
+    "code": "def countdown(number):\n    if number == 0:\n        print(\"Done\")\n    else:\n        print(number)\n        countdown(number - 1)\n\ncountdown(3)"
+  },
+  "modules": {
+    "question": "Modules",
+    "body": "**Definition:** A module is a Python file containing reusable code such as functions, variables and classes. Modules allow us to reuse existing code instead of writing everything from scratch.\n\nSyntax: `import module_name`\n\n| Module / package | Use |\n|---|---|\n| `math` | Mathematical operations (standard library) |\n| `random` | Random values (standard library) |\n| `statistics` | Statistical calculations (standard library) |\n| Pandas | Data manipulation (third-party) |\n| TensorFlow | ML / deep learning (third-party) |\n| OpenCV | Image and video processing (third-party) |\n\n**Difference:** Module = a file of reusable code. Function = one task inside it, e.g. `math.sqrt()`.",
+    "code": "import math\nprint(math.sqrt(25))\nprint(math.factorial(5))\nprint(math.ceil(4.2))\nprint(math.floor(4.8))\n\nimport random\nprint(random.randint(1, 6))"
+  },
+  "try except": {
+    "question": "Exception handling",
+    "body": "**Definition:** Exception handling is a mechanism in Python used to handle runtime exceptions so that a program can respond to errors instead of terminating unexpectedly.\n\n**Why:** handle runtime exceptions, prevent unexpected termination, show meaningful messages, make programs more reliable.\n\n| Keyword | Meaning |\n|---|---|\n| `try` | Code that may cause an exception |\n| `except` | Code to handle the exception |\n\n| Exception | Meaning |\n|---|---|\n| `ValueError` | Correct type, invalid value |\n| `TypeError` | Operation on inappropriate type |\n| `ZeroDivisionError` | Division by zero |\n| `KeyError` | Dictionary key not found |\n| `IndexError` | Index outside valid range |\n| `NameError` | Name not defined |\n| `FileNotFoundError` | File does not exist |\n\n**Note:** `SyntaxError` generally cannot be caught by a normal try-except; fix it before running.",
+    "code": "try:\n    num = int(\"ABC\")\n    print(num)\nexcept ValueError:\n    print(\"Please enter a valid integer.\")\n\ntry:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero.\")\n\nstudent = {\"name\": \"Rahul\", \"age\": 20, \"course\": \"Python\"}\ntry:\n    print(student[\"salary\"])\nexcept KeyError as e:\n    print(\"Key does not exist:\", e)\n\nnumbers = [10, 20, 30]\ntry:\n    print(numbers[5])\nexcept IndexError:\n    print(\"Index is out of range.\")\n\ntry:\n    result = 10 + \"Python\"\nexcept TypeError:\n    print(\"Cannot add an integer and a string.\")\n\ntry:\n    a, b = 10, 0\n    print(a / b)\nexcept ValueError:\n    print(\"Please enter numbers only.\")\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero.\")"
+  },
+  "files": {
+    "question": "File handling",
+    "body": "**Definition:** File handling is the process of creating, opening, reading, writing, appending/updating, and managing files using Python.\n\n**Why:** Variables live only in memory. When the kernel/notebook closes, they disappear. Files keep data permanently (names, sales, logs, reports).\n\n| Mode | Meaning |\n|---|---|\n| `r` | Read only |\n| `w` | Write — creates file if missing; **overwrites** existing content |\n| `a` | Append — add at the end without deleting old content |\n\nAlways `close()` after you finish. Class also mentioned `with open` and looping files for later.",
+    "code": "file = open(\"students.txt\", \"r\")\ndata = file.read()\nprint(data)\nfile.close()\n\nfile = open(\"students.txt\", \"w\")\nfile.write(\"Mary\\n\")\nfile.write(\"Tom\\n\")\nfile.close()\n\nfile = open(\"students.txt\", \"a\")\nfile.write(\"\\nGood morning\")\nfile.close()\n\nfile = open(\"new_file.txt\", \"w\")\nfile.write(\"This is the new file\")\nfile.close()",
+    "children": [
+      "file modes",
+      "file read",
+      "file write"
+    ]
+  },
+  "classes": {
+    "question": "Class",
+    "body": "**Definition:** A class is a blueprint or template used to create objects. It defines the attributes and methods that its objects can have.\n\nSyntax: `class ClassName:`\n\n- `class` — keyword used to create a class\n- `Student` — name of the class\n- `pass` — placeholder when the class has no code yet\n\n**Remember:** Class = blueprint. Object = instance created from the class.",
+    "code": "class Student:\n    pass\n\nclass Car:\n    pass\n\nprint(Student)\nprint(Car)",
+    "children": [
+      "oop",
+      "object",
+      "attributes",
+      "init",
+      "self",
+      "methods",
+      "inheritance",
+      "multiple inheritance",
+      "day6 compare",
+      "day6 interview",
+      "day6 revision"
+    ]
+  },
+  "init": {
+    "question": "__init__() method",
+    "body": "**Definition:** `__init__()` is a special method in Python that is automatically called when a new object is created. It is commonly used to initialize the object's attributes.\n\nSyntax:\n```\nclass ClassName:\n    def __init__(self, parameters):\n        self.attribute = parameters\n```\n\n**Important:**\n- `__init__()` is a special method\n- It is not a Python keyword\n- It initializes object attributes\n- It is automatically called when an object is created",
+    "code": "class Student:\n    def __init__(self, name, age, course):\n        self.name = name\n        self.age = age\n        self.course = course\n\ns1 = Student(\"Rahul\", 15, \"Python\")\ns2 = Student(\"Priya\", 17, \"Python\")\nprint(s1.name)\nprint(s2.name)"
+  },
+  "inheritance": {
+    "question": "Inheritance",
+    "body": "**Definition:** Inheritance is an OOP concept in which a child class acquires attributes and methods from another class called the parent class. It allows us to reuse existing code instead of writing the same code again.\n\n| Term | Meaning |\n|---|---|\n| Parent class | Class whose attributes and methods are inherited (base class) |\n| Child class | Class that inherits (derived class) |\n\nSyntax: `class Child(Parent):`\n\n**Types of inheritance:** single, multiple, multilevel, hierarchical, hybrid.\n\n**Why:** Employee, Data Scientist, Data Analyst may share name and salary — put common parts in a parent `Employee` class.",
+    "code": "class Employee:\n    def __init__(self, name, salary):\n        self.name = name\n        self.salary = salary\n\n    def display(self):\n        print(\"Name:\", self.name)\n        print(\"Salary:\", self.salary)\n\nclass DataScientist(Employee):\n    pass\n\nd1 = DataScientist(\"Amit\", 10000)\nd1.display()"
+  },
+  "polymorphism": {
+    "question": "polymorphism",
+    "body": "**Definition:** Polymorphism is the ability to use a common interface with different object types that provide their own behavior.",
+    "code": ""
+  },
+  "list comprehension": {
+    "question": "List comprehension",
+    "body": "**Definition:** List comprehension is a shorter and more readable way to create a new list from an existing iterable.\n\nIt allows us to apply an expression to each element and optionally include a condition to select specific elements.\n\nSyntax: `new_list = [expression for item in iterable]`\n\n**Important points:**\n- List comprehension creates a new list\n- It can apply an expression to every element\n- It can include conditions using `if`\n- It can use if-else to choose between two expressions\n- It makes code shorter than writing a normal for loop",
+    "code": "numbers = [1, 2, 3, 4, 5]\nsquares = [i * i for i in numbers]\nprint(squares)\n\nnew_list = [i + 10 for i in numbers]\nprint(new_list)\n\nnumbers = [1, 2, 3, 4, 5, 6]\neven_numbers = [i for i in numbers if i % 2 == 0]\nprint(even_numbers)\n\nresult = [i + 10 if i > 3 else i for i in numbers]\nprint(result)",
+    "children": [
+      "set comprehension",
+      "dict comprehension"
+    ]
+  },
+  "JSON": {
+    "question": "JSON",
+    "body": "**Definition:** JSON (JavaScript Object Notation) is a text-based format used to represent and exchange structured data.",
+    "code": ""
+  },
+  "dict remove": {
+    "question": "remove",
+    "body": "**Definition:** `pop(key)` removes a specified key and returns its value. It raises `KeyError` if the key is absent and no default is provided. `del` deletes a specified entry, or removes a name binding when used on a variable.",
+    "code": "employee = {\"name\": \"Rahul\", \"age\": 24, \"salary\": 1000, \"city\": \"Mumbai\"}\nprint(employee.pop(\"city\"))\ndel employee[\"age\"]\nprint(employee)"
+  },
+  "define vs call": {
+    "question": "Define vs call",
+    "body": "**Interview answer:** Defining a function means writing its logic. Calling a function means executing that logic.\n\n| Action | What happens |\n|---|---|\n| `def hello():` | Only defines. Nothing prints yet |\n| `hello()` | Runs the body |\n\nYou can call the same function many times.",
+    "code": "def greet():\n    print(\"Hello, how are you?\")\n\nprint(\"defined, not called yet\")\ngreet()"
+  },
+  "parameters": {
+    "question": "Parameters vs arguments",
+    "body": "**Interview answer:** A parameter is a variable in the function definition. An argument is the actual value supplied when calling the function.\n\nIn `greet(name)`, `name` is the parameter. In `greet(\"Ravi\")`, `\"Ravi\"` is the argument.\n\nThe number of arguments must match the required parameters unless a default is used.",
+    "code": "def greet_one(name):\n    print(\"Hello, how are you?\", name)\n\ngreet_one(\"Mary\")\ngreet_one(\"John\")\n\ndef calculate(a, b):\n    print(\"addition\", a + b)\n    print(\"subtraction\", a - b)\n    print(\"multiplication\", a * b)\n    print(\"division\", a / b)\n\ncalculate(70, 21)"
+  },
+  "print vs return": {
+    "question": "print vs return",
+    "body": "**Interview answer:** `print()` displays a value on the screen. `return` sends a value back to the caller.\n\n| `print()` | `return` |\n|---|---|\n| Displays a value | Sends a value back to the caller |\n| Useful for messages and debugging | Useful for calculations and further processing |\n\nUse `print()` when you want to display something. Use `return` when you want a result for later use.\n\nIf a function has no `return`, Python returns `None`.",
+    "code": "def add1(a, b, c):\n    return a + b + c\n\nprint(add1(5, 6, 7))\nprint(add1(5, 6, 7) * 10)\n\nresult = add1(1, 2, 3)\nprint(result)"
+  },
+  "score check": {
+    "question": "Conditions inside functions",
+    "body": "**Definition:** Conditions inside a function let the function choose which statements to execute based on the supplied values.",
+    "code": "def result(score):\n    if score > 80:\n        print(\"Excellent\")\n    elif 60 < score <= 80:\n        print(\"Very good\")\n    else:\n        print(\"Better luck next time\")\n\nresult(45)\nresult(89)"
+  },
+  "vote": {
+    "question": "Voting eligibility",
+    "body": "**Definition:** A function can check a condition and return or print a decision. Class rule: age `>= 18` is eligible to vote.",
+    "code": "def vote(age):\n    if age >= 18:\n        print(\"can vote\")\n    else:\n        print(\"you cannot vote\")\n\nvote(23)\nvote(16)"
+  },
+  "average": {
+    "question": "Average marks",
+    "body": "**Definition:** An average, or arithmetic mean, is the sum of numerical values divided by the number of values. An empty list needs a separate check to avoid division by zero.",
+    "code": "def average(marks):\n    total = sum(marks)\n    average = total / len(marks)\n    return average\n\nprint(average([80, 90, 70, 60]))"
+  },
+  "positional": {
+    "question": "Positional arguments",
+    "body": "**Interview answer:** Positional arguments are matched to parameters according to their order in the function call.\n\nThe first argument fills the first parameter. Order matters.\n\n`employee(\"IT\", \"Ravi\")` puts `\"IT\"` in `name` if `name` is first.",
+    "code": "def intro(name, age):\n    print(\"Hello\", name)\n    print(\"Your age is\", age)\n\nintro(\"Rahul\", 12)\nintro(12, \"Rahul\")"
+  },
+  "keyword": {
+    "question": "Keyword arguments",
+    "body": "**Interview answer:** Keyword arguments are passed using parameter names, so Python matches values by name.\n\nOrder can change. You cannot put a positional argument after a keyword argument.\n\n| Positional | Keyword |\n|---|---|\n| Matched by position | Matched by parameter name |\n| Order matters | Order can change |\n| `add(10, 20)` | `add(a=10, b=20)` |",
+    "code": "def intro(name, age):\n    print(\"Hello\", name)\n    print(\"Your age is\", age)\n\nintro(age=12, name=\"Rahul\")\n\ndef employee(department, salary):\n    print(\"You belong to\", department)\n    print(\"Your salary is\", salary)\n\nemployee(salary=40000, department=\"IT\")"
+  },
+  "default": {
+    "question": "Default arguments",
+    "body": "**Interview answer:** A default argument is a value used when the caller does not provide a value for that parameter.\n\nIf you pass a value, Python uses yours. If you skip it, Python uses the default.\n\nRequired parameters must come before default parameters. If a default exists and you pass a different value, the value you passed is used.",
+    "code": "def greet_two(name, message=\"welcome\"):\n    print(message, name)\n\ngreet_two(\"Rahul\")\ngreet_two(\"Rahul\", \"Good morning\")"
+  },
+  "nested call": {
+    "question": "Function inside a function",
+    "body": "**Definition:** A function can call another function to reuse its functionality. The called function can return a value to the calling function.\n\n`add(2, 3)` runs first and returns `5`; then `double(5)` returns `10`.",
+    "code": "def add(a, b):\n    return a + b\n\ndef double(n):\n    return n * 2\n\nprint(add(5, 6))\nprint(double(8))\nprint(double(add(2, 3)))\n\ndef total(x):\n    return sum(x)\n\ndef average(x):\n    return total(x) / len(x)\n\nprint(average([10, 20, 30]))"
+  },
+  "search name": {
+    "question": "Search a name in a list",
+    "body": "**Definition:** A search function checks a collection for a specified value and returns a result indicating whether the value was found.",
+    "code": "students = [\"Alex\", \"Mary\", \"John\", \"Priyam\"]\n\ndef find_name(students, name):\n    for i in students:\n        if i == name:\n            return True\n    return False\n\nprint(find_name(students, \"Mary\"))\nprint(find_name(students, \"Monica\"))"
+  },
+  "split tasks": {
+    "question": "Split a big task",
+    "body": "**Definition:** Decomposing a program means dividing a large task into smaller functions, each responsible for a clear part of the work. This improves readability, reuse, testing, and maintenance.",
+    "code": "def get_input():\n    return {\"name\": \"Rahul\", \"marks\": [80, 90, 70]}\n\ndef calculate_marks(marks):\n    return sum(marks) / len(marks)\n\ndef check_result(average):\n    if average >= 60:\n        return \"pass\"\n    return \"fail\"\n\ndef process_student():\n    student = get_input()\n    avg = calculate_marks(student[\"marks\"])\n    print(student[\"name\"], avg, check_result(avg))\n\nprocess_student()"
+  },
+  "employee bonus": {
+    "question": "Employee bonus",
+    "body": "**Definition:** Walk a list of dictionaries. Check experience. Bonus is 10% of salary when experience is `>= 3`, else 5%.\n\nThis uses dictionaries, a loop, a condition, and a function together.",
+    "code": "employees = [\n    {\"name\": \"Rahul\", \"experience\": 3, \"salary\": 2000},\n    {\"name\": \"Amit\", \"experience\": 2, \"salary\": 2000},\n    {\"name\": \"Mary\", \"experience\": 4, \"salary\": 4000},\n]\n\ndef calculate_bonus(employee):\n    for i in employee:\n        if i[\"experience\"] >= 3:\n            bonus = 0.10 * i[\"salary\"]\n        else:\n            bonus = 0.05 * i[\"salary\"]\n        print(\"The bonus of\", i[\"name\"], \"is\", bonus)\n\ncalculate_bonus(employees)"
+  },
+  "interview": {
+    "question": "Interview revision",
+    "body": "**Q1. What is a function?**\nA function is a reusable block of code designed to perform a specific task.\n\n**Q2. Define vs call?**\nDefining means writing the function's logic. Calling means executing that logic.\n\n**Q3. Parameter vs argument?**\nA parameter is a variable in the definition. An argument is the actual value supplied when calling.\n\n**Q4. Positional arguments?**\nMatched to parameters by order in the call. Order matters.\n\n**Q5. Keyword arguments?**\nPassed using parameter names. Python matches by name.\n\n**Q6. Default argument?**\nUsed when the caller does not provide that value. If you pass a different value, yours is used.\n\n**Q7. `print()` vs `return`?**\n`print()` displays a value. `return` sends a value back to the caller.\n\n**Q8. Local variable?**\nCreated inside a function. Normally accessible only there.\n\n**Q9. Global variable?**\nDefined outside functions. Functions can generally read it.\n\n**Q10. Can one function call another?**\nYes. It can use the returned value.\n\n**Q11. No `return` statement?**\nPython returns `None`.\n\n**Q12. Why use functions?**\nAvoid repeated code, improve readability, support reuse, and make programs easier to test.",
+    "code": "def greet_two(name, message=\"welcome\"):\n    print(message, name)\n\ngreet_two(\"Rahul\")\ngreet_two(\"Rahul\", \"Good morning\")"
+  },
+  "even odd": {
+    "question": "Even or odd",
+    "body": "**Definition:** An even integer is divisible by 2 with a remainder of `0`. An odd integer leaves a remainder of `1` when divided by `2`.",
+    "code": "def even_odd(n):\n    if n % 2 == 0:\n        print(n, \"is even\")\n    else:\n        print(n, \"is odd\")\n\neven_odd(10)\neven_odd(7)"
+  },
+  "star args": {
+    "question": "*args",
+    "body": "**Definition:** `*args` allows a function to accept any number of positional arguments without specifying the exact number of arguments in advance.\n\nPython collects all the positional arguments passed to `*args` and stores them inside a tuple.\n\nSyntax: `def function_name(*args):`\n\n**Important points:**\n- `*args` accepts multiple positional arguments\n- Arguments are stored in a tuple\n- The name `args` is not compulsory. The `*` symbol is important\n- You can use a different name, such as `*numbers` or `*values`",
+    "code": "def display(*args):\n    print(args)\n\ndisplay(10, 20, 30, 40)\n\ndef calculate_sum(*numbers):\n    total = sum(numbers)\n    print(\"Total:\", total)\n\ncalculate_sum(10, 20, 30)\ncalculate_sum(5, 10, 15, 20)"
+  },
+  "kwargs": {
+    "question": "**kwargs",
+    "body": "**Definition:** `**kwargs` allows a function to accept any number of keyword arguments without specifying the exact number of arguments in advance.\n\nPython collects all the keyword arguments and stores them inside a dictionary in the form of key-value pairs.\n\nSyntax: `def function_name(**kwargs):`\n\n**Important points:**\n- `**kwargs` accepts multiple keyword arguments\n- Arguments are stored in a dictionary\n- Each argument has a key and a value\n- The name `kwargs` is not compulsory. The `**` symbol is important",
+    "code": "def student_details(**kwargs):\n    print(kwargs)\n\nstudent_details(name=\"Rahul\", age=22, course=\"Python\")\n\ndef employee(**details):\n    for key, value in details.items():\n        print(key, \":\", value)\n\nemployee(name=\"Rahul\", salary=30000, department=\"IT\")"
+  },
+  "set comprehension": {
+    "question": "Set comprehension",
+    "body": "**Definition:** Set comprehension is a shorter way to create a set from an existing iterable.\n\nIt allows us to apply an expression to each element and optionally use conditions to select elements.\n\nSyntax: `new_set = {expression for item in iterable}`\n\n**Important points:**\n- Set comprehension creates a new set\n- Curly brackets `{ }` are used\n- Sets do not store duplicate values\n- Sets are unordered collections\n- Conditions can be used to filter elements",
+    "code": "numbers = [1, 2, 3, 4, 5]\nsquares = {i * i for i in numbers}\nprint(squares)\n\nnumbers = [1, 2, 2, 3, 3, 4, 5]\nunique_numbers = {i for i in numbers}\nprint(unique_numbers)\n\nnumbers = [1, 2, 3, 4, 5, 6]\neven_numbers = {i for i in numbers if i % 2 == 0]\nprint(even_numbers)"
+  },
+  "dict comprehension": {
+    "question": "Dictionary comprehension",
+    "body": "**Definition:** Dictionary comprehension is a shorter way to create a dictionary from an existing iterable.\n\nIt allows us to create key-value pairs using an expression and optionally apply conditions.\n\nSyntax: `new_dict = {key: value for item in iterable}`\n\n**Important points:**\n- Dictionary comprehension creates a dictionary\n- Curly brackets `{ }` are used\n- Key-value pairs are separated using a colon `:`\n- Each key must be unique\n- Conditions can be used to filter elements",
+    "code": "numbers = [1, 2, 3, 4, 5]\nsquares = {i: i * i for i in numbers}\nprint(squares)\n\nnames = [\"Rahul\", \"Amit\", \"Priya\"]\nname_lengths = {name: len(name) for name in names}\nprint(name_lengths)\n\nnumbers = [1, 2, 3, 4, 5, 6]\neven_squares = {i: i * i for i in numbers if i % 2 == 0}\nprint(even_squares)"
+  },
+  "map filter": {
+    "question": "map, filter, sorted",
+    "body": "**Definition:** These built-in functions are often used with lambda.\n\n| Function | Definition |\n|---|---|\n| `map()` | Applies a function to every element. Transforms data |\n| `filter()` | Selects elements based on a condition |\n| `sorted()` | Returns a new list in sorted order |\n| `zip()` | Combines corresponding elements from multiple iterables |\n| `min()` / `max()` | Smallest and largest values |\n| `enumerate()` | Index and value while iterating |\n\n`map()` and `filter()` return an iterator. Use `list()` to see the values. They do not modify the original iterable.",
+    "code": "numbers = [1, 2, 3, 4, 5]\nprint(list(map(lambda x: x * 2, numbers)))\nprint(list(filter(lambda x: x % 2 == 0, numbers)))\nprint(sorted([50, 10, 40, 20, 30]))",
+    "children": [
+      "map",
+      "filter",
+      "sorted",
+      "zip",
+      "min max",
+      "enumerate",
+      "day5 compare",
+      "day5 revision"
+    ]
+  },
+  "map": {
+    "question": "map",
+    "body": "**Definition:** The `map()` function applies a given function to every element of an iterable and returns a map iterator containing the results.\n\nIt is mainly used when we want to transform or modify every element in a collection.\n\nSyntax: `map(function, iterable)`\n\n**Important points:**\n- `map()` applies a function to every element\n- It is used for transforming data\n- It returns a map iterator, not a list\n- Use `list()` to convert the result into a list\n- It does not modify the original iterable",
+    "code": "numbers = [1, 2, 3, 4, 5]\nresult = list(map(lambda x: x * 2, numbers))\nprint(result)\n\nnumbers = [10, 20, 30, 40]\nresult = list(map(lambda x: x + 10, numbers))\nprint(result)\n\nnames = [\"rahul\", \"amit\", \"priya\"]\nresult = list(map(lambda name: name.upper(), names))\nprint(result)"
+  },
+  "filter": {
+    "question": "filter",
+    "body": "**Definition:** The `filter()` function selects elements from an iterable based on a condition.\n\nIt applies a function to each element and keeps only those elements for which the function returns `True`.\n\nSyntax: `filter(function, iterable)`\n\n**Important points:**\n- `filter()` selects elements based on a condition\n- It keeps elements for which the function returns `True`\n- It returns a filter iterator, not a list\n- Use `list()` to convert the result into a list\n- It does not modify the original iterable",
+    "code": "numbers = [1, 2, 3, 4, 5, 6]\nresult = list(filter(lambda x: x % 2 == 0, numbers))\nprint(result)\n\nnumbers = [5, 10, 15, 20, 25]\nresult = list(filter(lambda x: x > 10, numbers))\nprint(result)\n\nmarks = [35, 45, 55, 65, 75]\nresult = list(filter(lambda x: x > 50, marks))\nprint(result)"
+  },
+  "sorted": {
+    "question": "sorted",
+    "body": "**Definition:** The `sorted()` function returns a new list containing the elements of an iterable arranged in a specific order.\n\nBy default, it sorts elements in ascending order. Use `reverse=True` to sort in descending order.\n\nSyntax: `sorted(iterable)` or `sorted(iterable, reverse=True)`\n\n**Important points:**\n- `sorted()` arranges elements in order\n- By default, it sorts in ascending order\n- `reverse=True` sorts in descending order\n- It returns a new list\n- It does not modify the original iterable",
+    "code": "numbers = [50, 10, 40, 20, 30]\nprint(sorted(numbers))\nprint(sorted(numbers, reverse=True))\n\nnames = [\"Priya\", \"Amit\", \"Rahul\"]\nprint(sorted(names))"
+  },
+  "zip": {
+    "question": "zip",
+    "body": "**Definition:** The `zip()` function combines elements from two or more iterables by matching elements at the same position.\n\nIt returns a zip iterator containing tuples of corresponding elements.\n\nSyntax: `zip(iterable1, iterable2)`\n\n**Important points:**\n- `zip()` combines multiple iterables\n- It matches elements based on their positions\n- It returns a zip iterator\n- Use `list()` to view the result as a list\n- It stops when the shortest iterable is exhausted",
+    "code": "names = [\"Rahul\", \"Amit\", \"Priya\"]\nmarks = [85, 90, 95]\nprint(list(zip(names, marks)))\n\nnames = [\"Rahul\", \"Amit\"]\nages = [22, 25]\ncities = [\"Bengaluru\", \"Mumbai\"]\nprint(list(zip(names, ages, cities)))"
+  },
+  "enumerate": {
+    "question": "enumerate",
+    "body": "**Definition:** The `enumerate()` function adds a counter (index) to an iterable and returns an enumerate iterator containing index-value pairs.\n\nIt is useful when we want to access both the index and the value while iterating through a collection.\n\nSyntax: `enumerate(iterable, start=0)`\n\n**Important points:**\n- `enumerate()` provides both index and value\n- The default starting index is `0`\n- We can change the starting index using `start=1` or another value\n- It returns an enumerate iterator\n- It is commonly used with for loops",
+    "code": "names = [\"Rahul\", \"Amit\", \"Priya\"]\nfor index, name in enumerate(names):\n    print(index, name)\n\nfor index, name in enumerate(names, start=1):\n    print(index, name)\n\nnumbers = [10, 20, 30, 40]\nfor index, value in enumerate(numbers):\n    print(\"Index:\", index, \"Value:\", value)"
+  },
+  "combine args": {
+    "question": "Combining *args and **kwargs",
+    "body": "**Definition:** We can use `*args` and `**kwargs` together in a function when we want to accept both multiple positional arguments and multiple keyword arguments.\n\n`*args` collects positional arguments into a tuple. `**kwargs` collects keyword arguments into a dictionary.\n\nSyntax: `def function_name(*args, **kwargs):`\n\n**Important points:**\n- `*args` must come before `**kwargs` in the function definition\n- Positional arguments are collected in a tuple\n- Keyword arguments are collected in a dictionary\n- You can use both in the same function",
+    "code": "def student(*subjects, **details):\n    print(\"Subjects:\", subjects)\n    print(\"Details:\", details)\n\nstudent(\"Python\", \"SQL\", name=\"Rahul\", age=22)"
+  },
+  "min max": {
+    "question": "min and max",
+    "body": "**Definition of min():** The `min()` function returns the smallest element from a collection or the smallest among the given arguments.\n\n**Definition of max():** The `max()` function returns the largest element from a collection or the largest among the given arguments.\n\nSyntax: `min(iterable)` and `max(iterable)`\n\n**Important points:**\n- `min()` returns the smallest value\n- `max()` returns the largest value\n- Both functions work with comparable values\n- They can accept an iterable or multiple arguments",
+    "code": "numbers = [10, 50, 20, 80, 30]\nprint(\"Minimum:\", min(numbers))\nprint(\"Maximum:\", max(numbers))\n\nprint(min(10, 20, 5, 40))\nprint(max(10, 20, 5, 40))\n\nmarks = [45, 78, 90, 65, 88]\nprint(\"Lowest marks:\", min(marks))\nprint(\"Highest marks:\", max(marks))"
+  },
+  "day5 compare": {
+    "question": "Day 5 differences",
+    "body": "| Topic | Difference |\n|---|---|\n| `*args` | Positional arguments, stored in a tuple, one asterisk `*` |\n| `**kwargs` | Keyword arguments, stored in a dictionary, two asterisks `**` |\n| List comprehension | Creates a list with `[]`. Keeps order. Allows duplicates |\n| Set comprehension | Creates a set with `{ }`. No duplicates. No guaranteed order |\n| Dictionary comprehension | Creates a dictionary. Key-value pairs. Keys must be unique |\n| `map()` | Transforms every element |\n| `filter()` | Selects elements based on a condition |\n| `sorted()` | Returns all elements in sorted order as a new list |\n| `min()` | Returns only the smallest element |\n| `max()` | Returns only the largest element |\n| `zip()` | Combines corresponding elements from multiple iterables |\n| `enumerate()` | Provides the index and value of elements from an iterable |",
+    "code": ""
+  },
+  "args kwargs": {
+    "question": "*args and **kwargs",
+    "body": "**Definition:** Day 5 covers functions that can accept a variable number of arguments, plus lambda.\n\n| Topic | Definition |\n|---|---|\n| `*args` | Accepts any number of positional arguments. Stores them in a tuple |\n| `**kwargs` | Accepts any number of keyword arguments. Stores them in a dictionary |\n| Combining both | `*args` must come before `**kwargs`. Positional first, then keyword |\n| Lambda | Small anonymous function. One expression. Result is returned automatically |",
+    "code": "def display(*args):\n    print(args)\n\ndisplay(10, 20, 30, 40)\n\ndef student_details(**kwargs):\n    print(kwargs)\n\nstudent_details(name=\"Rahul\", age=22, course=\"Python\")\n\nsquare = lambda x: x * x\nprint(square(5))",
+    "children": [
+      "star args",
+      "kwargs",
+      "combine args",
+      "lambda"
+    ]
+  },
+  "day5 revision": {
+    "question": "Day 5 quick revision",
+    "body": "| Topic | Meaning |\n|---|---|\n| `*args` | Accepts multiple positional arguments |\n| `**kwargs` | Accepts multiple keyword arguments |\n| Lambda | Creates a small anonymous function |\n| List comprehension | Creates a new list |\n| Set comprehension | Creates a new set |\n| Dict comprehension | Creates a new dictionary |\n| `map()` | Transforms every element |\n| `filter()` | Selects elements based on a condition |\n| `sorted()` | Sorts elements |\n| `zip()` | Combines corresponding elements |\n| `min()` | Finds the smallest value |\n| `max()` | Finds the largest value |\n| `enumerate()` | Provides index and value |",
+    "code": ""
+  },
+  "iterable": {
+    "question": "Iterable",
+    "body": "**Definition:** An iterable is an object in Python that contains multiple elements or can produce elements one at a time.\n\nAn iterable allows us to access its elements one by one using a for loop.\n\nExamples of iterables: list, tuple, set, string, dictionary, range.\n\n**Important points:**\n- An iterable can be used in a for loop\n- Lists, tuples, sets, strings and dictionaries are iterables\n- An iterator is an object that produces values one at a time\n- We can create an iterator from an iterable using `iter()`",
+    "code": "numbers = [10, 20, 30, 40]\nfor num in numbers:\n    print(num)\n\nname = \"Python\"\nfor char in name:\n    print(char)"
+  },
+  "shallow copy": {
+    "question": "Shallow copy",
+    "body": "**Definition:** A shallow copy creates a new outer object but does not create copies of nested objects inside it.\n\nThe original object and the copied object share references to the same nested objects.\n\n**Explanation:**\n- A new outer list is created\n- The inner lists are shared between both objects\n- Changing a nested list through the copy also affects the original list\n\nUses `copy.copy()`.",
+    "code": "import copy\n\noriginal = [[10, 20], [30, 40]]\ncopied = copy.copy(original)\ncopied[0][0] = 100\n\nprint(\"Original:\", original)\nprint(\"Copied:\", copied)"
+  },
+  "deep copy": {
+    "question": "Deep copy",
+    "body": "**Definition:** A deep copy creates a completely independent copy of an object, including the nested objects inside it.\n\nChanges made to nested objects in the copied object do not affect the original object.\n\n**Explanation:**\n- A new outer list is created\n- New copies of nested lists are also created\n- Changes to nested objects in the copy do not affect the original object\n\nUses `copy.deepcopy()`.",
+    "code": "import copy\n\noriginal = [[10, 20], [30, 40]]\ncopied = copy.deepcopy(original)\ncopied[0][0] = 100\n\nprint(\"Original:\", original)\nprint(\"Copied:\", copied)"
+  },
+  "exception": {
+    "question": "Exception",
+    "body": "**Definition:** Exception handling is a mechanism in Python used to handle runtime exceptions so that a program can respond to errors instead of terminating unexpectedly.\n\n**Why:** handle runtime exceptions, prevent unexpected termination, show meaningful messages, make programs more reliable.\n\n| Keyword | Meaning |\n|---|---|\n| `try` | Code that may cause an exception |\n| `except` | Code to handle the exception |\n\n| Exception | Meaning |\n|---|---|\n| `ValueError` | Correct type, invalid value |\n| `TypeError` | Operation on inappropriate type |\n| `ZeroDivisionError` | Division by zero |\n| `KeyError` | Dictionary key not found |\n| `IndexError` | Index outside valid range |\n| `NameError` | Name not defined |\n| `FileNotFoundError` | File does not exist |\n\n**Note:** `SyntaxError` generally cannot be caught by a normal try-except; fix it before running.",
+    "code": "try:\n    num = int(\"ABC\")\n    print(num)\nexcept ValueError:\n    print(\"Please enter a valid integer.\")\n\ntry:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero.\")\n\nstudent = {\"name\": \"Rahul\", \"age\": 20, \"course\": \"Python\"}\ntry:\n    print(student[\"salary\"])\nexcept KeyError as e:\n    print(\"Key does not exist:\", e)\n\nnumbers = [10, 20, 30]\ntry:\n    print(numbers[5])\nexcept IndexError:\n    print(\"Index is out of range.\")\n\ntry:\n    result = 10 + \"Python\"\nexcept TypeError:\n    print(\"Cannot add an integer and a string.\")\n\ntry:\n    a, b = 10, 0\n    print(a / b)\nexcept ValueError:\n    print(\"Please enter numbers only.\")\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero.\")"
+  },
+  "dict iterate": {
+    "question": "How to iterate through a dictionary",
+    "body": "**Definition:** Dictionary iteration means accessing dictionary keys, values or key-value pairs one by one using a loop.\n\nA dictionary stores data in key-value pairs.\n\n| Method | What it walks |\n|---|---|\n| `for key in student` | Keys. Using a dictionary directly in a for loop gives its keys |\n| `student.values()` | Values |\n| `student.items()` | Key-value pairs |\n| `student.keys()` | Keys |\n\n**Important dictionary methods:**\n- `keys()` returns all dictionary keys\n- `values()` returns all dictionary values\n- `items()` returns key-value pairs",
+    "code": "student = {\n    \"name\": \"Rahul\",\n    \"age\": 22,\n    \"course\": \"Python\"\n}\n\nfor key in student:\n    print(key)\n\nfor value in student.values():\n    print(value)\n\nfor key, value in student.items():\n    print(key, \":\", value)\n\nfor key in student.keys():\n    print(key)"
+  },
+  "pop discard": {
+    "question": "pop() and discard()",
+    "body": "**Definition of pop():** The `pop()` method removes an element from a collection and returns the removed element. In a dictionary, `pop()` removes the specified key and returns its corresponding value.\n\n**Definition of discard():** The `discard()` method removes a specified element from a set if that element exists. If the element does not exist, `discard()` does not raise an error.\n\n| Method | Difference |\n|---|---|\n| `pop()` | Removes and returns an element. Used with lists, sets and dictionaries. Behavior depends on the collection |\n| `discard()` | Removes a specified element from a set. Does not raise an error if the element is missing. Does not return the removed element |",
+    "code": "numbers = [10, 20, 30, 40]\nresult = numbers.pop(1)\nprint(\"Removed:\", result)\nprint(\"Updated list:\", numbers)\n\nstudent = {\"name\": \"Rahul\", \"age\": 22}\nresult = student.pop(\"age\")\nprint(\"Removed value:\", result)\nprint(\"Updated dictionary:\", student)\n\nnumbers = {10, 20, 30, 40}\nnumbers.discard(20)\nprint(numbers)\n\nnumbers = {10, 20, 30}\nnumbers.discard(100)\nprint(numbers)"
+  },
+  "string format": {
+    "question": "String formatting",
+    "body": "**Definition:** String formatting is the process of inserting variables or values into a string in a readable and organized way.\n\n| Method | Definition |\n|---|---|\n| f-string | Insert variables and expressions inside a string using `{ }` |\n| `format()` | Inserts values into placeholders `{ }` |\n| `%` formatting | Inserts values using `%s`, `%d` and `%f` |\n\n**Important format specifiers:** `%s` string, `%d` integer, `%f` floating-point number.\n\nf-strings are generally the most convenient option for modern Python code.",
+    "code": "name = \"Rahul\"\nage = 22\nprint(f\"My name is {name} and my age is {age}\")\nprint(\"My name is {} and my age is {}\".format(name, age))\nprint(\"My name is %s and my age is %d\" % (name, age))\n\nprice = 99.567\nprint(f\"Price: {price:.2f}\")"
+  },
+  "type casting": {
+    "question": "Type casting",
+    "body": "**Definition:** Type casting is the process of converting a value from one data type to another data type.\n\nPython provides built-in functions to perform type casting.\n\n| Function | Definition |\n|---|---|\n| `int()` | Converts a compatible value into an integer |\n| `float()` | Converts a compatible value into a float |\n| `str()` | Converts a value into a string |\n| `bool()` | Converts a value into a Boolean |\n| `list()` | Converts an iterable into a list |\n| `tuple()` | Converts an iterable into a tuple |\n| `set()` | Converts an iterable into a set |\n\n**Important points:**\n- Type casting changes the data type of a value\n- Some conversions are not possible\n- `int(\"hello\")` raises a `ValueError`\n- `float(\"10.5\")` converts the string into a float",
+    "code": "number = \"100\"\nresult = int(number)\nprint(result)\nprint(type(result))\n\nnumber = 10\nresult = float(number)\nprint(result)\nprint(type(result))\n\nnumber = 100\nresult = str(number)\nprint(result)\nprint(type(result))\n\nnumbers = [10, 20, 30]\nresult = tuple(numbers)\nprint(result)"
+  },
+  "dynamic typing": {
+    "question": "Dynamic typing",
+    "body": "**Definition:** Dynamic typing means that Python determines the data type of a variable at runtime.\n\nWe do not need to declare the variable's data type explicitly before assigning a value. The same variable can refer to values of different data types during program execution.\n\n**Explanation:**\n- Initially, `x` refers to an integer\n- Then, `x` refers to a string\n- Finally, `x` refers to a float\n- Python determines the type at runtime\n\n**Important points:**\n- Python is a dynamically typed language\n- We do not need to declare variable types\n- A variable can be assigned values of different types\n- The type is associated with the value, not permanently fixed to the variable name",
+    "code": "x = 10\nprint(x)\nprint(type(x))\n\nx = \"Python\"\nprint(x)\nprint(type(x))\n\nx = 10.5\nprint(x)\nprint(type(x))"
+  },
+  "frozenset": {
+    "question": "frozenset",
+    "body": "**Definition:** A frozenset is an immutable version of a set in Python.\n\nIt stores unique elements and does not allow elements to be added or removed after creation.\n\nSyntax: `frozenset(iterable)`\n\n| | Set | Frozenset |\n|---|---|---|\n| Change items | Mutable. `add()`, `remove()`, `discard()` | Immutable. Cannot add or remove |\n| Dictionary key | Cannot be used as a key | Can be used as a key if its elements are hashable |\n\n**Important points:**\n- `frozenset` is immutable\n- It stores unique elements\n- Elements cannot be added or removed\n- It supports `union()`, `intersection()` and `difference()`\n- It can be used as a dictionary key if all its elements are hashable",
+    "code": "numbers = frozenset([10, 20, 30, 20])\nprint(numbers)\n\nnumbers = frozenset([1, 2, 2, 3, 3, 4])\nprint(numbers)\n\na = frozenset([1, 2, 3])\nb = frozenset([3, 4, 5])\nprint(a.union(b))\nprint(a.intersection(b))\nprint(a.difference(b))"
+  },
+  "important revision": {
+    "question": "Important concepts revision",
+    "body": "| Topic | Meaning |\n|---|---|\n| Iterable | An object that can be iterated over |\n| Shallow copy | Copies the outer object but shares nested objects |\n| Deep copy | Copies the object and its nested objects |\n| Exception | An error that occurs during program execution |\n| Dictionary | Stores data in key-value pairs |\n| `keys()` | Accesses dictionary keys |\n| `values()` | Accesses dictionary values |\n| `items()` | Accesses dictionary key-value pairs |\n| `pop()` | Removes and returns an element or value |\n| `discard()` | Removes an element from a set if it exists |\n| String format | Inserts values into a string |\n| Type casting | Converts one data type into another |\n| Dynamic typing | Determines variable types at runtime |\n| Frozenset | An immutable set |",
+    "code": ""
+  },
+  "important": {
+    "question": "Important concepts",
+    "body": "**Definition:** These are extra Python concepts used with collections, types, and errors.\n\n| Topic | Meaning |\n|---|---|\n| Iterable | An object we can loop over |\n| Shallow copy | New outer object, nested objects are shared |\n| Deep copy | Nested objects are copied too |\n| Exception | An error during execution |\n| Dictionary loop | Keys, values, or `items()` |\n| `pop()` / `discard()` | Remove from a collection |\n| String format | Insert values into a string |\n| Type casting | Convert one type into another |\n| Dynamic typing | Type is decided at runtime |\n| `frozenset` | Immutable set |",
+    "code": "",
+    "children": [
+      "iterable",
+      "shallow copy",
+      "deep copy",
+      "exception",
+      "dict iterate",
+      "pop discard",
+      "string format",
+      "type casting",
+      "dynamic typing",
+      "frozenset",
+      "important revision"
+    ]
+  },
+  "oop": {
+    "question": "Object-Oriented Programming (OOP)",
+    "body": "**Definition:** Object-Oriented Programming (OOP) is a programming approach in which programs are organized around objects.\n\nAn object contains data (attributes) and actions (methods) that can be performed using that data.\n\n**Example — Employee**\n- Attributes: name, age, salary, department\n- Methods: display details, calculate salary, calculate bonus\n\n**Why we use OOP:**\n- Makes code easier to organize\n- Helps reuse code\n- Reduces code repetition\n- Makes large programs easier to maintain",
+    "code": "# Think of Employee as a class blueprint.\n# Each employee object has its own name, age, salary, department."
+  },
+  "object": {
+    "question": "Object",
+    "body": "**Definition:** An object is an instance of a class. It is created using the class and can have its own attributes and use the methods defined in that class.\n\n| Class | Objects |\n|---|---|\n| Student | Rahul, Priya, Alex |\n| Car | Toyota, Honda, BMW |\n| Employee | Employee1, Employee2 |\n| BankAccount | Account1, Account2 |\n\n**Remember:** Class = blueprint. Object = instance.",
+    "code": "class Student:\n    pass\n\nstudent1 = Student()\nstudent2 = Student()\nprint(student1)\nprint(student2)"
+  },
+  "attributes": {
+    "question": "Attributes",
+    "body": "**Definition:** Attributes are variables that store data or properties associated with an object or class.\n\nThe **dot operator** `.` is used to access attributes and methods of an object: `student1.name`.",
+    "code": "class Student:\n    pass\n\nstudent1 = Student()\nstudent1.name = \"Rahul\"\nstudent1.age = 15\nstudent1.course = \"Python\"\nprint(student1.name)\nprint(student1.age)\nprint(student1.course)\n\nstudent2 = Student()\nstudent2.name = \"Priya\"\nstudent2.age = 17\nstudent2.course = \"Python\"\nprint(student2.name)"
+  },
+  "self": {
+    "question": "self",
+    "body": "**Definition:** `self` refers to the current object or instance of a class. It is used inside instance methods to access the attributes and methods belonging to that object.\n\nWhen you create `s1 = Student(\"Rahul\", 15)`, `self` refers to `s1`. When you create `s2`, `self` refers to `s2`.\n\n**Important points:**\n1. `self` refers to the current object\n2. It is generally the first parameter of an instance method\n3. It helps access object attributes\n4. `self` is not a reserved Python keyword\n5. It is the standard naming convention",
+    "code": "class Student:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\ns1 = Student(\"Rahul\", 15)\ns2 = Student(\"Priya\", 17)\nprint(s1.name)\nprint(s2.name)"
+  },
+  "methods": {
+    "question": "Methods",
+    "body": "**Definition:** A method is a function defined inside a class. It describes an action or behaviour that an object can perform.\n\n| | Attributes | Methods |\n|---|---|---|\n| Role | Store information | Perform actions |\n| Represent | Properties | Behaviour |\n| Examples | name, age, salary | display(), calculate(), intro() |",
+    "code": "class Student:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def intro(self):\n        print(\"My name is\", self.name)\n        print(\"My age is\", self.age)\n\ns1 = Student(\"Rahul\", 15)\ns1.intro()\n\nclass Employee:\n    def __init__(self, name, salary, department):\n        self.name = name\n        self.salary = salary\n        self.department = department\n\n    def calculate_bonus(self):\n        return self.salary * 0.10\n\n    def final_salary(self):\n        return self.salary + self.calculate_bonus()\n\ne1 = Employee(\"Rahul\", 15000, \"IT\")\nprint(e1.calculate_bonus())\nprint(e1.final_salary())\n\nclass StudentResult:\n    def __init__(self, name, marks):\n        self.name = name\n        self.marks = marks\n\n    def result(self):\n        if self.marks > 50:\n            return \"Pass\"\n        return \"Fail\"\n\nprint(StudentResult(\"Rahul\", 75).result())"
+  },
+  "multiple inheritance": {
+    "question": "Multiple inheritance",
+    "body": "**Definition:** Multiple inheritance is a type of inheritance in which a single child class inherits from more than one parent class.\n\n**Method Resolution Order (MRO):** When parent classes have methods with the same name, Python follows MRO to decide which method to use. Check with `ClassName.mro()`.",
+    "code": "class Employee:\n    def employee_details(self):\n        print(\"Employee details\")\n\nclass Researcher:\n    def research_details(self):\n        print(\"Research details\")\n\nclass DataScientist(Employee, Researcher):\n    pass\n\nd1 = DataScientist()\nd1.employee_details()\nd1.research_details()\nprint(DataScientist.mro())"
+  },
+  "day6 compare": {
+    "question": "Day 6 differences",
+    "body": "| Topic | Difference |\n|---|---|\n| Class | Blueprint/template. Defines attributes and methods. `class Student:` |\n| Object | Instance of a class. `s1 = Student()` |\n| Attributes | Store information / properties: name, age, salary |\n| Methods | Perform actions / behaviour: display(), calculate() |\n| Parent class | Class being inherited from (base class) |\n| Child class | Class that inherits (derived class) |\n| Module | Python file with reusable code (`math`) |\n| Function | One task (`math.sqrt()`) |",
+    "code": ""
+  },
+  "day6 interview": {
+    "question": "Day 6 interview questions",
+    "body": "1. What is Object-Oriented Programming?\n2. What is a class in Python?\n3. What is an object?\n4. What is the difference between a class and an object?\n5. What are attributes?\n6. What is the purpose of `__init__()`?\n7. What is `self` in Python?\n8. Is `self` a keyword in Python?\n9. What is a method?\n10. What is the difference between attributes and methods?\n11. What is inheritance?\n12. What is the difference between parent and child classes?\n13. What is multiple inheritance?\n14. What is Method Resolution Order?\n15. What is exception handling?\n16. What is the difference between try and except?\n17. What is ValueError / TypeError / KeyError / IndexError / ZeroDivisionError?\n18. What is a module?\n19. Purpose of math and random modules?\n20. Standard library modules vs third-party packages?",
+    "code": ""
+  },
+  "day6 revision": {
+    "question": "Day 6 quick revision",
+    "body": "| Topic | Meaning |\n|---|---|\n| OOP | Organizes programs around objects |\n| Class | Blueprint for creating objects |\n| Object | Instance of a class |\n| Attributes | Store object data |\n| `__init__()` | Initializes object attributes |\n| self | Refers to the current instance |\n| Methods | Functions defined inside a class |\n| Inheritance | Reuses parent class functionality |\n| Multiple inheritance | Inherits from multiple parent classes |\n| Exception handling | Handles runtime exceptions |\n| Modules | Reusable Python code |\n| File handling | Next class |",
+    "code": ""
+  },
+  "file modes": {
+    "question": "File modes r, w, a",
+    "body": "**Definition:** The second argument to `open(filename, mode)` controls how the file is used.\n\n| Mode | Definition |\n|---|---|\n| `r` | Read only. File must already exist |\n| `w` | Write. Creates the file if it does not exist. Replaces previous content |\n| `a` | Append. Adds new text at the end. Keeps old content |\n\n**Remember:** `w` overwrites. `a` does not.",
+    "code": "f = open(\"students.txt\", \"r\")\nprint(f.read())\nf.close()\n\nf = open(\"students.txt\", \"w\")\nf.write(\"Hello Python\")\nf.close()\n\nf = open(\"students.txt\", \"a\")\nf.write(\"\\nGood morning\")\nf.close()"
+  },
+  "file read": {
+    "question": "Reading a file",
+    "body": "**Definition:** After `open(..., \"r\")`, read the contents with:\n\n| Method | Result |\n|---|---|\n| `read()` | Whole file as one string |\n| `read(n)` | First `n` characters |\n| `readline()` | One line (string). Next call reads the next line |\n| `readlines()` | All lines as a **list** |\n\nOpen again if you need to restart reading from the beginning after `readline` calls.",
+    "code": "f = open(\"students.txt\", \"r\")\nprint(f.read())\nf.close()\n\nf = open(\"students.txt\", \"r\")\nprint(f.read(5))\nf.close()\n\nf = open(\"students.txt\", \"r\")\nprint(f.readline())\nprint(f.readline())\nf.close()\n\nf = open(\"students.txt\", \"r\")\nprint(f.readlines())\nf.close()"
+  },
+  "file write": {
+    "question": "Write and append",
+    "body": "**Write (`w`):** replaces existing content. Creates the file if missing.\n\n**Append (`a`):** adds text at the end. Old content stays.\n\nUse `\\n` for a new line. Always `close()` when done.",
+    "code": "f = open(\"students.txt\", \"w\")\nf.write(\"Mary\\nTom\\nAvi\")\nf.close()\n\nf = open(\"students.txt\", \"a\")\nf.write(\"\\nGood morning\")\nf.close()\n\nf = open(\"new_file.txt\", \"w\")\nf.write(\"Created with Python\")\nf.close()"
+  },
+  "numpy": {
+    "question": "NumPy",
+    "body": "**Definition:** NumPy stands for **Numerical Python**. It is a powerful library for numerical computing. Used heavily in data analytics, data science, ML, and deep learning.\n\nImport practice: `import numpy as np`\n\n**Main benefit:** NumPy **arrays** let you do math on every element **without a for loop** (unlike lists).\n\nTomorrow: more array functions, then Pandas.",
+    "code": "import numpy as np\n\nnumbers = np.array([10, 20, 30, 40])\nprint(numbers)\nprint(numbers * 2)",
+    "children": [
+      "numpy array",
+      "numpy shape",
+      "numpy index",
+      "numpy reshape",
+      "numpy special",
+      "numpy math",
+      "numpy agg",
+      "day7 revision"
+    ]
+  },
+  "numpy array": {
+    "question": "NumPy array",
+    "body": "**Definition:** A NumPy array is a data structure created with `np.array(...)`.\n\n- 1D array: one list of values\n- 2D array: list of lists (rows and columns), like a matrix\n- 3D: array inside array inside array (touched in class)\n\n**Difference from list:** `list * 2` repeats the list. `array * 2` multiplies each element.",
+    "code": "import numpy as np\n\na1 = np.array([1, 2, 3, 4])\nprint(a1)\n\na2 = np.array([[10, 20, 30], [40, 50, 60]])\nprint(a2)\n\nnums = [10, 20, 30]\nprint(nums * 2)\narr = np.array(nums)\nprint(arr * 2)"
+  },
+  "numpy shape": {
+    "question": "ndim, shape, size",
+    "body": "| Attribute | Meaning |\n|---|---|\n| `ndim` | Number of dimensions (1D, 2D, …) |\n| `shape` | Rows and columns, e.g. `(2, 3)` |\n| `size` | Total number of elements |\n\n**Difference:** shape = structure (rows, cols). size = how many values.",
+    "code": "import numpy as np\n\na1 = np.array([1, 2, 3, 4])\na2 = np.array([[10, 20, 30], [40, 50, 60]])\nprint(a1.ndim, a1.shape, a1.size)\nprint(a2.ndim, a2.shape, a2.size)"
+  },
+  "numpy index": {
+    "question": "Indexing and slicing",
+    "body": "**1D:** zero-based indexing like lists: `x[0]`, `x[-1]`, `x[1:4]`.\n\n**2D rule:** always **row, column** — `a2[row, col]`.\n\nSlicing: `a2[0:2, 0:2]` takes rows 0–1 and columns 0–1.",
+    "code": "import numpy as np\n\nx = np.array([10, 20, 30, 40, 50])\nprint(x[0], x[-1], x[1:4])\n\na2 = np.array([[10, 20, 30], [40, 50, 60], [70, 80, 90]])\nprint(a2[0])\nprint(a2[1, 0])\nprint(a2[0:2, 0:2])"
+  },
+  "numpy reshape": {
+    "question": "reshape",
+    "body": "**Definition:** `reshape` changes the shape of an array without changing the total number of elements.\n\nExample: 6 elements can become `(2, 3)`, `(3, 2)`, `(1, 6)`, `(6, 1)` — not `(4, 2)` (needs 8).\n\nClass note: jagged arrays (rows of different lengths) are not normal NumPy arrays; use list of lists instead.",
+    "code": "import numpy as np\n\na = np.array([1, 2, 3, 4, 5, 6])\nprint(a.reshape(2, 3))\nprint(a.reshape(3, 2))\nprint(a.reshape(6, 1))"
+  },
+  "numpy special": {
+    "question": "zeros, ones, arange, full",
+    "body": "Special array creators:\n\n| Function | Meaning |\n|---|---|\n| `np.zeros(n)` / `np.zeros((r, c))` | Array filled with 0 |\n| `np.ones(...)` | Array filled with 1 |\n| `np.full((r, c), value)` | Array filled with a chosen value |\n| `np.arange(start, stop, step)` | Like `range`, but returns an array |\n\n`np.random` was mentioned briefly; details later with ML.",
+    "code": "import numpy as np\n\nprint(np.zeros(4))\nprint(np.zeros((2, 3)))\nprint(np.ones(4))\nprint(np.full((2, 3), 7))\nprint(np.arange(1, 11))\nprint(np.arange(2, 11, 2))"
+  },
+  "numpy math": {
+    "question": "Math on arrays",
+    "body": "**Definition:** NumPy does math **element by element**.\n\n`a + 5`, `a * 4`, `a + b` (same shape required).\n\nConditional filter: `marks[marks > 50]`.\n\nMutable: change with index. Add with `np.append`. Remove with `np.delete` (by index).",
+    "code": "import numpy as np\n\na = np.array([10, 20, 30, 40, 50])\nb = np.array([1, 2, 3, 4, 5])\nprint(a + 5)\nprint(a * 4)\nprint(a + b)\n\nmarks = np.array([34, 56, 70, 20, 12])\nprint(marks[marks > 50])\nmarks[0] = 30\nprint(np.append(marks, 40))\nprint(np.delete(marks, 2))"
+  },
+  "numpy agg": {
+    "question": "sum, mean, max, min",
+    "body": "Aggregation helpers (no manual loop):\n\n| Function | Meaning |\n|---|---|\n| `np.sum` | Total |\n| `np.mean` | Average |\n| `np.max` / `np.min` | Highest / lowest |\n\nClass sales drill: total, average, highest, filter `> 3000`, add 10% with `sales * 1.1`.",
+    "code": "import numpy as np\n\nsales = np.array([1000, 1200, 1400, 1515, 1800, 2000, 7500, 5500])\nprint(np.sum(sales))\nprint(np.mean(sales))\nprint(np.max(sales))\nprint(np.min(sales))\nprint(sales[sales > 3000])\nprint(sales * 1.1)"
+  },
+  "day7 revision": {
+    "question": "Day 7 revision",
+    "body": "| Topic | Meaning |\n|---|---|\n| File handling | Create/open/read/write/append files |\n| `r` / `w` / `a` | Read / overwrite write / append |\n| `read` / `readline` / `readlines` | All text / one line / list of lines |\n| NumPy | Numerical Python library |\n| Array | Fast numeric data structure |\n| `ndim` / `shape` / `size` | Dimensions / rows-cols / element count |\n| Indexing 2D | `array[row, column]` |\n| `reshape` | Change shape, same element count |\n| `zeros` / `ones` / `arange` | Special arrays |\n| Element math | `+ - *` without a for loop |\n| Next | More array functions + Pandas |",
+    "code": ""
+  }
+};
+    const path = document.getElementById("path");
+    const parentOf = {};
+    Object.keys(info).forEach((id) => {
+      (info[id].children || []).forEach((child) => {
+        parentOf[child] = id;
+      });
+    });
+
+    function stageTitleFor(id) {
+      for (const stage of stages) {
+        if (stage.topics.includes(id) || stage.topics.includes(parentOf[id])) {
+          return stage.title;
+        }
+      }
+      return "";
+    }
+
+    stages.forEach((stage, index) => {
+      if (index > 0) {
+        const arrow = document.createElement("div");
+        arrow.className = "arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "→";
+        path.appendChild(arrow);
+      }
+      const column = document.createElement("section");
+      column.className = "column" + (stage.state === "ahead" ? " ahead" : "");
+      const heading = document.createElement("h2");
+      heading.textContent = stage.title;
+      column.appendChild(heading);
+      const stack = document.createElement("div");
+      stack.className = "stack";
+      stage.topics.forEach((id) => {
+        const topic = info[id];
+        const group = document.createElement("div");
+        group.className = "group" + (id === "JSON" ? " next-group" : "");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "topic";
+        button.textContent = ({ "args kwargs": "*args **kwargs", "try except": "exception handling" }[id] || id);
+        button.dataset.topic = id;
+        button.setAttribute("aria-pressed", "false");
+        button.addEventListener("click", () => show(id));
+        group.appendChild(button);
+        if (topic.children) {
+          const chips = document.createElement("div");
+          chips.className = "chips";
+          topic.children.forEach((childId) => {
+            const child = document.createElement("button");
+            child.type = "button";
+            child.className = "child";
+            const labels = { "dict remove": "remove", "star args": "*args", "kwargs": "**kwargs", "combine args": "*args + **kwargs", "min max": "min max", "day5 compare": "compare", "day5 revision": "revision", "args kwargs": "*args **kwargs", "shallow copy": "shallow copy", "deep copy": "deep copy", "dict iterate": "dict iterate", "pop discard": "pop discard", "string format": "string format", "type casting": "type casting", "dynamic typing": "dynamic typing", "important revision": "revision", "oop": "OOP", "object": "object", "attributes": "attributes", "self": "self", "methods": "methods", "multiple inheritance": "multiple inheritance", "day6 compare": "compare", "day6 revision": "revision", "day6 interview": "interview", "file modes": "modes r w a", "file read": "read", "file write": "write append", "numpy array": "array", "numpy shape": "ndim shape size", "numpy index": "indexing slicing", "numpy reshape": "reshape", "numpy special": "zeros ones arange", "numpy math": "math ops", "numpy agg": "sum mean max", "day7 revision": "revision" };
+            child.textContent = labels[childId] || childId;
+            child.dataset.topic = childId;
+            child.setAttribute("aria-pressed", "false");
+            child.addEventListener("click", () => show(childId));
+            chips.appendChild(child);
+          });
+          group.appendChild(chips);
+        }
+        stack.appendChild(group);
+      });
+      column.appendChild(stack);
+      path.appendChild(column);
+    });
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function inlineMarkdown(text) {
+      let safe = escapeHtml(text);
+      safe = safe.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      safe = safe.replace(/`([^`]+)`/g, "<code>$1</code>");
+      return safe;
+    }
+
+    function isTableSeparator(line) {
+      return /^\|[\s\-:|]+\|$/.test(line.trim());
+    }
+
+    function splitTableRow(line) {
+      return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((cell) => cell.trim());
+    }
+
+    function normalizeHeading(text) {
+      return text
+        .replace(/^#+\s*/, "")
+        .replace(/^\d+\.\s*/, "")
+        .replace(/\*\*/g, "")
+        .replace(/`/g, "")
+        .trim()
+        .toLowerCase();
+    }
+
+    function renderNotebookBody(text, title) {
+      if (!text || !text.trim()) {
+        return '<p class="note">Open the same topic in test.ipynb for full notes.</p>';
+      }
+
+      const lines = text.replace(/\r/g, "").split("\n");
+      const titleKey = normalizeHeading(title || "");
+      let html = "";
+      let i = 0;
+
+      while (i < lines.length) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        if (!trimmed) {
+          i += 1;
+          continue;
+        }
+
+        if (titleKey && normalizeHeading(trimmed) === titleKey) {
+          i += 1;
+          continue;
+        }
+
+        if (trimmed.startsWith("|") && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
+          const headers = splitTableRow(line);
+          i += 2;
+          html += "<table><thead><tr>";
+          headers.forEach((header) => {
+            html += "<th>" + inlineMarkdown(header) + "</th>";
+          });
+          html += "</tr></thead><tbody>";
+          while (i < lines.length && lines[i].trim().startsWith("|")) {
+            const cells = splitTableRow(lines[i]);
+            html += "<tr>";
+            cells.forEach((cell) => {
+              html += "<td>" + inlineMarkdown(cell) + "</td>";
+            });
+            html += "</tr>";
+            i += 1;
+          }
+          html += "</tbody></table>";
+          continue;
+        }
+
+        if (trimmed.startsWith("- ")) {
+          html += "<ul>";
+          while (i < lines.length && lines[i].trim().startsWith("- ")) {
+            html += "<li>" + inlineMarkdown(lines[i].trim().slice(2)) + "</li>";
+            i += 1;
+          }
+          html += "</ul>";
+          continue;
+        }
+
+        if (trimmed.startsWith("```")) {
+          const fence = [];
+          i += 1;
+          while (i < lines.length && !lines[i].trim().startsWith("```")) {
+            fence.push(lines[i]);
+            i += 1;
+          }
+          if (i < lines.length) i += 1;
+          html += "<pre>" + escapeHtml(fence.join("\n")) + "</pre>";
+          continue;
+        }
+
+        if (trimmed.startsWith("### ")) {
+          html += "<h3>" + inlineMarkdown(trimmed.slice(4)) + "</h3>";
+          i += 1;
+          continue;
+        }
+
+        if (/^Q\d+\./.test(trimmed)) {
+          html += "<p><strong>" + inlineMarkdown(trimmed) + "</strong></p>";
+          i += 1;
+          continue;
+        }
+
+        if (/^Definition:/i.test(trimmed)) {
+          html += "<p>" + inlineMarkdown("**" + trimmed + "**") + "</p>";
+          i += 1;
+          continue;
+        }
+
+        html += "<p>" + inlineMarkdown(trimmed) + "</p>";
+        i += 1;
+      }
+
+      return html;
+    }
+
+    function show(id) {
+      const item = info[id];
+      const parent = parentOf[id];
+      const trail = parent ? parent + "  →  " + id : id;
+      document.getElementById("info-path").textContent = stageTitleFor(id) + "  ·  " + trail;
+      document.getElementById("info-title").textContent = item.question.replace(/^\d+\.\s*/, "").replace(/`/g, "");
+      document.getElementById("info-body").innerHTML = renderNotebookBody(item.body, item.question);
+      const codeNode = document.getElementById("info-code");
+      if (item.code && item.code.trim()) {
+        codeNode.textContent = item.code;
+        codeNode.hidden = false;
+      } else {
+        codeNode.textContent = "";
+        codeNode.hidden = true;
+      }
+      document.querySelectorAll("button[data-topic]").forEach((node) => {
+        node.setAttribute("aria-pressed", node.dataset.topic === id ? "true" : "false");
+      });
+    }
+
+    show("data types");
+  </script>
+</body>
+</html>

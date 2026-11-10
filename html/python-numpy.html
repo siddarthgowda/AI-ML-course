@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>NumPy · Interview Preparation</title>
+<style>
+    :root {
+      color-scheme: dark;
+      --bg: #181818;
+      --panel: #202020;
+      --text: #e8e8e8;
+      --muted: #9a9a9a;
+      --line: #3a3a3a;
+      --accent: #7dcea0;
+      --code-bg: #141414;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 860px);
+      gap: 0;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 16px 40px;
+      border-right: 1px solid var(--line);
+      background: #161616;
+    }
+    nav h1 { font-size: 15px; margin: 0 0 4px; }
+    nav .sub { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+    nav a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12.5px;
+      padding: 3px 0;
+    }
+    nav a:hover { color: var(--accent); }
+    .toc-stage {
+      margin: 14px 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    main { padding: 28px 28px 80px; }
+    .intro {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 0 0 20px;
+    }
+    .intro h1 { margin: 0 0 8px; font-size: 22px; }
+    .intro p { margin: 0; color: var(--muted); }
+    h1.stage {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 12px;
+      padding-top: 8px;
+    }
+    article.topic {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px 14px;
+      margin: 0 0 12px;
+    }
+    article h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 650;
+    }
+    .num {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+    .body p { margin: 0 0 8px; }
+    .body p.label { margin-top: 10px; font-weight: 600; }
+    .body ul, .body ol { margin: 0 0 10px; padding-left: 20px; }
+    .body li { margin: 2px 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      background: #2a2a2a;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      overflow: auto;
+      margin: 8px 0 0;
+    }
+    pre code { background: transparent; padding: 0; font-size: 13px; }
+    .qmeta { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .diff-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    .diff-row:first-child { border-top: none; }
+    .diff-row strong { color: var(--accent); }
+    .rf {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      font-size: 14px;
+    }
+    .rf div { border-bottom: 1px solid var(--line); padding: 4px 0; }
+    .rf .q { color: var(--muted); }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; height: auto; max-height: 40vh; }
+      .rf, .diff-row { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>NumPy Interview</h1>
+<p class="sub">Beginner → advanced · full prep</p>
+<p class="toc-stage">01. NumPy Fundamentals</p><a href="#01-numpy-fundamentals">01. NumPy Fundamentals</a><p class="toc-stage">02. Array Dimensions and Attributes</p><a href="#02-array-dimensions-and-attributes">02. Array Dimensions and Attributes</a><p class="toc-stage">03. Array Creation Methods</p><a href="#03-array-creation-methods">03. Array Creation Methods</a><p class="toc-stage">04. NumPy Data Types</p><a href="#04-numpy-data-types">04. NumPy Data Types</a><p class="toc-stage">05. Indexing and Slicing</p><a href="#05-indexing-and-slicing">05. Indexing and Slicing</a><p class="toc-stage">06. Array Operations</p><a href="#06-array-operations">06. Array Operations</a><p class="toc-stage">07. Mathematical Functions</p><a href="#07-mathematical-functions">07. Mathematical Functions</a><p class="toc-stage">08. Statistical Functions</p><a href="#08-statistical-functions">08. Statistical Functions</a><p class="toc-stage">09. Reshaping and Array Manipulation</p><a href="#09-reshaping-and-array-manipulation">09. Reshaping and Array Manipulation</a><p class="toc-stage">10. Joining and Splitting Arrays</p><a href="#10-joining-and-splitting-arrays">10. Joining and Splitting Arrays</a><p class="toc-stage">11. Broadcasting</p><a href="#11-broadcasting">11. Broadcasting</a><p class="toc-stage">12. Copy and View</p><a href="#12-copy-and-view">12. Copy and View</a><p class="toc-stage">13. Boolean Indexing and Filtering</p><a href="#13-boolean-indexing-and-filtering">13. Boolean Indexing and Filtering</a><p class="toc-stage">14. Random Module</p><a href="#14-random-module">14. Random Module</a><p class="toc-stage">15. Linear Algebra</p><a href="#15-linear-algebra">15. Linear Algebra</a><p class="toc-stage">16. Missing Values and Special Values</p><a href="#16-missing-values-and-special-values">16. Missing Values and Special Values</a><p class="toc-stage">17. Searching and Sorting</p><a href="#17-searching-and-sorting">17. Searching and Sorting</a><p class="toc-stage">18. File Handling</p><a href="#18-file-handling">18. File Handling</a><p class="toc-stage">19. NumPy Modules and Submodules</p><a href="#19-numpy-modules-and-submodules">19. NumPy Modules and Submodules</a><p class="toc-stage">20. Difference-Based Questions</p><a href="#20-difference-based-questions">20. Difference-Based Questions</a><p class="toc-stage">21. Output-Based Questions</p><a href="#21-output-based-questions">21. Output-Based Questions</a><p class="toc-stage">22. Tricky Interview Questions</p><a href="#22-tricky-interview-questions">22. Tricky Interview Questions</a><p class="toc-stage">23. Scenario-Based Questions</p><a href="#23-scenario-based-questions">23. Scenario-Based Questions</a><p class="toc-stage">24. Coding Interview Programs</p><a href="#24-coding-interview-programs">24. Coding Interview Programs</a><p class="toc-stage">25. Rapid-Fire Interview Revision</p><a href="#25-rapid-fire-interview-revision">25. Rapid-Fire Interview Revision</a><p class="toc-stage">26. Interview Preparation Roadmap</p><a href="#26-interview-preparation-roadmap">26. Interview Preparation Roadmap</a><p class="toc-stage">Most Important Topics for Interviews</p><a href="#most-important-topics-for-interviews">Most Important Topics for Interviews</a><p class="toc-stage">Remember</p><a href="#remember">Remember</a><p class="toc-stage">27. Advanced NumPy Study Notes</p><a href="#27-advanced-numpy-study-notes">27. Advanced NumPy Study Notes</a>
+</nav>
+<main>
+<div class="intro">
+<h1>NumPy Complete Interview Preparation</h1>
+<p>Beginner to advanced: fundamentals through coding programs, differences, outputs, scenarios, rapid-fire and a 7-day roadmap.</p>
+</div>
+<p class="qmeta">326 numbered questions across 27 topics.</p>
+<h1 class="stage">Core Topics</h1><h1 class="stage" id="01-numpy-fundamentals">01. NumPy Fundamentals</h1><article class="topic" id="q1"><h2><span class="num">Q1</span> What is NumPy?</h2><div class="body"><p>NumPy stands for Numerical Python. It is a Python library used</p>
+<p>for numerical calculations, mathematical operations and working</p>
+<p>with multidimensional arrays.</p></div></article>
+<article class="topic" id="q2"><h2><span class="num">Q2</span> Why do we use NumPy?</h2><div class="body"><ul><li>Faster numerical calculations.</li><li>Efficient memory management.</li><li>Multidimensional array support.</li><li>Mathematical and statistical operations.</li><li>Matrix and linear algebra operations.</li><li>Useful for Data Science and Machine Learning.</li></ul></div></article>
+<article class="topic" id="q3"><h2><span class="num">Q3</span> What is the full form of NumPy?</h2><div class="body"><p>Numerical Python.</p></div></article>
+<article class="topic" id="q4"><h2><span class="num">Q4</span> How do you install NumPy?</h2><div class="body"><pre><code>pip install numpy</code></pre></div></article>
+<article class="topic" id="q5"><h2><span class="num">Q5</span> How do you import NumPy?</h2><div class="body"><pre><code>import numpy as np</code></pre></div></article>
+<article class="topic" id="q6"><h2><span class="num">Q6</span> Why do we use np?</h2><div class="body"><p>np is an alias for NumPy. It makes accessing NumPy functions</p>
+<p>easier.</p></div></article>
+<article class="topic" id="q7"><h2><span class="num">Q7</span> What is ndarray?</h2><div class="body"><p>ndarray means N-dimensional array. It is the main data</p>
+<p>structure in NumPy.</p></div></article>
+<article class="topic" id="q8"><h2><span class="num">Q8</span> Difference between Python list and NumPy array?</h2><div class="body"><p class="label">Python List:</p>
+<ul><li>Built into Python.</li><li>Can store different data types.</li><li>General-purpose data structure.</li><li>Multiplication by a number repeats the list.</li><li>Generally slower for large numerical operations.</li></ul>
+<p class="label">NumPy Array:</p>
+<ul><li>Requires NumPy.</li><li>Usually stores elements using one data type.</li><li>Designed for numerical operations.</li><li>Supports element-wise mathematical operations.</li><li>Generally faster for large numerical operations.</li></ul></div></article>
+<article class="topic" id="q9"><h2><span class="num">Q9</span> Is NumPy written in Python?</h2><div class="body"><p>NumPy provides a Python interface, but many computational</p>
+<p>operations are implemented in compiled languages such as C.</p></div></article>
+<article class="topic" id="q10"><h2><span class="num">Q10</span> Is NumPy mutable?</h2><div class="body"><p>Yes. NumPy arrays are mutable. We can modify their elements.</p>
+<p class="label">Example:</p>
+<p>a = <code>np.array</code>([10, 20, 30])</p>
+<p>a[0] = 100</p>
+<p>print(a)</p>
+<p class="label">Output:</p>
+<p>[100  20  30]</p></div></article>
+<article class="topic" id="q11"><h2><span class="num">Q11</span> Can NumPy store strings?</h2><div class="body"><p>Yes. NumPy supports string arrays.</p></div></article>
+<article class="topic" id="q12"><h2><span class="num">Q12</span> Can NumPy store mixed data types?</h2><div class="body"><p>Yes. NumPy generally converts values into a common compatible</p>
+<p>data type. Object arrays can also store mixed Python objects.</p></div></article>
+<article class="topic" id="q13"><h2><span class="num">Q13</span> What is vectorization?</h2><div class="body"><p>Vectorization means performing operations on entire arrays</p>
+<p>without explicitly writing Python loops.</p>
+<p class="label">Example:</p>
+<p>a = <code>np.array</code>([1, 2, 3])</p>
+<p>print(a * 2)</p>
+<p class="label">Output:</p>
+<p>[2 4 6]</p></div></article>
+<article class="topic" id="q14"><h2><span class="num">Q14</span> Difference between NumPy and Pandas?</h2><div class="body"><p class="label">NumPy:</p>
+<ul><li>Works mainly with arrays.</li><li>Numerical calculations.</li><li>Main object is ndarray.</li></ul>
+<p class="label">Pandas:</p>
+<ul><li>Works with Series and DataFrames.</li><li>Data manipulation and analysis.</li><li>Supports different data types across columns.</li></ul></div></article>
+<article class="topic" id="q15"><h2><span class="num">Q15</span> What is the relationship between NumPy and Machine Learning?</h2><div class="body"><p>NumPy is used for numerical calculations, matrix operations,</p>
+<p>data preprocessing and mathematical computations in Machine Learning.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="02-array-dimensions-and-attributes">02. Array Dimensions and Attributes</h1><article class="topic" id="q16"><h2><span class="num">Q16</span> What are the different dimensions in NumPy?</h2><div class="body"><p>0D = Scalar</p>
+<p>1D = Single-dimensional array</p>
+<p>2D = Rows and columns</p>
+<p>3D = Collection of 2D arrays</p>
+<p>ND = Multidimensional array</p></div></article>
+<article class="topic" id="q17"><h2><span class="num">Q17</span> What is a 0D array?</h2><div class="body"><p>An array containing a single scalar value.</p>
+<pre><code>a = np.array(10)
+print(a.ndim)</code></pre>
+<p class="label">Output:</p>
+<p>0</p></div></article>
+<article class="topic" id="q18"><h2><span class="num">Q18</span> What is a 1D array?</h2><div class="body"><p>An array containing elements along one axis.</p>
+<pre><code>a = np.array([10, 20, 30])
+print(a.ndim)</code></pre>
+<p class="label">Output:</p>
+<p>1</p></div></article>
+<article class="topic" id="q19"><h2><span class="num">Q19</span> What is a 2D array?</h2><div class="body"><p>An array containing rows and columns.</p>
+<pre><code>a = np.array([[10, 20], [30, 40]])
+print(a.ndim)</code></pre>
+<p class="label">Output:</p>
+<p>2</p></div></article>
+<article class="topic" id="q20"><h2><span class="num">Q20</span> What is a 3D array?</h2><div class="body"><p>An array containing multiple 2D arrays.</p></div></article>
+<article class="topic" id="q21"><h2><span class="num">Q21</span> What is ndim?</h2><div class="body"><p>Returns the number of dimensions.</p></div></article>
+<article class="topic" id="q22"><h2><span class="num">Q22</span> What is shape?</h2><div class="body"><p>Returns the size of an array along each dimension.</p>
+<p class="label">Example:</p>
+<p>a = <code>np.array</code>([[1, 2, 3], [4, 5, 6]])</p>
+<p>print(a.shape)</p>
+<p class="label">Output:</p>
+<p>(2, 3)</p></div></article>
+<article class="topic" id="q23"><h2><span class="num">Q23</span> What is size?</h2><div class="body"><p>Returns the total number of elements.</p></div></article>
+<article class="topic" id="q24"><h2><span class="num">Q24</span> What is dtype?</h2><div class="body"><p>Returns the data type of array elements.</p></div></article>
+<article class="topic" id="q25"><h2><span class="num">Q25</span> What is itemsize?</h2><div class="body"><p>Returns memory occupied by one array element in bytes.</p></div></article>
+<article class="topic" id="q26"><h2><span class="num">Q26</span> What is nbytes?</h2><div class="body"><p>Returns total memory occupied by array elements in bytes.</p></div></article>
+<article class="topic" id="q27"><h2><span class="num">Q27</span> Difference between shape and size?</h2><div class="body"><pre><code>shape = Dimensions and lengths of dimensions.
+size = Total number of elements.</code></pre></div></article>
+<article class="topic" id="q28"><h2><span class="num">Q28</span> How do you find rows and columns?</h2><div class="body"><pre><code>a = np.array([[1, 2, 3], [4, 5, 6]])
+rows, columns = a.shape</code></pre>
+<pre><code>print(rows)
+print(columns)</code></pre>
+<p class="label">Output:</p>
+<p>2</p>
+<p>3</p></div></article>
+<article class="topic" id="q29"><h2><span class="num">Q29</span> What are ndim, shape and size of a 3x3 matrix?</h2><div class="body"><pre><code>ndim  = 2
+shape = (3, 3)
+size  = 9</code></pre></div></article>
+<article class="topic" id="q30"><h2><span class="num">Q30</span> What is axis?</h2><div class="body"><p>Axis represents the dimension along which an operation</p>
+<p>is performed.</p>
+<pre><code>axis=0 : Down rows, producing column results.
+axis=1 : Across columns, producing row results.
+axis=None : Entire array.</code></pre>
+<p>======================================================================</p></div></article><h1 class="stage" id="03-array-creation-methods">03. Array Creation Methods</h1><article class="topic" id="q31"><h2><span class="num">Q31</span> How do you create a NumPy array?</h2><div class="body"><pre><code>a = np.array([10, 20, 30])</code></pre></div></article>
+<article class="topic" id="q32"><h2><span class="num">Q32</span> What is np.zeros()?</h2><div class="body"><p>Creates an array filled with zeros.</p>
+<pre><code>np.zeros(5)</code></pre>
+<p class="label">Output:</p>
+<p>[0. 0. 0. 0. 0.]</p></div></article>
+<article class="topic" id="q33"><h2><span class="num">Q33</span> What is np.ones()?</h2><div class="body"><p>Creates an array filled with ones.</p>
+<pre><code>np.ones(4)</code></pre>
+<p class="label">Output:</p>
+<p>[1. 1. 1. 1.]</p></div></article>
+<article class="topic" id="q34"><h2><span class="num">Q34</span> What is np.empty()?</h2><div class="body"><p>Creates an array without initializing its values.</p>
+<p>Its contents are arbitrary.</p></div></article>
+<article class="topic" id="q35"><h2><span class="num">Q35</span> What is np.full()?</h2><div class="body"><p>Creates an array filled with a specified value.</p>
+<pre><code>np.full(4, 7)</code></pre>
+<p class="label">Output:</p>
+<p>[7 7 7 7]</p></div></article>
+<article class="topic" id="q36"><h2><span class="num">Q36</span> What is np.arange()?</h2><div class="body"><p>Generates values using start, stop and step.</p>
+<pre><code>np.arange(1, 10, 2)</code></pre>
+<p class="label">Output:</p>
+<p>[1 3 5 7 9]</p></div></article>
+<article class="topic" id="q37"><h2><span class="num">Q37</span> What is np.linspace()?</h2><div class="body"><p>Generates a specified number of evenly spaced values.</p>
+<pre><code>np.linspace(1, 10, 5)</code></pre>
+<p class="label">Output:</p>
+<p>[1.   3.25 5.5  7.75 10. ]</p></div></article>
+<article class="topic" id="q38"><h2><span class="num">Q38</span> Difference between arange() and linspace()?</h2><div class="body"><p class="label">arange():</p>
+<ul><li>Uses step size.</li><li>Stop excluded by default.</li></ul>
+<p class="label">linspace():</p>
+<ul><li>Uses number of values.</li><li>Endpoint included by default.</li></ul></div></article>
+<article class="topic" id="q39"><h2><span class="num">Q39</span> What is np.eye()?</h2><div class="body"><p>Creates a matrix with ones on the diagonal and zeros elsewhere.</p></div></article>
+<article class="topic" id="q40"><h2><span class="num">Q40</span> What is np.identity()?</h2><div class="body"><p>Creates a square identity matrix.</p></div></article>
+<article class="topic" id="q41"><h2><span class="num">Q41</span> What is np.diag()?</h2><div class="body"><p>Creates a diagonal matrix or extracts diagonal elements.</p></div></article>
+<article class="topic" id="q42"><h2><span class="num">Q42</span> What is np.asarray()?</h2><div class="body"><p>Converts input into a NumPy array. It can reuse an existing</p>
+<p>compatible array without copying.</p></div></article>
+<article class="topic" id="q43"><h2><span class="num">Q43</span> What is np.zeros_like()?</h2><div class="body"><p>Creates a zero-filled array with the same shape as another array.</p></div></article>
+<article class="topic" id="q44"><h2><span class="num">Q44</span> What is np.ones_like()?</h2><div class="body"><p>Creates a one-filled array with the same shape as another array.</p></div></article>
+<article class="topic" id="q45"><h2><span class="num">Q45</span> What is np.full_like()?</h2><div class="body"><p>Creates an array with the same shape as another array and</p>
+<p>fills it with a specified value.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="04-numpy-data-types">04. NumPy Data Types</h1><article class="topic" id="q46"><h2><span class="num">Q46</span> What data types are supported by NumPy?</h2><div class="body"><p class="label">Integer:</p>
+<p>int8, int16, int32, int64</p>
+<p class="label">Unsigned Integer:</p>
+<p>uint8, uint16, uint32, uint64</p>
+<p class="label">Float:</p>
+<p>float16, float32, float64</p>
+<p class="label">Other:</p>
+<p>bool_, complex64, complex128, strings, object.</p></div></article>
+<article class="topic" id="q47"><h2><span class="num">Q47</span> What is astype()?</h2><div class="body"><p>Converts an array into another data type.</p>
+<pre><code>a = np.array([10, 20, 30])
+b = a.astype(float)</code></pre>
+<pre><code>print(b)</code></pre>
+<p class="label">Output:</p>
+<p>[10. 20. 30.]</p></div></article>
+<article class="topic" id="q48"><h2><span class="num">Q48</span> Difference between int32 and int64?</h2><div class="body"><pre><code>int32 = Uses 32 bits.
+int64 = Uses 64 bits.</code></pre></div></article>
+<article class="topic" id="q49"><h2><span class="num">Q49</span> What is type casting?</h2><div class="body"><p>Converting data from one data type into another.</p></div></article>
+<article class="topic" id="q50"><h2><span class="num">Q50</span> What happens when integer and float values are stored together?</h2><div class="body"><p>NumPy generally promotes them to a common compatible type,</p>
+<p>such as float.</p></div></article>
+<article class="topic" id="q51"><h2><span class="num">Q51</span> What is float64?</h2><div class="body"><p>A 64-bit floating-point data type.</p></div></article>
+<article class="topic" id="q52"><h2><span class="num">Q52</span> What is int64?</h2><div class="body"><p>A 64-bit signed integer data type.</p></div></article>
+<article class="topic" id="q53"><h2><span class="num">Q53</span> Can we change the dtype of an existing array?</h2><div class="body"><p>We can create a converted array using <code>astype()</code>. It does not</p>
+<p>normally change the original array&#x27;s dtype in place.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="05-indexing-and-slicing">05. Indexing and Slicing</h1><article class="topic" id="q54"><h2><span class="num">Q54</span> What is indexing?</h2><div class="body"><p>Accessing a specific element using its index.</p>
+<pre><code>a = np.array([10, 20, 30])
+print(a[0])</code></pre>
+<p class="label">Output:</p>
+<p>10</p></div></article>
+<article class="topic" id="q55"><h2><span class="num">Q55</span> What is slicing?</h2><div class="body"><p>Extracting a range of elements from an array.</p>
+<pre><code>a = np.array([10, 20, 30, 40, 50])
+print(a[1:4])</code></pre>
+<p class="label">Output:</p>
+<p>[20 30 40]</p></div></article>
+<article class="topic" id="q56"><h2><span class="num">Q56</span> What is negative indexing?</h2><div class="body"><p>Accessing elements from the end of an array.</p>
+<pre><code>a = np.array([10, 20, 30])
+print(a[-1])</code></pre>
+<p class="label">Output:</p>
+<p>30</p></div></article>
+<article class="topic" id="q57"><h2><span class="num">Q57</span> What is slicing syntax?</h2><div class="body"><p>array[start:stop:step]</p></div></article>
+<article class="topic" id="q58"><h2><span class="num">Q58</span> How do you reverse an array?</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+print(a[::-1])</code></pre>
+<p class="label">Output:</p>
+<p>[40 30 20 10]</p></div></article>
+<article class="topic" id="q59"><h2><span class="num">Q59</span> How do you access an element from a 2D array?</h2><div class="body"><pre><code>a = np.array([[10, 20], [30, 40]])
+print(a[1, 0])</code></pre>
+<p class="label">Output:</p>
+<p>30</p></div></article>
+<article class="topic" id="q60"><h2><span class="num">Q60</span> What does a[:, 1] mean?</h2><div class="body"><p>Selects the second column from all rows.</p></div></article>
+<article class="topic" id="q61"><h2><span class="num">Q61</span> What does a[0, :] mean?</h2><div class="body"><p>Selects all columns from the first row.</p></div></article>
+<article class="topic" id="q62"><h2><span class="num">Q62</span> What does a[1:3, 0:2] mean?</h2><div class="body"><p>Selects rows at indices 1 and 2 and columns at indices</p>
+<p>0 and 1.</p></div></article>
+<article class="topic" id="q63"><h2><span class="num">Q63</span> What happens when we access an invalid index?</h2><div class="body"><p>NumPy raises IndexError.</p></div></article>
+<article class="topic" id="q64"><h2><span class="num">Q64</span> Can we modify array elements using indexing?</h2><div class="body"><p>Yes. NumPy arrays are mutable.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="06-array-operations">06. Array Operations</h1><article class="topic" id="q65"><h2><span class="num">Q65</span> What are arithmetic operations in NumPy?</h2><div class="body"><p>Operations that perform mathematical calculations.</p>
+<p class="label">Functions:</p>
+<p><code>np.add</code>()</p>
+<p><code>np.subtract</code>()</p>
+<p><code>np.multiply</code>()</p>
+<p><code>np.divide</code>()</p>
+<p><code>np.power</code>()</p>
+<p><code>np.mod</code>()</p></div></article>
+<article class="topic" id="q66"><h2><span class="num">Q66</span> What is element-wise addition?</h2><div class="body"><p>Adds corresponding elements.</p>
+<pre><code>a = np.array([10, 20])
+b = np.array([1, 2])
+print(a + b)</code></pre>
+<p class="label">Output:</p>
+<p>[11 22]</p></div></article>
+<article class="topic" id="q67"><h2><span class="num">Q67</span> What is element-wise multiplication?</h2><div class="body"><p>Multiplies corresponding elements.</p>
+<pre><code>a = np.array([2, 3])
+b = np.array([4, 5])
+print(a * b)</code></pre>
+<p class="label">Output:</p>
+<p>[ 8 15]</p></div></article>
+<article class="topic" id="q68"><h2><span class="num">Q68</span> Difference between * and @?</h2><div class="body"><p>* = Element-wise multiplication.</p>
+<p>@ = Matrix multiplication.</p></div></article>
+<article class="topic" id="q69"><h2><span class="num">Q69</span> What are comparison operators?</h2><div class="body"><p>&gt;</p>
+<p>&lt;</p>
+<p>&gt;=</p>
+<p>&lt;=</p>
+<p>==</p>
+<p>!=</p>
+<p>They return Boolean arrays.</p></div></article>
+<article class="topic" id="q70"><h2><span class="num">Q70</span> What are logical operations?</h2><div class="body"><pre><code>np.logical_and()
+np.logical_or()
+np.logical_not()
+np.logical_xor()</code></pre></div></article>
+<article class="topic" id="q71"><h2><span class="num">Q71</span> What is np.add()?</h2><div class="body"><p>Adds two arrays element by element.</p></div></article>
+<article class="topic" id="q72"><h2><span class="num">Q72</span> What is np.subtract()?</h2><div class="body"><p>Subtracts corresponding elements.</p></div></article>
+<article class="topic" id="q73"><h2><span class="num">Q73</span> What is np.multiply()?</h2><div class="body"><p>Performs element-wise multiplication.</p></div></article>
+<article class="topic" id="q74"><h2><span class="num">Q74</span> What is np.divide()?</h2><div class="body"><p>Performs element-wise division.</p></div></article>
+<article class="topic" id="q75"><h2><span class="num">Q75</span> What is np.power()?</h2><div class="body"><p>Raises elements to a specified power.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="07-mathematical-functions">07. Mathematical Functions</h1><article class="topic" id="q76"><h2><span class="num">Q76</span> What is np.sqrt()?</h2><div class="body"><p>Calculates square root.</p></div></article>
+<article class="topic" id="q77"><h2><span class="num">Q77</span> What is np.square()?</h2><div class="body"><p>Calculates square of each element.</p></div></article>
+<article class="topic" id="q78"><h2><span class="num">Q78</span> What is np.abs()?</h2><div class="body"><p>Returns absolute values.</p></div></article>
+<article class="topic" id="q79"><h2><span class="num">Q79</span> What is np.round()?</h2><div class="body"><p>Rounds values to a specified number of decimal places.</p></div></article>
+<article class="topic" id="q80"><h2><span class="num">Q80</span> What is np.floor()?</h2><div class="body"><p>Rounds values down to the nearest integer.</p></div></article>
+<article class="topic" id="q81"><h2><span class="num">Q81</span> What is np.ceil()?</h2><div class="body"><p>Rounds values up to the nearest integer.</p></div></article>
+<article class="topic" id="q82"><h2><span class="num">Q82</span> What is np.exp()?</h2><div class="body"><p>Calculates exponential e^x.</p></div></article>
+<article class="topic" id="q83"><h2><span class="num">Q83</span> What is np.log()?</h2><div class="body"><p>Calculates natural logarithm.</p></div></article>
+<article class="topic" id="q84"><h2><span class="num">Q84</span> What is np.log10()?</h2><div class="body"><p>Calculates logarithm to base 10.</p></div></article>
+<article class="topic" id="q85"><h2><span class="num">Q85</span> What is np.sin()?</h2><div class="body"><p>Calculates sine of values in radians.</p></div></article>
+<article class="topic" id="q86"><h2><span class="num">Q86</span> What is np.cos()?</h2><div class="body"><p>Calculates cosine of values in radians.</p></div></article>
+<article class="topic" id="q87"><h2><span class="num">Q87</span> What is np.tan()?</h2><div class="body"><p>Calculates tangent of values in radians.</p></div></article>
+<article class="topic" id="q88"><h2><span class="num">Q88</span> What is np.sum()?</h2><div class="body"><p>Calculates sum of array elements.</p></div></article>
+<article class="topic" id="q89"><h2><span class="num">Q89</span> What is np.cumsum()?</h2><div class="body"><p>Calculates cumulative sum.</p>
+<pre><code>a = np.array([1, 2, 3, 4])
+print(np.cumsum(a))</code></pre>
+<p class="label">Output:</p>
+<p>[1 3 6 10]</p></div></article>
+<article class="topic" id="q90"><h2><span class="num">Q90</span> What is np.cumprod()?</h2><div class="body"><p>Calculates cumulative product.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="08-statistical-functions">08. Statistical Functions</h1><article class="topic" id="q91"><h2><span class="num">Q91</span> What is np.mean()?</h2><div class="body"><p>Calculates arithmetic average.</p></div></article>
+<article class="topic" id="q92"><h2><span class="num">Q92</span> What is np.median()?</h2><div class="body"><p>Returns the middle value after sorting.</p></div></article>
+<article class="topic" id="q93"><h2><span class="num">Q93</span> Does NumPy have np.mode()?</h2><div class="body"><p>No. Use scipy.stats.<code>mode()</code> or another method.</p></div></article>
+<article class="topic" id="q94"><h2><span class="num">Q94</span> What is np.std()?</h2><div class="body"><p>Calculates standard deviation.</p></div></article>
+<article class="topic" id="q95"><h2><span class="num">Q95</span> What is np.var()?</h2><div class="body"><p>Calculates variance.</p></div></article>
+<article class="topic" id="q96"><h2><span class="num">Q96</span> Difference between variance and standard deviation?</h2><div class="body"><pre><code>Variance = Average squared deviation from the mean.
+Standard deviation = Square root of variance.</code></pre></div></article>
+<article class="topic" id="q97"><h2><span class="num">Q97</span> What is np.min()?</h2><div class="body"><p>Returns smallest element.</p></div></article>
+<article class="topic" id="q98"><h2><span class="num">Q98</span> What is np.max()?</h2><div class="body"><p>Returns largest element.</p></div></article>
+<article class="topic" id="q99"><h2><span class="num">Q99</span> What is np.argmax()?</h2><div class="body"><p>Returns index of maximum element.</p></div></article>
+<article class="topic" id="q100"><h2><span class="num">Q100</span> What is np.argmin()?</h2><div class="body"><p>Returns index of minimum element.</p></div></article>
+<article class="topic" id="q101"><h2><span class="num">Q101</span> What is np.percentile()?</h2><div class="body"><p>Calculates a specified percentile.</p></div></article>
+<article class="topic" id="q102"><h2><span class="num">Q102</span> What is np.quantile()?</h2><div class="body"><p>Calculates a specified quantile.</p></div></article>
+<article class="topic" id="q103"><h2><span class="num">Q103</span> What is np.prod()?</h2><div class="body"><p>Calculates product of array elements.</p></div></article>
+<article class="topic" id="q104"><h2><span class="num">Q104</span> What is np.average()?</h2><div class="body"><p>Calculates average, optionally using weights.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="09-reshaping-and-array-manipulation">09. Reshaping and Array Manipulation</h1><article class="topic" id="q105"><h2><span class="num">Q105</span> What is reshaping?</h2><div class="body"><p>Changing array dimensions without changing its elements.</p></div></article>
+<article class="topic" id="q106"><h2><span class="num">Q106</span> What is reshape()?</h2><div class="body"><pre><code>a = np.array([1, 2, 3, 4, 5, 6])
+print(a.reshape(2, 3))</code></pre>
+<p class="label">Output:</p>
+<p>[[1 2 3]</p>
+<p>[4 5 6]]</p></div></article>
+<article class="topic" id="q107"><h2><span class="num">Q107</span> What happens if requested shape is incompatible?</h2><div class="body"><p>NumPy raises ValueError.</p></div></article>
+<article class="topic" id="q108"><h2><span class="num">Q108</span> What is flatten()?</h2><div class="body"><p>Converts multidimensional array into a 1D copy.</p></div></article>
+<article class="topic" id="q109"><h2><span class="num">Q109</span> What is ravel()?</h2><div class="body"><p>Converts array into 1D, returning a view when possible.</p></div></article>
+<article class="topic" id="q110"><h2><span class="num">Q110</span> Difference between flatten() and ravel()?</h2><div class="body"><p class="label">flatten():</p>
+<ul><li>Always returns a copy.</li></ul>
+<p class="label">ravel():</p>
+<ul><li>Returns a view when possible.</li><li>Can avoid unnecessary copying.</li></ul></div></article>
+<article class="topic" id="q111"><h2><span class="num">Q111</span> What is transpose?</h2><div class="body"><p>Swaps the axes of an array.</p></div></article>
+<article class="topic" id="q112"><h2><span class="num">Q112</span> What is a.T?</h2><div class="body"><p>Shortcut for transposing an array.</p></div></article>
+<article class="topic" id="q113"><h2><span class="num">Q113</span> What is np.squeeze()?</h2><div class="body"><p>Removes dimensions with size 1.</p></div></article>
+<article class="topic" id="q114"><h2><span class="num">Q114</span> What is np.expand_dims()?</h2><div class="body"><p>Adds a new dimension.</p></div></article>
+<article class="topic" id="q115"><h2><span class="num">Q115</span> What is np.resize()?</h2><div class="body"><p>Returns an array with a specified new shape. It can repeat</p>
+<p>values if more elements are needed.</p></div></article>
+<article class="topic" id="q116"><h2><span class="num">Q116</span> What is np.swapaxes()?</h2><div class="body"><p>Swaps two specified axes.</p></div></article>
+<article class="topic" id="q117"><h2><span class="num">Q117</span> What is np.moveaxis()?</h2><div class="body"><p>Moves specified axes to new positions.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="10-joining-and-splitting-arrays">10. Joining and Splitting Arrays</h1><article class="topic" id="q118"><h2><span class="num">Q118</span> What is concatenation?</h2><div class="body"><p>Joining arrays along an existing axis.</p></div></article>
+<article class="topic" id="q119"><h2><span class="num">Q119</span> What is np.concatenate()?</h2><div class="body"><p>Joins arrays along an existing axis.</p></div></article>
+<article class="topic" id="q120"><h2><span class="num">Q120</span> What is np.stack()?</h2><div class="body"><p>Joins arrays along a new axis.</p></div></article>
+<article class="topic" id="q121"><h2><span class="num">Q121</span> Difference between concatenate and stack?</h2><div class="body"><p class="label">concatenate:</p>
+<ul><li>Uses existing axis.</li></ul>
+<p class="label">stack:</p>
+<ul><li>Creates a new axis.</li><li>Input shapes must match.</li></ul></div></article>
+<article class="topic" id="q122"><h2><span class="num">Q122</span> What is np.vstack()?</h2><div class="body"><p>Stacks arrays vertically.</p></div></article>
+<article class="topic" id="q123"><h2><span class="num">Q123</span> What is np.hstack()?</h2><div class="body"><p>Stacks arrays horizontally.</p></div></article>
+<article class="topic" id="q124"><h2><span class="num">Q124</span> What is np.dstack()?</h2><div class="body"><p>Stacks arrays along the third axis.</p></div></article>
+<article class="topic" id="q125"><h2><span class="num">Q125</span> What is np.split()?</h2><div class="body"><p>Splits an array into equal sections.</p></div></article>
+<article class="topic" id="q126"><h2><span class="num">Q126</span> What is np.array_split()?</h2><div class="body"><p>Splits an array into sections that can have unequal sizes.</p></div></article>
+<article class="topic" id="q127"><h2><span class="num">Q127</span> Difference between split and array_split?</h2><div class="body"><p>split = Equal sections required.</p>
+<p>array_split = Unequal sections allowed.</p></div></article>
+<article class="topic" id="q128"><h2><span class="num">Q128</span> What is np.hsplit()?</h2><div class="body"><p>Horizontal splitting.</p></div></article>
+<article class="topic" id="q129"><h2><span class="num">Q129</span> What is np.vsplit()?</h2><div class="body"><p>Vertical splitting.</p></div></article>
+<article class="topic" id="q130"><h2><span class="num">Q130</span> What is np.dsplit()?</h2><div class="body"><p>Splitting along the third axis.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="11-broadcasting">11. Broadcasting</h1><article class="topic" id="q131"><h2><span class="num">Q131</span> What is broadcasting?</h2><div class="body"><p>Allows operations between arrays of different shapes</p>
+<p>when their dimensions are compatible.</p></div></article>
+<article class="topic" id="q132"><h2><span class="num">Q132</span> Why do we use broadcasting?</h2><div class="body"><ul><li>Avoids manually repeating values.</li><li>Makes calculations easier.</li><li>Reduces unnecessary memory usage.</li><li>Supports efficient operations.</li></ul></div></article>
+<article class="topic" id="q133"><h2><span class="num">Q133</span> What are broadcasting rules?</h2><div class="body"><ul><li>Compare dimensions from right to left.</li><li>Dimensions must be equal or one must be 1.</li><li>Missing dimensions are treated as 1.</li></ul></div></article>
+<article class="topic" id="q134"><h2><span class="num">Q134</span> Can arrays of different shapes be added?</h2><div class="body"><p>Yes, if broadcasting rules are satisfied.</p></div></article>
+<article class="topic" id="q135"><h2><span class="num">Q135</span> What happens when broadcasting rules fail?</h2><div class="body"><p>NumPy raises ValueError.</p></div></article>
+<article class="topic" id="q136"><h2><span class="num">Q136</span> Difference between broadcasting and vectorization?</h2><div class="body"><pre><code>Broadcasting = Handles compatible array shapes.
+Vectorization = Performs operations on entire arrays.</code></pre></div></article>
+<article class="topic" id="q137"><h2><span class="num">Q137</span> Predict output:</h2><div class="body"><pre><code>a = np.array([1, 2, 3])
+print(a + 10)</code></pre>
+<p class="label">Output:</p>
+<p>[11 12 13]</p></div></article>
+<article class="topic" id="q138"><h2><span class="num">Q138</span> Predict output:</h2><div class="body"><pre><code>a = np.array([[1], [2], [3]])
+b = np.array([10, 20])
+print(a + b)</code></pre>
+<p class="label">Output:</p>
+<p>[[11 21]</p>
+<p>[12 22]</p>
+<p>[13 23]]</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="12-copy-and-view">12. Copy and View</h1><article class="topic" id="q139"><h2><span class="num">Q139</span> What is copy?</h2><div class="body"><p>Creates an independent array with separate data storage.</p></div></article>
+<article class="topic" id="q140"><h2><span class="num">Q140</span> What is view?</h2><div class="body"><p>Creates a new array object sharing the original array&#x27;s data.</p></div></article>
+<article class="topic" id="q141"><h2><span class="num">Q141</span> Difference between copy and view?</h2><div class="body"><p class="label">Copy:</p>
+<ul><li>Independent data.</li><li>Changes do not affect original.</li></ul>
+<p class="label">View:</p>
+<ul><li>Shares data.</li><li>Changes can affect original.</li></ul></div></article>
+<article class="topic" id="q142"><h2><span class="num">Q142</span> How do you create a copy?</h2><div class="body"><pre><code>b = a.copy()</code></pre></div></article>
+<article class="topic" id="q143"><h2><span class="num">Q143</span> How do you create a view?</h2><div class="body"><pre><code>b = a.view()</code></pre></div></article>
+<article class="topic" id="q144"><h2><span class="num">Q144</span> How do you check shared memory?</h2><div class="body"><pre><code>np.shares_memory(a, b)</code></pre></div></article>
+<article class="topic" id="q145"><h2><span class="num">Q145</span> Does slicing create copy or view?</h2><div class="body"><p>Basic slicing generally creates a view.</p></div></article>
+<article class="topic" id="q146"><h2><span class="num">Q146</span> Does Boolean indexing create copy or view?</h2><div class="body"><p>Boolean indexing returns a copy.</p></div></article>
+<article class="topic" id="q147"><h2><span class="num">Q147</span> What is shallow copy?</h2><div class="body"><p>Creates a new outer object but can retain references to</p>
+<p>nested objects.</p></div></article>
+<article class="topic" id="q148"><h2><span class="num">Q148</span> What is deep copy?</h2><div class="body"><p>Recursively copies nested objects.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="13-boolean-indexing-and-filtering">13. Boolean Indexing and Filtering</h1><article class="topic" id="q149"><h2><span class="num">Q149</span> What is Boolean indexing?</h2><div class="body"><p>Uses True and False conditions to select elements.</p>
+<pre><code>a = np.array([10, 20, 30, 40])
+print(a[a &gt; 20])</code></pre>
+<p class="label">Output:</p>
+<p>[30 40]</p></div></article>
+<article class="topic" id="q150"><h2><span class="num">Q150</span> What is filtering?</h2><div class="body"><p>Extracting elements that satisfy a condition.</p></div></article>
+<article class="topic" id="q151"><h2><span class="num">Q151</span> What is np.where()?</h2><div class="body"><p>Returns indices where a condition is true, or selects values</p>
+<p>based on a condition.</p>
+<pre><code>a = np.array([10, 20, 30, 40])
+print(np.where(a &gt; 20))</code></pre>
+<p class="label">Output:</p>
+<p>(array([2, 3]),)</p></div></article>
+<article class="topic" id="q152"><h2><span class="num">Q152</span> What is np.extract()?</h2><div class="body"><p>Extracts elements based on a condition.</p></div></article>
+<article class="topic" id="q153"><h2><span class="num">Q153</span> How do you filter even numbers?</h2><div class="body"><pre><code>a = np.array([1, 2, 3, 4, 5, 6])
+print(a[a % 2 == 0])</code></pre>
+<p class="label">Output:</p>
+<p>[2 4 6]</p></div></article>
+<article class="topic" id="q154"><h2><span class="num">Q154</span> How do you filter numbers between 10 and 50?</h2><div class="body"><pre><code>a = np.array([5, 15, 25, 55])
+print(a[(a &gt;= 10) &amp; (a &lt;= 50)])</code></pre>
+<p class="label">Output:</p>
+<p>[15 25]</p></div></article>
+<article class="topic" id="q155"><h2><span class="num">Q155</span> Why use &amp; instead of and?</h2><div class="body"><p>&amp; performs element-wise logical AND. Python&#x27;s and expects</p>
+<p>single truth values.</p></div></article>
+<article class="topic" id="q156"><h2><span class="num">Q156</span> What is np.any()?</h2><div class="body"><p>Returns True if at least one element satisfies the condition.</p></div></article>
+<article class="topic" id="q157"><h2><span class="num">Q157</span> What is np.all()?</h2><div class="body"><p>Returns True if all elements satisfy the condition.</p>
+<p class="label">Logical operators:</p>
+<p>&amp; = AND</p>
+<p>| = OR</p>
+<p>~ = NOT</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="14-random-module">14. Random Module</h1><article class="topic" id="q158"><h2><span class="num">Q158</span> What is np.random?</h2><div class="body"><p>NumPy submodule used for random number generation.</p></div></article>
+<article class="topic" id="q159"><h2><span class="num">Q159</span> What is np.random.rand()?</h2><div class="body"><p>Generates random floats between 0 and 1.</p></div></article>
+<article class="topic" id="q160"><h2><span class="num">Q160</span> What is np.random.randn()?</h2><div class="body"><p>Generates values from a standard normal distribution.</p></div></article>
+<article class="topic" id="q161"><h2><span class="num">Q161</span> What is np.random.randint()?</h2><div class="body"><p>Generates random integers within a specified range.</p></div></article>
+<article class="topic" id="q162"><h2><span class="num">Q162</span> What is np.random.choice()?</h2><div class="body"><p>Randomly selects elements from a collection.</p></div></article>
+<article class="topic" id="q163"><h2><span class="num">Q163</span> What is np.random.shuffle()?</h2><div class="body"><p>Shuffles an array in place.</p></div></article>
+<article class="topic" id="q164"><h2><span class="num">Q164</span> What is np.random.permutation()?</h2><div class="body"><p>Returns a shuffled permutation without modifying the original.</p></div></article>
+<article class="topic" id="q165"><h2><span class="num">Q165</span> What is np.random.seed()?</h2><div class="body"><p>Sets the seed for reproducible results using the legacy API.</p></div></article>
+<article class="topic" id="q166"><h2><span class="num">Q166</span> What is np.random.default_rng()?</h2><div class="body"><p>Creates a modern random number generator.</p></div></article>
+<article class="topic" id="q167"><h2><span class="num">Q167</span> Difference between rand and randint?</h2><div class="body"><p>rand = Random floating-point numbers.</p>
+<p>randint = Random integers.</p></div></article>
+<article class="topic" id="q168"><h2><span class="num">Q168</span> Why use random numbers in Machine Learning?</h2><div class="body"><p>Used for initializing weights, shuffling datasets, generating</p>
+<p>samples and splitting data.</p>
+<p class="label">Modern example:</p>
+<pre><code>rng = np.random.default_rng(42)
+print(rng.integers(1, 10, size=5))</code></pre>
+<p>======================================================================</p></div></article><h1 class="stage" id="15-linear-algebra">15. Linear Algebra</h1><article class="topic" id="q169"><h2><span class="num">Q169</span> What is linear algebra in NumPy?</h2><div class="body"><p>Mathematical operations involving vectors and matrices.</p></div></article>
+<article class="topic" id="q170"><h2><span class="num">Q170</span> What is np.linalg.inv()?</h2><div class="body"><p>Calculates inverse of an invertible square matrix.</p></div></article>
+<article class="topic" id="q171"><h2><span class="num">Q171</span> What is np.linalg.det()?</h2><div class="body"><p>Calculates matrix determinant.</p></div></article>
+<article class="topic" id="q172"><h2><span class="num">Q172</span> What is np.linalg.matrix_rank()?</h2><div class="body"><p>Calculates matrix rank.</p></div></article>
+<article class="topic" id="q173"><h2><span class="num">Q173</span> What is np.linalg.solve()?</h2><div class="body"><p>Solves a system of linear equations.</p></div></article>
+<article class="topic" id="q174"><h2><span class="num">Q174</span> What is np.linalg.eig()?</h2><div class="body"><p>Calculates eigenvalues and eigenvectors.</p></div></article>
+<article class="topic" id="q175"><h2><span class="num">Q175</span> What is np.linalg.norm()?</h2><div class="body"><p>Calculates vector or matrix norm.</p></div></article>
+<article class="topic" id="q176"><h2><span class="num">Q176</span> What is np.linalg.svd()?</h2><div class="body"><p>Performs singular value decomposition.</p></div></article>
+<article class="topic" id="q177"><h2><span class="num">Q177</span> Difference between dot() and matmul()?</h2><div class="body"><p class="label">dot():</p>
+<ul><li>Performs dot product and matrix multiplication depending</li><li>on input dimensions.</li></ul>
+<p class="label">matmul():</p>
+<ul><li>Specifically performs matrix multiplication.</li><li>Supports stacked matrices.</li></ul></div></article>
+<article class="topic" id="q178"><h2><span class="num">Q178</span> Difference between * and np.dot()?</h2><div class="body"><pre><code>* = Element-wise multiplication.
+np.dot() = Dot product or matrix product depending on dimensions.</code></pre>
+<p>======================================================================</p></div></article><h1 class="stage" id="16-missing-values-and-special-values">16. Missing Values and Special Values</h1><article class="topic" id="q179"><h2><span class="num">Q179</span> What is NaN?</h2><div class="body"><p>Not a Number. Represents undefined or missing numerical data.</p></div></article>
+<article class="topic" id="q180"><h2><span class="num">Q180</span> How do you create NaN?</h2><div class="body"><pre><code>a = np.array([10, 20, np.nan, 40])</code></pre></div></article>
+<article class="topic" id="q181"><h2><span class="num">Q181</span> What is np.isnan()?</h2><div class="body"><p>Checks for NaN values.</p></div></article>
+<article class="topic" id="q182"><h2><span class="num">Q182</span> What is np.nanmean()?</h2><div class="body"><p>Calculates mean while ignoring NaN values.</p></div></article>
+<article class="topic" id="q183"><h2><span class="num">Q183</span> What is np.nansum()?</h2><div class="body"><p>Calculates sum while treating NaN values as zero.</p></div></article>
+<article class="topic" id="q184"><h2><span class="num">Q184</span> What is np.nanmax()?</h2><div class="body"><p>Returns maximum while ignoring NaN values.</p></div></article>
+<article class="topic" id="q185"><h2><span class="num">Q185</span> What is np.nanmin()?</h2><div class="body"><p>Returns minimum while ignoring NaN values.</p></div></article>
+<article class="topic" id="q186"><h2><span class="num">Q186</span> What is np.isinf()?</h2><div class="body"><p>Checks for positive or negative infinity.</p></div></article>
+<article class="topic" id="q187"><h2><span class="num">Q187</span> What is np.isfinite()?</h2><div class="body"><p>Checks for values that are neither NaN nor infinity.</p></div></article>
+<article class="topic" id="q188"><h2><span class="num">Q188</span> What is np.nan_to_num()?</h2><div class="body"><p>Replaces NaN and infinite values with finite values.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="17-searching-and-sorting">17. Searching and Sorting</h1><article class="topic" id="q189"><h2><span class="num">Q189</span> What is np.sort()?</h2><div class="body"><p>Returns a sorted copy of an array.</p></div></article>
+<article class="topic" id="q190"><h2><span class="num">Q190</span> What is np.argsort()?</h2><div class="body"><p>Returns indices that would sort an array.</p></div></article>
+<article class="topic" id="q191"><h2><span class="num">Q191</span> What is np.unique()?</h2><div class="body"><p>Returns unique elements.</p></div></article>
+<article class="topic" id="q192"><h2><span class="num">Q192</span> What is np.where()?</h2><div class="body"><p>Returns indices or conditionally selected values.</p></div></article>
+<article class="topic" id="q193"><h2><span class="num">Q193</span> What is np.argmax()?</h2><div class="body"><p>Returns index of maximum element.</p></div></article>
+<article class="topic" id="q194"><h2><span class="num">Q194</span> What is np.argmin()?</h2><div class="body"><p>Returns index of minimum element.</p></div></article>
+<article class="topic" id="q195"><h2><span class="num">Q195</span> What is np.searchsorted()?</h2><div class="body"><p>Finds insertion position in sorted data.</p></div></article>
+<article class="topic" id="q196"><h2><span class="num">Q196</span> What is np.intersect1d()?</h2><div class="body"><p>Returns common unique elements between two arrays.</p></div></article>
+<article class="topic" id="q197"><h2><span class="num">Q197</span> What is np.union1d()?</h2><div class="body"><p>Returns sorted unique union of two arrays.</p></div></article>
+<article class="topic" id="q198"><h2><span class="num">Q198</span> What is np.setdiff1d()?</h2><div class="body"><p>Returns elements present in first array but not second.</p></div></article>
+<article class="topic" id="q199"><h2><span class="num">Q199</span> What is np.setxor1d()?</h2><div class="body"><p>Returns elements present in either array but not both.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="18-file-handling">18. File Handling</h1><article class="topic" id="q200"><h2><span class="num">Q200</span> How do you save a NumPy array?</h2><div class="body"><pre><code>np.save(&quot;data.npy&quot;, a)</code></pre></div></article>
+<article class="topic" id="q201"><h2><span class="num">Q201</span> How do you load a NumPy array?</h2><div class="body"><pre><code>a = np.load(&quot;data.npy&quot;)</code></pre></div></article>
+<article class="topic" id="q202"><h2><span class="num">Q202</span> What is .npy?</h2><div class="body"><p>Binary file format for storing a single NumPy array.</p></div></article>
+<article class="topic" id="q203"><h2><span class="num">Q203</span> What is .npz?</h2><div class="body"><p>Archive format used to store multiple NumPy arrays.</p></div></article>
+<article class="topic" id="q204"><h2><span class="num">Q204</span> What is np.savez()?</h2><div class="body"><p>Saves multiple arrays in an uncompressed .npz archive.</p></div></article>
+<article class="topic" id="q205"><h2><span class="num">Q205</span> What is np.savez_compressed()?</h2><div class="body"><p>Saves multiple arrays in a compressed .npz archive.</p></div></article>
+<article class="topic" id="q206"><h2><span class="num">Q206</span> What is np.savetxt()?</h2><div class="body"><p>Saves arrays in text format such as CSV.</p></div></article>
+<article class="topic" id="q207"><h2><span class="num">Q207</span> What is np.loadtxt()?</h2><div class="body"><p>Loads numerical data from text files.</p></div></article>
+<article class="topic" id="q208"><h2><span class="num">Q208</span> What is np.genfromtxt()?</h2><div class="body"><p>Loads text data and supports missing-value handling.</p></div></article>
+<article class="topic" id="q209"><h2><span class="num">Q209</span> Difference between loadtxt and genfromtxt?</h2><div class="body"><p class="label">loadtxt:</p>
+<ul><li>Suitable for clean numerical data.</li><li>Simpler and often faster.</li></ul>
+<p class="label">genfromtxt:</p>
+<ul><li>More flexible.</li><li>Supports missing-value handling.</li></ul>
+<p>======================================================================</p></div></article><h1 class="stage" id="19-numpy-modules-and-submodules">19. NumPy Modules and Submodules</h1><article class="topic" id="q210"><h2><span class="num">Q210</span> What are the main NumPy modules?</h2><div class="body"><pre><code>numpy             = Main library
+numpy.random      = Random numbers
+numpy.linalg      = Linear algebra
+numpy.fft         = Fourier transforms
+numpy.ma          = Masked arrays
+numpy.char        = String operations
+numpy.testing     = Testing
+numpy.polynomial  = Polynomial operations</code></pre></div></article>
+<article class="topic" id="q211"><h2><span class="num">Q211</span> What is np.fft?</h2><div class="body"><p>Used for Fourier transforms and frequency-domain calculations.</p></div></article>
+<article class="topic" id="q212"><h2><span class="num">Q212</span> What is np.ma?</h2><div class="body"><p>Used for masked arrays.</p></div></article>
+<article class="topic" id="q213"><h2><span class="num">Q213</span> What is np.char?</h2><div class="body"><p>Provides vectorized string operations.</p></div></article>
+<article class="topic" id="q214"><h2><span class="num">Q214</span> What is np.testing?</h2><div class="body"><p>Provides functions to test and compare arrays.</p></div></article>
+<article class="topic" id="q215"><h2><span class="num">Q215</span> What is np.polynomial?</h2><div class="body"><p>Used for polynomial calculations and fitting.</p></div></article>
+<article class="topic" id="q216"><h2><span class="num">Q216</span> Difference between module and function?</h2><div class="body"><p class="label">Module:</p>
+<p>A collection of related functionality.</p>
+<p class="label">Function:</p>
+<p>Performs a specific operation.</p>
+<p class="label">Example:</p>
+<p><code>np.random.randint</code>(1, 10)</p>
+<pre><code>np = Main library.
+random = Submodule.
+randint() = Function.</code></pre>
+<p>======================================================================</p></div></article><h1 class="stage">Interview Practice</h1><article class="topic" id="20-difference-based-questions"><h2>20. Difference-Based Questions</h2><div class="body"><div class="diff-row"><strong>List vs Array</strong><span></span></div><p>List is general-purpose; array is optimized for numerical operations.</p><div class="diff-row"><strong>1D vs 2D</strong><span></span></div><p>One axis vs two axes.</p><div class="diff-row"><strong>ndim vs shape</strong><span></span></div><p>Number of dimensions vs dimension lengths.</p><div class="diff-row"><strong>shape vs size</strong><span></span></div><p>Dimension lengths vs total elements.</p><div class="diff-row"><strong>arange vs linspace</strong><span></span></div><p>Step size vs number of values.</p><div class="diff-row"><strong>zeros vs ones</strong><span></span></div><p>Fills with 0 vs fills with 1.</p><div class="diff-row"><strong>array vs asarray</strong><span></span></div><p>Creates array vs avoids copying when possible.</p><div class="diff-row"><strong>copy vs view</strong><span></span></div><p>Independent data vs shared data.</p><div class="diff-row"><strong>flatten vs ravel</strong><span></span></div><p>Always copy vs view when possible.</p><div class="diff-row"><strong>* vs @</strong><span></span></div><p>Element-wise multiplication vs matrix multiplication.</p><div class="diff-row"><strong>dot vs matmul</strong><span></span></div><p>Dot/matrix product vs matrix multiplication.</p><div class="diff-row"><strong>concatenate vs stack</strong><span></span></div><p>Existing axis vs new axis.</p><div class="diff-row"><strong>split vs array_split</strong><span></span></div><p>Equal sections vs potentially unequal sections.</p><div class="diff-row"><strong>vstack vs hstack</strong><span></span></div><p>Vertical vs horizontal stacking.</p><div class="diff-row"><strong>sort vs argsort</strong><span></span></div><p>Sorted values vs sorting indices.</p><div class="diff-row"><strong>argmax vs max</strong><span></span></div><p>Index vs value.</p><div class="diff-row"><strong>argmin vs min</strong><span></span></div><p>Index vs value.</p><div class="diff-row"><strong>mean vs median</strong><span></span></div><p>Average vs middle value.</p><div class="diff-row"><strong>var vs std</strong><span></span></div><p>Variance vs standard deviation.</p><div class="diff-row"><strong>any vs all</strong><span></span></div><p>At least one True vs all True.</p><div class="diff-row"><strong>loadtxt vs genfromtxt</strong><span></span></div><p>Clean numerical text vs missing-value handling.</p><div class="diff-row"><strong>rand vs randint</strong><span></span></div><p>Random floats vs random integers.</p><div class="diff-row"><strong>shuffle vs permutation</strong><span></span></div><p>Modifies array in place vs returns a permutation.</p><p>======================================================================</p></div></article><h1 class="stage" id="21-output-based-questions">21. Output-Based Questions</h1><article class="topic" id="q217"><h2><span class="num">Q217</span></h2><pre><code>a = np.array([10, 20, 30])
+print(a + 5)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[15 25 35]</p></div></article>
+<article class="topic" id="q218"><h2><span class="num">Q218</span></h2><pre><code>a = np.array([1, 2, 3])
+print(a * 3)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[3 6 9]</p></div></article>
+<article class="topic" id="q219"><h2><span class="num">Q219</span></h2><pre><code>a = np.array([10, 20, 30, 40])
+print(a[1:3])</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[20 30]</p></div></article>
+<article class="topic" id="q220"><h2><span class="num">Q220</span></h2><pre><code>a = np.array([1, 2, 3, 4])
+print(a[::-1])</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[4 3 2 1]</p></div></article>
+<article class="topic" id="q221"><h2><span class="num">Q221</span></h2><pre><code>a = np.array([10, 20, 30])
+print(a.ndim)
+print(a.shape)
+print(a.size)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>1</p>
+<p>(3,)</p>
+<p>3</p></div></article>
+<article class="topic" id="q222"><h2><span class="num">Q222</span></h2><pre><code>a = np.array([[1, 2], [3, 4]])
+print(a.sum())</code></pre><div class="body"><p class="label">Answer:</p>
+<p>10</p></div></article>
+<article class="topic" id="q223"><h2><span class="num">Q223</span></h2><pre><code>a = np.array([[1, 2], [3, 4]])
+print(a.sum(axis=0))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[4 6]</p></div></article>
+<article class="topic" id="q224"><h2><span class="num">Q224</span></h2><pre><code>a = np.array([[1, 2], [3, 4]])
+print(a.sum(axis=1))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[3 7]</p></div></article>
+<article class="topic" id="q225"><h2><span class="num">Q225</span></h2><pre><code>a = np.array([1, 2, 3, 4])
+print(a &gt; 2)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[False False True True]</p></div></article>
+<article class="topic" id="q226"><h2><span class="num">Q226</span></h2><pre><code>a = np.array([1, 2, 2, 3, 3, 3])
+print(np.unique(a))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[1 2 3]</p></div></article>
+<article class="topic" id="q227"><h2><span class="num">Q227</span></h2><pre><code>a = np.array([10, 20, 30, 40])
+print(np.argmax(a))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>3</p></div></article>
+<article class="topic" id="q228"><h2><span class="num">Q228</span></h2><pre><code>a = np.array([1, 2, 3])
+print(np.mean(a))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>2.0</p></div></article>
+<article class="topic" id="q229"><h2><span class="num">Q229</span></h2><pre><code>a = np.array([1, 2, 3, 4])
+print(a.reshape(2, 2))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[[1 2]</p>
+<p>[3 4]]</p></div></article>
+<article class="topic" id="q230"><h2><span class="num">Q230</span></h2><pre><code>a = np.array([1, 2, 3])
+b = a.copy()
+b[0] = 100
+print(a)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[1 2 3]</p></div></article>
+<article class="topic" id="q231"><h2><span class="num">Q231</span></h2><pre><code>a = np.array([1, 2, 3])
+b = a.view()
+b[0] = 100
+print(a)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[100   2   3]</p></div></article>
+<article class="topic" id="q232"><h2><span class="num">Q232</span></h2><pre><code>a = np.array([1, 2, 3, 4, 5])
+print(a[a % 2 == 0])</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[2 4]</p></div></article>
+<article class="topic" id="q233"><h2><span class="num">Q233</span></h2><pre><code>a = np.array([1, 2, 3])
+b = np.array([10])
+print(a + b)</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[11 12 13]</p></div></article>
+<article class="topic" id="q234"><h2><span class="num">Q234</span></h2><pre><code>a = np.array([1, 2, 3])
+print(np.cumsum(a))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[1 3 6]</p></div></article>
+<article class="topic" id="q235"><h2><span class="num">Q235</span></h2><pre><code>a = np.array([1, 2, 3])
+print(np.where(a &gt; 1, 100, 0))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>[  0 100 100]</p></div></article>
+<article class="topic" id="q236"><h2><span class="num">Q236</span></h2><pre><code>a = np.array([10, 20, 30])
+print(np.min(a))
+print(np.max(a))</code></pre><div class="body"><p class="label">Answer:</p>
+<p>10</p>
+<p>30</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="22-tricky-interview-questions">22. Tricky Interview Questions</h1><article class="topic" id="q237"><h2><span class="num">Q237</span> Can a NumPy array contain another NumPy array?</h2><div class="body"><p>Yes. Compatible nested arrays generally form multidimensional</p>
+<p>arrays. Object arrays can store arrays as objects.</p></div></article>
+<article class="topic" id="q238"><h2><span class="num">Q238</span> Can we change array shape without changing data?</h2><div class="body"><p>Yes, using <code>reshape()</code> when compatible.</p></div></article>
+<article class="topic" id="q239"><h2><span class="num">Q239</span> Does reshape() always return a view?</h2><div class="body"><p>No. It returns a view when possible and otherwise may return</p>
+<p>a copy.</p></div></article>
+<article class="topic" id="q240"><h2><span class="num">Q240</span> Is NumPy always faster than Python lists?</h2><div class="body"><p>No. NumPy is generally faster for large numerical operations.</p></div></article>
+<article class="topic" id="q241"><h2><span class="num">Q241</span> Can NumPy arrays have different data types?</h2><div class="body"><p>Standard arrays use one dtype. Object arrays can hold</p>
+<p>different Python object types.</p></div></article>
+<article class="topic" id="q242"><h2><span class="num">Q242</span> What happens when dividing an integer array by another?</h2><div class="body"><p>Normal division generally produces floating-point results.</p></div></article>
+<article class="topic" id="q243"><h2><span class="num">Q243</span> What happens when dividing by zero?</h2><div class="body"><p>Depending on dtype and error settings, NumPy can return</p>
+<p>inf or nan and issue a warning.</p></div></article>
+<article class="topic" id="q244"><h2><span class="num">Q244</span> What is memory efficiency?</h2><div class="body"><p>NumPy stores homogeneous array elements in compact buffers,</p>
+<p>reducing overhead compared with Python lists.</p></div></article>
+<article class="topic" id="q245"><h2><span class="num">Q245</span> What is contiguous memory?</h2><div class="body"><p>Array elements stored continuously in a particular memory order.</p></div></article>
+<article class="topic" id="q246"><h2><span class="num">Q246</span> What is C order?</h2><div class="body"><p>Row-major memory order.</p></div></article>
+<article class="topic" id="q247"><h2><span class="num">Q247</span> What is Fortran order?</h2><div class="body"><p>Column-major memory order.</p></div></article>
+<article class="topic" id="q248"><h2><span class="num">Q248</span> What is np.newaxis?</h2><div class="body"><p>Adds a new dimension. It is an alias for None.</p>
+<pre><code>a = np.array([1, 2, 3])
+print(a[:, np.newaxis].shape)</code></pre>
+<p class="label">Output:</p>
+<p>(3, 1)</p></div></article>
+<article class="topic" id="q249"><h2><span class="num">Q249</span> What is np.clip()?</h2><div class="body"><p>Restricts values to a specified minimum and maximum.</p>
+<pre><code>a = np.array([5, 15, 25, 35])
+print(np.clip(a, 10, 30))</code></pre>
+<p class="label">Output:</p>
+<p>[10 15 25 30]</p></div></article>
+<article class="topic" id="q250"><h2><span class="num">Q250</span> What is np.meshgrid()?</h2><div class="body"><p>Generates coordinate matrices from coordinate vectors.</p></div></article>
+<article class="topic" id="q251"><h2><span class="num">Q251</span> What is np.broadcast_to()?</h2><div class="body"><p>Creates a broadcasted view with a compatible shape.</p></div></article>
+<article class="topic" id="q252"><h2><span class="num">Q252</span> What is np.fromiter()?</h2><div class="body"><p>Creates an array from an iterable.</p></div></article>
+<article class="topic" id="q253"><h2><span class="num">Q253</span> What is np.fromfunction()?</h2><div class="body"><p>Creates an array by applying a function to coordinate arrays.</p></div></article>
+<article class="topic" id="q254"><h2><span class="num">Q254</span> What is np.vectorize()?</h2><div class="body"><p>Applies a Python function element-wise as a convenience</p>
+<p>wrapper. It is not generally a performance optimization.</p></div></article>
+<article class="topic" id="q255"><h2><span class="num">Q255</span> What is np.apply_along_axis()?</h2><div class="body"><p>Applies a function to 1D slices along a specified axis.</p>
+<p>======================================================================</p></div></article><h1 class="stage" id="23-scenario-based-questions">23. Scenario-Based Questions</h1><article class="topic" id="q256"><h2><span class="num">Q256</span> You have a large list of numbers. How do you perform
+mathematical calculations efficiently?</h2><div class="body"><pre><code>a = np.array(numbers)
+print(a * 2)</code></pre></div></article>
+<article class="topic" id="q257"><h2><span class="num">Q257</span> How do you calculate an average ignoring NaN?</h2><div class="body"><pre><code>np.nanmean(a)</code></pre></div></article>
+<article class="topic" id="q258"><h2><span class="num">Q258</span> How do you remove duplicate values?</h2><div class="body"><pre><code>np.unique(a)</code></pre></div></article>
+<article class="topic" id="q259"><h2><span class="num">Q259</span> How do you find values greater than 50?</h2><div class="body"><p>a[a &gt; 50]</p></div></article>
+<article class="topic" id="q260"><h2><span class="num">Q260</span> How do you convert 12 elements into a 3x4 matrix?</h2><div class="body"><p>a.reshape(3, 4)</p></div></article>
+<article class="topic" id="q261"><h2><span class="num">Q261</span> How do you calculate column-wise totals?</h2><div class="body"><pre><code>np.sum(a, axis=0)</code></pre></div></article>
+<article class="topic" id="q262"><h2><span class="num">Q262</span> How do you calculate row-wise totals?</h2><div class="body"><pre><code>np.sum(a, axis=1)</code></pre></div></article>
+<article class="topic" id="q263"><h2><span class="num">Q263</span> How do you modify a new array without affecting original?</h2><div class="body"><pre><code>b = a.copy()</code></pre></div></article>
+<article class="topic" id="q264"><h2><span class="num">Q264</span> How do you randomly select five records?</h2><div class="body"><pre><code>rng = np.random.default_rng()
+rng.choice(a, size=5, replace=False)</code></pre></div></article>
+<article class="topic" id="q265"><h2><span class="num">Q265</span> How do you combine two arrays vertically?</h2><div class="body"><pre><code>np.vstack((a, b))</code></pre></div></article>
+<article class="topic" id="q266"><h2><span class="num">Q266</span> How do you find common values?</h2><div class="body"><pre><code>np.intersect1d(a, b)</code></pre></div></article>
+<article class="topic" id="q267"><h2><span class="num">Q267</span> How do you calculate matrix inverse?</h2><div class="body"><pre><code>np.linalg.inv(a)</code></pre></div></article>
+<article class="topic" id="q268"><h2><span class="num">Q268</span> How do you save and load an array?</h2><div class="body"><pre><code>np.save(&quot;data.npy&quot;, a)
+a = np.load(&quot;data.npy&quot;)</code></pre></div></article>
+<article class="topic" id="q269"><h2><span class="num">Q269</span> How do you replace all values below 10 with 10?</h2><div class="body"><pre><code>np.maximum(a, 10)</code></pre></div></article>
+<article class="topic" id="q270"><h2><span class="num">Q270</span> How do you find indices of elements greater than 20?</h2><div class="body"><pre><code>np.where(a &gt; 20)</code></pre>
+<p>======================================================================</p></div></article><h1 class="stage" id="24-coding-interview-programs">24. Coding Interview Programs</h1><article class="topic" id="q271"><h2><span class="num">Q271</span> Create a NumPy array.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+print(a)</code></pre></div></article>
+<article class="topic" id="q272"><h2><span class="num">Q272</span> Find sum of all elements.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+print(np.sum(a))</code></pre>
+<p class="label">Output:</p>
+<p>100</p></div></article>
+<article class="topic" id="q273"><h2><span class="num">Q273</span> Find maximum and minimum.</h2><div class="body"><pre><code>a = np.array([10, 50, 20, 80, 30])
+print(&quot;Maximum:&quot;, np.max(a))
+print(&quot;Minimum:&quot;, np.min(a))</code></pre>
+<p class="label">Output:</p>
+<p>Maximum: 80</p>
+<p>Minimum: 10</p></div></article>
+<article class="topic" id="q274"><h2><span class="num">Q274</span> Find average.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+print(np.mean(a))</code></pre>
+<p class="label">Output:</p>
+<p>25.0</p></div></article>
+<article class="topic" id="q275"><h2><span class="num">Q275</span> Find even numbers.</h2><div class="body"><pre><code>a = np.array([1, 2, 3, 4, 5, 6])
+print(a[a % 2 == 0])</code></pre>
+<p class="label">Output:</p>
+<p>[2 4 6]</p></div></article>
+<article class="topic" id="q276"><h2><span class="num">Q276</span> Find odd numbers.</h2><div class="body"><pre><code>a = np.array([1, 2, 3, 4, 5, 6])
+print(a[a % 2 != 0])</code></pre>
+<p class="label">Output:</p>
+<p>[1 3 5]</p></div></article>
+<article class="topic" id="q277"><h2><span class="num">Q277</span> Reverse an array.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+print(a[::-1])</code></pre></div></article>
+<article class="topic" id="q278"><h2><span class="num">Q278</span> Remove duplicates.</h2><div class="body"><pre><code>a = np.array([10, 20, 20, 30, 30, 40])
+print(np.unique(a))</code></pre>
+<p class="label">Output:</p>
+<p>[10 20 30 40]</p></div></article>
+<article class="topic" id="q279"><h2><span class="num">Q279</span> Sort an array.</h2><div class="body"><pre><code>a = np.array([40, 10, 30, 20])
+print(np.sort(a))</code></pre>
+<p class="label">Output:</p>
+<p>[10 20 30 40]</p></div></article>
+<article class="topic" id="q280"><h2><span class="num">Q280</span> Find second-largest unique number.</h2><div class="body"><pre><code>a = np.array([10, 50, 30, 50, 40])
+unique = np.unique(a)
+print(unique[-2])</code></pre>
+<p class="label">Output:</p>
+<p>40</p></div></article>
+<article class="topic" id="q281"><h2><span class="num">Q281</span> Find common elements.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+b = np.array([30, 40, 50, 60])
+print(np.intersect1d(a, b))</code></pre>
+<p class="label">Output:</p>
+<p>[30 40]</p></div></article>
+<article class="topic" id="q282"><h2><span class="num">Q282</span> Find elements in first array but not second.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40])
+b = np.array([30, 40, 50])
+print(np.setdiff1d(a, b))</code></pre>
+<p class="label">Output:</p>
+<p>[10 20]</p></div></article>
+<article class="topic" id="q283"><h2><span class="num">Q283</span> Replace negative numbers with zero.</h2><div class="body"><pre><code>a = np.array([-10, 20, -30, 40])
+result = np.where(a &lt; 0, 0, a)
+print(result)</code></pre>
+<p class="label">Output:</p>
+<p>[ 0 20  0 40]</p></div></article>
+<article class="topic" id="q284"><h2><span class="num">Q284</span> Find index of largest number.</h2><div class="body"><pre><code>a = np.array([10, 50, 30, 80, 20])
+print(np.argmax(a))</code></pre>
+<p class="label">Output:</p>
+<p>3</p></div></article>
+<article class="topic" id="q285"><h2><span class="num">Q285</span> Find cumulative sum.</h2><div class="body"><pre><code>a = np.array([1, 2, 3, 4])
+print(np.cumsum(a))</code></pre>
+<p class="label">Output:</p>
+<p>[1 3 6 10]</p></div></article>
+<article class="topic" id="q286"><h2><span class="num">Q286</span> Convert 1D into 2D.</h2><div class="body"><pre><code>a = np.array([1, 2, 3, 4, 5, 6])
+print(a.reshape(2, 3))</code></pre>
+<p class="label">Output:</p>
+<p>[[1 2 3]</p>
+<p>[4 5 6]]</p></div></article>
+<article class="topic" id="q287"><h2><span class="num">Q287</span> Transpose a matrix.</h2><div class="body"><pre><code>a = np.array([[1, 2, 3], [4, 5, 6]])
+print(a.T)</code></pre>
+<p class="label">Output:</p>
+<p>[[1 4]</p>
+<p>[2 5]</p>
+<p>[3 6]]</p></div></article>
+<article class="topic" id="q288"><h2><span class="num">Q288</span> Calculate row-wise and column-wise sums.</h2><div class="body"><pre><code>a = np.array([[10, 20, 30], [40, 50, 60]])</code></pre>
+<pre><code>print(&quot;Column sum:&quot;, np.sum(a, axis=0))
+print(&quot;Row sum:&quot;, np.sum(a, axis=1))</code></pre>
+<p class="label">Output:</p>
+<p>Column sum: [50 70 90]</p>
+<p>Row sum: [60 150]</p></div></article>
+<article class="topic" id="q289"><h2><span class="num">Q289</span> Multiply two matrices.</h2><div class="body"><pre><code>a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])</code></pre>
+<pre><code>print(np.matmul(a, b))</code></pre>
+<p class="label">Output:</p>
+<p>[[19 22]</p>
+<p>[43 50]]</p></div></article>
+<article class="topic" id="q290"><h2><span class="num">Q290</span> Calculate standard deviation and variance.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40, 50])</code></pre>
+<pre><code>print(&quot;Variance:&quot;, np.var(a))
+print(&quot;Standard deviation:&quot;, np.std(a))</code></pre>
+<p class="label">Output:</p>
+<p>Variance: 200.0</p>
+<p>Standard deviation: 14.142135623730951</p></div></article>
+<article class="topic" id="q291"><h2><span class="num">Q291</span> Replace NaN with zero.</h2><div class="body"><pre><code>a = np.array([10, 20, np.nan, 40])
+print(np.nan_to_num(a, nan=0))</code></pre>
+<p class="label">Output:</p>
+<p>[10. 20.  0. 40.]</p></div></article>
+<article class="topic" id="q292"><h2><span class="num">Q292</span> Generate 10 random integers between 1 and 100.</h2><div class="body"><pre><code>rng = np.random.default_rng(42)
+a = rng.integers(1, 101, size=10)
+print(a)</code></pre></div></article>
+<article class="topic" id="q293"><h2><span class="num">Q293</span> Find numbers greater than average.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40, 50])
+average = np.mean(a)
+print(a[a &gt; average])</code></pre>
+<p class="label">Output:</p>
+<p>[40 50]</p></div></article>
+<article class="topic" id="q294"><h2><span class="num">Q294</span> Convert 2D array into 1D.</h2><div class="body"><pre><code>a = np.array([[1, 2], [3, 4]])
+print(a.flatten())</code></pre>
+<p class="label">Output:</p>
+<p>[1 2 3 4]</p></div></article>
+<article class="topic" id="q295"><h2><span class="num">Q295</span> Find unique values and their counts.</h2><div class="body"><pre><code>a = np.array([10, 20, 20, 30, 30, 30])</code></pre>
+<p>values, counts = <code>np.unique</code>(a, return_counts=True)</p>
+<pre><code>print(values)
+print(counts)</code></pre>
+<p class="label">Output:</p>
+<p>[10 20 30]</p>
+<p>[1 2 3]</p></div></article>
+<article class="topic" id="q296"><h2><span class="num">Q296</span> Check whether two arrays share memory.</h2><div class="body"><pre><code>a = np.array([10, 20, 30])
+b = a.view()</code></pre>
+<pre><code>print(np.shares_memory(a, b))</code></pre>
+<p class="label">Output:</p>
+<p>True</p></div></article>
+<article class="topic" id="q297"><h2><span class="num">Q297</span> Find diagonal elements.</h2><div class="body"><p>a = <code>np.array</code>([[10, 20, 30],</p>
+<p>[40, 50, 60],</p>
+<p>[70, 80, 90]])</p>
+<pre><code>print(np.diag(a))</code></pre>
+<p class="label">Output:</p>
+<p>[10 50 90]</p></div></article>
+<article class="topic" id="q298"><h2><span class="num">Q298</span> Create identity matrix.</h2><div class="body"><pre><code>print(np.eye(4))</code></pre>
+<p class="label">Output:</p>
+<p>[[1. 0. 0. 0.]</p>
+<p>[0. 1. 0. 0.]</p>
+<p>[0. 0. 1. 0.]</p>
+<p>[0. 0. 0. 1.]]</p></div></article>
+<article class="topic" id="q299"><h2><span class="num">Q299</span> Find absolute values.</h2><div class="body"><pre><code>a = np.array([-10, -20, 30, -40])
+print(np.abs(a))</code></pre>
+<p class="label">Output:</p>
+<p>[10 20 30 40]</p></div></article>
+<article class="topic" id="q300"><h2><span class="num">Q300</span> Find 50th percentile.</h2><div class="body"><pre><code>a = np.array([10, 20, 30, 40, 50])
+print(np.percentile(a, 50))</code></pre>
+<p class="label">Output:</p>
+<p>30.0</p>
+<p>======================================================================</p></div></article><article class="topic" id="25-rapid-fire-interview-revision"><h2>25. Rapid-Fire Interview Revision</h2><div class="body"><div class="rf"><div><div class="q">Full form of NumPy?</div><div>Numerical Python.</div></div><div><div class="q">Main NumPy object?</div><div>ndarray.</div></div><div><div class="q">Import statement?</div><div>import numpy as np</div></div><div><div class="q">Create array?</div><div><code>np.array</code>()</div></div><div><div class="q">Find dimensions?</div><div>ndim</div></div><div><div class="q">Find shape?</div><div>shape</div></div><div><div class="q">Find total elements?</div><div>size</div></div><div><div class="q">Find data type?</div><div>dtype</div></div><div><div class="q">Create zeros?</div><div><code>np.zeros</code>()</div></div><div><div class="q">Create ones?</div><div><code>np.ones</code>()</div></div><div><div class="q">Generate range?</div><div><code>np.arange</code>()</div></div><div><div class="q">Generate evenly spaced values?</div><div><code>np.linspace</code>()</div></div><div><div class="q">Change shape?</div><div><code>reshape()</code></div></div><div><div class="q">Convert into 1D?</div><div><code>flatten()</code> / <code>ravel()</code></div></div><div><div class="q">Transpose?</div><div>.T</div></div><div><div class="q">Find average?</div><div><code>mean()</code></div></div><div><div class="q">Find median?</div><div><code>median()</code></div></div><div><div class="q">Find standard deviation?</div><div><code>std()</code></div></div><div><div class="q">Find variance?</div><div><code>var()</code></div></div><div><div class="q">Find maximum?</div><div><code>max()</code></div></div><div><div class="q">Find minimum?</div><div><code>min()</code></div></div><div><div class="q">Find maximum index?</div><div><code>argmax()</code></div></div><div><div class="q">Find minimum index?</div><div><code>argmin()</code></div></div><div><div class="q">Find unique elements?</div><div><code>unique()</code></div></div><div><div class="q">Sort array?</div><div><code>sort()</code></div></div><div><div class="q">Filter values?</div><div>Boolean indexing.</div></div><div><div class="q">Find indices by condition?</div><div><code>where()</code></div></div><div><div class="q">Generate random integers?</div><div>rng.<code>integers()</code></div></div><div><div class="q">Matrix inverse?</div><div><code>np.linalg.inv</code>()</div></div><div><div class="q">Matrix determinant?</div><div><code>np.linalg.det</code>()</div></div><div><div class="q">Join arrays?</div><div><code>concatenate()</code></div></div><div><div class="q">Split arrays?</div><div><code>split()</code></div></div><div><div class="q">Add dimension?</div><div><code>expand_dims()</code></div></div><div><div class="q">Remove size-1 dimensions?</div><div><code>squeeze()</code></div></div><div><div class="q">Handle NaN in mean?</div><div><code>nanmean()</code></div></div><div><div class="q">Save array?</div><div><code>save()</code></div></div><div><div class="q">Load array?</div><div><code>load()</code></div></div><div><div class="q">Create copy?</div><div><code>copy()</code></div></div><div><div class="q">Create view?</div><div><code>view()</code></div></div><div><div class="q">Check shared memory?</div><div><code>shares_memory()</code></div></div><div><div class="q">======================================================================</div><div></div></div></div></div></article><h1 class="stage">Plan &amp; Focus</h1><article class="topic" id="26-interview-preparation-roadmap"><h2>26. Interview Preparation Roadmap</h2><div class="body"><p class="label">DAY 1 - FUNDAMENTALS</p>
+<ul><li>What is NumPy?</li><li>Installation and importing.</li><li>Array creation.</li><li>Dimensions.</li><li>Attributes.</li><li>Data types.</li></ul>
+<p class="label">DAY 2 - ARRAY OPERATIONS</p>
+<ul><li>Indexing.</li><li>Slicing.</li><li>Arithmetic operations.</li><li>Comparison operations.</li><li>Logical operations.</li><li>Mathematical functions.</li></ul>
+<p class="label">DAY 3 - STATISTICS AND MANIPULATION</p>
+<ul><li>Mean.</li><li>Median.</li><li>Mode.</li><li>Variance.</li><li>Standard deviation.</li><li>Reshape.</li><li>Flatten.</li><li>Ravel.</li><li>Transpose.</li><li>Joining and splitting.</li></ul>
+<p class="label">DAY 4 - IMPORTANT CONCEPTS</p>
+<ul><li>Broadcasting.</li><li>Vectorization.</li><li>Copy vs View.</li><li>Boolean indexing.</li><li>Filtering.</li><li>Axis 0 vs Axis 1.</li></ul>
+<p class="label">DAY 5 - ADVANCED NUMPY</p>
+<ul><li>Random module.</li><li>Linear algebra.</li><li>Missing values.</li><li>Searching and sorting.</li><li>File handling.</li><li>Modules and submodules.</li></ul>
+<p class="label">DAY 6 - INTERVIEW PRACTICE</p>
+<ul><li>Theory questions.</li><li>Difference-based questions.</li><li>Output-based questions.</li><li>Tricky questions.</li><li>Scenario-based questions.</li></ul>
+<p class="label">DAY 7 - CODING PRACTICE</p>
+<ul><li>Practice all 30 coding questions.</li><li>Write code without looking at answers.</li><li>Predict outputs.</li><li>Explain every function.</li></ul>
+<p>======================================================================</p></div></article><h1 class="stage">Plan &amp; Focus</h1><article class="topic" id="most-important-topics-for-interviews"><h2>Most Important Topics for Interviews</h2><div class="body"><ol><li>What is ndarray?</li><li>List vs NumPy array.</li><li>Array dimensions.</li><li>ndim, shape, size and dtype.</li><li>Array creation methods.</li><li>Indexing and slicing.</li><li>Broadcasting.</li><li>Vectorization.</li><li>Axis 0 vs Axis 1.</li><li>Copy vs View.</li><li>Flatten vs Ravel.</li><li>Reshape and transpose.</li><li>Mathematical functions.</li><li>Statistical functions.</li><li>Boolean indexing.</li><li>Random module.</li><li>Linear algebra.</li><li>Handling NaN values.</li><li>Joining and splitting.</li><li>NumPy vs Pandas.</li></ol></div></article><article class="topic" id="remember"><h2>Remember</h2><div class="body"><p class="label">REMEMBER:</p>
+<ul><li>Understand the concept, practise the code and learn to explain</li><li>the output. Do not only memorize definitions.</li></ul>
+<p class="label">NumPy is an important foundation for:</p>
+<ul><li>Python -&gt; NumPy -&gt; Pandas -&gt; Matplotlib -&gt; Machine Learning -&gt; AI.</li></ul></div></article><h1 class="stage" id="27-advanced-numpy-study-notes">27. Advanced NumPy Study Notes</h1><article class="topic" id="q301"><h2><span class="num">Q301</span> WHAT IS NUMPY</h2><div class="body"><p>NumPy stands for Numerical Python.</p>
+<p>It is a Python library used for numerical calculations,</p>
+<p>scientific computing, and working with multidimensional arrays.</p>
+<p class="label">Main object:</p>
+<p>ndarray</p>
+<p class="label">Import:</p>
+<p>import numpy as np</p>
+<p class="label">Example:</p>
+<p>arr = <code>np.array</code>([10, 20, 30, 40])</p>
+<p>Why NumPy?</p>
+<p>- Faster numerical calculations</p>
+<p>- Multidimensional arrays</p>
+<p>- Mathematical operations</p>
+<p>- Statistical operations</p>
+<p>- Matrix operations</p>
+<p>- Broadcasting</p>
+<p>- Data manipulation</p></div></article>
+<article class="topic" id="q302"><h2><span class="num">Q302</span> ARRAY DIMENSIONS</h2><div class="body"><p class="label">0D ARRAY:</p>
+<p>Single value.</p>
+<pre><code>arr = np.array(10)</code></pre>
+<p class="label">1D ARRAY:</p>
+<p>Single-dimensional array.</p>
+<pre><code>arr = np.array([10, 20, 30])</code></pre>
+<p class="label">2D ARRAY:</p>
+<p>Rows and columns.</p>
+<pre><code>arr = np.array([[1, 2], [3, 4]])</code></pre>
+<p class="label">3D ARRAY:</p>
+<p>Collection of 2D arrays.</p>
+<pre><code>arr = np.array([
+        [[1, 2], [3, 4]],
+        [[5, 6], [7, 8]]
+    ])</code></pre>
+<p class="label">Important attributes:</p>
+<p>arr.ndim       -&gt; Number of dimensions</p>
+<p>arr.shape      -&gt; Dimensions of array</p>
+<p>arr.size       -&gt; Total number of elements</p>
+<p>arr.dtype      -&gt; Data type of elements</p>
+<p>arr.itemsize   -&gt; Size of each element in bytes</p>
+<p>arr.nbytes     -&gt; Total memory occupied by elements</p></div></article>
+<article class="topic" id="q303"><h2><span class="num">Q303</span> BASIC ARRAY INDEXING</h2><div class="body"><p>Indexing means accessing individual elements.</p>
+<pre><code>arr = np.array([10, 20, 30, 40, 50])</code></pre>
+<p>arr[0]       -&gt; 10</p>
+<p>arr[1]       -&gt; 20</p>
+<p>arr[-1]      -&gt; 50</p>
+<p>arr[-2]      -&gt; 40</p>
+<p class="label">2D indexing:</p>
+<pre><code>arr = np.array([[10, 20, 30],
+                [40, 50, 60]])</code></pre>
+<p>arr[0, 0]    -&gt; 10</p>
+<p>arr[0, 1]    -&gt; 20</p>
+<p>arr[1, 2]    -&gt; 60</p>
+<p>arr[1, -1]   -&gt; 60</p></div></article>
+<article class="topic" id="q304"><h2><span class="num">Q304</span> BASIC SLICING</h2><div class="body"><p>Slicing extracts a portion of an array.</p>
+<p class="label">Syntax:</p>
+<p>array[start:stop:step]</p>
+<pre><code>start = Starting index (included)
+stop  = Ending index (excluded)
+step  = Number of positions to skip</code></pre>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30, 40, 50, 60])</code></pre>
+<p>arr[1:4]    -&gt; [20 30 40]</p>
+<p>arr[:3]     -&gt; [10 20 30]</p>
+<p>arr[2:]     -&gt; [30 40 50 60]</p>
+<p>arr[::2]    -&gt; [10 30 50]</p>
+<p>arr[::-1]   -&gt; [60 50 40 30 20 10]</p></div></article>
+<article class="topic" id="q305"><h2><span class="num">Q305</span> ADVANCED SLICING</h2><div class="body"><p class="label">Slicing in 2D arrays:</p>
+<p>arr = <code>np.array</code>([</p>
+<p>[1, 2, 3, 4],</p>
+<p>[5, 6, 7, 8],</p>
+<p>[9, 10, 11, 12]</p>
+<p>])</p>
+<p class="label">Select first two rows:</p>
+<p>arr[:2, :]</p>
+<p class="label">Output:</p>
+<p>[[1 2 3 4]</p>
+<p>[5 6 7 8]]</p>
+<p class="label">Select first two columns:</p>
+<p>arr[:, :2]</p>
+<p class="label">Output:</p>
+<p>[[1 2]</p>
+<p>[5 6]</p>
+<p>[9 10]]</p>
+<p class="label">Select rows 1 to 2 and columns 1 to 3:</p>
+<p>arr[1:3, 1:3]</p>
+<p class="label">Output:</p>
+<p>[[ 6  7]</p>
+<p>[10 11]]</p>
+<p class="label">Select a single column:</p>
+<p>arr[:, 1]</p>
+<p class="label">Output:</p>
+<p>[ 2  6 10]</p>
+<p class="label">Select a single row:</p>
+<p>arr[1, :]</p>
+<p class="label">Output:</p>
+<p>[5 6 7 8]</p>
+<p class="label">Reverse rows:</p>
+<p>arr[::-1, :]</p>
+<p class="label">Reverse columns:</p>
+<p>arr[:, ::-1]</p>
+<p class="label">Reverse both:</p>
+<p>arr[::-1, ::-1]</p></div></article>
+<article class="topic" id="q306"><h2><span class="num">Q306</span> FANCY INDEXING</h2><div class="body"><p>Fancy indexing means accessing multiple elements using</p>
+<p>a list or array of indexes.</p>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30, 40, 50])</code></pre>
+<p>arr[[0, 2, 4]]</p>
+<p class="label">Output:</p>
+<p>[10 30 50]</p>
+<p class="label">2D fancy indexing:</p>
+<p>arr = <code>np.array</code>([</p>
+<p>[1, 2],</p>
+<p>[3, 4],</p>
+<p>[5, 6]</p>
+<p>])</p>
+<p>arr[[0, 2]]</p>
+<p class="label">Output:</p>
+<p>[[1 2]</p>
+<p>[5 6]]</p>
+<p class="label">Important:</p>
+<p>Fancy indexing generally returns a copy,</p>
+<p>not a view.</p></div></article>
+<article class="topic" id="q307"><h2><span class="num">Q307</span> BOOLEAN INDEXING</h2><div class="body"><p>Boolean indexing selects values based on conditions.</p>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30, 40, 50])</code></pre>
+<p>arr[arr &gt; 25]</p>
+<p class="label">Output:</p>
+<p>[30 40 50]</p>
+<p class="label">Other examples:</p>
+<p>arr[arr &lt; 30]</p>
+<p>arr[arr == 20]</p>
+<p>arr[arr != 30]</p>
+<p>arr[arr % 2 == 0]</p>
+<p class="label">Multiple conditions:</p>
+<p>arr[(arr &gt; 20) &amp; (arr &lt; 50)]</p>
+<p class="label">Output:</p>
+<p>[30 40]</p>
+<p class="label">Operators:</p>
+<p>&amp;  -&gt; AND</p>
+<p>|  -&gt; OR</p>
+<p>~  -&gt; NOT</p>
+<p>Use parentheses around each condition.</p></div></article>
+<article class="topic" id="q308"><h2><span class="num">Q308</span> WHERE FUNCTION</h2><div class="body"><pre><code>np.where() returns indexes or selects values based
+on a condition.</code></pre>
+<p class="label">Syntax:</p>
+<pre><code>np.where(condition, value_if_true, value_if_false)</code></pre>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30, 40])</code></pre>
+<pre><code>np.where(arr &gt; 20, 1, 0)</code></pre>
+<p class="label">Output:</p>
+<p>[0 0 1 1]</p>
+<p class="label">Find indexes:</p>
+<pre><code>np.where(arr &gt; 20)</code></pre>
+<p class="label">Output:</p>
+<p>(array([2, 3]),)</p></div></article>
+<article class="topic" id="q309"><h2><span class="num">Q309</span> NONZERO AND ARGWHERE</h2><div class="body"><pre><code>np.nonzero():</code></pre>
+<p>Returns indexes of non-zero elements.</p>
+<pre><code>arr = np.array([0, 10, 0, 20])</code></pre>
+<pre><code>np.nonzero(arr)</code></pre>
+<pre><code>np.argwhere():</code></pre>
+<p>Returns indexes where a condition is true.</p>
+<pre><code>arr = np.array([10, 20, 30, 40])</code></pre>
+<pre><code>np.argwhere(arr &gt; 20)</code></pre></div></article>
+<article class="topic" id="q310"><h2><span class="num">Q310</span> RESHAPING ARRAYS</h2><div class="body"><p>Reshape changes the dimensions of an array</p>
+<p>without changing its elements.</p>
+<pre><code>arr = np.array([1, 2, 3, 4, 5, 6])</code></pre>
+<p>arr.reshape(2, 3)</p>
+<p class="label">Output:</p>
+<p>[[1 2 3]</p>
+<p>[4 5 6]]</p>
+<p class="label">Other examples:</p>
+<p>arr.reshape(3, 2)</p>
+<p>arr.reshape(1, 6)</p>
+<p>arr.reshape(2, -1)</p>
+<p>-1 means NumPy automatically calculates that dimension.</p>
+<p class="label">Important:</p>
+<p>Total number of elements must remain the same.</p></div></article>
+<article class="topic" id="q311"><h2><span class="num">Q311</span> FLATTEN AND RAVEL</h2><div class="body"><p>Both convert multidimensional arrays into 1D arrays.</p>
+<p class="label">flatten():</p>
+<p>Returns a copy.</p>
+<p class="label">ravel():</p>
+<p>Returns a view when possible.</p>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([[1, 2], [3, 4]])</code></pre>
+<p>arr.<code>flatten()</code></p>
+<p>arr.<code>ravel()</code></p></div></article>
+<article class="topic" id="q312"><h2><span class="num">Q312</span> TRANSPOSE</h2><div class="body"><p>Transpose changes rows into columns and columns into rows.</p>
+<pre><code>arr = np.array([[1, 2, 3],
+                    [4, 5, 6]])</code></pre>
+<p>arr.T</p>
+<p class="label">Output:</p>
+<p>[[1 4]</p>
+<p>[2 5]</p>
+<p>[3 6]]</p>
+<p class="label">Alternative:</p>
+<pre><code>np.transpose(arr)</code></pre></div></article>
+<article class="topic" id="q313"><h2><span class="num">Q313</span> EXPAND_DIMS AND SQUEEZE</h2><div class="body"><p class="label">expand_dims():</p>
+<p>Adds a new dimension.</p>
+<pre><code>arr = np.array([1, 2, 3])</code></pre>
+<pre><code>np.expand_dims(arr, axis=0)</code></pre>
+<p class="label">Output shape:</p>
+<p>(1, 3)</p>
+<pre><code>np.expand_dims(arr, axis=1)</code></pre>
+<p class="label">Output shape:</p>
+<p>(3, 1)</p>
+<p class="label">squeeze():</p>
+<p>Removes dimensions whose size is 1.</p>
+<pre><code>arr = np.array([[1, 2, 3]])</code></pre>
+<pre><code>np.squeeze(arr)</code></pre>
+<p class="label">Output:</p>
+<p>[1 2 3]</p></div></article>
+<article class="topic" id="q314"><h2><span class="num">Q314</span> STACKING ARRAYS</h2><div class="body"><p>Stacking combines multiple arrays.</p>
+<p class="label">vstack():</p>
+<p>Combines arrays vertically.</p>
+<p class="label">hstack():</p>
+<p>Combines arrays horizontally.</p>
+<p class="label">stack():</p>
+<p>Combines arrays along a new axis.</p>
+<p class="label">Example:</p>
+<pre><code>a = np.array([1, 2])
+    b = np.array([3, 4])</code></pre>
+<pre><code>np.vstack((a, b))</code></pre>
+<pre><code>np.hstack((a, b))</code></pre>
+<pre><code>np.stack((a, b))</code></pre>
+<p class="label">Other functions:</p>
+<pre><code>np.concatenate()
+    np.dstack()
+    np.column_stack()
+    np.row_stack()  # Legacy alias; prefer vstack.</code></pre></div></article>
+<article class="topic" id="q315"><h2><span class="num">Q315</span> SPLITTING ARRAYS</h2><div class="body"><p>Splitting divides an array into multiple arrays.</p>
+<pre><code>arr = np.array([1, 2, 3, 4, 5, 6])</code></pre>
+<pre><code>np.split(arr, 3)</code></pre>
+<p class="label">Output:</p>
+<p>[array([1, 2]),</p>
+<p>array([3, 4]),</p>
+<p>array([5, 6])]</p>
+<p class="label">Other functions:</p>
+<pre><code>np.array_split()
+    np.hsplit()
+    np.vsplit()
+    np.dsplit()</code></pre>
+<p class="label">Difference:</p>
+<p class="label">split():</p>
+<p>Requires equal division.</p>
+<p class="label">array_split():</p>
+<p>Allows unequal division.</p></div></article>
+<article class="topic" id="q316"><h2><span class="num">Q316</span> BROADCASTING</h2><div class="body"><p>Broadcasting allows NumPy to perform operations</p>
+<p>on arrays with different but compatible shapes.</p>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30])</code></pre>
+<p>arr + 5</p>
+<p class="label">Output:</p>
+<p>[15 25 35]</p>
+<p class="label">2D broadcasting:</p>
+<pre><code>arr = np.array([[1, 2, 3],
+                    [4, 5, 6]])</code></pre>
+<p>arr + <code>np.array</code>([10, 20, 30])</p>
+<p class="label">Output:</p>
+<p>[[11 22 33]</p>
+<p>[14 25 36]]</p>
+<p class="label">Broadcasting rules:</p>
+<p>Compare dimensions from right to left.</p>
+<p class="label">Dimensions are compatible if:</p>
+<ul><li>They are equal.</li><li>One of them is 1.</li><li>One dimension is missing and treated as 1.</li></ul>
+<p>Otherwise, broadcasting raises ValueError.</p></div></article>
+<article class="topic" id="q317"><h2><span class="num">Q317</span> MATHEMATICAL FUNCTIONS</h2><div class="body"><p class="label">Basic operations:</p>
+<pre><code>np.add(a, b)
+    np.subtract(a, b)
+    np.multiply(a, b)
+    np.divide(a, b)
+    np.power(a, b)
+    np.mod(a, b)
+    np.sqrt(arr)
+    np.square(arr)
+    np.abs(arr)
+    np.round(arr)
+    np.floor(arr)
+    np.ceil(arr)</code></pre>
+<p class="label">Trigonometric functions:</p>
+<pre><code>np.sin(arr)
+    np.cos(arr)
+    np.tan(arr)
+    np.degrees(arr)
+    np.radians(arr)</code></pre></div></article>
+<article class="topic" id="q318"><h2><span class="num">Q318</span> AGGREGATE FUNCTIONS</h2><div class="body"><p>These functions calculate summary values.</p>
+<pre><code>np.sum(arr)
+    np.min(arr)
+    np.max(arr)
+    np.mean(arr)
+    np.median(arr)
+    np.std(arr)
+    np.var(arr)
+    np.prod(arr)
+    np.cumsum(arr)
+    np.cumprod(arr)
+    np.percentile(arr, 50)
+    np.quantile(arr, 0.5)</code></pre>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30, 40])</code></pre>
+<pre><code>np.sum(arr)       -&gt; 100
+    np.mean(arr)      -&gt; 25
+    np.min(arr)       -&gt; 10
+    np.max(arr)       -&gt; 40
+    np.median(arr)    -&gt; 25</code></pre></div></article>
+<article class="topic" id="q319"><h2><span class="num">Q319</span> AXIS IN NUMPY</h2><div class="body"><p>Axis determines the direction of an operation.</p>
+<pre><code>arr = np.array([[1, 2, 3],
+                    [4, 5, 6]])</code></pre>
+<pre><code>np.sum(arr, axis=0)</code></pre>
+<p class="label">Output:</p>
+<p>[5 7 9]</p>
+<p class="label">axis=0:</p>
+<p>Operation down the rows, producing column results.</p>
+<pre><code>np.sum(arr, axis=1)</code></pre>
+<p class="label">Output:</p>
+<p>[6 15]</p>
+<p class="label">axis=1:</p>
+<p>Operation across columns, producing row results.</p></div></article>
+<article class="topic" id="q320"><h2><span class="num">Q320</span> SORTING AND SEARCHING</h2><div class="body"><pre><code>np.sort(arr)
+    np.argsort(arr)
+    np.argmax(arr)
+    np.argmin(arr)
+    np.searchsorted(arr, value)
+    np.partition(arr, kth)</code></pre>
+<p class="label">Examples:</p>
+<pre><code>np.sort([30, 10, 20])
+        -&gt; [10 20 30]</code></pre>
+<pre><code>np.argmax([10, 50, 20])
+        -&gt; 1</code></pre>
+<pre><code>np.argmin([10, 50, 20])
+        -&gt; 0</code></pre></div></article>
+<article class="topic" id="q321"><h2><span class="num">Q321</span> UNIQUE AND SET OPERATIONS</h2><div class="body"><pre><code>np.unique(arr)
+    np.union1d(a, b)
+    np.intersect1d(a, b)
+    np.setdiff1d(a, b)
+    np.setxor1d(a, b)
+    np.isin(a, b)</code></pre>
+<p class="label">Purpose:</p>
+<p class="label">unique:</p>
+<p>Returns distinct values.</p>
+<p class="label">union1d:</p>
+<p>Combines unique elements.</p>
+<p class="label">intersect1d:</p>
+<p>Returns common elements.</p>
+<p class="label">setdiff1d:</p>
+<p>Elements in first array but not second.</p>
+<p class="label">setxor1d:</p>
+<p>Elements present in either array but not both.</p>
+<p class="label">isin:</p>
+<p>Checks whether elements exist in another array.</p></div></article>
+<article class="topic" id="q322"><h2><span class="num">Q322</span> RANDOM MODULE</h2><div class="body"><p class="label">Use:</p>
+<pre><code>np.random</code></pre>
+<p class="label">Functions:</p>
+<pre><code>np.random.rand()
+    np.random.randn()
+    np.random.randint()
+    np.random.random()
+    np.random.choice()
+    np.random.shuffle()
+    np.random.permutation()
+    np.random.seed()</code></pre>
+<p class="label">Modern recommended approach:</p>
+<pre><code>rng = np.random.default_rng(42)</code></pre>
+<pre><code>rng.random(5)
+    rng.integers(1, 100, size=5)
+    rng.choice([10, 20, 30], size=2)</code></pre></div></article>
+<article class="topic" id="q323"><h2><span class="num">Q323</span> MATRIX OPERATIONS</h2><div class="body"><pre><code>np.dot(a, b)
+    np.matmul(a, b)
+    a @ b
+    np.linalg.inv(a)
+    np.linalg.det(a)
+    np.linalg.eig(a)
+    np.linalg.solve(a, b)
+    np.linalg.svd(a)</code></pre>
+<p class="label">Important:</p>
+<p>Matrix multiplication is different from</p>
+<p>element-wise multiplication.</p>
+<p>a * b   -&gt; Element-wise multiplication</p>
+<p>a @ b   -&gt; Matrix multiplication</p></div></article>
+<article class="topic" id="q324"><h2><span class="num">Q324</span> COPYING AND VIEWS</h2><div class="body"><p class="label">View:</p>
+<p>Shares the underlying data when possible.</p>
+<p class="label">Copy:</p>
+<p>Creates independent data.</p>
+<p>arr.<code>copy()</code></p>
+<p>Basic slicing generally returns a view.</p>
+<p>Fancy indexing generally returns a copy.</p>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, 30])</code></pre>
+<pre><code>view = arr[1:]
+    copy = arr[[1, 2]]</code></pre>
+<p>view[0] = 99</p>
+<p># Original array may change because view shares data.</p>
+<p>copy[0] = 88</p>
+<p># Original array remains unchanged.</p></div></article>
+<article class="topic" id="q325"><h2><span class="num">Q325</span> HANDLING MISSING AND SPECIAL VALUES</h2><div class="body"><pre><code>np.nan
+    np.inf
+    -np.inf</code></pre>
+<p class="label">Functions:</p>
+<pre><code>np.isnan(arr)
+    np.isinf(arr)
+    np.isfinite(arr)
+    np.nanmean(arr)
+    np.nansum(arr)
+    np.nanmax(arr)
+    np.nanmin(arr)</code></pre>
+<p class="label">Example:</p>
+<pre><code>arr = np.array([10, 20, np.nan])</code></pre>
+<pre><code>np.nanmean(arr)</code></pre></div></article>
+<article class="topic" id="q326"><h2><span class="num">Q326</span> OTHER IMPORTANT NUMPY FUNCTIONS</h2><div class="body"><pre><code>np.zeros()
+    np.ones()
+    np.empty()
+    np.full()
+    np.eye()
+    np.arange()
+    np.linspace()
+    np.logspace()
+    np.diag()
+    np.repeat()
+    np.tile()
+    np.clip()
+    np.where()
+    np.diff()
+    np.gradient()
+    np.meshgrid()
+    np.save()
+    np.load()
+    np.savez()
+    np.savetxt()
+    np.loadtxt()</code></pre></div></article>
+</main>
+</div>
+</body>
+</html>

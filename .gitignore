@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.Python
+.env
+.env.*
+*.pem
+*.key
+credentials*.json
+
+# Local practice output from notebooks
+file_demo/
+
+# Large class recordings (keep transcripts in repo)
+*.mp3
+*.wav
+*.m4a
