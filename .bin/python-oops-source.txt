@@ -356,16 +356,23 @@ Ans:
 ---------------- INHERITANCE ----------------
 
 Q61. What is inheritance?
-Ans: One class acquires attributes and methods from another
-class.
+Ans: Inheritance is an Object-Oriented Programming concept in
+which a class (child or derived class) acquires the properties
+and methods of another class (parent or base class). It promotes
+code reusability and allows existing functionality to be extended.
+
+In simple words: Inheritance allows one class to reuse the
+properties and methods of another class.
 
 Q62. What are the five types of inheritance?
 Ans:
-1. Single
-2. Multiple
-3. Multilevel
-4. Hierarchical
-5. Hybrid
+
+Type | Definition
+Single inheritance | A child class inherits from one parent class.
+Multiple inheritance | A child class inherits from two or more parent classes.
+Multilevel inheritance | A class inherits from another derived class, forming an inheritance chain.
+Hierarchical inheritance | Two or more child classes inherit from the same parent class.
+Hybrid inheritance | A combination of two or more types of inheritance.
 
 Q63. What is single inheritance?
 Ans: One child class inherits from one parent class.
@@ -469,19 +476,28 @@ multiple inheritance. Direct parent calls do not.
 ---------------- POLYMORPHISM ----------------
 
 Q78. What is polymorphism?
-Ans: One interface or method name can have different
-behaviors depending on the object.
+Ans: Polymorphism is an Object-Oriented Programming concept that
+allows a single interface, method, or operator to represent
+different behaviours depending on the object or data type with
+which it is used.
+
+In simple words: Polymorphism means one name or interface can
+have different behaviours.
 
 Q79. What are common forms of polymorphism?
 Ans:
-1. Method overriding
-2. Operator overloading
-3. Method overloading simulation
-4. Duck typing
+
+Type | Definition
+Method overriding | A child class provides its own implementation of a method inherited from its parent class.
+Method overloading | Multiple methods share the same name with different parameter lists. Python does not support traditional signature-based overloading directly, but similar behaviour can be achieved using default arguments and *args.
+Operator overloading | The same operator performs different operations depending on the operand types or custom class implementation.
+Duck typing | Python allows objects to be used based on the methods and behaviour they support rather than their specific class.
 
 Q80. What is method overloading?
-Ans: Same method name with different parameter lists.
-Python does not directly support traditional overloading.
+Ans: Multiple methods share the same name with different parameter
+lists. Python does not support traditional signature-based
+overloading directly, but similar behaviour can be achieved using
+default arguments and *args.
 
 Q81. How can we simulate method overloading?
 Ans: Using default arguments, *args and **kwargs.
@@ -526,8 +542,14 @@ traditional method overloading in Java.
 ---------------- ENCAPSULATION ----------------
 
 Q88. What is encapsulation?
-Ans: Combining data and methods inside a class and
-controlling access to internal data.
+Ans: Encapsulation is an Object-Oriented Programming concept in
+which data (variables) and the methods (functions) that operate on
+that data are bundled together into a single unit called a class.
+It also provides controlled access to the data to prevent
+unintended modification.
+
+In simple words: Encapsulation means wrapping data and methods
+together inside a class and controlling access to that data.
 
 Q89. Why use encapsulation?
 Ans:
@@ -543,15 +565,29 @@ Ans:
 3. Private
 
 Q91. What is a public variable?
-Ans: Normally accessible from inside and outside the class.
+Ans: Public members are attributes and methods that can be
+accessed from anywhere in the program, both inside and outside
+the class.
+
+Syntax: No underscore prefix. Example: self.name
 
 Q92. What is a protected variable?
-Ans: Starts with a single underscore (_).
-It is a convention for internal or subclass use.
+Ans: Protected members are attributes and methods intended to be
+accessed within the class and its subclasses. They are also
+accessible from outside the class in Python, but doing so is
+discouraged by convention.
+
+Syntax: A single underscore (_) before the variable name.
+Example: self._department
 
 Q93. What is a private variable?
-Ans: Starts with double underscores (__).
-Python applies name mangling.
+Ans: Private members are attributes and methods that are intended
+to be used only within the class. In Python, a double underscore
+triggers name mangling, which changes the attribute's internal
+name to reduce accidental access.
+
+Syntax: Double underscore (__) before the variable name.
+Example: self.__salary
 
 Q94. Does Python support strict private access?
 Ans: No. Python uses naming conventions and name mangling.
@@ -584,8 +620,20 @@ Private = __name
 ---------------- ABSTRACTION ----------------
 
 Q100. What is abstraction?
-Ans: Hiding implementation details and exposing essential
-functionality.
+Ans: Abstraction is an Object-Oriented Programming concept that
+hides the internal implementation details of an object and exposes
+only the essential features or functionality to the user.
+
+In simple words: Abstraction means hiding how something works
+internally and showing only what is necessary to use it.
+
+Types of abstraction:
+1. Data abstraction — Hides the internal representation of data
+   and exposes only the necessary operations to access or
+   manipulate it.
+2. Process abstraction — Hides the internal steps or
+   implementation of a process and exposes only the operation
+   required to perform it.
 
 Q101. Why use abstraction?
 Ans: To reduce complexity and define common interfaces.
@@ -617,8 +665,10 @@ Ans: Yes.
 
 Q110. Difference between abstraction and encapsulation?
 Ans:
-Abstraction = Hides implementation details.
-Encapsulation = Bundles data and methods with controlled access.
+Abstraction = Hides internal implementation details and shows only
+essential functionality to the user.
+Encapsulation = Wraps data and methods together in a class and
+controls access to data to prevent unintended modification.
 
 PART 8: MAGIC / DUNDER METHODS
 ------------------------------------------------------------
@@ -1842,10 +1892,10 @@ cls               = Current class reference
 __init__()        = Initializer
 __new__()         = Object creation
 __del__()         = Finalizer
-Inheritance       = Reusing parent functionality
-Polymorphism      = Different behavior through common interface
-Encapsulation     = Bundling data and methods with controlled access
-Abstraction       = Hiding implementation details
+Inheritance       = Child class acquires parent properties and methods (code reuse)
+Polymorphism      = One interface, different behaviours by object or type
+Encapsulation     = Data and methods in one class with controlled access
+Abstraction       = Hide implementation; show only essential features
 Overriding        = Redefining inherited method
 Overloading       = Same name with different arguments/behavior
 super()           = Next class in MRO

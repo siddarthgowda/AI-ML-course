@@ -192,10 +192,10 @@
 <li><strong>Static Method</strong> → Does not require <code>self</code> or <code>cls</code>.</li>
 </ol></div></article><article class="topic" id="q186"><h2><span class="num">186</span> What are the four pillars of OOPs?</h2><div class="body"><p><strong>Ans:</strong></p>
 <ol>
-<li><strong>Encapsulation</strong> → Wrapping data and methods together and controlling access to data.</li>
-<li><strong>Inheritance</strong> → Acquiring properties and methods from a parent class.</li>
-<li><strong>Polymorphism</strong> → One name, many forms. Same method can perform different operations.</li>
-<li><strong>Abstraction</strong> → Hiding implementation details and showing essential functionality.</li>
+<li><strong>Encapsulation</strong> → Bundle data and methods in a class; control access to prevent unintended changes.</li>
+<li><strong>Inheritance</strong> → Child class acquires parent properties and methods (code reuse).</li>
+<li><strong>Polymorphism</strong> → One interface or name, different behaviours by object or type.</li>
+<li><strong>Abstraction</strong> → Hide implementation; show only essential features.</li>
 </ol></div></article><article class="topic" id="q187"><h2><span class="num">187</span> What is File Handling in Python?</h2><div class="body"><p><strong>Ans:</strong> File handling is the process of creating, opening, reading, writing, appending and closing files using Python.</p>
 <p>It helps us store data permanently.</p>
 <p>Common file modes:</p>
@@ -255,15 +255,15 @@ d1.sound()</code></pre></div></article><article class="topic" id="q192"><h2><spa
 <p>Python does not have a separate interface keyword. We can achieve interface-like functionality using Abstract Base Classes (ABC) or Protocols.</p>
 <p>It defines <strong>WHAT</strong> a class should do, rather than <strong>HOW</strong> it should do it.</p></div></article><article class="topic" id="q193"><h2><span class="num">193</span> What is the difference between Encapsulation and Abstraction?</h2><div class="body"><p><strong>Encapsulation:</strong></p>
 <ol>
-<li>Wraps data and methods inside a single class.</li>
-<li>Controls access to data.</li>
-<li>Helps protect data from unwanted modifications.</li>
+<li>Wraps data (variables) and methods in one class.</li>
+<li>Controls access (public / protected / private).</li>
+<li>Prevents unintended modification of data.</li>
 </ol>
 <p><strong>Abstraction:</strong></p>
 <ol>
 <li>Hides internal implementation details.</li>
-<li>Shows only essential functionality.</li>
-<li>Reduces complexity.</li>
+<li>Exposes only essential features (data or process abstraction).</li>
+<li>Reduces complexity for the user.</li>
 </ol>
 <p><strong>Example:</strong> Encapsulation → protecting bank account balance. Abstraction → using an ATM without knowing its internal working.</p></div></article><article class="topic" id="q194"><h2><span class="num">194</span> What is Namespace in Python?</h2><div class="body"><p><strong>Ans:</strong> A namespace is a mapping system that stores names such as variables, functions and classes with their corresponding objects.</p>
 <p>It helps avoid naming conflicts.</p>
@@ -280,11 +280,11 @@ d1.sound()</code></pre></div></article><article class="topic" id="q192"><h2><spa
 <li><strong>Enclosing Scope</strong> → Variables defined inside an outer function.</li>
 <li><strong>Global Scope</strong> → Variables defined outside functions.</li>
 <li><strong>Built-in Scope</strong> → Predefined Python names and functions.</li>
-</ol></div></article><article class="topic" id="q196"><h2><span class="num">196</span> What are Public, Private and Protected Access Modifiers?</h2><div class="body"><p><strong>Ans:</strong> Access modifiers indicate how variables and methods are intended to be accessed inside a class.</p>
+</ol></div></article><article class="topic" id="q196"><h2><span class="num">196</span> What are Public, Private and Protected Access Modifiers?</h2><div class="body"><p><strong>Ans:</strong> Access modifiers indicate how variables and methods are intended to be accessed.</p>
 <ol>
-<li><strong>Public</strong> → Accessible from anywhere. Example: <code>self.name</code></li>
-<li><strong>Protected</strong> → Intended for use inside the class and child classes. Example: <code>self._name</code></li>
-<li><strong>Private</strong> → Intended for use within the same class. Uses name mangling. Example: <code>self.__name</code></li>
+<li><strong>Public</strong> → Attributes and methods accessible from anywhere inside or outside the class. Example: <code>self.name</code></li>
+<li><strong>Protected</strong> → Intended for the class and subclasses; single underscore <code>_</code>. Outside access is allowed in Python but discouraged. Example: <code>self._department</code></li>
+<li><strong>Private</strong> → Intended for use only within the class; double underscore <code>__</code> triggers name mangling. Example: <code>self.__salary</code></li>
 </ol>
 <p><strong>Note:</strong> Python does not strictly enforce public, protected and private access restrictions.</p></div></article><article class="topic" id="q197"><h2><span class="num">197</span> Give one structure combining OOP concepts.</h2><div class="body"><pre><code>from abc import ABC, abstractmethod
 
@@ -334,12 +334,12 @@ t1.work()</code></pre>
 <li><strong>Class Var</strong> → Variable shared by class instances.</li>
 <li><strong>Overriding</strong> → Child class provides its own implementation of a parent method.</li>
 <li><strong>Overloading</strong> → Same method name with different parameter combinations.</li>
-</ol></div></article><article class="topic" id="q199"><h2><span class="num">199</span> Explain the four pillars of OOPs in detail.</h2><div class="body"><p><strong>1. Encapsulation:</strong> Wrapping data (variables) and methods (functions) together into a single unit called a class. It also controls access to data to prevent unwanted modifications.</p>
-<p><strong>2. Inheritance:</strong> One class (child) acquires the properties and methods of another class (parent). Helps in code reusability.</p>
-<p><strong>3. Polymorphism:</strong> One name, many forms. The same method or function can perform different operations depending on the object or situation.</p>
-<p><strong>4. Abstraction:</strong> Hiding internal implementation details and showing only essential features or functionality to the user.</p></div></article><article class="topic" id="q200"><h2><span class="num">200</span> Explain Public, Protected and Private.</h2><div class="body"><p><strong>Public:</strong> Accessible from anywhere, inside or outside the class. Example: <code>self.name</code></p>
-<p><strong>Protected:</strong> Intended to be accessed within the class and its child classes. Example: <code>self._name</code></p>
-<p><strong>Private:</strong> Intended for use within the same class. Python uses name mangling. Example: <code>self.__name</code></p></div></article><article class="topic" id="q201"><h2><span class="num">201</span> What is the difference between Instance Method, Class Method and Static Method?</h2><div class="body"><p><strong>1. Instance Method:</strong></p>
+</ol></div></article><article class="topic" id="q199"><h2><span class="num">199</span> Explain the four pillars of OOPs in detail.</h2><div class="body"><p><strong>1. Encapsulation:</strong> Bundles data and methods in a class and controls access to prevent unintended modification. Public, protected (<code>_</code>), and private (<code>__</code>) members.</p>
+<p><strong>2. Inheritance:</strong> A child (derived) class acquires properties and methods of a parent (base) class for reusability. Types: single, multiple, multilevel, hierarchical, hybrid.</p>
+<p><strong>3. Polymorphism:</strong> One interface, method, or operator can show different behaviour by object or type—overriding, overloading (via defaults/<code>*args</code>), operator overloading, duck typing.</p>
+<p><strong>4. Abstraction:</strong> Hides internal implementation; shows only essential features. Data abstraction and process abstraction; abstract classes with <code>abc</code> and <code>@abstractmethod</code>.</p></div></article><article class="topic" id="q200"><h2><span class="num">200</span> Explain Public, Protected and Private.</h2><div class="body"><p><strong>Public:</strong> Accessible from anywhere in the program. No underscore prefix. Example: <code>self.name</code></p>
+<p><strong>Protected:</strong> For class and subclasses; convention is single underscore. Example: <code>self._department</code></p>
+<p><strong>Private:</strong> For use within the class only; double underscore and name mangling. Example: <code>self.__salary</code></p></div></article><article class="topic" id="q201"><h2><span class="num">201</span> What is the difference between Instance Method, Class Method and Static Method?</h2><div class="body"><p><strong>1. Instance Method:</strong></p>
 <ul>
 <li>Works with an object.</li>
 <li>Uses <code>self</code>.</li>
