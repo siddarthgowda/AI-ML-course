@@ -130,10 +130,32 @@
       padding: 8px 16px 14px;
       border-top: 1px solid #333;
       background: var(--bg);
-      overflow: auto;
+      overflow-x: auto;
+      overflow-y: auto;
+      scroll-padding-right: 48px;
+      -webkit-overflow-scrolling: touch;
     }
-    .path { display: flex; align-items: flex-start; gap: 18px; min-width: min-content; }
-    .column { min-width: 230px; }
+    .path {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      min-width: min-content;
+      padding-right: max(28vw, 220px);
+      padding-left: 4px;
+    }
+    .path::after {
+      content: "";
+      flex: 0 0 1px;
+      width: 1px;
+      height: 1px;
+    }
+    .scroll-hint {
+      flex: 0 0 auto;
+      margin: 0 0 12px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .column { min-width: 230px; flex: 0 0 auto; }
     .column h2 { margin: 0 0 12px; font-size: 12px; font-weight: 500; color: var(--muted); }
     .stack { display: flex; flex-direction: column; gap: 12px; }
     .group {
@@ -144,6 +166,20 @@
       background: var(--done);
     }
     .group.wide { width: 248px; }
+    .group.numpy-board {
+      width: 268px;
+      max-width: 268px;
+    }
+    .group.numpy-board .chip-section .chips {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+    .group.numpy-board button.child {
+      font-size: 11px;
+      padding: 3px 6px;
+      text-align: center;
+    }
     .chip-section { padding: 2px 4px 6px; }
     .chip-section + .chip-section {
       margin-top: 4px;
@@ -189,7 +225,7 @@
     <div class="top">
       <div>
         <h1>Topics from the start</h1>
-        <p class="lead">Scroll to Day 6–7. OOP and files use labeled chip rows (class vs full pack). Matches <strong>test.ipynb</strong>.</p>
+        <p class="lead">Scroll the roadmap <strong>→ right</strong> for Files, NumPy, Pandas. Matches <strong>test.ipynb</strong>.</p>
       </div>
       <div class="legend">
         <span><i class="swatch"></i>Done in class</span>
@@ -205,6 +241,7 @@
       <pre id="info-code"></pre>
     </section>
     <div class="path-wrap">
+      <p class="scroll-hint">← → drag or trackpad to scroll all day columns (1–12)</p>
       <div class="path" id="path"></div>
     </div>
   </main>
@@ -219,7 +256,9 @@
       { title: "7 Day 6 OOP", state: "done", topics: ["classes"] },
       { title: "8 Day 7 Files", state: "done", topics: ["files"] },
       { title: "9 Day 7 NumPy", state: "done", topics: ["numpy"] },
-      { title: "10 Intermediate", state: "ahead", topics: ["JSON"] }
+      { title: "10 Intermediate", state: "ahead", topics: ["JSON"] },
+      { title: "11 Pandas", state: "ahead", topics: ["pandas"] },
+      { title: "12 Study packs", state: "ahead", topics: ["study links"] }
     ];
 
     const info = {
@@ -735,6 +774,16 @@
     "body": "**Definition:** JSON (JavaScript Object Notation) is a text-based format used to represent and exchange structured data.",
     "code": ""
   },
+  "pandas": {
+    "question": "Pandas",
+    "body": "**Definition:** **Pandas** is a Python library for **tabular data** (rows and columns), built on NumPy.\n\n**Main object:** `DataFrame` — like a spreadsheet or SQL table.\n\n**Import:** `import pandas as pd`\n\n**After NumPy:** Use arrays for raw numbers; use Pandas for CSV, column names, missing values, group-by.\n\n**Full notes:** [python-pandas.html](python-pandas.html)",
+    "code": "import pandas as pd\n\ndf = pd.DataFrame({\"name\": [\"Amit\", \"Priya\"], \"score\": [80, 95]})\nprint(df)"
+  },
+  "study links": {
+    "question": "Browser study packs",
+    "body": "Open full Q&A pages:\n\n| Pack | Link |\n|---|---|\n| Basics | [python-basics.html](python-basics.html) |\n| File handling | [python-file-handling.html](python-file-handling.html) |\n| OOP | [python-oops.html](python-oops.html) |\n| NumPy interview | [python-numpy.html](python-numpy.html) |\n| NumPy roadmap | [python-numpy-roadmap.html](python-numpy-roadmap.html) |\n| Pandas | [python-pandas.html](python-pandas.html) |\n| Notes | [python-notes.html](python-notes.html) |",
+    "code": ""
+  },
   "dict remove": {
     "question": "remove",
     "body": "**Definition:** `pop(key)` removes a specified key and returns its value. It raises `KeyError` if the key is absent and no default is provided. `del` deletes a specified entry, or removes a name binding when used on a variable.",
@@ -1041,18 +1090,87 @@
   },
   "numpy": {
     "question": "NumPy",
-    "body": "**Definition:** NumPy stands for **Numerical Python**. It is a powerful library for numerical computing. Used heavily in data analytics, data science, ML, and deep learning.\n\nImport practice: `import numpy as np`\n\n**Main benefit:** NumPy **arrays** let you do math on every element **without a for loop** (unlike lists).\n\nTomorrow: more array functions, then Pandas.",
+    "body": "**Definition:** NumPy stands for **Numerical Python**. It is a powerful library for numerical computing. Used heavily in data analytics, data science, ML, and deep learning.\n\nImport practice: `import numpy as np`\n\n**Main benefit:** NumPy **arrays** let you do math on every element **without a for loop** (unlike lists).\n\n**Full roadmap (browser):** [python-numpy-roadmap.html](python-numpy-roadmap.html) — 189 topics + interview + practice. **Interview pack:** [python-numpy.html](python-numpy.html).",
     "code": "import numpy as np\n\nnumbers = np.array([10, 20, 30, 40])\nprint(numbers)\nprint(numbers * 2)",
     "children": [
-      "numpy array",
-      "numpy shape",
-      "numpy index",
-      "numpy reshape",
-      "numpy special",
-      "numpy math",
-      "numpy agg",
+      "numpy roadmap",
+      "np-t1",
+      "np-t2",
+      "np-t3",
+      "np-t4",
+      "np-t5",
+      "np-t6",
+      "np-t7",
+      "np-t8",
+      "np-t9",
+      "np-t10",
+      "np-t11",
       "day7 revision"
+    ],
+    "childGroups": [
+      { "label": "NumPy syllabus — units 1 to 11", "items": ["np-t1", "np-t2", "np-t3", "np-t4", "np-t5", "np-t6", "np-t7", "np-t8", "np-t9", "np-t10", "np-t11"] },
+      { "label": "Extra notes", "items": ["numpy roadmap", "day7 revision"] }
     ]
+  },
+  "np-t1": {
+    "question": "Unit 1 — Introduction to NumPy",
+    "body": "**Definition:** **NumPy** (Numerical Python) is a library for fast numerical work on **homogeneous, n-dimensional arrays** (`ndarray`).\n\n**Why we use it:** Do math on thousands of values without Python `for` loops; foundation for **pandas**, **scikit-learn**, and deep learning.\n\n**Import:** `import numpy as np` — `np` is the standard alias.\n\n**List vs array (interview):**\n\n| | Python list | NumPy array |\n|---|---|---|\n| `* 2` | Repeats items | Multiplies each element |\n| Types | Mixed allowed | One main `dtype` |\n| Speed | Slower on big data | Optimised C code |\n\n**Tekbind:** cells 581+ · **More:** [Fundamentals](python-numpy-roadmap.html#01-num-py-fundamentals)",
+    "code": "import numpy as np\nnums = [10, 20, 30]\nprint(nums * 2)\narr = np.array(nums)\nprint(arr * 2)"
+  },
+  "np-t2": {
+    "question": "Unit 2 — Creating NumPy Arrays",
+    "body": "**Definition:** **Creating arrays** means building an `ndarray` with a known shape and initial values.\n\n| Function | Definition |\n|---|---|\n| `np.array(data)` | Build from list or nested list |\n| `np.zeros(shape)` | Every element 0 |\n| `np.ones(shape)` | Every element 1 |\n| `np.full(shape, v)` | Every element set to `v` |\n| `np.arange(start, stop, step)` | Sequence with fixed step (like `range`) |\n\n**Tekbind:** all except `linspace`, `eye`, `random` · **More:** [Part 2 — Creation](python-numpy-roadmap.html#02-array-creation-methods)",
+    "code": "import numpy as np\nprint(np.array([1, 2, 3]))\nprint(np.zeros((2, 3)))\nprint(np.arange(2, 11, 2))"
+  },
+  "np-t3": {
+    "question": "Unit 3 — Types and Dimensions of Arrays (0D–3D)",
+    "body": "**Definition:** **Dimension** is the number of axes in an array. **`ndim`** counts them; **`shape`** gives the length along each axis; **`size`** is the total element count.\n\n| Array | Definition | Example `shape` | `ndim` |\n|---|---|---|---|\n| **0D** | Single scalar value (no sequence axis) | `()` | 0 |\n| **1D** | One sequence (vector) | `(4,)` | 1 |\n| **2D** | Rows and columns (matrix) | `(2, 3)` | 2 |\n| **3D** | Stack of 2D layers | `(2, 2, 3)` | 3 |\n\n**`ndim` vs `shape`:** `ndim` = how many dimensions (0, 1, 2, 3…). `shape` = size on **each** dimension (e.g. 2 rows × 3 cols → `(2, 3)`).\n\n**Homogeneous:** All elements share one main `dtype` (unlike a Python list).\n\n**Rule:** In 2D/3D, nested lists must have **consistent** row lengths.\n\n**Quick revision:** 0D = one value · 1D = one list · 2D = table · 3D = layers of tables · `size` = product of `shape`.\n\n**Tekbind:** 1D, 2D, 3D (0D in code below · class focused on 1–3).",
+    "code": "import numpy as np\n\narr_0d = np.array(10)\nprint(\"0D\", arr_0d, \"ndim\", arr_0d.ndim, \"shape\", arr_0d.shape)\n\narr_1d = np.array([10, 20, 30, 40])\nprint(\"1D\", arr_1d, \"ndim\", arr_1d.ndim, \"shape\", arr_1d.shape)\n\narr_2d = np.array([[10, 20, 30], [40, 50, 60]])\nprint(\"2D\", arr_2d, \"ndim\", arr_2d.ndim, \"shape\", arr_2d.shape)\n\narr_3d = np.array([[[10, 20, 30], [40, 50, 60]], [[70, 80, 90], [100, 110, 120]]])\nprint(\"3D ndim\", arr_3d.ndim, \"shape\", arr_3d.shape, \"size\", arr_3d.size)"
+  },
+  "np-t4": {
+    "question": "Unit 4 — NumPy Array Attributes",
+    "body": "**Definition:** **Attributes** describe the structure and size of an array (they are properties, not functions).\n\n| Attribute | Definition |\n|---|---|\n| `.ndim` | Number of dimensions (1, 2, 3, …) |\n| `.shape` | Tuple of lengths per axis, e.g. `(3, 4)` |\n| `.size` | Total count of elements |\n\n**Note:** `shape` = layout; `size` = how many numbers. For extras (`dtype`, `itemsize`, `nbytes`) see Unit 5 and the [roadmap](python-numpy-roadmap.html#03-array-attributes).\n\n**Tekbind:** `ndim`, `shape`, `size` — yes",
+    "code": "import numpy as np\na = np.array([[1, 2, 3], [4, 5, 6]])\nprint(a.ndim, a.shape, a.size)"
+  },
+  "np-t5": {
+    "question": "Unit 5 — NumPy Data Types",
+    "body": "**Definition:** Data types specify the kind of values stored inside a NumPy array, such as integers, decimal numbers, Boolean values, or complex numbers.\n\n**Topics:**\n\n1. **Integer (int)** — Stores whole numbers.\n2. **Float (float)** — Stores decimal numbers.\n3. **Boolean (bool)** — Stores `True` or `False`.\n4. **String (str)** — Stores text (often `dtype` like `U` for Unicode).\n5. **Complex (complex)** — Stores real and imaginary parts.\n6. **`dtype`** — Returns the data type of array elements.\n7. **`astype()`** — Converts an array from one data type to another.\n8. **Type conversion** — Change values from one dtype to another.\n\n**Quick revision:** Know what lives in the array before you do math (e.g. `3 / 2` is `1` for int arrays, `1.5` for float).\n\n**Tekbind:** implicit dtypes in class · **Deep dive:** [python-numpy.html](python-numpy.html) Part 4",
+    "code": "import numpy as np\na = np.array([1, 2, 3])\nf = np.array([1.5, 2.5])\nprint(a.dtype, f.dtype)\nprint(a.astype(float))\nprint(3 / 2, np.array([3]).astype(float) / 2)"
+  },
+  "np-t6": {
+    "question": "Unit 6 — NumPy Indexing and Slicing",
+    "body": "**Definition:** Indexing and slicing are used to access individual elements or extract a portion of a NumPy array.\n\n**Topics:**\n\n1. **Positive indexing** — Access from index `0` at the start.\n2. **Negative indexing** — Access from the end (`-1` is last).\n3. **1D indexing** — One index per element in a vector.\n4. **2D indexing** — `array[row, col]` for row and column.\n5. **3D indexing** — Layer, row, and column (e.g. `a[layer, row, col]`).\n6. **Slicing** — `start:stop:step` for a portion.\n7. **Boolean indexing** — `arr[arr > 50]` selects by condition.\n8. **Fancy indexing** — Pick positions with a list of indices.\n9. **`np.where()`** — Find positions or choose values from a condition.\n\n**Quick revision:** Access and extract — the base skill before reshape and stats.\n\n**Tekbind:** 1D/2D index & slice, boolean, `where`, `&` · **Notes:** fancy indexing in [roadmap Part 4](python-numpy-roadmap.html#04-indexing-and-slicing)",
+    "code": "import numpy as np\nx = np.array([10, 20, 30, 40, 50])\nprint(x[0], x[-1], x[1:4])\nm = np.array([[10, 20, 30], [40, 50, 60]])\nprint(m[1, 0], m[0:2, 0:2])\nprint(m[m > 25])\nprint(np.where(m >= 40, m, 0))"
+  },
+  "np-t7": {
+    "question": "Unit 7 — NumPy Reshape and Array Manipulation",
+    "body": "**Definition:** Reshaping and array manipulation change the dimensions, structure, or arrangement of an array without necessarily changing its underlying data (total element count for reshape must match).\n\n**Topics:**\n\n1. **`reshape()`** — Change dimensions (e.g. 12 elements → `(3, 4)`).\n2. **`flatten()`** — 1D array; **always a copy**.\n3. **`ravel()`** — 1D array; **view when possible**.\n4. **`transpose()`** — Reorder axes (rows ↔ columns for 2D).\n5. **`.T`** — Shortcut for transpose.\n6. **`np.newaxis`** — Add a length-1 dimension (helps broadcasting).\n7. **`np.expand_dims()`** — Add a dimension at a given axis.\n8. **`np.squeeze()`** — Remove axes of length 1.\n\n**Quick revision:** Change layout — same data, different shape view.\n\n**Tekbind:** `reshape` only · **Rest:** [Part 5](python-numpy-roadmap.html#05-array-manipulation)",
+    "code": "import numpy as np\na = np.arange(1, 13)\nprint(a.reshape(3, 4))\nprint(a.ravel(), a.reshape(3, 4).T)\nprint(np.expand_dims(np.array([1, 2, 3]), axis=1).shape)"
+  },
+  "np-t8": {
+    "question": "Unit 8 — NumPy Array Arithmetic",
+    "body": "**Definition:** Array arithmetic means performing mathematical operations on NumPy arrays, either element by element or through matrix operations.\n\n**Topics:**\n\n1. **Addition (`+`)** — Add corresponding elements.\n2. **Subtraction (`-`)** — Subtract corresponding elements.\n3. **Multiplication (`*`)** — Multiply corresponding elements (element-wise).\n4. **Division (`/`)** — Divide corresponding elements.\n5. **Modulus (`%`)** — Remainder after division.\n6. **Power (`**`)** — Raise each element to a power.\n7. **`np.sqrt()`** — Square root of each element.\n8. **`np.square()`** — Square of each element.\n9. **`np.abs()`** — Absolute value.\n10. **`np.round()`**, **`floor()`**, **`ceil()`** — Rounding.\n11. **Matrix multiplication (`@`)** — Linear algebra multiply (not the same as `*`).\n\n**Quick revision:** `*` is element-wise; `@` is matrix multiply.\n\n**Tekbind:** `+`, `*`, scalar, `a+b`, `sales*1.1` · **More:** [Part 6](python-numpy-roadmap.html#06-mathematical-operations)",
+    "code": "import numpy as np\na = np.array([10, 20, 30])\nprint(a + 5, a ** 2, np.sqrt(a))\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nprint(A * B)\nprint(A @ B)"
+  },
+  "np-t9": {
+    "question": "Unit 9 — NumPy Broadcasting",
+    "body": "**Definition:** Broadcasting is a NumPy feature that allows mathematical operations between arrays of different shapes when their dimensions are compatible.\n\n**Topics:**\n\n1. **Broadcasting** — Operate on compatible arrays of different shapes.\n2. **Broadcasting rules** — Compare dimensions **from right to left**; sizes must be equal or one must be `1`.\n3. **Scalar broadcasting** — One number applies to every element.\n4. **1D and 2D broadcasting** — e.g. row vector with a matrix.\n5. **Multidimensional broadcasting** — Same rules on 3D+ arrays.\n6. **Shape compatibility** — Decides if two arrays can operate together without error.\n\n**Class example:** `sales * np.array([1.05, 1.10, 1.03]).reshape(3, 1)` — one rate per row.\n\n**Quick revision:** Different shapes can still math together if rules say yes.\n\n**Tekbind:** yes · **More:** [Part 11](python-numpy-roadmap.html#11-broadcasting-and-vectorization)",
+    "code": "import numpy as np\nsales = np.array([[1200, 1500, 1400], [1000, 1300, 1100], [2000, 2200, 2500]])\nrates = np.array([1.05, 1.10, 1.03]).reshape(3, 1)\nprint(sales * rates)\nprint(np.array([1, 2, 3]) + 10)"
+  },
+  "np-t10": {
+    "question": "Unit 10 — NumPy Axis Operations and Aggregation",
+    "body": "**Definition:** Axis operations and aggregation perform calculations such as sum, average, minimum, and maximum across specific dimensions of an array.\n\n**Topics:**\n\n1. **Axis** — Which dimension the operation runs along.\n2. **`axis=0`** — Down the rows → **column-wise** result (on a 2D table).\n3. **`axis=1`** — Across columns → **row-wise** result.\n4. **`np.sum()`** — Total of elements.\n5. **`np.mean()`** — Average.\n6. **`np.min()`** / **`np.max()`** — Smallest / largest.\n7. **`np.std()`** — Standard deviation.\n8. **`np.var()`** — Variance.\n9. **`np.cumsum()`** — Running total.\n10. **`np.cumprod()`** — Running product.\n\n**Quick revision:** Totals and summaries along rows or columns.\n\n**Tekbind:** sum, mean, min, max (1D marks + 2D sales) · **More:** [Part 7](python-numpy-roadmap.html#07-aggregation-and-axis)",
+    "code": "import numpy as np\nmarks = np.array([34, 56, 75, 23, 12])\nprint(np.sum(marks), np.mean(marks), np.max(marks))\nsales = np.array([[1200, 1500, 1400, 1800], [1000, 1300, 1100, 1600], [2000, 2200, 2500, 2700]])\nprint(np.sum(sales, axis=0))\nprint(np.sum(sales, axis=1))\nprint(np.cumsum(marks))"
+  },
+  "np-t11": {
+    "question": "Unit 11 — Additional Important NumPy Topics",
+    "body": "**Definition:** Extra tools you need after basics — mutation, filtering labels, and memory safety.\n\n| Topic | Definition |\n|---|---|\n| `np.append` / `np.delete` | Add or remove elements (ndarray has **no** `.append()` like lists) |\n| `np.where(cond, x, y)` | Pick `x` or `y` per element based on condition |\n| **View vs copy** | `b = a` shares memory; `b = a.copy()` is independent |\n\n**In notes only:** NaN, random, linear algebra, `save`/`load` — [python-numpy.html](python-numpy.html) · [roadmap](python-numpy-roadmap.html)\n\n**Tekbind capstone:** compare month totals with `np.sum(sales, axis=0)`.",
+    "code": "import numpy as np\na = np.array([10, 20, 30])\nb = a.copy()\nb[0] = 999\nprint(a)\nprint(np.where(np.array([1200, 1500, 1100]) >= 1500, \"target completed\", \"Below target\"))"
+  },
+  "numpy roadmap": {
+    "question": "NumPy — full learning roadmap (234 Q)",
+    "body": "**234 topics** in the browser: fundamentals → advanced → projects, plus **20 interview** and **25 practice** tasks.\n\nEach topic follows: Definition · Purpose · Syntax · Example · Output · Explanation · Real-world · Interview · Practice.\n\n| Resource | Link |\n|---|---|\n| Roadmap (this syllabus) | [python-numpy-roadmap.html](python-numpy-roadmap.html) |\n| Deep interview Q&A | [python-numpy.html](python-numpy.html) |\n| Word document | `docs/python-numpy-roadmap.docx` |\n\nRebuild: `python3 .bin/build_numpy_roadmap.py`",
+    "code": ""
   },
   "numpy array": {
     "question": "NumPy array",
@@ -1234,7 +1352,7 @@
       });
     });
 
-    const chipLabels = { "dict remove": "remove", "star args": "*args", "kwargs": "**kwargs", "combine args": "*args + **kwargs", "min max": "min max", "day5 compare": "compare", "day5 revision": "revision", "args kwargs": "*args **kwargs", "shallow copy": "shallow copy", "deep copy": "deep copy", "dict iterate": "dict iterate", "pop discard": "pop discard", "string format": "string format", "type casting": "type casting", "dynamic typing": "dynamic typing", "important revision": "revision", "oop": "OOP", "object": "object", "attributes": "attributes", "self": "self", "methods": "methods", "inheritance": "inheritance", "polymorphism": "polymorphism", "encapsulation": "encapsulation", "abstraction": "abstraction", "multiple inheritance": "multiple inh.", "day6 compare": "compare", "day6 revision": "revision", "day6 interview": "interview", "try except": "exceptions", "modules": "modules", "file modes": "modes r w a", "file read": "read", "files map": "open 25 parts", "file write": "write append", "numpy array": "array", "numpy shape": "ndim shape size", "numpy index": "indexing slicing", "numpy reshape": "reshape", "numpy special": "zeros ones arange", "numpy math": "math ops", "numpy agg": "sum mean max", "day7 revision": "revision", "fh-p01": "P1", "fh-p02": "P2", "fh-p03": "P3", "fh-p04": "P4", "fh-p05": "P5", "fh-p06": "P6", "fh-p07": "P7", "fh-p08": "P8", "fh-p09": "P9", "fh-p10": "P10", "fh-p11": "P11", "fh-p12": "P12", "fh-p13": "P13", "fh-p14": "P14", "fh-p15": "P15", "fh-p16": "P16", "fh-p17": "P17", "fh-p18": "P18", "fh-p19": "P19", "fh-p20": "P20", "fh-p21": "P21", "fh-p22": "P22", "fh-p23": "P23", "fh-p24": "P24", "fh-p25": "P25" };
+    const chipLabels = { "dict remove": "remove", "star args": "*args", "kwargs": "**kwargs", "combine args": "*args + **kwargs", "min max": "min max", "day5 compare": "compare", "day5 revision": "revision", "args kwargs": "*args **kwargs", "shallow copy": "shallow copy", "deep copy": "deep copy", "dict iterate": "dict iterate", "pop discard": "pop discard", "string format": "string format", "type casting": "type casting", "dynamic typing": "dynamic typing", "important revision": "revision", "oop": "OOP", "object": "object", "attributes": "attributes", "self": "self", "methods": "methods", "inheritance": "inheritance", "polymorphism": "polymorphism", "encapsulation": "encapsulation", "abstraction": "abstraction", "multiple inheritance": "multiple inh.", "day6 compare": "compare", "day6 revision": "revision", "day6 interview": "interview", "try except": "exceptions", "modules": "modules", "file modes": "modes r w a", "file read": "read", "files map": "open 25 parts", "file write": "write append", "numpy roadmap": "full roadmap", "np-t1": "1 Introduction", "np-t2": "2 Creating arrays", "np-t3": "3 · 0D–3D", "np-t4": "4 Attributes", "np-t5": "5 Data types", "np-t6": "6 Indexing", "np-t7": "7 Reshape", "np-t8": "8 Arithmetic", "np-t9": "9 Broadcasting", "np-t10": "10 Axis & agg", "np-t11": "11 More topics", "numpy array": "array", "numpy shape": "ndim shape size", "numpy index": "indexing slicing", "numpy reshape": "reshape", "numpy special": "zeros ones arange", "numpy math": "math ops", "numpy agg": "sum mean max", "day7 revision": "revision", "fh-p01": "P1", "fh-p02": "P2", "fh-p03": "P3", "fh-p04": "P4", "fh-p05": "P5", "fh-p06": "P6", "fh-p07": "P7", "fh-p08": "P8", "fh-p09": "P9", "fh-p10": "P10", "fh-p11": "P11", "fh-p12": "P12", "fh-p13": "P13", "fh-p14": "P14", "fh-p15": "P15", "fh-p16": "P16", "fh-p17": "P17", "fh-p18": "P18", "fh-p19": "P19", "fh-p20": "P20", "fh-p21": "P21", "fh-p22": "P22", "fh-p23": "P23", "fh-p24": "P24", "fh-p25": "P25" };
 
     function makeChip(childId) {
       const child = document.createElement("button");
@@ -1311,7 +1429,7 @@
       stage.topics.forEach((id) => {
         const topic = info[id];
         const group = document.createElement("div");
-        group.className = "group" + (id === "JSON" ? " next-group" : "");
+        group.className = "group" + (id === "JSON" ? " next-group" : "") + (id === "numpy" ? " wide numpy-board" : "");
         const button = document.createElement("button");
         button.type = "button";
         button.className = "topic";

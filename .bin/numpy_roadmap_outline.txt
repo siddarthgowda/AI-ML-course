@@ -1,0 +1,275 @@
+NUMPY – COMPLETE LEARNING ROADMAP
+
+PART 1: NUMPY FUNDAMENTALS
+What is NumPy?
+Why do we use NumPy?
+What is an ndarray?
+Difference between Python List and NumPy Array.
+Advantages and features of NumPy.
+Installing and importing NumPy.
+Creating NumPy arrays using np.array().
+Understanding 1D, 2D, and 3D arrays.
+Understanding array dimensions.
+Understanding array shape.
+
+PART 2: ARRAY CREATION METHODS
+np.array() – Create an array.
+np.zeros() – Create an array filled with zeros.
+np.ones() – Create an array filled with ones.
+np.empty() – Create an uninitialized array.
+np.arange() – Create an array using a fixed step.
+np.linspace() – Create evenly spaced values.
+np.full() – Create an array with a specified value.
+np.eye() – Create an identity matrix.
+np.identity() – Create an identity matrix.
+np.random.rand() – Generate random values.
+np.random.randint() – Generate random integers.
+np.random.randn() – Generate normally distributed values.
+np.random.seed() – Control random number generation.
+
+PART 3: ARRAY ATTRIBUTES
+ndim – Number of dimensions.
+shape – Number of rows and columns.
+size – Total number of elements.
+dtype – Data type of elements.
+itemsize – Memory occupied by one element.
+nbytes – Total memory occupied by an array.
+
+PART 4: INDEXING AND SLICING
+What is array indexing?
+Accessing elements in a 1D array.
+Accessing elements in a 2D array.
+Accessing elements in a 3D array.
+Positive indexing.
+Negative indexing.
+Array slicing.
+Slicing using start, stop, and step.
+Slicing rows and columns.
+Extracting specific rows and columns.
+Boolean indexing.
+Fancy indexing (indexing using lists or arrays).
+
+PART 5: ARRAY MANIPULATION
+reshape() – Change array shape.
+flatten() – Convert into a 1D copy.
+ravel() – Convert into a 1D view when possible.
+transpose() – Change rows into columns and vice versa.
+.T – Transpose an array.
+resize() – Change array size.
+squeeze() – Remove dimensions of size 1.
+expand_dims() – Add a new dimension.
+concatenate() – Join arrays.
+stack() – Combine arrays along a new axis.
+vstack() – Stack arrays vertically.
+hstack() – Stack arrays horizontally.
+split() – Split arrays.
+append() – Add elements.
+insert() – Insert elements.
+delete() – Delete elements.
+repeat() – Repeat elements.
+tile() – Repeat an entire array pattern.
+
+PART 6: MATHEMATICAL OPERATIONS
+Addition of arrays.
+Subtraction of arrays.
+Multiplication of arrays.
+Division of arrays.
+Modulus operation.
+Power operation.
+Square root – np.sqrt().
+Square – np.square().
+Absolute value – np.abs().
+Exponential – np.exp().
+Logarithm – np.log() and np.log10().
+Trigonometric functions – sin(), cos(), tan().
+Rounding – round(), floor(), ceil().
+Summation – np.sum().
+Minimum – np.min().
+Maximum – np.max().
+Mean – np.mean().
+Median – np.median().
+Standard deviation – np.std().
+Variance – np.var().
+Percentile – np.percentile().
+
+PART 7: AGGREGATION AND AXIS
+What is axis in NumPy?
+Understanding axis=0.
+Understanding axis=1.
+Sum along rows and columns.
+Mean along rows and columns.
+Minimum and maximum along axes.
+argmin() – Index of minimum value.
+argmax() – Index of maximum value.
+cumsum() – Cumulative sum.
+cumprod() – Cumulative product.
+
+PART 8: FILTERING AND CONDITIONS
+Filtering arrays using conditions.
+Boolean masks.
+np.where() – Apply conditions.
+np.any() – Check whether any condition is true.
+np.all() – Check whether all conditions are true.
+np.unique() – Find unique values.
+np.isin() – Check membership.
+np.clip() – Limit values within a range.
+np.select() – Apply multiple conditions.
+
+PART 9: SORTING AND SEARCHING
+np.sort() – Sort an array.
+np.argsort() – Get sorted indices.
+np.argmax() and np.argmin().
+np.searchsorted() – Find insertion position.
+np.nonzero() – Find non-zero indices.
+np.count_nonzero() – Count non-zero values.
+
+PART 10: COMPARISON AND LOGICAL OPERATIONS
+Array comparison operators.
+Equal to (==).
+Not equal to (!=).
+Greater than (>).
+Less than (<).
+Logical AND – np.logical_and().
+Logical OR – np.logical_or().
+Logical NOT – np.logical_not().
+
+PART 11: BROADCASTING AND VECTORIZATION
+What is broadcasting?
+Broadcasting rules.
+Broadcasting with 1D and 2D arrays.
+Practical broadcasting examples.
+What is vectorization?
+Vectorized operations vs Python loops.
+Benefits of vectorization.
+Universal functions (ufuncs).
+
+PART 12: LINEAR ALGEBRA
+What is linear algebra in NumPy?
+Matrix addition and subtraction.
+Matrix multiplication using np.dot().
+Matrix multiplication using @.
+Element-wise multiplication vs matrix multiplication.
+Matrix transpose.
+Determinant – np.linalg.det().
+Inverse – np.linalg.inv().
+Matrix rank – np.linalg.matrix_rank().
+Eigenvalues and eigenvectors.
+Solving linear equations – np.linalg.solve().
+
+PART 13: RANDOM MODULE
+Generate random numbers.
+Generate random integers.
+Generate random arrays.
+Generate random samples.
+Shuffle arrays.
+Permutation of arrays.
+Normal distribution.
+Uniform distribution.
+Random sampling using default_rng().
+
+PART 14: HANDLING MISSING AND SPECIAL VALUES
+What is NaN?
+np.nan – Represent missing numerical values.
+np.isnan() – Identify NaN values.
+np.nanmean() – Mean ignoring NaN.
+np.nansum() – Sum ignoring NaN.
+np.nanmin() and np.nanmax().
+Positive and negative infinity.
+np.isinf() – Identify infinity.
+np.isfinite() – Identify finite values.
+
+PART 15: COPYING AND MEMORY MANAGEMENT
+Difference between copy and view.
+copy() – Create an independent copy.
+view() – Create a view of an array.
+Memory sharing.
+np.shares_memory().
+Modifying original arrays and their views.
+Understanding NumPy array memory layout.
+Contiguous arrays.
+np.ascontiguousarray().
+
+PART 16: FILE HANDLING WITH NUMPY
+np.save() – Save an array in NPY format.
+np.load() – Load an NPY file.
+np.savez() – Save multiple arrays.
+np.savetxt() – Save arrays as text or CSV.
+np.loadtxt() – Load text or CSV data.
+np.genfromtxt() – Load data with missing values.
+np.fromstring() – Create arrays from strings.
+
+PART 17: ADVANCED NUMPY
+Structured arrays.
+Record arrays.
+Masked arrays.
+np.meshgrid().
+np.diag() – Diagonal elements and matrices.
+np.triu() – Upper triangular matrix.
+np.tril() – Lower triangular matrix.
+np.einsum() – Einstein summation.
+np.vectorize().
+Performance optimization.
+NumPy data types and type conversion.
+Integer overflow and floating-point precision.
+
+PART 18: PRACTICAL PROJECTS
+Student marks analysis.
+Employee salary analysis.
+Customer loan data analysis.
+Campaign call count analysis.
+Payment status analysis.
+Finding missing values in datasets.
+Data normalization.
+Min-max scaling.
+Calculating statistical summaries.
+Simple recommendation and prediction calculations.
+Preparing numerical data for Machine Learning.
+
+PART 19: INTERVIEW QUESTIONS
+What is NumPy, and why is it used?
+What is an ndarray?
+What is the difference between a list and a NumPy array?
+What is the difference between 1D, 2D, and 3D arrays?
+What is the difference between arange() and linspace()?
+What is the difference between zeros() and ones()?
+What is the difference between reshape() and resize()?
+What is the difference between flatten() and ravel()?
+What is broadcasting?
+What is vectorization?
+What is the difference between axis=0 and axis=1?
+What is the difference between copy() and view()?
+What is the difference between concatenate() and stack()?
+What is the difference between vstack() and hstack()?
+What is the difference between np.dot() and *?
+What is Boolean indexing?
+What is fancy indexing?
+What is a universal function?
+How do you handle NaN values in NumPy?
+Why is NumPy useful in Machine Learning?
+
+PART 20: PRACTICE QUESTIONS
+Create a 1D array containing numbers from 1 to 10.
+Create a 3×3 array filled with zeros.
+Create a 4×4 array filled with ones.
+Create an array containing even numbers from 2 to 20.
+Generate 10 equally spaced values between 0 and 100.
+Create a 3×3 identity matrix.
+Create a 2D array and print its shape, size, and dimensions.
+Extract the third element from a 1D array.
+Extract the second row from a 2D array.
+Extract the last column from a 2D array.
+Reverse a NumPy array.
+Reshape a 1D array into a 3×3 matrix.
+Find the sum and average of an array.
+Find the maximum and minimum values.
+Find all values greater than 50.
+Replace all values below 50 with zero using np.where().
+Sort an array in ascending order.
+Find unique values in an array.
+Join two arrays using concatenate().
+Calculate row-wise and column-wise sums.
+Multiply two matrices.
+Find the standard deviation of an array.
+Generate 10 random integers between 1 and 100.
+Find and count missing values.
+Analyze a small customer payment dataset using NumPy.

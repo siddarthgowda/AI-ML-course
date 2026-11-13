@@ -1,0 +1,4829 @@
+=======
+NUMPY – COMPLETE LEARNING ROADMAP
+Topics, Questions, Answers, and Practical Examples
+=======
+
+For every topic in this roadmap, study in this order:
+
+1. Definition — What is it?
+2. Purpose — Why do we use it?
+3. Syntax — How do we write it?
+4. Example — Simple code.
+5. Output — What does the code return?
+6. Explanation — Understand each line.
+7. Real-world example — Where is it used?
+8. Interview questions — What can interviewers ask?
+9. Practice — Solve independently.
+
+Goal: Finish fundamentals, manipulation, math, broadcasting, and linear algebra before Pandas.
+
+=======
+01. NUMPY FUNDAMENTALS
+======================================================================
+
+Q1. What is NumPy?
+Ans: Definition: NumPy (Numerical Python) is an open-source library for fast numerical work on multidimensional arrays.
+
+Purpose: Replace slow Python loops with vectorized C-level operations for data science, ML, and analytics.
+
+Syntax: import numpy as np
+
+Example:
+import numpy as np
+scores = np.array([70, 82, 91])
+print(scores)
+
+Output: [70 82 91]
+
+Explanation: np.array() builds an ndarray. Operations on it run in compiled code, not per-element Python loops.
+
+Real-world: Model features, image pixels, time-series windows, batch tensors.
+
+Interview: "What is NumPy?" / "Why not plain lists?"
+
+Practice: Create a 1D array of five marks and multiply every mark by 1.1.
+
+Q2. Why do we use NumPy?
+Ans: Definition: We use NumPy when we need efficient numeric arrays and math at scale.
+
+Purpose: Speed, memory, broadcasting, linear algebra, and integration with pandas, scikit-learn, and PyTorch.
+
+Syntax: import numpy as np
+
+Example:
+import numpy as np
+py_list = list(range(1_000_000))
+%timeit sum(py_list)
+arr = np.arange(1_000_000)
+%timeit arr.sum()
+
+Output: NumPy sum is typically much faster on large data.
+
+Explanation: Homogeneous ndarray storage and vectorization avoid Python object overhead.
+
+Real-world: ETL pipelines, feature engineering, training data matrices.
+
+Interview: Speed, memory, ndarray, ecosystem.
+
+Practice: Compare list * 2 vs np.array(list) * 2.
+
+Q3. What is an ndarray?
+Ans: Definition: ndarray (n-dimensional array) is NumPy's main object — a homogeneous, fixed-size grid of values.
+
+Purpose: Unified structure for 1D vectors, 2D tables, 3D volumes, etc.
+
+Syntax: arr = np.array(data)
+
+Example:
+import numpy as np
+a1 = np.array([1, 2, 3])
+a2 = np.array([[1, 2], [3, 4]])
+print(type(a1), a1.ndim, a2.shape)
+
+Output: <class 'numpy.ndarray'> 1 (2, 2)
+
+Explanation: All elements share one dtype. Shape describes dimensions.
+
+Real-world: Feature matrix (rows=samples, cols=features).
+
+Interview: ndarray vs list.
+
+Practice: Build 1D and 2D arrays; print ndim, shape, size.
+
+Q4. Difference between Python List and NumPy Array.
+Ans: Definition: Lists are general Python sequences; NumPy arrays are typed, fixed-shape numerical grids.
+
+Purpose: Pick lists for mixed types and small scripts; pick arrays for numeric bulk work.
+
+Syntax: np.array(list_obj)
+
+Example:
+import numpy as np
+L = [1, 2, 3]
+A = np.array(L)
+print(L * 2)
+print(A * 2)
+
+Output: [1, 2, 3, 1, 2, 3] vs [2 4 6]
+
+Explanation: List * 2 repeats; array * 2 multiplies element-wise.
+
+Real-world: Sales CSV columns loaded into ndarray for stats.
+
+Interview: Type homogeneity, speed, broadcasting.
+
+Practice: Store the same numbers in list and array; compare + and *.
+
+Q5. Advantages and features of NumPy.
+Ans: Definition: Advantages and features of NumPy.
+
+Purpose: Part of NUMPY FUNDAMENTALS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q6. Installing and importing NumPy.
+Ans: Definition: Installing and importing NumPy.
+
+Purpose: Part of NUMPY FUNDAMENTALS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q7. Creating NumPy arrays using np.array().
+Ans: Definition: Creating NumPy arrays using np.array().
+
+Purpose: Part of NUMPY FUNDAMENTALS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.array
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q8. Understanding 1D, 2D, and 3D arrays.
+Ans: Definition: Understanding 1D, 2D, and 3D arrays.
+
+Purpose: Part of NUMPY FUNDAMENTALS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q9. Understanding array dimensions.
+Ans: Definition: Understanding array dimensions.
+
+Purpose: Part of NUMPY FUNDAMENTALS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q10. Understanding array shape.
+Ans: Definition: Understanding array shape.
+
+Purpose: Part of NUMPY FUNDAMENTALS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+02. ARRAY CREATION METHODS
+======================================================================
+
+Q11. np.array() – Create an array.
+Ans: Definition: np.array() – Create an array.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.array
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q12. np.zeros() – Create an array filled with zeros.
+Ans: Definition: np.zeros(shape) creates an array of zeros.
+
+Purpose: Allocate a matrix before filling (weights, masks, grids).
+
+Syntax: np.zeros((rows, cols), dtype=float)
+
+Example:
+import numpy as np
+z = np.zeros((2, 3))
+print(z)
+
+Output: [[0. 0. 0.] [0. 0. 0.]]
+
+Real-world: Initialize gradient buffers, empty image channels.
+
+Interview: zeros vs ones vs empty.
+
+Practice: Create 3×3 zeros, then set the diagonal to 1.
+
+Q13. np.ones() – Create an array filled with ones.
+Ans: Definition: np.ones() – Create an array filled with ones.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+print(np.ones((2, 2)))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q14. np.empty() – Create an uninitialized array.
+Ans: Definition: np.empty() – Create an uninitialized array.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.empty
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q15. np.arange() – Create an array using a fixed step.
+Ans: Definition: np.arange(start, stop, step) builds a range like range() but as an array.
+
+Purpose: Integer or float sequences with a fixed step.
+
+Syntax: np.arange(0, 10, 2)
+
+Example:
+import numpy as np
+print(np.arange(0, 10, 2))
+
+Output: [0 2 4 6 8]
+
+Interview vs linspace: arange uses step; linspace uses count and endpoints.
+
+Practice: Build even numbers 2–20 with arange.
+
+Q16. np.linspace() – Create evenly spaced values.
+Ans: Definition: np.linspace(start, stop, num) returns evenly spaced values including endpoints.
+
+Purpose: Sampling continuous intervals (plots, thresholds).
+
+Syntax: np.linspace(0, 1, 5)
+
+Example:
+import numpy as np
+print(np.linspace(0, 100, 5))
+
+Output: [  0.  25.  50.  75. 100.]
+
+Interview: arange(step) vs linspace(count).
+
+Practice: Ten points between 0 and 100.
+
+Q17. np.full() – Create an array with a specified value.
+Ans: Definition: np.full() – Create an array with a specified value.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.full
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q18. np.eye() – Create an identity matrix.
+Ans: Definition: np.eye() – Create an identity matrix.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+print(np.eye(3))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q19. np.identity() – Create an identity matrix.
+Ans: Definition: np.identity() – Create an identity matrix.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+print(np.identity(3))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q20. np.random.rand() – Generate random values.
+Ans: Definition: np.random.rand() – Generate random values.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.random.rand
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q21. np.random.randint() – Generate random integers.
+Ans: Definition: np.random.randint() – Generate random integers.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.random.randint
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q22. np.random.randn() – Generate normally distributed values.
+Ans: Definition: np.random.randn() – Generate normally distributed values.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.random.randn
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q23. np.random.seed() – Control random number generation.
+Ans: Definition: np.random.seed() – Control random number generation.
+
+Purpose: Part of ARRAY CREATION METHODS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.random.seed
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+03. ARRAY ATTRIBUTES
+======================================================================
+
+Q24. ndim – Number of dimensions.
+Ans: Definition: ndim – Number of dimensions.
+
+Purpose: Part of ARRAY ATTRIBUTES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q25. shape – Number of rows and columns.
+Ans: Definition: shape – Number of rows and columns.
+
+Purpose: Part of ARRAY ATTRIBUTES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q26. size – Total number of elements.
+Ans: Definition: size – Total number of elements.
+
+Purpose: Part of ARRAY ATTRIBUTES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q27. dtype – Data type of elements.
+Ans: Definition: dtype – Data type of elements.
+
+Purpose: Part of ARRAY ATTRIBUTES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q28. itemsize – Memory occupied by one element.
+Ans: Definition: itemsize – Memory occupied by one element.
+
+Purpose: Part of ARRAY ATTRIBUTES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q29. nbytes – Total memory occupied by an array.
+Ans: Definition: nbytes – Total memory occupied by an array.
+
+Purpose: Part of ARRAY ATTRIBUTES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+04. INDEXING AND SLICING
+======================================================================
+
+Q30. What is array indexing?
+Ans: Definition: What is array indexing?
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q31. Accessing elements in a 1D array.
+Ans: Definition: Accessing elements in a 1D array.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q32. Accessing elements in a 2D array.
+Ans: Definition: Accessing elements in a 2D array.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q33. Accessing elements in a 3D array.
+Ans: Definition: Accessing elements in a 3D array.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q34. Positive indexing.
+Ans: Definition: Positive indexing.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q35. Negative indexing.
+Ans: Definition: Negative indexing.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q36. Array slicing.
+Ans: Definition: Array slicing.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q37. Slicing using start, stop, and step.
+Ans: Definition: Slicing using start, stop, and step.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q38. Slicing rows and columns.
+Ans: Definition: Slicing rows and columns.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q39. Extracting specific rows and columns.
+Ans: Definition: Extracting specific rows and columns.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q40. Boolean indexing.
+Ans: Definition: Boolean indexing.
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q41. Fancy indexing (indexing using lists or arrays).
+Ans: Definition: Fancy indexing (indexing using lists or arrays).
+
+Purpose: Part of INDEXING AND SLICING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+05. ARRAY MANIPULATION
+======================================================================
+
+Q42. reshape() – Change array shape.
+Ans: Definition: reshape() returns a new view or array with different shape (same total size).
+
+Purpose: Turn 1D data into matrices for linear algebra or images.
+
+Syntax: arr.reshape(3, 3) or arr.reshape(-1, 3)
+
+Example:
+import numpy as np
+a = np.arange(9)
+b = a.reshape(3, 3)
+print(b)
+
+Output: 3×3 matrix 0–8
+
+Interview: reshape vs resize; -1 inference.
+
+Practice: Reshape 1–12 into 3×4.
+
+Q43. flatten() – Convert into a 1D copy.
+Ans: Definition: flatten() – Convert into a 1D copy.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q44. ravel() – Convert into a 1D view when possible.
+Ans: Definition: ravel() – Convert into a 1D view when possible.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q45. transpose() – Change rows into columns and vice versa.
+Ans: Definition: transpose() – Change rows into columns and vice versa.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q46. .T – Transpose an array.
+Ans: Definition: .T – Transpose an array.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q47. resize() – Change array size.
+Ans: Definition: resize() – Change array size.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q48. squeeze() – Remove dimensions of size 1.
+Ans: Definition: squeeze() – Remove dimensions of size 1.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q49. expand_dims() – Add a new dimension.
+Ans: Definition: expand_dims() – Add a new dimension.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q50. concatenate() – Join arrays.
+Ans: Definition: concatenate() – Join arrays.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q51. stack() – Combine arrays along a new axis.
+Ans: Definition: stack() – Combine arrays along a new axis.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+m = np.array([[1, 2], [3, 4]])
+print(m.sum(axis=0), m.sum(axis=1))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q52. vstack() – Stack arrays vertically.
+Ans: Definition: vstack() – Stack arrays vertically.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q53. hstack() – Stack arrays horizontally.
+Ans: Definition: hstack() – Stack arrays horizontally.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q54. split() – Split arrays.
+Ans: Definition: split() – Split arrays.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q55. append() – Add elements.
+Ans: Definition: append() – Add elements.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q56. insert() – Insert elements.
+Ans: Definition: insert() – Insert elements.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q57. delete() – Delete elements.
+Ans: Definition: delete() – Delete elements.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q58. repeat() – Repeat elements.
+Ans: Definition: repeat() – Repeat elements.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q59. tile() – Repeat an entire array pattern.
+Ans: Definition: tile() – Repeat an entire array pattern.
+
+Purpose: Part of ARRAY MANIPULATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+06. MATHEMATICAL OPERATIONS
+======================================================================
+
+Q60. Addition of arrays.
+Ans: Definition: Addition of arrays.
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q61. Subtraction of arrays.
+Ans: Definition: Subtraction of arrays.
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q62. Multiplication of arrays.
+Ans: Definition: Multiplication of arrays.
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q63. Division of arrays.
+Ans: Definition: Division of arrays.
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q64. Modulus operation.
+Ans: Definition: Modulus operation.
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q65. Power operation.
+Ans: Definition: Power operation.
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q66. Square root – np.sqrt().
+Ans: Definition: Square root – np.sqrt().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+print(np.sqrt([4, 9, 16]))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q67. Square – np.square().
+Ans: Definition: Square – np.square().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.square
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q68. Absolute value – np.abs().
+Ans: Definition: Absolute value – np.abs().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.abs
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q69. Exponential – np.exp().
+Ans: Definition: Exponential – np.exp().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.exp
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q70. Logarithm – np.log() and np.log10().
+Ans: Definition: Logarithm – np.log() and np.log10().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.log
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q71. Trigonometric functions – sin(), cos(), tan().
+Ans: Definition: Trigonometric functions – sin(), cos(), tan().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q72. Rounding – round(), floor(), ceil().
+Ans: Definition: Rounding – round(), floor(), ceil().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q73. Summation – np.sum().
+Ans: Definition: Summation – np.sum().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.sum
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q74. Minimum – np.min().
+Ans: Definition: Minimum – np.min().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.min
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q75. Maximum – np.max().
+Ans: Definition: Maximum – np.max().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.max
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q76. Mean – np.mean().
+Ans: Definition: Mean – np.mean().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.mean
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q77. Median – np.median().
+Ans: Definition: Median – np.median().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.median
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q78. Standard deviation – np.std().
+Ans: Definition: Standard deviation – np.std().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.std
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q79. Variance – np.var().
+Ans: Definition: Variance – np.var().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.var
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q80. Percentile – np.percentile().
+Ans: Definition: Percentile – np.percentile().
+
+Purpose: Part of MATHEMATICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.percentile
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+07. AGGREGATION AND AXIS
+======================================================================
+
+Q81. What is axis in NumPy?
+Ans: Definition: What is axis in NumPy?
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+m = np.array([[1, 2], [3, 4]])
+print(m.sum(axis=0), m.sum(axis=1))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q82. Understanding axis=0.
+Ans: Definition: Understanding axis=0.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+m = np.array([[1, 2], [3, 4]])
+print(m.sum(axis=0), m.sum(axis=1))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q83. Understanding axis=1.
+Ans: Definition: Understanding axis=1.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+m = np.array([[1, 2], [3, 4]])
+print(m.sum(axis=0), m.sum(axis=1))
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q84. Sum along rows and columns.
+Ans: Definition: Sum along rows and columns.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q85. Mean along rows and columns.
+Ans: Definition: Mean along rows and columns.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q86. Minimum and maximum along axes.
+Ans: Definition: Minimum and maximum along axes.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q87. argmin() – Index of minimum value.
+Ans: Definition: argmin() – Index of minimum value.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q88. argmax() – Index of maximum value.
+Ans: Definition: argmax() – Index of maximum value.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q89. cumsum() – Cumulative sum.
+Ans: Definition: cumsum() – Cumulative sum.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q90. cumprod() – Cumulative product.
+Ans: Definition: cumprod() – Cumulative product.
+
+Purpose: Part of AGGREGATION AND AXIS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+08. FILTERING AND CONDITIONS
+======================================================================
+
+Q91. Filtering arrays using conditions.
+Ans: Definition: Filtering arrays using conditions.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q92. Boolean masks.
+Ans: Definition: Boolean masks.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q93. np.where() – Apply conditions.
+Ans: Definition: np.where() – Apply conditions.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.where
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q94. np.any() – Check whether any condition is true.
+Ans: Definition: np.any() – Check whether any condition is true.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.any
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q95. np.all() – Check whether all conditions are true.
+Ans: Definition: np.all() – Check whether all conditions are true.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.all
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q96. np.unique() – Find unique values.
+Ans: Definition: np.unique() – Find unique values.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.unique
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q97. np.isin() – Check membership.
+Ans: Definition: np.isin() – Check membership.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.isin
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q98. np.clip() – Limit values within a range.
+Ans: Definition: np.clip() – Limit values within a range.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.clip
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q99. np.select() – Apply multiple conditions.
+Ans: Definition: np.select() – Apply multiple conditions.
+
+Purpose: Part of FILTERING AND CONDITIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.select
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+09. SORTING AND SEARCHING
+======================================================================
+
+Q100. np.sort() – Sort an array.
+Ans: Definition: np.sort() – Sort an array.
+
+Purpose: Part of SORTING AND SEARCHING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.sort
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q101. np.argsort() – Get sorted indices.
+Ans: Definition: np.argsort() – Get sorted indices.
+
+Purpose: Part of SORTING AND SEARCHING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.argsort
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q102. np.argmax() and np.argmin().
+Ans: Definition: np.argmax() and np.argmin().
+
+Purpose: Part of SORTING AND SEARCHING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.argmax
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q103. np.searchsorted() – Find insertion position.
+Ans: Definition: np.searchsorted() – Find insertion position.
+
+Purpose: Part of SORTING AND SEARCHING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.searchsorted
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q104. np.nonzero() – Find non-zero indices.
+Ans: Definition: np.nonzero() – Find non-zero indices.
+
+Purpose: Part of SORTING AND SEARCHING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.nonzero
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q105. np.count_nonzero() – Count non-zero values.
+Ans: Definition: np.count_nonzero() – Count non-zero values.
+
+Purpose: Part of SORTING AND SEARCHING in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.count_nonzero
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+10. COMPARISON AND LOGICAL OPERATIONS
+======================================================================
+
+Q106. Array comparison operators.
+Ans: Definition: Array comparison operators.
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q107. Equal to (==).
+Ans: Definition: Equal to (==).
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q108. Not equal to (!=).
+Ans: Definition: Not equal to (!=).
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q109. Greater than (>).
+Ans: Definition: Greater than (>).
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q110. Less than (<).
+Ans: Definition: Less than (<).
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q111. Logical AND – np.logical_and().
+Ans: Definition: Logical AND – np.logical_and().
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.logical_and
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q112. Logical OR – np.logical_or().
+Ans: Definition: Logical OR – np.logical_or().
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.logical_or
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q113. Logical NOT – np.logical_not().
+Ans: Definition: Logical NOT – np.logical_not().
+
+Purpose: Part of COMPARISON AND LOGICAL OPERATIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.logical_not
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+11. BROADCASTING AND VECTORIZATION
+======================================================================
+
+Q114. What is broadcasting?
+Ans: Definition: Broadcasting lets NumPy apply operations on arrays of different shapes by stretching smaller arrays safely.
+
+Purpose: Avoid explicit loops when adding vector to matrix, etc.
+
+Syntax: Automatic when shapes are compatible per NumPy rules.
+
+Example:
+import numpy as np
+M = np.array([[1, 2, 3], [4, 5, 6]])
+v = np.array([10, 20, 30])
+print(M + v)
+
+Output: [[11 22 33] [14 25 36]]
+
+Interview: broadcast rules (align trailing dimensions).
+
+Practice: Add shape (3,) bias to shape (5, 3) data.
+
+Q115. Broadcasting rules.
+Ans: Definition: Broadcasting rules.
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q116. Broadcasting with 1D and 2D arrays.
+Ans: Definition: Broadcasting with 1D and 2D arrays.
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q117. Practical broadcasting examples.
+Ans: Definition: Practical broadcasting examples.
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q118. What is vectorization?
+Ans: Definition: What is vectorization?
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q119. Vectorized operations vs Python loops.
+Ans: Definition: Vectorized operations vs Python loops.
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q120. Benefits of vectorization.
+Ans: Definition: Benefits of vectorization.
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q121. Universal functions (ufuncs).
+Ans: Definition: Universal functions (ufuncs).
+
+Purpose: Part of BROADCASTING AND VECTORIZATION in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+12. LINEAR ALGEBRA
+======================================================================
+
+Q122. What is linear algebra in NumPy?
+Ans: Definition: What is linear algebra in NumPy?
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q123. Matrix addition and subtraction.
+Ans: Definition: Matrix addition and subtraction.
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q124. Matrix multiplication using np.dot().
+Ans: Definition: Matrix multiplication using np.dot().
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.dot
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q125. Matrix multiplication using @.
+Ans: Definition: Matrix multiplication using @.
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q126. Element-wise multiplication vs matrix multiplication.
+Ans: Definition: Element-wise multiplication vs matrix multiplication.
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q127. Matrix transpose.
+Ans: Definition: Matrix transpose.
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q128. Determinant – np.linalg.det().
+Ans: Definition: Determinant – np.linalg.det().
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.linalg.det
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q129. Inverse – np.linalg.inv().
+Ans: Definition: Inverse – np.linalg.inv().
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.linalg.inv
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q130. Matrix rank – np.linalg.matrix_rank().
+Ans: Definition: Matrix rank – np.linalg.matrix_rank().
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.linalg.matrix_rank
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q131. Eigenvalues and eigenvectors.
+Ans: Definition: Eigenvalues and eigenvectors.
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q132. Solving linear equations – np.linalg.solve().
+Ans: Definition: Solving linear equations – np.linalg.solve().
+
+Purpose: Part of LINEAR ALGEBRA in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.linalg.solve
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+13. RANDOM MODULE
+======================================================================
+
+Q133. Generate random numbers.
+Ans: Definition: Generate random numbers.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q134. Generate random integers.
+Ans: Definition: Generate random integers.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q135. Generate random arrays.
+Ans: Definition: Generate random arrays.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q136. Generate random samples.
+Ans: Definition: Generate random samples.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q137. Shuffle arrays.
+Ans: Definition: Shuffle arrays.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q138. Permutation of arrays.
+Ans: Definition: Permutation of arrays.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q139. Normal distribution.
+Ans: Definition: Normal distribution.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q140. Uniform distribution.
+Ans: Definition: Uniform distribution.
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q141. Random sampling using default_rng().
+Ans: Definition: Random sampling using default_rng().
+
+Purpose: Part of RANDOM MODULE in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+14. HANDLING MISSING AND SPECIAL VALUES
+======================================================================
+
+Q142. What is NaN?
+Ans: Definition: What is NaN?
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q143. np.nan – Represent missing numerical values.
+Ans: Definition: np.nan – Represent missing numerical values.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.nan
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q144. np.isnan() – Identify NaN values.
+Ans: Definition: np.isnan() – Identify NaN values.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.isnan
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q145. np.nanmean() – Mean ignoring NaN.
+Ans: Definition: np.nanmean() – Mean ignoring NaN.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.nanmean
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q146. np.nansum() – Sum ignoring NaN.
+Ans: Definition: np.nansum() – Sum ignoring NaN.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.nansum
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q147. np.nanmin() and np.nanmax().
+Ans: Definition: np.nanmin() and np.nanmax().
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.nanmin
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q148. Positive and negative infinity.
+Ans: Definition: Positive and negative infinity.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q149. np.isinf() – Identify infinity.
+Ans: Definition: np.isinf() – Identify infinity.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.isinf
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q150. np.isfinite() – Identify finite values.
+Ans: Definition: np.isfinite() – Identify finite values.
+
+Purpose: Part of HANDLING MISSING AND SPECIAL VALUES in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.isfinite
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+15. COPYING AND MEMORY MANAGEMENT
+======================================================================
+
+Q151. Difference between copy and view.
+Ans: Definition: Difference between copy and view.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q152. copy() – Create an independent copy.
+Ans: Definition: copy() – Create an independent copy.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q153. view() – Create a view of an array.
+Ans: Definition: view() – Create a view of an array.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q154. Memory sharing.
+Ans: Definition: Memory sharing.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q155. np.shares_memory().
+Ans: Definition: np.shares_memory().
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.shares_memory
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q156. Modifying original arrays and their views.
+Ans: Definition: Modifying original arrays and their views.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q157. Understanding NumPy array memory layout.
+Ans: Definition: Understanding NumPy array memory layout.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q158. Contiguous arrays.
+Ans: Definition: Contiguous arrays.
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q159. np.ascontiguousarray().
+Ans: Definition: np.ascontiguousarray().
+
+Purpose: Part of COPYING AND MEMORY MANAGEMENT in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.ascontiguousarray
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+16. FILE HANDLING WITH NUMPY
+======================================================================
+
+Q160. np.save() – Save an array in NPY format.
+Ans: Definition: np.save() – Save an array in NPY format.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.save
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q161. np.load() – Load an NPY file.
+Ans: Definition: np.load() – Load an NPY file.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.load
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q162. np.savez() – Save multiple arrays.
+Ans: Definition: np.savez() – Save multiple arrays.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.savez
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q163. np.savetxt() – Save arrays as text or CSV.
+Ans: Definition: np.savetxt() – Save arrays as text or CSV.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.savetxt
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q164. np.loadtxt() – Load text or CSV data.
+Ans: Definition: np.loadtxt() – Load text or CSV data.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.loadtxt
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q165. np.genfromtxt() – Load data with missing values.
+Ans: Definition: np.genfromtxt() – Load data with missing values.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.genfromtxt
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q166. np.fromstring() – Create arrays from strings.
+Ans: Definition: np.fromstring() – Create arrays from strings.
+
+Purpose: Part of FILE HANDLING WITH NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.fromstring
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+17. ADVANCED NUMPY
+======================================================================
+
+Q167. Structured arrays.
+Ans: Definition: Structured arrays.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q168. Record arrays.
+Ans: Definition: Record arrays.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q169. Masked arrays.
+Ans: Definition: Masked arrays.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q170. np.meshgrid().
+Ans: Definition: np.meshgrid().
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.meshgrid
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q171. np.diag() – Diagonal elements and matrices.
+Ans: Definition: np.diag() – Diagonal elements and matrices.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.diag
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q172. np.triu() – Upper triangular matrix.
+Ans: Definition: np.triu() – Upper triangular matrix.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.triu
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q173. np.tril() – Lower triangular matrix.
+Ans: Definition: np.tril() – Lower triangular matrix.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.tril
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q174. np.einsum() – Einstein summation.
+Ans: Definition: np.einsum() – Einstein summation.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.einsum
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q175. np.vectorize().
+Ans: Definition: np.vectorize().
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+# see docs for np.vectorize
+arr = np.array([1, 2, 3])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q176. Performance optimization.
+Ans: Definition: Performance optimization.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q177. NumPy data types and type conversion.
+Ans: Definition: NumPy data types and type conversion.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q178. Integer overflow and floating-point precision.
+Ans: Definition: Integer overflow and floating-point precision.
+
+Purpose: Part of ADVANCED NUMPY in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+18. PRACTICAL PROJECTS
+======================================================================
+
+Q179. Student marks analysis.
+Ans: Definition: Student marks analysis.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q180. Employee salary analysis.
+Ans: Definition: Employee salary analysis.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q181. Customer loan data analysis.
+Ans: Definition: Customer loan data analysis.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q182. Campaign call count analysis.
+Ans: Definition: Campaign call count analysis.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q183. Payment status analysis.
+Ans: Definition: Payment status analysis.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q184. Finding missing values in datasets.
+Ans: Definition: Finding missing values in datasets.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q185. Data normalization.
+Ans: Definition: Data normalization.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q186. Min-max scaling.
+Ans: Definition: Min-max scaling.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q187. Calculating statistical summaries.
+Ans: Definition: Calculating statistical summaries.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q188. Simple recommendation and prediction calculations.
+Ans: Definition: Simple recommendation and prediction calculations.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q189. Preparing numerical data for Machine Learning.
+Ans: Definition: Preparing numerical data for Machine Learning.
+
+Purpose: Part of PRACTICAL PROJECTS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+19. INTERVIEW QUESTIONS
+======================================================================
+
+Q190. What is NumPy, and why is it used?
+Ans: Definition: What is NumPy, and why is it used?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q191. What is an ndarray?
+Ans: Definition: What is an ndarray?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q192. What is the difference between a list and a NumPy array?
+Ans: Definition: What is the difference between a list and a NumPy array?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q193. What is the difference between 1D, 2D, and 3D arrays?
+Ans: Definition: What is the difference between 1D, 2D, and 3D arrays?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q194. What is the difference between arange() and linspace()?
+Ans:
+arange: fixed step between values (like range). May not hit exact endpoint.
+linspace: fixed number of points; includes both endpoints.
+Example: np.arange(0, 1, 0.3) vs np.linspace(0, 1, 4).
+
+Q195. What is the difference between zeros() and ones()?
+Ans: Definition: What is the difference between zeros() and ones()?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q196. What is the difference between reshape() and resize()?
+Ans:
+reshape: returns new shape (often view); total elements unchanged.
+resize: changes shape in place; may repeat or drop elements if size changes.
+
+Q197. What is the difference between flatten() and ravel()?
+Ans:
+ravel: 1D view when possible (shares memory).
+flatten: always copies to new 1D array.
+
+Q198. What is broadcasting?
+Ans: Definition: What is broadcasting?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q199. What is vectorization?
+Ans: Definition: What is vectorization?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q200. What is the difference between axis=0 and axis=1?
+Ans:
+For 2D: axis=0 is down rows (column-wise agg); axis=1 is across columns (row-wise agg).
+sum(axis=0) → one value per column.
+
+Q201. What is the difference between copy() and view()?
+Ans:
+view shares data; copy owns separate buffer. Changing view affects original unless copied.
+
+Q202. What is the difference between concatenate() and stack()?
+Ans: Definition: What is the difference between concatenate() and stack()?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q203. What is the difference between vstack() and hstack()?
+Ans: Definition: What is the difference between vstack() and hstack()?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q204. What is the difference between np.dot() and *?
+Ans:
+* is element-wise multiply (same shape/broadcast).
+np.dot/@ is matrix multiplication (linear algebra rules).
+
+Q205. What is Boolean indexing?
+Ans: Definition: What is Boolean indexing?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q206. What is fancy indexing?
+Ans: Definition: What is fancy indexing?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q207. What is a universal function?
+Ans: Definition: What is a universal function?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q208. How do you handle NaN values in NumPy?
+Ans: Definition: How do you handle NaN values in NumPy?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+Q209. Why is NumPy useful in Machine Learning?
+Ans: Definition: Why is NumPy useful in Machine Learning?
+
+Purpose: Part of INTERVIEW QUESTIONS in the NumPy learning path — supports numerical pipelines before Pandas/ML.
+
+Syntax: import numpy as np (then the function, method, or attribute from the topic title).
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Output: Run the cell above; verify shape and values match your expectation.
+
+Explanation: Works on ndarray objects with vectorized operations (faster than Python loops).
+
+Real-world: Tabular numeric features, metrics dashboards, model inputs, image/audio grids.
+
+Interview: Be ready to define the topic, show one line of syntax, and compare with a related API (e.g. list vs array).
+
+Practice: Recreate the example with your own data; print ndim, shape, dtype.
+
+20. PRACTICE QUESTIONS
+======================================================================
+
+Q210. Create a 1D array containing numbers from 1 to 10.
+Ans: Task: Create a 1D array containing numbers from 1 to 10.
+
+Example solution:
+import numpy as np
+print(np.arange(1, 11))
+
+Q211. Create a 3×3 array filled with zeros.
+Ans: Task: Create a 3×3 array filled with zeros.
+
+Example solution:
+import numpy as np
+print(np.zeros((3, 3)))
+
+Q212. Create a 4×4 array filled with ones.
+Ans: Task: Create a 4×4 array filled with ones.
+
+Example solution:
+import numpy as np
+print(np.ones((4, 4)))
+
+Q213. Create an array containing even numbers from 2 to 20.
+Ans: Task: Create an array containing even numbers from 2 to 20.
+
+Example solution:
+import numpy as np
+print(np.arange(2, 21, 2))
+
+Q214. Generate 10 equally spaced values between 0 and 100.
+Ans: Task: Generate 10 equally spaced values between 0 and 100.
+
+Example solution:
+import numpy as np
+print(np.linspace(0, 100, 10))
+
+Q215. Create a 3×3 identity matrix.
+Ans: Task: Create a 3×3 identity matrix.
+
+Example solution:
+import numpy as np
+print(np.eye(3))
+
+Q216. Create a 2D array and print its shape, size, and dimensions.
+Ans: Task: Create a 2D array and print its shape, size, and dimensions.
+
+Example solution:
+import numpy as np
+a = np.array([[1, 2], [3, 4]])
+print(a.ndim, a.shape, a.size)
+
+Q217. Extract the third element from a 1D array.
+Ans: Task: Extract the third element from a 1D array.
+
+Example solution:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Q218. Extract the second row from a 2D array.
+Ans: Task: Extract the second row from a 2D array.
+
+Example solution:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Q219. Extract the last column from a 2D array.
+Ans: Task: Extract the last column from a 2D array.
+
+Example solution:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Q220. Reverse a NumPy array.
+Ans: Task: Reverse a NumPy array.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q221. Reshape a 1D array into a 3×3 matrix.
+Ans: Task: Reshape a 1D array into a 3×3 matrix.
+
+Example solution:
+import numpy as np
+a = np.array([10, 20, 30])
+m = np.array([[1, 2], [3, 4]])
+print(a[0], m[1, 0])
+
+Q222. Find the sum and average of an array.
+Ans: Task: Find the sum and average of an array.
+
+Example solution:
+import numpy as np
+a = np.array([10, 20, 30, 40])
+print(np.sum(a), np.mean(a))
+
+Q223. Find the maximum and minimum values.
+Ans: Task: Find the maximum and minimum values.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q224. Find all values greater than 50.
+Ans: Task: Find all values greater than 50.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q225. Replace all values below 50 with zero using np.where().
+Ans: Task: Replace all values below 50 with zero using np.where().
+
+Example solution:
+import numpy as np
+a = np.array([30, 60, 45, 80])
+print(a[a > 50])
+
+Q226. Sort an array in ascending order.
+Ans: Task: Sort an array in ascending order.
+
+Example solution:
+import numpy as np
+a = np.array([30, 60, 45, 80])
+print(np.where(a < 50, 0, a))
+
+Q227. Find unique values in an array.
+Ans: Task: Find unique values in an array.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q228. Join two arrays using concatenate().
+Ans: Task: Join two arrays using concatenate().
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q229. Calculate row-wise and column-wise sums.
+Ans: Task: Calculate row-wise and column-wise sums.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q230. Multiply two matrices.
+Ans: Task: Multiply two matrices.
+
+Example solution:
+import numpy as np
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+print(A @ B)
+
+Q231. Find the standard deviation of an array.
+Ans: Task: Find the standard deviation of an array.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q232. Generate 10 random integers between 1 and 100.
+Ans: Task: Generate 10 random integers between 1 and 100.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q233. Find and count missing values.
+Ans: Task: Find and count missing values.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+Q234. Analyze a small customer payment dataset using NumPy.
+Ans: Task: Analyze a small customer payment dataset using NumPy.
+
+Example solution:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+
+END OF NUMPY ROADMAP
